@@ -1,0 +1,2 @@
+Stack: New node points to first node;
+Queue: first node points to new node;
