@@ -1,2 +1,2 @@
 # DPP
-A problem a day, keeps the rust away.
+A problem a day, keeps that rust away.
