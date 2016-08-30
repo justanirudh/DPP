@@ -33,29 +33,31 @@ int main(){
 	long unsigned int noRows = sizeof(el)/sizeof(el[0]);
 	GraphAL graphAL = convertELToAL(el, 16, noRows); //Need to pass number of rows as an argument as it cannot be calculated in compile time (http://stackoverflow.com/questions/6934776/c-getting-the-row-size-of-a-multidimensional-array-passed-to-a-function)  	
 	printPerVertexBasis(graphAL);
-	printDFSusingALHelper(graphAL, 1);
-	printf("\n");
+	printDFSusingALInitiator(graphAL, 1);
+	printf("\n------------------------------------------------\n");
 
 	int elWeighted[][EDGESIZE] = {
-		{1,8,2704},	
-{1,2,867},
-{1,4,187},
-{1,6,1258},
-{2,3,849},
-{2,4,740},
-{2,5,621},
-{2,7,802},
-{2,8,1846},
-{3,4,144},
-{4,5,184},
-{4,6,1090},
-{4,7,1391},
-{5,6,946},
-{6,7,1121},
-{6,9,2342},
-{7,8,1464},
-{7,9,1235},
-{8,9,337}};
-
+	{1,8,2704},	
+	{1,2,867},
+	{1,4,187},
+	{1,6,1258},
+	{2,3,849},
+	{2,4,740},
+	{2,5,621},
+	{2,7,802},
+	{2,8,1846},
+	{3,4,144},
+	{4,5,184},
+	{4,6,1090},
+	{4,7,1391},
+	{5,6,946},
+	{6,7,1121},
+	{6,9,2342},
+	{7,8,1464},
+	{7,9,1235},
+	{8,9,337}};
+	noRows = sizeof(elWeighted)/sizeof(elWeighted[0]);
+	graphAL = convertELToAL(elWeighted, 9, noRows);
+	printDijkstra(graphAL, 5);
 	return 0;
 }
