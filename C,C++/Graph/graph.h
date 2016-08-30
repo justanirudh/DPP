@@ -26,13 +26,6 @@ struct vertexandproximity{
 
 typedef struct vertexandproximity* VaP;
 
-struct exploreandindex {
-	bool explored;
-	int index;
-};
-
-typedef struct exploreandindex* EaI;
-
 ALnode initializeNode(int, int);//vertex and weight
 
 GraphAL initializeGraphAL(int); //inputting size of graph
