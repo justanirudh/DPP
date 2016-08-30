@@ -1,0 +1,24 @@
+graph.c: In function ‘dijkstraFromAVertex’:
+graph.c:156:12: warning: initialization makes integer from pointer without a cast [enabled by default]
+  int min = findAndExploreMinimum(infoVP, graph->size);
+            ^
+graph.c:157:9: warning: comparison between pointer and integer [enabled by default]
+  if(min == NULL)
+         ^
+graph.c:159:23: error: ‘minVertx’ undeclared (first use in this function)
+  node = &(graph->root[minVertx - 1]);
+                       ^
+graph.c:159:23: note: each undeclared identifier is reported only once for each function it appears in
+graph.c:165:10: error: invalid type argument of ‘->’ (have ‘int’)
+    if(min->proximity + node->weight < infoVP[ei->index].proximity)
+          ^
+graph.c:166:38: error: invalid type argument of ‘->’ (have ‘int’)
+     infoVP[ei->index].proximity = min->proximity + node->weight; //relaxation
+                                      ^
+graph.c: In function ‘dijkstraFromAVertexInitiator’:
+graph.c:174:22: error: request for member ‘size’ in something not a structure or union
+  int vertices = graph.size;
+                      ^
+graph.c:184:2: warning: return makes pointer from integer without a cast [enabled by default]
+  return dijkstraFromVertex(graph, infoVP);
+  ^
