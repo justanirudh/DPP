@@ -86,7 +86,6 @@ object ShuttleMSProblem extends App{
 
   val filename = "/home/anirudh/MSCodingProblem/MSGraphTC3.txt"
   val allLines= Source.fromFile(filename).getLines.toSeq
-  val noTestcases = allLines.head.toInt
   val testcases = allLines.tail
 
   val allRoutes = calculateBestRoutes(testcases, Seq(), 1)
