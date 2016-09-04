@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+//It is a Binary Seacrh Tree
 TreeNode initializeNode(int element){
 	TreeNode tn = (TreeNode)malloc(sizeof(struct treeNode));
 	if(tn == NULL){
@@ -118,17 +119,33 @@ int findDepth(Tree t, int element){
 
 void printInOrderRecInTree(TreeNode tn){
 	if(tn == NULL){
-		return;
 	}
 	else{
 		printInOrderRecInTree(tn->left);
 		printf("%d -> ", tn->element);
 		printInOrderRecInTree(tn->right);
-		return;
 	}
 }
 
 void printInOrderRec(Tree t){
 	printInOrderRecInTree(t.root);
-	return;	
+}
+
+int getHeightOfNode(TreeNode node) {
+	if(node == NULL)
+		return 0;
+	else
+		return max(getHeightOfNode(node->left), getHeightOfNode(node->right)) + 1;
+}
+
+bool isBalanced(TreeNode node){
+	if(node == NULL)
+		return true;
+	else		
+		return isBalanced(node->left) && isBalanced(node->right) && abs(getHeightOfNode(node-> left) - getHeightOfNode(node->right)) <= 1;	
+}
+
+bool isBalancedInitializer(Tree t){
+	TreeNode root = t.root;
+	return isBalanced(root);
 }

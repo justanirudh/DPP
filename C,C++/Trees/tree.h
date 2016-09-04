@@ -1,3 +1,5 @@
+//typedef enum {FALSE}
+#include<stdbool.h>
 struct treeNode{
 	int element;
 	struct treeNode* left;
@@ -48,3 +50,9 @@ Tree deleteNode(Tree, int);
 void printInOrderIter(Tree);
 
 void printLevelOrder(Tree);
+
+int getHeightOfNode(TreeNode);
+
+bool isBalanced(TreeNode);
+
+bool isBalancedInitializer(Tree);
