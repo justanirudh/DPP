@@ -7,14 +7,14 @@ object FindGroupsOfAnagrams extends App{
 
   val GoodPrimeNumber = 37
   val GoodConstantForHornerRule = 5
-  def createHashcodeCheat(word:String):String = word.sorted
+
   /*
-  * Horner's rule
-  * y = 0
-  * for i==n downto 0
-  *    y = ai + x * y
-  *    here,y is sum, x is constant and ai is the char
-  * */
+ * Horner's rule
+ * y = 0
+ * for i==n downto 0
+ *    y = ai + x * y
+ *    here,y is sum, x is constant and ai is the char
+ * */
   def createHashcode(word:String):Int = {
     //Using Horner's rule in the sorted string, a = 41
     val sorted = word.sorted
@@ -32,7 +32,9 @@ object FindGroupsOfAnagrams extends App{
     }).toSeq.filter(_.nonEmpty)
   }
 
-  def groupAnagramsCheating(words:String*):Map[String, Seq[String]] = { //cheating as using a map
+  def createHashcodeCheat(word:String):String = word.sorted
+
+  def groupAnagramsCheat(words:String*):Map[String, Seq[String]] = { //cheating as using a map
     words.foldLeft(Map[String, Seq[String]]())((map, word) => {
       val key = createHashcodeCheat(word)
       if(map.exists(_._1 == key))
@@ -42,7 +44,7 @@ object FindGroupsOfAnagrams extends App{
     })
   }
 
-  val groupsCheat = groupAnagramsCheating("debitcard", "elvis", "silent", "badcredit", "lives",
+  val groupsCheat = groupAnagramsCheat("debitcard", "elvis", "silent", "badcredit", "lives",
     "freedom", "listen", "levis", "cc", "bd").values.toSeq
   val groups = groupAnagrams("debitcard", "elvis", "silent", "badcredit", "lives", "freedom",
     "listen", "levis", "cc", "bd")
@@ -54,5 +56,4 @@ object FindGroupsOfAnagrams extends App{
     }
     print("\" ")
   }
-
 }
