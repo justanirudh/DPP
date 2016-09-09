@@ -1,4 +1,0 @@
-Create a binary search tree and travel inorder recursively.
-
-Ordered: there is some order between siblings
-Proper Binary: every node has exactly 2 children.

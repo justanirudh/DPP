@@ -1,2 +1,0 @@
-#define EDGESIZE 3
-#define HUGE_NUMBER 100000
