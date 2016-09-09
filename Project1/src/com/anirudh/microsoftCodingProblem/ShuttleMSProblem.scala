@@ -1,4 +1,4 @@
-package com.anirudh.MSCodingProblem
+package com.anirudh.microsoftCodingProblem
 
 import scala.io.Source
 
