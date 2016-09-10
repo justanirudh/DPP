@@ -4,14 +4,15 @@ package com.anirudh.algos
   * Created by anirudh on 10/9/16.
   */
 //Binary Search Tree
+//No need of stack or anything. Iterate for the 2 elements together
 
 case class ElementsNotFoundException(elem1:Int, elem2:Int) extends Exception("Element was not found: " + elem1 + "," + elem2)
 case class EmptyTreeException() extends Exception("Tree is empty")
+
 object LeastCommonAncestor extends App{
 
   class Tree{
 
-    type Queue[A] = Seq[A]
     var size = 0
     var root:Option[TreeNode] = None
 
