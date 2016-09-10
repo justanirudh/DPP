@@ -1,4 +1,4 @@
-package com.anirudh.algos
+package com.anirudh.elementsofprogramminginterview
 
 /**
   * Created by anirudh on 5/9/16.

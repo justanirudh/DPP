@@ -1,4 +1,4 @@
-package com.anirudh.datastructures
+package com.anirudh.algos
 
 /**
   * Created by anirudh on 2/6/16.

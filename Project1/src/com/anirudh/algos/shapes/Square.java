@@ -1,4 +1,4 @@
-package com.anirudh.shapes;
+package com.anirudh.algos.shapes;
 
 /**
  * Created by anirudh on 19/7/16.
