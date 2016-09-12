@@ -6,19 +6,20 @@
 int main(){
 
 	//char* rpn2[] = {"2", "1", "+", "3", "*"};
-	//char* rpn[] = {"4", "13", "5", "/", "+"};	
-	//int tokenSize = 5;
+	char* rpn[] = {"4", "13", "5", "/", "+"};	
+	int tokenSize = 5;
 
-	char* rpn[] = {"3","-4","+"};
-	int tokenSize = 3; 
+	//char* rpn[] = {"3","-4","+"};
+	//int tokenSize = 3; 
 
 	int j;
-		bool isSymbol(char* c) {
+
+	bool isSymbol(char* c) {
 		char* symbols[] = {"+", "-", "*", "/"};
 		int i;
 		for(i = 0; i<4; i++){
-			if(symbols[i] == c)
-				return true;
+		if(symbols[i] == c)
+			return true;
 		}
 		return false;
 	}
