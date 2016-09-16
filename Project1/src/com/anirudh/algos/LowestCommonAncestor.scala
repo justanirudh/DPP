@@ -91,7 +91,7 @@ object LeastCommonAncestor extends App{
 
   }
 
-  var tree = new Tree
+  val tree = new Tree
   tree.add(19)
   tree.add(7)
   tree.add(43)
