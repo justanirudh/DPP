@@ -1,4 +1,4 @@
-package com.anirudh.leetcode;
+package com.anirudh.leetcode.setmatrixzero.setmatrixzero;
 
 /**
  * Created by anirudh on 13/9/16.
