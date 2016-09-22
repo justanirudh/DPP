@@ -1,78 +1,184 @@
 package ufpt_tryouts_09182016;
 
-import java.util.Arrays;
-import java.util.Scanner;
+/*
+* The Hungarian Paul Erd¨os (1913–1996, speak as “Ar-dish”) not only was one of the strangest mathematicians
+of the 20th century, he was also one of the most famous. He kept on publishing widely
+circulated papers up to a very high age and every mathematician having the honor of being a co-author
+to Erd¨os is well respected.
+Not everybody got the chance to co-author a paper with Erd¨os, so many people were content if they
+managed to publish a paper with somebody who had published a scientific paper with Erd¨os. This
+gave rise to the so-called Erd¨os numbers. An author who has jointly published with Erd¨os had Erd¨os
+number 1. An author who had not published with Erd¨os but with somebody with Erd¨os number 1
+obtained Erd¨os number 2, and so on.
+Today, nearly everybody wants to know which Erd¨os number he or she has. Your task is to write a
+program which computes Erd¨os numbers for a given set of scientists.
+Input
+The first line of the input contains the number of scenarios.
+The input for each scenario consists of a paper database and a list of names. It begins with the line
+P N
+where P and N are natural numbers. Following this line are P lines containing descriptions of papers
+(this is the paper database). A paper appears on a line by itself and is specified in the following way:
+Smith, M.N., Martin, G., Erdos, P.: Newtonian forms of prime factors matrices
+Note that umlauts like ‘¨o’ are simply written as ‘o’. After the P papers follow N lines with names.
+Such a name line has the following format:
+Martin, G.
+Output
+For every scenario you are to print a line containing a string “Scenario i” (where i is the number
+of the scenario) and the author names together with their Erd¨os number of all authors in the list of
+names. The authors should appear in the same order as they appear in the list of names. The Erd¨os
+number is based on the papers in the paper database of this scenario. Authors which do not have any
+relation to Erd¨os via the papers in the database have Erd¨os number “infinity”.
+Sample Input
+1
+4 3
+Smith, M.N., Martin, G., Erdos, P.: Newtonian forms of prime factor matrices
+Erdos, P., Reisig, W.: Stuttering in petri nets
+Smith, M.N., Chen, X.: First oder derivates in structured programming
+Jablonski, T., Hsueh, Z.: Selfstabilizing data structures
+Smith, M.N.
+Hsueh, Z.
+Chen, X.
+Sample Output
+Scenario 1
+Smith, M.N. 1
+Hsueh, Z. infinity
+Chen, X. 2
+* */
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 /**
- * Created by anirudh on 18/9/16.
+ * Created by anirudh on 20/9/16.
  */
-/*Cupid’s job is getting harder, so he is adopting new technologies to help him with his difficult task of
-matching people into happy couples. He appointed the best programmers in his staff to a new project
-called Advanced Couples Matching (ACM). For this project, the programmers need to produce an
-algorithm that takes a set of an even number of N lonely persons and matches them into N/2 couples,
-such that each person is in exactly one couple.
-Sadly, the data available about each person is limited. In this modern world, using gender, ethnicity,
-age or nationality as criteria to form couples is not a sensible option, so the programmers can only use
-data about the internet connection of each candidate. They decided to focus this stage on time zones.
-People living in closer time zones are more likely to find time to interact with each other. Thus, the
-programmers decided to create couples so as to minimize the total time difference.
-Each time zone is identified by an integer between -11 and 12, inclusive, representing its difference
-in hours from a particular time zone called Coordinated Universal Time (or UTC). The time difference
-of two people living in time zones represented by integers i and j is the minimum between |i − j| and
-24 − |i − j|. Given a partition of a set of an even number N of candidates into N/2 couples, its total
-time difference is the sum of the time difference of each couple.
-You are asked to write a program that receives as input the time zones of a set of N candidates.
-The output of the program must be the minimum total time difference among all possible partitions of
-the set into couples.
-Input
-The input contains several test cases; each test case is formatted as follows. The first line contains an
-even integer N (2 ≤ N ≤ 1000) representing the number of candidates to be coupled. The second line
-contains N integers T1, T2, . . . , TN (−11 ≤ Ti ≤ 12 for i = 1, 2, . . . , N) indicating the time zones of
-the candidates.
-Output
-For each test case in the input, output a line with an integer representing the minimum total time
-difference among all possible partitions of the set of candidates into couples.
-Sample Input
-6
--3 -10 -5 11 4 4
-2
--6 6
-8
-0 0 0 0 0 0 0 0
-Sample Output
-5
-12
-0*/
+
+//TODO: BROKEN: Needs to be fixed
+
 public class Main {
-    public static Scanner s = new Scanner(System.in);
 
-    public static void readStuff() {
-        try{while(true){
-            Integer numLoners =  Integer.parseInt(s.nextLine()) ;
-            Integer[] lonersInt = new Integer[numLoners];
-            int i;
-            String[] lonersStr = s.nextLine().split(" ");
-            for(i = 0; i<numLoners; i++){
-                lonersInt[i] = Integer.parseInt(lonersStr[i]);
-            }
-            Arrays.sort(lonersInt);
-            int sum1 = Math.min(Math.abs(lonersInt[0] - lonersInt[numLoners - 1]),
-                    24 - Math.abs(lonersInt[0] - lonersInt[numLoners - 1]));
-            for(i = 1; i <= numLoners -3; i = i+2){
-                int diff = Math.abs(lonersInt[i] - lonersInt[i + 1]);
-                sum1 = sum1 + diff;
-            }
-            int sum2 = 0;
-            for(i = 0; i < numLoners - 1; i = i+2){
-                int diff = Math.abs(lonersInt[i] - lonersInt[i + 1]);
-                sum2 = sum2 + diff;
-            }
-            System.out.println(Math.min(sum1, sum2));
-        }} catch (Exception e){
+//    public static Scanner s = new Scanner(System.in);
 
+
+    public static class Node {
+        String scientist;
+        Boolean explored = false;
+        int erdosNum;
+        ArrayList<String> neighbours = new ArrayList<>();
+        public Node(String scientist){
+            this.scientist = scientist;
+        }
+        Node updateNeighbours(String e) {
+            neighbours.add(e);
+            return this;
         }
     }
-    public static void main(String[] args){
-        readStuff();
+
+    public static int findErdosNumber(Map<String, Node> graph, String scientist){
+        Queue<String> queue = new LinkedList<>();
+        queue.add("Erdos, P.");
+        graph.get("Erdos, P.").erdosNum = 0;
+        while (!queue.isEmpty()){
+            Node src = graph.get(queue.poll());
+            src.explored = true;
+            ArrayList<String> neighbours = src.neighbours;
+            for(String neighbour : neighbours){
+                if(!graph.get(neighbour).explored){
+                    graph.get(neighbour).erdosNum = src.erdosNum + 1;
+                    if(neighbour.equals(scientist))
+                        return graph.get(neighbour).erdosNum;
+                    else
+                        queue.add(neighbour);
+                }
+            }
+        }
+        return -1;
+    }
+
+    public static void addToGraph(ArrayList<String> allScientists){
+        int k, j;
+        int sizeScientists = allScientists.size();
+        for(k =0; k < sizeScientists; k++){
+            String e = allScientists.get(k);
+            for(j = 0; j < sizeScientists; j++){
+                if(k != j){
+                    String key = allScientists.get(j);
+                    if(graph.containsKey(key)){
+                        graph.put(key, graph.get(key).updateNeighbours(e));
+                    }
+                    else{
+                        Node n = new Node(key);
+                        graph.put(key, n.updateNeighbours(e));
+                    }
+                }
+            }
+        }
+    }
+
+    public static Map<String, Node> graph = new HashMap<>();
+
+    public static void readStuff( BufferedReader s) throws IOException{
+        Integer scenarios = Integer.parseInt(s.readLine());
+        int i, l, m;
+        ArrayList<String> allScenarios = new ArrayList<>();
+        for (m = 0; m<scenarios; m++) {
+            allScenarios.add("Scenario " + (m+1));
+            String[] inputs = s.readLine().split(" ");
+            int  numPapers =  Integer.parseInt(inputs[0].trim());
+            int  numScientists =  Integer.parseInt(inputs[1].trim());
+            for(i = 0; i<numPapers; i++){
+                //parse scientists per line
+                String paper = s.readLine();
+                String[] scientistsAllBroken = (paper.split(":")[0]).split(",");
+                ArrayList<String> allScientists = new ArrayList<>();
+                for(l = 0; l < scientistsAllBroken.length; l++){
+                    allScientists.add(scientistsAllBroken[l].trim() + ", " + scientistsAllBroken[l+1].trim());
+                    l++;
+                }
+                //make graph
+                addToGraph(allScientists);
+            }
+
+            //printing graph
+            Map<String, Node> graphCopy0 = new HashMap<>(graph);
+            for (Map.Entry<String, Node> entry : graphCopy0.entrySet()) {
+                String key = entry.getKey();
+                ArrayList<String> values = entry.getValue().neighbours;
+                System.out.print(key + "-> ");
+                for(String e : values){
+                    System.out.print(e + " | ");
+                }
+                System.out.println();
+            }
+
+            //BFS in the graph
+            for(i = 0; i< numScientists; i++){
+                String scientist = s.readLine();
+                Map<String, Node> graphCopy = new HashMap<>(graph);
+                int erdosNum = findErdosNumber(graphCopy, scientist);
+                if(erdosNum == -1)
+                    allScenarios.add(scientist + " infinity");
+//                    System.out.println(scientist + " infinity");
+                else
+                    allScenarios.add(scientist + " " + erdosNum);
+//                    System.out.println(scientist + " " + erdosNum);
+            }
+        }
+        for(String str: allScenarios){
+            System.out.println(str);
+        }
+    }
+
+    public static void main(String[] args) throws FileNotFoundException{
+        BufferedReader br = new BufferedReader(new FileReader("/home/anirudh/erdosInputTiny"));
+        try{
+            readStuff(br);
+        }
+        catch(Exception e){
+
+        }
+
     }
 }
