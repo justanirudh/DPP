@@ -1,0 +1,2 @@
+gcc -pthread foo.c /*foo.c should also have <pthread.h> linked*/
+g++ -pthread your_file.cpp //-std=c++11 already included in bash
