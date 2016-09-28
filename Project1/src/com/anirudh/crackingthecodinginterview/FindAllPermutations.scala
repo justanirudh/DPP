@@ -1,9 +1,11 @@
-package com.anirudh.algos
+package com.anirudh.crackingthecodinginterview
+
+import scala.io.StdIn._
 
 /**
   * Created by anirudh on 25/6/16.
   */
-//CTCI Chap9 Q5: only implementing Recursive, DP would be just adding hashmap for result of each substring
+//CTCI Chap9 Q5: This is DP, but is O(n!). Cannot do better than this as n! permutations
 object FindAllPermutations extends App{
 
   def getAllPermutations(string:String):Seq[String] = {
@@ -34,11 +36,19 @@ object FindAllPermutations extends App{
       n * factorial(n-1)
   }
 
-  val string = "eat"
+  val str = "create"
 
-  val allPermutations = getAllPermutations(string)
-
+//  val num = readLine()
+//  val numAllSubsets = (num.toSeq.toSet.subsets.map(_.toSeq).toSeq.map(s => s.mkString)
+//    .filterNot(s => s == "") :+ num).distinct
+//  val singleDigits = numAllSubsets.filter(_.size == 1)
+//  val multipleDigits = numAllSubsets.filter(_.size > 1)
+//  val allPermutations =  multipleDigits.flatMap(subset => getAllPermutations(subset)).distinct
+//  val max = (allPermutations.filter(s => s == s.reverse) ++ singleDigits).map(_.toInt).max
+//  println(max)
+val allPermutations = getAllPermutations(str)
   allPermutations foreach println
 
-  assert(allPermutations.length == factorial(string.length))
+  println("size of allPerms: " + allPermutations.length)
+  assert(allPermutations.length == factorial(str.length))
 }
