@@ -5,11 +5,11 @@ package concurrent_programming.optimistic_sync;
  */
 public class OptComplexCASRunnable implements Runnable{
 
-    public OptComplexCompareAndSet cx;
+    public OptComplexCAS cx;
 
     double factor;
 
-    public OptComplexCASRunnable(OptComplexCompareAndSet cx, double factor){
+    public OptComplexCASRunnable(OptComplexCAS cx, double factor){
         this.cx = cx;
         this.factor =factor;
     }

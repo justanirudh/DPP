@@ -3,10 +3,10 @@ package concurrent_programming.jCreateThreads;
 /**
  * Created by anirudh on 1/9/16.
  */
-class Print1 implements Runnable{
+class Print1Runnable implements Runnable{
     int id;
 
-    Print1(int id){this.id = id;}
+    Print1Runnable(int id){this.id = id;}
 
     @Override
     public void run()

@@ -10,14 +10,14 @@ class Driver_JCreateThreads {
         Thread[] threads = new Thread[NUM_THREADS];
         for (int t = 0; t< NUM_THREADS; ++t){
             System.out.println("Creating thread " + t);
-            threads[t]= new Thread(new Print0());
+            threads[t]= new Thread(new Print0Runnable());
             threads[t].start();
         }
     }
     static void example_passingid(){
         Thread[] threads = new Thread[NUM_THREADS];
         for (int t = 0; t< NUM_THREADS; ++t){
-            threads[t]= new Thread(new Print1(t));
+            threads[t]= new Thread(new Print1Runnable(t));
             threads[t].start();
         }
     }
@@ -25,11 +25,11 @@ class Driver_JCreateThreads {
     static void example2() throws InterruptedException{
         Thread[] threads = new Thread[NUM_THREADS];
         //refs to Runnables
-        BusyWork[] runnables = new BusyWork[NUM_THREADS];
+        BusyWorkRunnable[] runnables = new BusyWorkRunnable[NUM_THREADS];
 
         //create and start the threads
         for (int t = 0; t< NUM_THREADS; ++t){
-            runnables[t] = new BusyWork(t);
+            runnables[t] = new BusyWorkRunnable(t);
             threads[t]= new Thread(runnables[t]);
             threads[t].start();
         }

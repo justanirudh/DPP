@@ -5,11 +5,12 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * Created by anirudh on 27/9/16.
  */
-public class OptComplexCompareAndSet {
+//CAS = Compare And Set
+public class OptComplexCAS {
 
     protected AtomicReference<Complex> v = new AtomicReference<>() ;  //the state we want to update
 
-    public OptComplexCompareAndSet(Complex cx) {
+    public OptComplexCAS(Complex cx) {
         v.set(cx);
     }
 

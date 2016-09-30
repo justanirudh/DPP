@@ -14,7 +14,7 @@ public class ClientBlockingQueue {
             new ArrayBlockingQueue<ExpandableArray>(1);
 
     public static void main(String[] args) throws InterruptedException{
-        Thread t = new Thread(new UseExpandableArrayThread());
+        Thread t = new Thread(new UseExpandableArrayRunnable());
         t.start();  //both t and main thread access array.
         array = new ExpandableArray(CAPACITY);
         queue.add(array); //passing the whole array to a blocking queue. Thread calls queue.take

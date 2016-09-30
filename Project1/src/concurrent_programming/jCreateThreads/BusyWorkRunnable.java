@@ -3,11 +3,11 @@ package concurrent_programming.jCreateThreads;
 /**
  * Created by anirudh on 1/9/16.
  */
-class BusyWork implements Runnable{
+class BusyWorkRunnable implements Runnable{
     int id;
     double resultVal;
 
-    BusyWork(int id){this.id = id;}
+    BusyWorkRunnable(int id){this.id = id;}
 
     public void run(){
         double result = 0;

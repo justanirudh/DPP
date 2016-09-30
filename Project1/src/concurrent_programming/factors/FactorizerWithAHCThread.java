@@ -34,7 +34,7 @@ public class FactorizerWithAHCThread extends Thread{
             }
         }
 
-        System.out.println("\nFactorsThread for number " + num + " are:");
+        System.out.println("\nFactorsRunnable for number " + num + " are:");
         for(BigInteger x: factors){
             counter.incrementAndGet();
             System.out.print(x + " ");

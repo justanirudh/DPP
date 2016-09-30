@@ -8,7 +8,7 @@ import static concurrent_programming.expandablearray.ClientBlockingQueue.queue;
 /**
  * Created by anirudh on 27/9/16.
  */
-public class UseExpandableArrayThread implements Runnable{
+public class UseExpandableArrayRunnable implements Runnable{
 
     public ExpandableArray arr;
 
@@ -20,6 +20,7 @@ public class UseExpandableArrayThread implements Runnable{
     public void run(){
         array.add("69");
         array.add(44);
+        array.removeLast();
         array.add(new ArrayList<Integer>(20).add(10));
     }
 

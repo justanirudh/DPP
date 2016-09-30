@@ -8,7 +8,7 @@ public class Driver {
     public static void main(String[] args) {
         int NUM_THREADS = 4;
         Complex cx = new Complex(3 ,4);
-        OptComplexCompareAndSet occas = new OptComplexCompareAndSet(cx);
+        OptComplexCAS occas = new OptComplexCAS(cx);
 
         Thread[] threads = new Thread[NUM_THREADS];
 

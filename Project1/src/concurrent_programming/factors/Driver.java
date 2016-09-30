@@ -16,7 +16,7 @@ public class Driver {
                 BigInteger.valueOf(43),BigInteger.valueOf(76)};
 
 //        for (int t = 0; t< NUM_THREADS; ++t){
-//            threads[t]= new Thread(new FactorsThread(numbers[t]));
+//            threads[t]= new Thread(new FactorsRunnable(numbers[t]));
 //            threads[t].start();
 //        }
 //

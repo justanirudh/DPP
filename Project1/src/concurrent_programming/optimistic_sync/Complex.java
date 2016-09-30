@@ -12,4 +12,11 @@ public class Complex {
         this.real = real;
         this.imag = imag;
     }
+
+    double getReal(){
+        return real;
+    }
+    double getImag(){
+        return imag;
+    }
 }

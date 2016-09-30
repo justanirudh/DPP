@@ -6,10 +6,10 @@ import java.util.ArrayList;
 /**
  * Created by anirudh on 3/9/16.
  */
-public class FactorsThread implements Runnable{
+public class FactorsRunnable implements Runnable{
     BigInteger num;
 
-    FactorsThread(BigInteger num){this.num = num;}
+    FactorsRunnable(BigInteger num){this.num = num;}
 
     private static long counter; //since static, accessed by each thread
 
@@ -30,7 +30,7 @@ public class FactorsThread implements Runnable{
                 fac = fac.nextProbablePrime();  //fac gets bigger
             }
         }
-        System.out.println("\nFactorsThread for number " + num + " are:");
+        System.out.println("\nFactorsRunnable for number " + num + " are:");
         for(BigInteger x: factors){
             counter++;
             System.out.print(x + " "); //also prints from other threads
