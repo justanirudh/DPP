@@ -1,4 +1,4 @@
-package com.anirudh.leetcode.setmatrixzero.wordletter
+package com.anirudh.leetcode.wordletter
 
 /**
   * Created by anirudh on 16/9/16.
@@ -35,8 +35,10 @@ object Driver extends App{
     else{
       val queueNew = tempVocab.foldLeft(queue.tail){ //queue.tail as deleted 1st element
         case(agg, vocabWord) => {
-          val diffs = (next._1 zip vocabWord).foldLeft(0)((diff, tup) =>
+          //matching 2 strings character by character
+          val diffs = (next._1 zip vocabWord).foldLeft(0)((diff, tup) => //zipping current word with each vocab word
             if(tup._1 == tup._2) diff else diff + 1)
+          
           if(diffs != 1)
             agg
           else{

@@ -1,4 +1,4 @@
-package com.anirudh.leetcode.setmatrixzero.superuglynumbers;
+package com.anirudh.leetcode.superuglynumbers;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.anirudh.leetcode.setmatrixzero.superuglynumbers;
+package com.anirudh.leetcode.superuglynumbers;
 
 /**
  * Created by anirudh on 17/9/16.
