@@ -6,8 +6,8 @@ package com.anirudh.algos
 object CountingSort extends App{
 
   def getCountingSorted(arr:Seq[Int]):Seq[Int] = { //arr is A
-  val bufferSize = arr.max //arr[j] belong to 1 to k
-  val buffer = Array.fill(bufferSize){0}
+    val bufferSize = arr.max //arr[j] belong to 1 to k
+    val buffer = Array.fill(bufferSize){0}
     for(i <- arr.indices){ //C
       buffer(arr(i)-1) = buffer(arr(i)-1) + 1
     }

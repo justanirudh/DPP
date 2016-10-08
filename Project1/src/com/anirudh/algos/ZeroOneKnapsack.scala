@@ -11,6 +11,7 @@ object ZeroOneKnapsack extends App{
     val items = itemsMap.toSeq
     val weightsRange = 0 to knapsackSize
 
+    //Can be done with simple for loops.
     val itemToWeightBenefitMatrix:Seq[Seq[Int]] = items.foldLeft(Seq[Seq[Int]]()){
       case(matrixTillNow, (indexItem, (benefitItem, weightItem))) => {
           val benefitsForIndex:Seq[Int] = weightsRange.foldLeft(Seq[Int]()){

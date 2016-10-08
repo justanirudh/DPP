@@ -81,8 +81,6 @@ object LeastCommonAncestor extends App{
       else{
         if(elem1 == elem2)
           elem1
-        else if (elem1 < root.get.elem && elem2 > root.get.elem)
-          root.get.elem
         else{
           findLCA(elem1, elem2, root.get)
         }
