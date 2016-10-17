@@ -14,11 +14,11 @@ public class OptComplexCAS {
         v.set(cx);
     }
 
-    synchronized private AtomicReference<Complex> getComplex(){
+    private AtomicReference<Complex> getComplex(){
         return v;
     }
 
-    synchronized public void scale(double x) { //no synchronization here (being optimistic)
+    public void scale(double x) { //no synchronization here (being optimistic)
         boolean success = false;
         do {
             AtomicReference<Complex> old = getComplex();

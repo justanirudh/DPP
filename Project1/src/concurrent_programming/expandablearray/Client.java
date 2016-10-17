@@ -10,10 +10,10 @@ public class Client {
     static ExpandableArray array;
 
     public static void main(String[] args) throws InterruptedException{
+        array = new ExpandableArray(CAPACITY);
         Thread t = new Thread(new UseExpandableArrayRunnable());
         t.start();  //both t and main thread access array.
-        array = new ExpandableArray(CAPACITY);
         Thread.sleep(100); //without this, no time for context switch to child thread, hence NPE for get(1)
-        System.out.println(array.get(1));
+        System.out.println(array.get(0));
     }
 }

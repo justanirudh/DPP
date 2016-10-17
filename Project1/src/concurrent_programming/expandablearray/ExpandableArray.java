@@ -20,7 +20,7 @@ public class ExpandableArray {
     public synchronized Object get(int i) throws NoSuchElementException {
         if (i < 0 || i >= size )
             throw new NoSuchElementException();
-        return data[i]; //return its copy to be extra safe
+        return data[i]; //can return its copy to be extra safe
     }
 
     public synchronized void add(Object x) { // add at end
