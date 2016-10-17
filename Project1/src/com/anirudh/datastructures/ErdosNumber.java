@@ -1,4 +1,4 @@
-package ufpt_tryouts_09182016;
+package com.anirudh.datastructures;
 
 /*
 * The Hungarian Paul Erd¨os (1913–1996, speak as “Ar-dish”) not only was one of the strangest mathematicians
@@ -57,7 +57,7 @@ import java.util.*;
 
 //TODO: BROKEN: Needs to be fixed
 
-public class Main {
+public class ErdosNumber {
 
 //    public static Scanner s = new Scanner(System.in);
 
