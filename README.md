@@ -1,2 +1,2 @@
 #Daily Practice Problems
-A Problem a day..
+A problem a day keeps the axe sharp.
