@@ -44,7 +44,6 @@ object FindCorrectSequence extends App{
     graph
   }
 
-  //TODO: Broken. Fix this
   def doDFSAndPopulateSorted(graph:MutableMap[String, GraphNode], start:String, sorted:Seq[String]):Seq[String] = {
     var sortedTemp = sorted
     graph(start).color = "grey"
@@ -52,15 +51,14 @@ object FindCorrectSequence extends App{
       if(graph(neighbour).color == "white"){
         sortedTemp = doDFSAndPopulateSorted(graph,neighbour, sortedTemp)
       }
-      graph(start).color = "black"
-      sortedTemp = start +: sortedTemp
     }
-    sortedTemp
+    graph(start).color = "black"
+    start +: sortedTemp
   }
 
   def doTopologicalSort(graph:MutableMap[String, GraphNode]):Seq[String] ={
     var sorted:Seq[String] = Seq()
-    val start = graph.head._1
+//    val start = graph.head._1
     for(node <- graph.valuesIterator){
       if(node.color == "white"){
         sorted = doDFSAndPopulateSorted(graph, node.str, sorted)
@@ -73,12 +71,12 @@ object FindCorrectSequence extends App{
     val graph = createDAG(sos)
 
     //print the graph
-    /*for((key, value) <- graph){
+    for((key, value) <- graph){
       print(key + "(in = " + value.inNeighboursCount + "): ")
       for(n <- value.outNeighbours)
         print(n + ", ")
       println()
-    }*/
+    }
 
     //Two ways of getting the correct order:
     //1. iterate through all nodes and find the one with inCount = 0. Add that to our sequence, decrement counter of all
