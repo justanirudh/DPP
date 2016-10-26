@@ -15,9 +15,12 @@ object FindCorrectSequence extends App{
 
   class GraphNode(val str:String){
     var outNeighbours:Seq[String] = Seq()
-    var inNeighboursCount = 0
     def addOutNeighbour(str:String) = outNeighbours = str +: outNeighbours
     def incInNeighbourCount() = inNeighboursCount = inNeighboursCount + 1
+    //for purposes of Method 1
+    var inNeighboursCount = 0
+    //for purposes of Method 2
+    var color = "white"
   }
 
   def createDAG(sos:Seq[Seq[String]]):MutableMap[String, GraphNode] = {
@@ -41,6 +44,31 @@ object FindCorrectSequence extends App{
     graph
   }
 
+  //TODO: Broken. Fix this
+  def doDFSAndPopulateSorted(graph:MutableMap[String, GraphNode], start:String, sorted:Seq[String]):Seq[String] = {
+    var sortedTemp = sorted
+    graph(start).color = "grey"
+    for(neighbour <- graph(start).outNeighbours){
+      if(graph(neighbour).color == "white"){
+        sortedTemp = doDFSAndPopulateSorted(graph,neighbour, sortedTemp)
+      }
+      graph(start).color = "black"
+      sortedTemp = start +: sortedTemp
+    }
+    sortedTemp
+  }
+
+  def doTopologicalSort(graph:MutableMap[String, GraphNode]):Seq[String] ={
+    var sorted:Seq[String] = Seq()
+    val start = graph.head._1
+    for(node <- graph.valuesIterator){
+      if(node.color == "white"){
+        sorted = doDFSAndPopulateSorted(graph, node.str, sorted)
+      }
+    }
+    sorted
+  }
+
   def getOrderedSeq(sos:Seq[Seq[String]]):Seq[String] = {
     val graph = createDAG(sos)
 
@@ -55,10 +83,10 @@ object FindCorrectSequence extends App{
     //Two ways of getting the correct order:
     //1. iterate through all nodes and find the one with inCount = 0. Add that to our sequence, decrement counter of all
     // the outNeighbours of the node and delete the current node (or mark it as -1). This is O(V^2 + E) = O(V^2)
-    //2. Use topological sort. O(V + E) ~ O(V^2)
+    //2. Use topological sort. O(V + E)
 
-    //Doing 1 here
-    //Making temporary mapping of vertices to their in-counts
+    //Method 1
+    /*//Making temporary mapping of vertices to their in-counts
     val vertexToInCount = new MutableMap[String, Int]()
     for(g <- graph){
       vertexToInCount += (g._1 -> g._2.inNeighboursCount)
@@ -81,7 +109,10 @@ object FindCorrectSequence extends App{
       }
     }
 
-    getFinalSeq(vertexToInCount, Seq())
+    getFinalSeq(vertexToInCount, Seq())*/
+
+    //Method 2
+    doTopologicalSort(graph)
   }
 
   val seqOfSeqs = Seq(Seq("a", "b", "c", "g"), Seq("k","a","d"), Seq("d", "c", "i"), Seq("c", "l", "g"))
