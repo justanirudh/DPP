@@ -1,7 +1,5 @@
 package com.anirudh.datastructures.facebookInterviewProblem
 
-import scala.collection.mutable.{HashMap => MutableMap}
-
 /**
   * Created by anirudh on 24/10/16.
   */
@@ -23,9 +21,9 @@ object FindCorrectSequence extends App{
     var color = "white"
   }
 
-  def createDAG(sos:Seq[Seq[String]]):MutableMap[String, GraphNode] = {
+  def createDAG(sos:Seq[Seq[String]]):Map[String, GraphNode] = {
 
-    val graph = new MutableMap[String, GraphNode]()
+    var graph = Map[String, GraphNode]()
 
     //populating graph for this use-case
     for(seq <- sos){
@@ -44,21 +42,26 @@ object FindCorrectSequence extends App{
     graph
   }
 
-  def doDFSAndPopulateSorted(graph:MutableMap[String, GraphNode], start:String, sorted:Seq[String]):Seq[String] = {
+  def doDFSAndPopulateSorted(graph:Map[String, GraphNode], start:String, sorted:Seq[String]):Seq[String] = {
     var sortedTemp = sorted
+    //node has been discovered
     graph(start).color = "grey"
     for(neighbour <- graph(start).outNeighbours){
-      if(graph(neighbour).color == "white"){
+      if(graph(neighbour).color == "white"){ //dfs on the node only if it has not be discovered
         sortedTemp = doDFSAndPopulateSorted(graph,neighbour, sortedTemp)
       }
     }
+    //node has been finished
     graph(start).color = "black"
+    //add it to the front of the queue. The earlier a node gets finished, the deeper it is in the graph, the later it
+    //comes in the topological sort
     start +: sortedTemp
   }
 
-  def doTopologicalSort(graph:MutableMap[String, GraphNode]):Seq[String] ={
+  def doTopologicalSort(graph:Map[String, GraphNode]):Seq[String] ={
     var sorted:Seq[String] = Seq()
-//    val start = graph.head._1
+
+    //DFS initiator
     for(node <- graph.valuesIterator){
       if(node.color == "white"){
         sorted = doDFSAndPopulateSorted(graph, node.str, sorted)
@@ -113,6 +116,7 @@ object FindCorrectSequence extends App{
     doTopologicalSort(graph)
   }
 
+  //k a b d c i l g
   val seqOfSeqs = Seq(Seq("a", "b", "c", "g"), Seq("k","a","d"), Seq("d", "c", "i"), Seq("c", "l", "g"))
 
   //c -> g -> c
