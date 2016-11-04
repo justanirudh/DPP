@@ -55,13 +55,13 @@ import java.util.*;
  * Created by anirudh on 20/9/16.
  */
 
-//TODO: BROKEN: Needs to be fixed
+//TODO: BROKEN: Needs to be fixed: Graph Impl is correct. Maybe a minor issue in BFS
 
 public class ErdosNumber {
 
 //    public static Scanner s = new Scanner(System.in);
 
-
+//GRAPH Implementation is SPOT ON!
     public static class Node {
         String scientist;
         Boolean explored = false;
