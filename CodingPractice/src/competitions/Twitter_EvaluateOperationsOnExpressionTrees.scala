@@ -6,6 +6,8 @@ import scala.io.StdIn._
 /**
   * Created by anirudh on 8/11/16.
   */
+
+//Problem: Evaluate an expression tree by he given operations
 object Twitter_EvaluateOperationsOnExpressionTrees extends App{
 
   /*
@@ -81,7 +83,7 @@ object Twitter_EvaluateOperationsOnExpressionTrees extends App{
             if(temp.head == '('){ //starting element
             val parenClosesFirst = getClosingIndex(temp, 1)
               if( parenClosesFirst != -1){ //first element's paren need to be removed
-                val ttemp = temp.toList.to[ListBuffer]
+              val ttemp = temp.toList.to[ListBuffer]
                 ttemp.remove(0)
                 ttemp.remove(parenClosesFirst - 1)
                 temp = ttemp.mkString
@@ -116,87 +118,4 @@ object Twitter_EvaluateOperationsOnExpressionTrees extends App{
   catch{
     case e:Exception =>
   }
-
-
-
-/*
-
-  def getClosingIndex(exp:String, index: Int):Int = {
-    if(index >= exp.length)
-      -1
-    else{
-      val char = exp(index)
-      if(char == ')' || char == '('){
-        if(char == ')')
-          index
-        else
-          -1
-      }
-      else
-        getClosingIndex(exp, index + 1)
-    }
-  }
-
-  val filename = "/home/anirudh/Code/twitter/P2/input003.txt"
-  for (line <- Source.fromFile(filename).getLines()) {
-    val arr = line.replaceAll(" ", "").split("/")
-    if(arr.size == 1) //no ops
-      println(arr(0))
-    else{
-      val exp = arr(0) //expression
-      val ops = arr(1) //operatios
-      //        ops foreach println
-      var opsIndex = 0 //opsIndex of ops arr
-      var temp = exp //temp expression
-      while(opsIndex < ops.length){
-        val op = ops(opsIndex)
-        if(op == 'R'){ //if op is an 'R'
-          if( opsIndex + 1 < ops.length && ops(opsIndex + 1) == 'R') //next op is also 'R'
-            opsIndex = opsIndex + 2
-          else{ //next op is not 'R'
-            temp = temp.reverse
-            temp = temp.map(c => if(c == '(') ')' else if(c == ')') '(' else c)
-            opsIndex = opsIndex + 1
-          }
-        }
-        else{ //op is 'S'
-          while(opsIndex + 1 < ops.length && ops(opsIndex + 1) == 'S') {//consecutive S operations have same effect as one
-            opsIndex = opsIndex + 1
-          }
-          //            println(temp)
-          if(temp.head == '('){ //starting element
-          val parenClosesFirst = getClosingIndex(temp, 1)
-            if( parenClosesFirst != -1){ //first element's paren need to be removed
-            val ttemp = temp.toList.to[ListBuffer]
-              ttemp.remove(0)
-              ttemp.remove(parenClosesFirst - 1)
-              temp = ttemp.mkString
-            }
-          }
-          var tempIndex = 0
-          while(tempIndex < temp.length){
-            if(temp(tempIndex) == '(' && tempIndex + 1 < temp.length && temp(tempIndex + 1) == '('){ //start of a subexpression has paren
-              //                println("in 2nd last if ")
-              tempIndex = tempIndex + 1 //start of child paren
-              val parenClosesFirst = getClosingIndex(temp, tempIndex + 1)
-              if(parenClosesFirst != -1){
-                //                  println("in last if ")
-                val ttemp = temp.toList.to[ListBuffer]
-                ttemp.remove(tempIndex)
-                ttemp.remove(parenClosesFirst - 1)
-                temp = ttemp.mkString
-                tempIndex = tempIndex + 2
-              }
-              else
-                tempIndex = tempIndex + 1
-            }
-            else
-              tempIndex = tempIndex + 1
-          }
-          opsIndex = opsIndex + 1
-        }
-      }
-      println(temp)
-    }
-  }*/
 }
