@@ -19,6 +19,7 @@ Sample Output
 0
 979
 44*/
+
 import java.util.Scanner;
 public class Palindrometer {
 
