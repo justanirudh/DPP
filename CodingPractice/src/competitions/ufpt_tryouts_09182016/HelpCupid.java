@@ -1,4 +1,4 @@
-package ufpt_tryouts_09182016;
+package competitions.ufpt_tryouts_09182016;
 
 import java.util.Arrays;
 import java.util.Scanner;
