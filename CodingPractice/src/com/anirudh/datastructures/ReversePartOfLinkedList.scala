@@ -1,14 +1,12 @@
 package com.anirudh.datastructures
 
-import com.anirudh.datastructures.LinkedListAddTwoNumbers.LinkedList
-
 /**
   * Created by anirudh on 10/10/16.
   */
 case class ListnotLongEnoughException(msg:String) extends Exception(msg)
 object ReversePartOfLinkedList extends App{
 
-  class LLWithReversalFunc extends LinkedList{
+  class LLWithReversalFunc extends LinkedList[Int]{
 
     def reverse(start:Int, end:Int) = {
       if(this.head.isEmpty)

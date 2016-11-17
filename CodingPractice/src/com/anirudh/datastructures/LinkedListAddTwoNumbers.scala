@@ -16,10 +16,10 @@ Input: (7 -> 6 -> 1 -> 5 -> 4) + (4 -> 3 -> 2)
 Output: 1 -> 0 -> 4 -> 5 -> 4
 * */
 
-class LinkedListAddTwoNumbers extends LinkedList {
+class LinkedListAddTwoNumbers extends LinkedList[Int] {
 
-  def addLL(ll:LinkedList):LinkedList = {
-    val sumLL = new LinkedList
+  def addLL(ll:LinkedList[Int]):LinkedList[Int] = {
+    val sumLL = new LinkedList[Int]
     if(head.isEmpty && ll.head.isEmpty)
       sumLL
     else if (head.isDefined && ll.head.isEmpty)

@@ -3,7 +3,7 @@ package com.anirudh.datastructures
 /**
   * Created by anirudh on 12/11/16.
   */
-class StackUsingLL extends LinkedList{
+class StackUsingLL extends LinkedList[Int]{
 
   def push(elem:Int) = {
     val newNode = new Node(elem, None)

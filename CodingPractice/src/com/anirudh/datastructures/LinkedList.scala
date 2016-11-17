@@ -3,13 +3,13 @@ package com.anirudh.datastructures
 /**
   * Created by anirudh on 12/11/16.
   */
-class LinkedList {
+class LinkedList[T] {
 
-  class Node(val elem:Int, var next:Option[Node])
+  class Node(val elem:T, var next:Option[Node])
 
   var head:Option[Node] = None
 
-  def add(elem:Int) = {
+  def add(elem:T) = {
     val newNode = new Node(elem, None)
     if(head.isEmpty)
       head = Some(newNode)
@@ -21,7 +21,7 @@ class LinkedList {
     }
   }
 
-  def delete(elem:Int) = {
+  def delete(elem:T) = {
     if(head.isEmpty){
       println("Empty Linked List. Cannot Delete")
     }
@@ -56,7 +56,7 @@ class LinkedList {
 }
 
 object LinkedList extends App {
-  val ll = new LinkedList
+  val ll = new LinkedList[Int]
   ll.add(7)
   ll.add(6)
   ll.add(1)
@@ -68,7 +68,7 @@ object LinkedList extends App {
   ll.delete(6)
   ll.printLL()
 
-  val ll2 = new LinkedList
+  val ll2 = new LinkedList[Int]
   ll2.add(4)
   ll2.add(3)
   ll2.add(2)

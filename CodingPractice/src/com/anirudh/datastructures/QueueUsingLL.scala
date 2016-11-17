@@ -3,11 +3,12 @@ package com.anirudh.datastructures
 /**
   * Created by anirudh on 12/11/16.
   */
-class QueueUsingLL extends LinkedList{
+class QueueUsingLL[T] extends LinkedList[T]{
 
+//  override var head:Option[Node] = None
   var tail:Option[Node] = None
 
-  def enqueue(elem:Int) = {
+  def enqueue(elem:T) = {
     val newNode = new Node(elem, None)
     if(head.isEmpty && tail.isEmpty){
       head = Some(newNode)
@@ -19,10 +20,16 @@ class QueueUsingLL extends LinkedList{
     }
   }
 
-  def dequeue():Int = {
+  def dequeue() = {
     if(head.isEmpty && tail.isEmpty){
       println("cannot dequeue from an empty queue")
-      -1
+      null
+    }
+    else if(head == tail){ //1 element in queue
+      val elem = head.get.elem
+      head = None
+      tail = None
+      elem
     }
     else{
       val elem = head.get.elem
@@ -31,4 +38,30 @@ class QueueUsingLL extends LinkedList{
     }
   }
 
+  def printQueue() = {
+    if(this.tail.isEmpty && this.head.isEmpty)
+      println("empty queue")
+    else {
+      var ptr = head
+      while(ptr.isDefined){
+        print(ptr.get.elem + "->")
+        ptr = ptr.get.next
+      }
+      print("NULL")
+    }
+  }
+
+  def isEmpty = tail.isEmpty && head.isEmpty
+}
+
+object QueueUsingLL extends App{
+  val q = new QueueUsingLL[(Int, Int)]
+  q.enqueue((1,1))
+//  q.enqueue((2,2))
+//  q.enqueue((3,3))
+//  q.enqueue((4,4))
+//  q.printQueue()
+  q.dequeue()
+//  q.dequeue()
+  q.printQueue()
 }
