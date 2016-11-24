@@ -10,6 +10,8 @@ to given sum.
 
 Examples: set[] = {3, 34, 4, 12, 5, 2}, sum = 9
 Output:  True  //There is a subset (4, 5) with sum 9.
+
+NP complete: pseudo polynomial, input sensitive as O(sum * n)
  */
 object SubsetSum extends App{
 
