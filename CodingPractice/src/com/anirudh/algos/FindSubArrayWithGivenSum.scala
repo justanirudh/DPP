@@ -21,7 +21,7 @@ Output: No subarray found
 object FindSubArrayWithGivenSum extends App{
 
   //Incrementing index (end) till we get sum == or > target. Then incrementing another index
-  //from start that decrements sum till we get == or < sum.
+  //from start that decrements sum till we get == or < sum. Like a sliding window.
   def findSubArray(arr:Seq[Int], target:Int):Seq[Int] = {
     var sum = 0
     var start = 0

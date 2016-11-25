@@ -5,7 +5,7 @@ import scala.io.StdIn._
 /**
   * Created by anirudh on 25/6/16.
   */
-//CTCI Chap9 Q5: This is DP, but is O(n!). Cannot do better than this as n! permutations
+//CTCI Chap9 Q5: This is O(n!). Cannot do better than this as n! permutations
 object FindAllPermutations extends App{
 
   def getAllPermutations(string:String):Seq[String] = {

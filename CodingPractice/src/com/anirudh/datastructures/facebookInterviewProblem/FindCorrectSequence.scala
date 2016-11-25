@@ -48,7 +48,7 @@ object FindCorrectSequence extends App{
   def doDFSAndPopulateSorted(graph:Map[String, GraphNode], start:String, sorted:Seq[String]):Seq[String] = {
     var sortedTemp = sorted
     //node has been discovered
-    graph(start).color = "grey" //not required for programmatic purposes
+    graph(start).color = "grey"
     for(neighbour <- graph(start).outNeighbours){
       if(graph(neighbour).color == "white"){ //dfs on the node only if it has not be discovered
         sortedTemp = doDFSAndPopulateSorted(graph,neighbour, sortedTemp)

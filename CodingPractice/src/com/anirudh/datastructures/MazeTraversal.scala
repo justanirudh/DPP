@@ -36,7 +36,7 @@ Shortest Path is 11
  */
 object MazeTraversal extends App{
 
-  class GraphNode(val coords:(Int, Int)){
+  class GraphNode(val coords:(Int, Int)){ //complete definition of a graph node
     var color = "white" //undiscovered
     var distFromSrc = -1
     var parent:(Int, Int) = (-1, -1)
@@ -137,9 +137,11 @@ object MazeTraversal extends App{
   val src = (0,0)
   val dest = (3,4)
 
-  val graph = createGraph(maze) //creates adjacency list of the maze/matrix
+  //1. creates adjacency list of the maze/matrix
+  val graph = createGraph(maze)
 
-  val updatedGraph:ListMap[(Int, Int), GraphNode] = performBFS(graph, src) //updates graph with BFS wrt src
+  //2. updates graph with BFS wrt src
+  val updatedGraph:ListMap[(Int, Int), GraphNode] = performBFS(graph, src)
 
   /*for(vertex <- updatedGraph) {
     println(vertex._1 + "-> ")
@@ -147,7 +149,8 @@ object MazeTraversal extends App{
     println("color: " + node.color + " parent: (" + node.coords._1 + "," + node.coords._2 + ")" + " distance from src: " + node.distFromSrc)
   }*/
 
-  val path:(Seq[(Int, Int)], Int) = getPath(updatedGraph, src, dest) //gets path
+  //3. gets path
+  val path:(Seq[(Int, Int)], Int) = getPath(updatedGraph, src, dest)
 
   if(path._2 == -1){
     println("No Path")

@@ -19,7 +19,7 @@ object RandQuickSortWithFindRank extends App{
     val pivot = partSeq(random_index)
     partSeq = exchangeElems(partSeq, random_index, start) //moved pivot to start
     var small = start
-    for(large <- start + 1 to end){
+    for(large <- start + 1 to end){ //small = start, large= start + 1
       if(partSeq(large) < pivot){
         small = small + 1
         partSeq = exchangeElems(partSeq, small, large)
@@ -46,9 +46,9 @@ object RandQuickSortWithFindRank extends App{
     else{
       val (partitionIndex, partitionedArray) = getPartition(seq, start, end)
       val rankPartition = partitionIndex - start + 1
-      if (rankPartition == rank)
+      if (rank == rankPartition)
         partitionedArray(partitionIndex)
-      else if (rankPartition > rank)
+      else if (rank < rankPartition)
         findElemWithRank(partitionedArray, rank, start, partitionIndex - 1)
       else
         findElemWithRank(partitionedArray, rankPartition - rank, partitionIndex + 1, end)

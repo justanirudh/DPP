@@ -30,7 +30,7 @@ object ZigZag extends App{
           strptr = strptr + 1
           i = i + 1
         }
-        if(strptr != strLen){
+        if(strptr != strLen){ //last row
           twoDArray(i)(j) = str(strptr)
           goingDown = false
           strptr = strptr + 1
