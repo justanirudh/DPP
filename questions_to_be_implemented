@@ -1,0 +1,11 @@
+Scala
+1. Heap Sort
+2. DFS of a binary tree (not bst) and a node and return stack of the path of the node
+3. Build an elevator system
+4. implement deletion from BST
+
+Mimimum spanning trees
+Djikstra's
+Belman Ford
+DAG shortest Path -> Topological Sort
+BFS and DFS graph

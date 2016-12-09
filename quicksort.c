@@ -8,9 +8,9 @@ int main(){
 
 	int partition(int array[], int start, int end){
 		int pivot = array[start]; //first elem pivot
-		int small = start;
+		int small = start; //small starts with first elem
 		int large, temp;
-		for(large = start + 1; large <= end; large++){
+		for(large = start + 1; large <= end; large++){ //large starts with start + 1 elem
 			if(array[large] < pivot){
 				small = small+1;
 				temp = array[large];
@@ -28,7 +28,7 @@ int main(){
 		//printf("%d %d", start, end);
 		int part;
 		if (start < end){
-			part = partition(array, start, end);
+			part = partition(array, start, end);//returns the partition AND changes the array
 			quicksort(array, start, part-1);
 			quicksort(array, part + 1, end);
 		}

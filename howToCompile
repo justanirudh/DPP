@@ -1,0 +1,1 @@
+gcc -o output towersOfHanoi.c ToHdriver.c ../stack.c (as it is also using stacks from one directory above)
