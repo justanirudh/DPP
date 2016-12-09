@@ -10,7 +10,7 @@ import scala.collection.SortedMap
   */
 import scala.io.StdIn._
 
-//Problem: Given apache logs, parse them and find succes rate (non-500 http codes)
+//Problem: Given apache logs, parse them and find success rate (non-500 http codes)
 object Twitter_ApacheLogsSuccessRate extends  App{
 
   //map from date-time to endpint to percentage
