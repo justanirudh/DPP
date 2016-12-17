@@ -3,7 +3,7 @@ package com.anirudh.general_algos
 /**
   * Created by paanir on 12/17/16.
   */
-//Given an array of numbers, find the largest number you can make from it
+//Given an array of numbers, find the largest number you can make from them
 //Eg. [50, 213, 9] -> 950213
 object LargestNumberS extends App{
 
