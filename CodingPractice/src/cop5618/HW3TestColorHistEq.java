@@ -86,7 +86,6 @@ public class HW3TestColorHistEq {
 		File output = new File(filename);
 		BufferedImage source = sourceImage;
 		BufferedImage newImage = new BufferedImage(source.getWidth(), source.getHeight(), source.getType());
-//		Timer timerData = ColorHistEq.colorHistEq_serial(source, newImage);
 		for (int rep = 0; rep < WARMUPREPS; rep++) {
 			Timer timerData = ColorHistEq.colorHistEq_serial(source, newImage);
 //			System.out.println(timerData.toStringNanos());
