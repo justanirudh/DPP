@@ -43,7 +43,6 @@ public class MinStack {
             head = newHead;
         }
     }
-
     public void pop() throws StackEmptyException{
         if(head == null)
             throw new StackEmptyException("Stack is empty. Cannot pop");

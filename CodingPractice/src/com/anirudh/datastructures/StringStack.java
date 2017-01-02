@@ -4,7 +4,7 @@ package com.anirudh.datastructures;
  * Created by paanir on 12/22/16.
  */
 public class StringStack {
-
+//push, pop, top, isEmpty
     private class Node {
         String elem;
         Node next;
@@ -14,6 +14,7 @@ public class StringStack {
     }
 
     private Node head;
+    private int size = 0;
 
     public StringStack() {
         head = null;
@@ -27,6 +28,7 @@ public class StringStack {
             newHead.next = head;
             head = newHead;
         }
+        ++size;
     }
 
     public String pop(){
@@ -36,6 +38,7 @@ public class StringStack {
         else{
             String s = head.elem;
             head = head.next;
+            --size;
             return s;
         }
     }
@@ -46,5 +49,9 @@ public class StringStack {
 
     public boolean isEmpty(){
         return head == null;
+    }
+
+    public int getSize(){
+        return size;
     }
 }
