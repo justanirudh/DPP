@@ -38,9 +38,8 @@ public class LongestSubstringwithAtMostKDistinctCharacters {
             if (map.size() > k) {
                 maxLen = Math.max(maxLen, i - left);
 
+                //remove elements from left until size of map is equal to k
                 while (map.size() > k) {
-
-                    //remove elements from left until size of map is equal to k
                     char fc = s.charAt(left);
                     if (map.get(fc) == 1) {
                         map.remove(fc);
@@ -51,15 +50,14 @@ public class LongestSubstringwithAtMostKDistinctCharacters {
                     left++;
                 }
             }
-
         }
 
-        maxLen = Math.max(maxLen, s.length() - left);
+        maxLen = Math.max(maxLen, s.length() - left); //last comparison
 
         return maxLen;
     }
 
-    public static void main(String[] args){
-        System.out.println(lengthOfLongestSubstringKDistinct(  "abcbbbbcccbdddadacb", 2 ));
+    public static void main(String[] args) {
+        System.out.println(lengthOfLongestSubstringKDistinct("abcbbbbcccbdddadacb", 2));
     }
 }

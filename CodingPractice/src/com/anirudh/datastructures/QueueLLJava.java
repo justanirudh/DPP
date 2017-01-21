@@ -3,9 +3,9 @@ package com.anirudh.datastructures;
 /**
  * Created by paanir on 12/17/16.
  */
-public class QueueLLJava {
+public class QueueLLJava<T> {
 
-    class BadImplementationException extends Exception
+    static class BadImplementationException extends RuntimeException
     {
         public BadImplementationException(String message)
         {
@@ -13,7 +13,7 @@ public class QueueLLJava {
         }
     }
 
-    class EmptyQueueException extends Exception
+    static class EmptyQueueException extends RuntimeException
     {
         public EmptyQueueException(String message)
         {
@@ -22,9 +22,9 @@ public class QueueLLJava {
     }
 
     private class Node {
-        int elem;
+        T elem;
         Node next;
-        public Node (int elem){
+        public Node (T elem){
             this.elem = elem;
         }
     }
@@ -34,7 +34,7 @@ public class QueueLLJava {
 
     //enqueue, dequeue, getfront, getback, print, isEmpty
 
-    public void enqueue(int elem) throws BadImplementationException{
+    public void enqueue(T elem) /*throws BadImplementationException*/{
         Node newNode = new Node(elem);
         if(head == null && tail==null){
             head = newNode;
@@ -48,24 +48,24 @@ public class QueueLLJava {
             throw new BadImplementationException("something wrong");
     }
 
-    public int dequeue() throws EmptyQueueException {
+    public T dequeue()/* throws EmptyQueueException */{
         if(head == null && tail==null){
             throw new EmptyQueueException("Queue empty. Nothing to dequeue");
         }
         else if (head == tail){
-            int elem = head.elem;
+            T elem = head.elem;
             head = null;
             tail = null;
             return elem;
         }
         else {
-            int elem = head.elem;
+            T elem = head.elem;
             head = head.next;
             return elem;
         }
     }
 
-    public int getfront()  throws EmptyQueueException{
+    public T getfront()  throws EmptyQueueException{
         if(head == null && tail==null){
             throw new EmptyQueueException("Queue empty. Nothing to dequeue");
         }
@@ -73,7 +73,7 @@ public class QueueLLJava {
             return head.elem;
     }
 
-    public int getback()  throws EmptyQueueException{
+    public T getback()  throws EmptyQueueException{
         if(head == null && tail==null){
             throw new EmptyQueueException("Queue empty. Nothing to dequeue");
         }
@@ -94,8 +94,8 @@ public class QueueLLJava {
         return (head == null && tail == null);
     }
 
-    public static void main(String[] args) throws BadImplementationException, EmptyQueueException{
-        QueueLLJava q = new QueueLLJava();
+    public static void main(String[] args) /*throws BadImplementationException, EmptyQueueException*/{
+        QueueLLJava q = new QueueLLJava<Integer>();
         q.enqueue(1);
         q.enqueue(2);
         q.enqueue(3);

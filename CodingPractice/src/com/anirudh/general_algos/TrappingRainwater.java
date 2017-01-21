@@ -25,15 +25,17 @@ public class TrappingRainwater {
 
         int[] left = new int[height.length];
         left[0] = height[0];
-        for (int i = 1; i < height.length; ++i) //from left to right
+        for (int i = 1; i < height.length; ++i) //from left to right. finding left boundary of barrage.
             left[i] = Integer.max(left[i - 1], height[i]);
 
         int[] right = new int[height.length];
         right[height.length - 1] = height[height.length - 1];
-        for (int i = height.length - 2; i >= 0; --i) //from right to left
+        for (int i = height.length - 2; i >= 0; --i) //from right to left. finding right boundary of barrage.
             right[i] = Integer.max(right[i + 1], height[i]);
 
         int trapped = 0;
+        //for every bar, minimum of the left and right minus height of the bar. taking min as barrage will hold water
+        //equal to lesser boundaries height.
         for (int i = 0; i < height.length; ++i)
             trapped += Integer.min(left[i], right[i]) - height[i];
         return trapped;

@@ -9,7 +9,7 @@ object CountingSort extends App{
     val bufferSize = arr.max //arr[j] belong to 1 to k
     val buffer = Array.fill(bufferSize){0}
     for(i <- arr.indices){ //C
-      buffer(arr(i)-1) = buffer(arr(i)-1) + 1
+      buffer(arr(i)-1) = buffer(arr(i)-1) + 1 //at arr elems value's index, count no. of its occurences
     }
     buffer foreach println
     println("----------------------")
@@ -19,9 +19,9 @@ object CountingSort extends App{
     buffer foreach println
     println("----------------------")
     val sortedArray = Array.fill(arr.size){0} //B
-    for(i <- (arr.size - 1) to 0 by -1){
+    for(i <- (arr.size - 1) to 0 by -1){ //decrementing from end of buffer
       sortedArray(buffer(arr(i)-1)-1) = arr(i)
-      buffer(arr(i)-1) = buffer(arr(i)-1) - 1
+      buffer(arr(i)-1) = buffer(arr(i)-1) - 1 //decrementing the value
     }
     sortedArray
   }
