@@ -1,10 +1,10 @@
-package com.anirudh;
+package com.anirudh.general_algos;
 
 /**
  * Created by paanir on 1/22/17.
  */
 /*
-41. First Missing Positive   Add to List QuestionEditorial Solution  My Submissions
+41. First Missing Positive   Add to List QuestionEditorial Bloomberg_Chocolate_Fix  My Submissions
 Total Accepted: 85982
 Total Submissions: 344471
 Difficulty: Hard
