@@ -1,4 +1,4 @@
-package com.anirudh.datastructures.facebookInterviewProblem
+package com.anirudh.datastructures
 
 /**
   * Created by anirudh on 24/10/16.
@@ -70,6 +70,7 @@ object FindCorrectSequence extends App{
       if(node.color == "white"){
         sorted = doDFSAndPopulateSorted(graph, node.str, sorted)
       }
+
     }
     sorted
   }
