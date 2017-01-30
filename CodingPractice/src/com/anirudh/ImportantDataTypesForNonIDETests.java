@@ -1,9 +1,6 @@
 package com.anirudh;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by paanir on 1/19/17.
@@ -26,5 +23,21 @@ public class ImportantDataTypesForNonIDETests {
         TreeMap<Integer, String> tm = new TreeMap<>(); //sorted
 
         LinkedHashMap<Integer, String> lhm = new LinkedHashMap<>(); //in the same order as inserted
+
+        class Node {
+            int val;
+            Node next;
+            Node(int val) {
+                this.val = val;
+                this.next = null;
+            }
+        }
+Integer.M
+        Stack<Node> stack = new Stack<Node>();
+        System.out.println(stack);
+
+        //https://docs.oracle.com/javase/7/docs/api/java/util/Queue.html
+        Queue<Node> queue = new LinkedList<Node>();
+        System.out.println(queue);
     }
 }
