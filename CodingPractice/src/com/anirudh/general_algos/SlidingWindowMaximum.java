@@ -43,10 +43,49 @@ public class SlidingWindowMaximum {
         return maxes;
     }
 
+    public static int[] maxSlidingWindowBetter(int[] nums, int k) {
+        if (nums.length == 0)
+            return new int[0];
+        int[] maxes = new int[nums.length - k + 1];
 
+        int maxIndex = 0;
+        int maxValue = Integer.MIN_VALUE;
+        for (int j = 0; j < k; ++j) {
+            if (nums[j] > maxValue) {
+                maxValue = nums[j];
+                maxIndex = j;
+            }
+        }
+        maxes[0] = maxValue;
+
+        for (int i = 1; i <= nums.length - k; ++i) {
+            int newIndex = i + k - 1;
+            int newNum = nums[newIndex];
+            if (maxIndex >= i && maxIndex < newIndex) {
+                System.out.println("here");
+                if (newNum > maxValue) {
+                    maxValue = newNum;
+                    maxIndex = newIndex;
+                }
+                maxes[i] = maxValue;
+            } else {
+                System.out.println("there");
+                int max = Integer.MIN_VALUE;
+                for (int j = i; j < i + k; ++j) {
+                    if (nums[j] > max) {
+                        max = nums[j];
+                        maxIndex = j;
+                    }
+                }
+                maxValue = max;
+                maxes[i] = maxValue;
+            }
+        }
+        return maxes;
+    }
 
     public static void main(String[] args) {
-        int[] arr = maxSlidingWindow(new int[]{1}, 1);
+        int[] arr = maxSlidingWindowBetter(new int[]{1, 3, 1, 2, 0 ,5}, 3);
         for (int i : arr) {
             System.out.println(i);
         }
