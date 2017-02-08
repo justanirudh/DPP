@@ -14,6 +14,8 @@ public class ImportantDataTypesForNonIDETests {
         ArrayList<Integer> arrl = new ArrayList<>();
         System.out.println(arrl);
 
+        int[] arr2 = new int[3];
+
         int[] arr = new int[]{2,3,4};
         System.out.println(arr);
 
@@ -32,7 +34,7 @@ public class ImportantDataTypesForNonIDETests {
                 this.next = null;
             }
         }
-Integer.M
+
         Stack<Node> stack = new Stack<Node>();
         System.out.println(stack);
 
