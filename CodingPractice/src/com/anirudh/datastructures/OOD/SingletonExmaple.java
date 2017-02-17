@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.datastructures.OOD;
 
 /**
  * Created by anirudh on 14/11/16.
