@@ -71,6 +71,22 @@ public class LRUCache {
         queue.head = qn;
     }
 
+    private void removeFromTail(QueueNode qn){
+        QueueNode prev = qn.prev;
+        prev.next = null;
+        queue.tail = prev;
+    }
+
+    private void addToMap(int key, QueueNode qn){
+        map.put(key, qn);
+        numElems++;
+    }
+
+    private void removeFromMap(int key){
+        map.remove(key);
+        numElems--;
+    }
+
     public int get(int key) {
         if (!map.containsKey(key))
             return -1;
@@ -81,11 +97,7 @@ public class LRUCache {
             if (queue.head == qn) {
                 //if head, DO nothing
             } else if (queue.tail == qn) { //if tail, bring it to head
-                //remove from tail
-                QueueNode prev = qn.prev;
-                prev.next = null;
-                queue.tail = prev;
-                //move to head
+                removeFromTail(qn);
                 moveToHead(qn);
             } else { // in between
                 //remove from between
@@ -93,12 +105,10 @@ public class LRUCache {
                 QueueNode next = qn.next;
                 prev.next = next;
                 next.prev = prev;
-                //move to head
                 moveToHead(qn);
             }
             return val;
         }
-
     }
 
     public void put(int key, int value) {
@@ -111,46 +121,34 @@ public class LRUCache {
             if (capacity == 1) { // only 1 capacity
                 //remove LRU node from queue
                 QueueNode qn = queue.tail; //= queue.head
-                //delete entry from map
-                int oldKey = qn.key;
-                map.remove(oldKey);
+                removeFromMap(qn.key);
                 //add new node to front of queue
                 QueueNode qnNew = new QueueNode(key, value);
                 queue.head = qnNew;
                 queue.tail = qnNew;
-                //add to map
-                map.put(key, qnNew);
+                addToMap(key, qnNew);
                 return;
             }
             //remove LRU node from queue
             QueueNode qn = queue.tail;
-            QueueNode prev = qn.prev;
-            prev.next = null;
-            queue.tail = prev;
-            //delete entry from map
-            int oldKey = qn.key;
-            map.remove(oldKey);
+            removeFromTail(qn);
+            removeFromMap(qn.key);
             //add new node to front of queue
             QueueNode qnNew = new QueueNode(key, value);
             moveToHead(qnNew);
-            //add to map
-            map.put(key, qnNew);
+            addToMap(key, qnNew);
         } else { //space is there
             QueueNode qn = new QueueNode(key, value);
             if (numElems == 0) {
                 //add to front of queue
                 queue.head = qn;
                 queue.tail = qn;
-                // add to map
-                map.put(key, qn);
-                numElems++;
+                addToMap(key, qn);
                 return;
             }
             //add to front of queue
             moveToHead(qn);
-            //add to map
-            map.put(key, qn);
-            numElems++;
+            addToMap(key, qn);
         }
     }
 
