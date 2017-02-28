@@ -22,7 +22,7 @@ public class ImportantDataTypesForNonIDETests {
         HashMap<Integer, String> hm = new HashMap<>();
         System.out.println(hm);
 
-        TreeMap<Integer, String> tm = new TreeMap<>(); //sorted
+        TreeMap<Integer, String> tm = new TreeMap<>(); //sorted keys
 
         LinkedHashMap<Integer, String> lhm = new LinkedHashMap<>(); //in the same order as inserted
 

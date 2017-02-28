@@ -39,7 +39,6 @@ public class LRUCache {
     int capacity;
     int numElems;
 
-    //TODO: Instead of homemade queue, we can use ArrayList<KeyValueClass>
     class Queue {
         QueueNode head = null; //MRU
         QueueNode tail = null; //LRU

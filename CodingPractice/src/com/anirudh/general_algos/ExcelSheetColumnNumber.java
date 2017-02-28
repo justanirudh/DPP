@@ -24,6 +24,7 @@ For example:
     AA -> 27
     AB -> 28
  */
+// B A C = ('B' - 64) * 26^2 + ('A' - 64) * 26^1 + ('C' - 64) * 26
 public class ExcelSheetColumnNumber {
     public int titleToNumAux(String s, int num) {
         if (s.length() == 0)

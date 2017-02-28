@@ -29,6 +29,12 @@ public class PalindromePairs {
 
     //Time: O(n^3): nC2 * 2 * O(n)
     public List<List<Integer>> palindromePairsNaive(String[] words) {
+
+        String s=  "wweee";
+        for(char c: s.toCharArray()){
+            System.out.println();
+        }
+
         List<List<Integer>> list = new ArrayList<>();
         for (int i = 0; i < words.length - 1; ++i) {
             for (int j = i + 1; j < words.length; ++j) {
