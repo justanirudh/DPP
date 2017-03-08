@@ -14,7 +14,8 @@ public class ImportantDataTypesForNonIDETests {
         ArrayList<Integer> arrl = new ArrayList<>();
         System.out.println(arrl);
 
-        int[] arr2 = new int[3];
+        int k = 5;
+        int[] arr2 = new int[k];
 
         int[] arr = new int[]{2,3,4};
         System.out.println(arr);
