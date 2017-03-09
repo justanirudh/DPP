@@ -11,6 +11,9 @@ public class ImportantDataTypesForNonIDETests {
         String s = "abc";
         System.out.println(s);
 
+        StringBuilder sb = new StringBuilder();
+        System.out.println(sb);
+
         ArrayList<Integer> arrl = new ArrayList<>();
         System.out.println(arrl);
 
