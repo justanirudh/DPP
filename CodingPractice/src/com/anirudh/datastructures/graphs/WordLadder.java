@@ -3,18 +3,14 @@ package com.anirudh.datastructures.graphs;
 import com.anirudh.general_algos.basics.QueueLLJava;
 
 import java.util.*;
+//BFS
 
 /**
  * Created by paanir on 1/11/17.
  */
 /*
-127. Word Ladder   Add to List QuestionEditorial Solution  My Submissions
-Total Accepted: 106852
-Total Submissions: 553578
-Difficulty: Medium
-Contributors: Admin
-Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation
-sequence from beginWord to endWord, such that:
+127. Word Ladder
+Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation sequence from beginWord to endWord, such that:
 
 Only one letter can be changed at a time
 Each intermediate word must exist in the word list

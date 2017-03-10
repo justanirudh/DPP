@@ -1,5 +1,5 @@
-package com.anirudh.datastructures
-
+package com.anirudh.datastructures.graphs
+//DFS Scala
 /**
   * Created by anirudh on 24/10/16.
   */
