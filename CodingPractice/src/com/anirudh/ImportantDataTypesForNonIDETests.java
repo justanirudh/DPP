@@ -11,6 +11,8 @@ public class ImportantDataTypesForNonIDETests {
         String s = "abc";
         System.out.println(s);
 
+        Integer.toString(Integer.parseInt(s));
+
         StringBuilder sb = new StringBuilder();
         System.out.println(sb);
 
