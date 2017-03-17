@@ -1,8 +1,8 @@
 package com.anirudh;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
-import static com.anirudh.Sandbox.changeA;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -10,14 +10,12 @@ import static org.junit.Assert.assertEquals;
  */
 public class Sandbox {
 
-    static void  changeA(int a) {
-        a = 10;
-    }
-
     public static void main(String[] args) {
-        int a = 5;
-        changeA(a);
-        System.out.println(a);
+        Stack<Integer> st = new Stack<>();
+        st.push(1);
+        st.push(2);
+        System.out.println(st.contains(3));
+
     }
 }
 

@@ -1,6 +1,5 @@
 package com.anirudh.datastructures.graphs;
 //DFS
-import scala.Int;
 
 import java.util.ArrayList;
 import java.util.HashMap;
