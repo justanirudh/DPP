@@ -54,19 +54,19 @@ public class DetectCycle {
             if (visited[child] == 0) {
                 boolean cycle = doDFS(child, curr, alist, visited); //IMP: dont return if false; only return if true
                 if (cycle)
-                    return true;
+                    return true; //if false, check for next child
             } else { //visited
-                if (child != parent)
+                if (child != parent) //make sure we are not looking at curr's parent
                     return true;
             }
         }
         return false;
     }
 
-    static Boolean isCyclic(int V, LinkedList<Integer>[] alist) {
-        int[] visited = new int[V];
+    static Boolean isCyclic(int V, LinkedList<Integer>[] alist) { //represented graph as an array of linked lists: index (node) to list of neighbours
+        int[] visited = new int[V]; //no field of color gray or black as just an array. hence, using visited array to tally
         for (int i = 0; i < V; ++i)
-            visited[i] = 0;
+            visited[i] = 0; //all not visited to start with
         for (int i = 0; i < V; ++i) {
             if (visited[i] == 0)
                 if (doDFS(i, -1, alist, visited))
