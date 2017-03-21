@@ -78,6 +78,7 @@ public class DetectCycle {
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+
         int t = in.nextInt();
         while (t-- > 0) {
             int v = in.nextInt();
