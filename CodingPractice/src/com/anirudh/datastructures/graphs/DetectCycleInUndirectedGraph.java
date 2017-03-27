@@ -7,6 +7,8 @@ import java.util.Scanner;
  * Created by paanir on 3/16/17.
  */
 /*
+http://www.geeksforgeeks.org/detect-cycle-undirected-graph/
+
 G4G: http://www.practice.geeksforgeeks.org/problem-page.php?pid=700219
 
 Detect cycle in an undirected graph
@@ -47,7 +49,7 @@ In the second test case there is a graph with 3 vertices and 3 edges from 0 to 1
 
 **For More Examples Use Expected Output**
  */
-public class DetectCycle {
+public class DetectCycleInUndirectedGraph {
     static Boolean doDFS(int curr, int parent, LinkedList<Integer>[] alist, int[] visited) {
         visited[curr] = 1; //visited this
         for (Integer child : alist[curr]) { //all neighbours
