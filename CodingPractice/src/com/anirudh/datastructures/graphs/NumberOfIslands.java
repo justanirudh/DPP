@@ -87,6 +87,7 @@ public class NumberOfIslands {
     }
 
     public static class GraphNode {
+        private char c; //using in Surrounded Regions problem
         private Coord coord;
         private String color;
         private ArrayList<Coord> neighbours;
@@ -111,6 +112,14 @@ public class NumberOfIslands {
 
         public ArrayList<Coord> getNeighbours() {
             return neighbours;
+        }
+
+        public void setC(char c) {
+            this.c = c;
+        }
+
+        public char getC() {
+            return c;
         }
     }
 
