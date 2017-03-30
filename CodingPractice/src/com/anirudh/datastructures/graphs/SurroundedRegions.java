@@ -6,7 +6,7 @@ import java.util.Queue;
 
 import com.anirudh.datastructures.graphs.NumberOfIslands.Coord;
 import com.anirudh.datastructures.graphs.NumberOfIslands.GraphNode;
-
+//BFS, can be done by DFS too
 /**
  * Created by paanir on 3/27/17.
  */
@@ -77,7 +77,7 @@ public class SurroundedRegions {
         while (!queue.isEmpty()) {
             Coord c = queue.remove();
             for (Coord child : graph.get(c).getNeighbours()) {
-                if (graph.get(child).getC() != '#') { //check if white
+                if (graph.get(child).getC() != '#') { //normal BFS: check if white
                     graph.get(child).setC('#');
                     queue.add(child);
                 }

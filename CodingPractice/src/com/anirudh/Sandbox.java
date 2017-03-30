@@ -24,13 +24,14 @@ public class Sandbox {
 //        Foo f2 = new Foo();
 //        System.out.println(f1.equals(f2));
 
-        Integer a = 0, b = 0, d = 0;
-
-        int c = a != b ? 5 : foo(d);
-
-        System.out.println(c + "," + d);
-
-        return;
+//        Integer a = 0, b = 0, d = 0;
+//
+//        int c = a != b ? 5 : foo(d);
+//
+//        System.out.println(c + "," + d);
+//
+//        return;
+        int[] record = new int[3];
     }
 }
 
