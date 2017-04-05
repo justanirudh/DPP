@@ -31,7 +31,46 @@ public class Sandbox {
 //        System.out.println(c + "," + d);
 //
 //        return;
-        int[] record = new int[3];
+//        int[] record = new int[3];
+//        ArrayList<Integer> al = new ArrayList<>();
+//        al.add(1);
+//        al.add(2);
+//        al.add(4);
+//        al.add(0, 3);
+//        for(Integer i : al)
+//            System.out.println(i);
+
+//        System.out.println(Boolean.parseBoolean(""));
+//        int a = 5;
+//        char[] ar = Integer.toString(5).toCharArray();
+
+//        int [][] array= {
+//                {10, 16},
+//                {2, 8},
+//                {1, 6},
+//                {7, 12} };
+//
+//        Arrays.sort(array, new java.util.Comparator<int[]>() {
+//            public int compare(int[] a, int[] b) {
+//                return Integer.compare(a[0], b[0]);
+//            }
+//        });
+//
+//        for(int[] ar : array){
+//            System.out.println(ar[0] + "," + ar[1]);
+//        }
+
+//        String url = "http://tinyurl.com/foobar";
+//        String[] pieces = url.split("/");
+//        for(String str: pieces)
+//            System.out.println(str);
+
+        byte[] encodedBytes = Base64.getEncoder().encode("Test".getBytes());
+        System.out.println("encodedBytes " + new String(encodedBytes));
+        byte[] decodedBytes = Base64.getDecoder().decode(encodedBytes);
+        System.out.println("decodedBytes " + new String(decodedBytes));
+
+
     }
 }
 
