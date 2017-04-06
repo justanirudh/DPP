@@ -21,7 +21,9 @@ public class EncodeDecodeTinyURL {
     public static String encode(String longUrl) {
         // encode data on your side using BASE64
         byte[] encodedBytes = Base64.getEncoder().encode(longUrl.getBytes());
-        return "http://tinyurl.com/" + new String(encodedBytes);
+//        byte[] encodedBytes2 = Base64.getEncoder().encode(encodedBytes);
+        String s2 = new String(encodedBytes);
+        return "http://tinyurl.com/" + s2;
     }
 
     // Decodes a shortened URL to its original URL.
