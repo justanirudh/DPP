@@ -7,7 +7,6 @@ import java.util.List;
  * Created by paanir on 4/4/17.
  */
 
-
 public class Permutations {
     public static List<Integer> addElement(List<Integer> arr, int num, int index) {
         List<Integer> newList = new ArrayList<Integer>(arr);
