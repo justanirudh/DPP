@@ -1,5 +1,8 @@
-package com.anirudh.general_algos
+package com.anirudh.matrix
 
+/**
+  * Created by paanir on 4/24/17.
+  */
 object FindElemInMatrix extends App {
 
 	def findElement(matrix:Seq[Seq[Int]], elem:Int, r:Int, c:Int):(Int, Int) = {
@@ -10,7 +13,7 @@ object FindElemInMatrix extends App {
 		else if(elem < matrix(r)(c))
 			findElement(matrix, elem, r-1, c)
 		else
-			findElement(matrix, elem, r, c+1)			
+			findElement(matrix, elem, r, c+1)
 	}
 
 	val matrix = Seq(Seq(15,20,40,85), Seq(20,35,85,95), Seq(30,55,95,105), Seq(40,80,100,120))
