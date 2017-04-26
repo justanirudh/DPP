@@ -24,6 +24,7 @@ Given target = 5, return true.
 
 Given target = 20, return false.
  */
+//O(m + n)
 public class Search2DMatrix2 {
     public boolean searchMatrix(int[][] matrix, int target) {
         int numRows = matrix.length;
