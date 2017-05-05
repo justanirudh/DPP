@@ -1,3 +1,2 @@
-#Daily Practice Problems
-
+# Daily Practice Problems
 Scala/Java
