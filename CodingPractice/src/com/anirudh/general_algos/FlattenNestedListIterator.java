@@ -7,7 +7,22 @@ import java.util.Stack;
 /**
  * Created by paanir on 5/9/17.
  */
-//#341 under-construction
+/*
+341. Flatten Nested List Iterator
+Given a nested list of integers, implement an iterator to flatten it.
+
+Each element is either an integer, or a list -- whose elements may also be integers or other lists.
+
+Example 1:
+Given the list [[1,1],2,[1,1]],
+
+By calling next repeatedly until hasNext returns false, the order of elements returned by next should be: [1,1,2,1,1].
+
+Example 2:
+Given the list [1,[4,[6]]],
+
+By calling next repeatedly until hasNext returns false, the order of elements returned by next should be: [1,4,6].
+ */
 public class FlattenNestedListIterator {
 
     // This is the interface that allows for creating nested lists.
@@ -28,36 +43,46 @@ public class FlattenNestedListIterator {
 
     public class NestedIterator implements Iterator<Integer> {
 
-        List<NestedInteger> nestedList;
-        Stack<NestedInteger> stack;
+        Stack<Iterator<NestedInteger>> stack;
+        NestedInteger currInt;
 
         public NestedIterator(List<NestedInteger> nestedList) {
-            this.nestedList = nestedList;
             stack = new Stack<>();
-//            stack.push();
+            stack.push(nestedList.iterator());
+        }
+
+        private Iterator<NestedInteger> getTop() {
+            if (stack.isEmpty())
+                return null;
+            else
+                return stack.peek();
         }
 
         @Override
-        public Integer next() {
-            // NestedInteger curr = super.next();
-
-            // if(curr.isInteger()){
-            //     return curr.getInteger();
-            // }
-            // else{ //is list
-            //     List<NestedInteger> l = curr.getList();
-            // }
-
+        public Integer next() { //will always be integer
+            return currInt.getInteger();
         }
 
         @Override
-        public boolean hasNext() {
-            return stack.isEmpty();
-            //boolean  super.hasNext();
-//            if (stack.isEmpty()) {
-//
-//            } else
-//                return true;
+        public boolean hasNext() { //removes all fluff till an in is found
+            Iterator<NestedInteger> curr = getTop();
+            if (curr == null) //stack empty, return false
+                return false;
+            boolean hasNext = curr.hasNext();
+            if (hasNext) {
+                NestedInteger elem = curr.next();
+                if (elem.isInteger()) { //integer
+                    currInt = elem;
+                    return true;
+                } else { //list
+                    List<NestedInteger> l = elem.getList();
+                    stack.push(l.iterator());
+                    return hasNext();
+                }
+            } else { //go to list below it in stack
+                stack.pop();
+                return hasNext();
+            }
         }
     }
 
