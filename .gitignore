@@ -3,3 +3,8 @@
 *.out
 *.s
 *.class
+*.xml
+*.iml
+/Competitions&Interviews
+questions_to_be_impl
+some_git_cmds
