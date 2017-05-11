@@ -1,4 +1,4 @@
-package com.anirudh;
+package com.anirudh.general_algos;
 
 import java.util.ArrayList;
 import java.util.List;

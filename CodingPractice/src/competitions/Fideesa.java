@@ -1,4 +1,4 @@
-package competitions.ufpt_tryouts_09182016;
+package competitions;
 
 import com.anirudh.general_algos.IntegerToEnglishWords;
 
