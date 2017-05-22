@@ -9,7 +9,7 @@ class BinarySearchTree extends BinaryTree{
   //TODO: implement delete
 
 
-  private def add(newNode:TreeNode, node:TreeNode):Unit = {
+  private def add(newNode:TreeNodeS, node:TreeNodeS):Unit = {
     if(newNode.elem < node.elem){
       if(node.left.isEmpty)
         node.left = Some(newNode)
@@ -28,7 +28,7 @@ class BinarySearchTree extends BinaryTree{
   }
 
   override def add(elem:Int):Unit = {
-    val newNode = new TreeNode(elem, None, None)
+    val newNode = new TreeNodeS(elem, None, None)
     if(size == 0)
       root = Some(newNode)
     else
@@ -36,7 +36,7 @@ class BinarySearchTree extends BinaryTree{
     size = size+1
   }
 
-  private def search(elem:Int, node:TreeNode):Option[TreeNode] = {
+  private def search(elem:Int, node:TreeNodeS):Option[TreeNodeS] = {
     if(elem < node.elem){
       if(node.left.isEmpty)
         None
@@ -53,14 +53,14 @@ class BinarySearchTree extends BinaryTree{
       Some(node)
   }
 
-  def search(elem:Int):Option[TreeNode] = {
+  def search(elem:Int):Option[TreeNodeS] = {
     if(root.isEmpty)
       None
     else
       search(elem, root.get)
   }
 
-  private def getParent(elem:Int, node:TreeNode):Option[TreeNode] = { // in its public mthod, check for elem = root
+  private def getParent(elem:Int, node:TreeNodeS):Option[TreeNodeS] = { // in its public mthod, check for elem = root
     if(elem < node.elem){
       if(node.left.isEmpty)
         None
@@ -106,7 +106,7 @@ class BinarySearchTree extends BinaryTree{
         }
       }
       else{ //deleting a non-root
-        val parent:Option[TreeNode] = getParent(elem, root.get)
+        val parent:Option[TreeNodeS] = getParent(elem, root.get)
         parent match {
           case None => println("Element not found")
           case Some(p) =>

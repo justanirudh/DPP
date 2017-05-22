@@ -7,7 +7,7 @@ package com.anirudh.datastructures.trees
 
 class AlmostBST extends BinaryTree{ //Not a BST
 
-  private def add(newNode:TreeNode, node:TreeNode):Unit = {
+  private def add(newNode:TreeNodeS, node:TreeNodeS):Unit = {
 
     if(newNode.elem == 14){
       node.left = Some(newNode)
@@ -21,7 +21,7 @@ class AlmostBST extends BinaryTree{ //Not a BST
   }
 
   override def add(elem:Int):Unit = {
-    val newNode = new TreeNode(elem, None, None)
+    val newNode = new TreeNodeS(elem, None, None)
     if(size == 0)
       root = Some(newNode)
     else
@@ -35,7 +35,7 @@ object CheckIfaBinaryTreesIsaBST extends App{
   val BIGNUMBER = 10000
 
   //Checks if the given binary tree is also a binary search tree
-  def checkBSTAux(curr:Option[TreeNode], min:Int, max:Int): Boolean = {
+  def checkBSTAux(curr:Option[TreeNodeS], min:Int, max:Int): Boolean = {
     if(curr.isEmpty)
       true
     else {

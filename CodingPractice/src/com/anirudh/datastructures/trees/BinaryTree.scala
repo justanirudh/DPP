@@ -1,17 +1,13 @@
 package com.anirudh.datastructures.trees
 
-/**
-  * Created by anirudh on 3/11/16.
-  */
 
-class TreeNode(var elem:Int, var left:Option[TreeNode], var right:Option[TreeNode])
 
 class BinaryTree {
 
   var size = 0
-  /*private*/ var root:Option[TreeNode] = None
+  /*private*/ var root:Option[TreeNodeS] = None
 
-  private def add(newNode:TreeNode, node:TreeNode):Unit = {
+  private def add(newNode:TreeNodeS, node:TreeNodeS):Unit = {
     val r = scala.util.Random.nextInt(10)
     if(r < 5 ){ //randomly adding to the tree
       if(node.left.isEmpty)
@@ -27,15 +23,15 @@ class BinaryTree {
     }
   }
 
-  private def show(treeNode:Option[TreeNode]):String = {
-    if(treeNode.isEmpty)
+  private def show(TreeNodeS:Option[TreeNodeS]):String = {
+    if(TreeNodeS.isEmpty)
       "NULL"
     else
-      treeNode.get.elem + " -> {"+ show(treeNode.get.left) + ", " + show(treeNode.get.right)+ "}"
+      TreeNodeS.get.elem + " -> {"+ show(TreeNodeS.get.left) + ", " + show(TreeNodeS.get.right)+ "}"
   }
 
   def add(elem:Int):Unit = {
-    val newNode = new TreeNode(elem, None, None)
+    val newNode = new TreeNodeS(elem, None, None)
     if(size == 0)
       root = Some(newNode)
     else

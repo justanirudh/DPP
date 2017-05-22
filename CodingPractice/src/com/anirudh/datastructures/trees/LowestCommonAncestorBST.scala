@@ -13,7 +13,7 @@ object LeastCommonAncestor extends App{
 
   class BSTWithLCA extends BinarySearchTree {
 
-    private def findLCA(elem1:Int, elem2:Int, curr:TreeNode): Int ={
+    private def findLCA(elem1:Int, elem2:Int, curr:TreeNodeS): Int ={
       //curr is ancestor till now
       if((elem1 == curr.elem) ||
         (elem2 == curr.elem) ||
