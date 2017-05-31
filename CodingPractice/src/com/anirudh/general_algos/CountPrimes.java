@@ -21,7 +21,7 @@ public class CountPrimes {
         return true;
     }
 
-    //O(1) space but slower
+    //O(1) space but slower, O(n^1.5) time
     public int countPrimesSlow(int n) {
         if (n == 0 || n == 1)
             return 0;
@@ -41,7 +41,6 @@ public class CountPrimes {
             return 0;
         boolean[] done = new boolean[n]; //got all numbers from 0 until n in just a declaration!
         int count = 0;
-//        double nn = Math.sqrt(n);
         for (int i = 2; i < n; ++i) {
             if (!done[i]) {
                 count++;

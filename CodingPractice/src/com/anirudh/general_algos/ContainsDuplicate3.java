@@ -12,15 +12,16 @@ difference between nums[i] and nums[j] is at most t and the absolute difference 
 //#220 question. SUB-OPTIMAL SOLUTION
 public class ContainsDuplicate3 {
 
-    //O(n^2) time, O(1) space
-    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
-        for (int i = 0; i < nums.length - 1; ++i) {
-            for (int j = i + 1; j < nums.length; ++j) {
+    //O(n^k) time, O(1) space
+
+    public boolean containsNearbyAlmostDuplicate2(int[] nums, int k, int t) {
+        for(int i = 0; i < nums.length; ++i){
+            for(int j = i + 1; j <= i + k; ++j){ //1, 3
+                if(j >= nums.length)
+                        break;
                 double diffNums = Math.abs((double)nums[i] - (double)nums[j]);
                 System.out.println(diffNums);
-                double diffIx = (double) Math.abs(i - j);
-                System.out.println(diffIx);
-                if (diffNums <= t && diffIx <= k)
+                if(diffNums <= t)
                     return true;
             }
         }
@@ -29,7 +30,7 @@ public class ContainsDuplicate3 {
 
     public static void main(String[] args) {
         ContainsDuplicate3 cd = new ContainsDuplicate3();
-        boolean ret = cd.containsNearbyAlmostDuplicate(new int[]{-1, 2147483647}, 1, 2147483647);
+        boolean ret = cd.containsNearbyAlmostDuplicate2(new int[]{2, 2}, 3, 0);
         System.out.println(ret);
     }
 }
