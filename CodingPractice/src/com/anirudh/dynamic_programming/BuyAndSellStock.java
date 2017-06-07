@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.dynamic_programming;
 
 /**
  * Created by paanir on 2/1/17.
