@@ -71,8 +71,19 @@ public class Sandbox {
 //        System.out.println("decodedBytes " + new String(decodedBytes));
 
 
-        boolean[] arr = new boolean[2];
-        System.out.println(arr[1]);
+//        boolean[] arr = new boolean[2];
+//        System.out.println(arr[1]);
+
+        int c = 4;
+        for (int i = 0; i <3; ++i)
+        {
+            // extract the i-th bit
+            int b = ((c >> i) & 1);
+            // b will be 1 if i-th bit is set, 0 otherwise
+
+            // do whatever you want with b
+            System.out.println(b);
+        }
     }
 }
 
