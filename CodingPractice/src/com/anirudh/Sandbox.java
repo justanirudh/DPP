@@ -74,16 +74,29 @@ public class Sandbox {
 //        boolean[] arr = new boolean[2];
 //        System.out.println(arr[1]);
 
-        int c = 4;
-        for (int i = 0; i <3; ++i)
-        {
-            // extract the i-th bit
-            int b = ((c >> i) & 1);
-            // b will be 1 if i-th bit is set, 0 otherwise
+//        int c = 4;
+//        for (int i = 0; i <3; ++i)
+//        {
+//            // extract the i-th bit
+//            int b = ((c >> i) & 1);
+//            // b will be 1 if i-th bit is set, 0 otherwise
+//
+//            // do whatever you want with b
+//            System.out.println(b);
+//        }
 
-            // do whatever you want with b
-            System.out.println(b);
-        }
+//        HashMap<List<Double>, Double> hash = new HashMap<>();
+//        List<Double> foo = new ArrayList<>();
+//        foo.add(3.0);
+//        foo.add(2.0);
+//        hash.put(foo, 9.0);
+//
+//        List<Double> bar = new ArrayList<>();
+//        bar.add(3.0);
+//        bar.add(2.0);
+//        System.out.println(hash.containsKey(bar));
+//        System.out.println(hash.get(bar));
+
     }
 }
 
