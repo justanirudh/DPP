@@ -40,8 +40,9 @@ public class BlackShapes {
     private int di[] = new int[]{1, -1, 0, 0}; //neighbours: (1,0) (-1, 0) (0, 1) (0,-1)
     private int dj[] = new int[]{0, 0, 1, -1};//neighbours ^
     private ArrayList<String> A;
+    int m, n;
 
-    public boolean isValid(int i, int j, int m, int n) {
+    public boolean isValid(int i, int j) {
 
         if (i < 0 || i >= m || j < 0 || j >= n) //are in the matrix
             return false;
@@ -52,7 +53,7 @@ public class BlackShapes {
         return true;
     }
 
-    public void dfs(int i, int j, int m, int n) {
+    public void dfs(int i, int j) {
 
         marked[i][j] = true; //marked explored in a new matrix! no need waste time and make an adjacency list!!
         //also, no need to turn it to black, etc. Discovered and Finished are the same state here
@@ -63,14 +64,14 @@ public class BlackShapes {
             int jj = j + dj[k];
 
             //(ii, jj) is a neighbour
-            if (isValid(ii, jj, m, n) && !marked[ii][jj]) { //is valid and white
-                dfs(ii, jj, m, n);
+            if (isValid(ii, jj) && !marked[ii][jj]) { //is valid and white
+                dfs(ii, jj);
             }
         }
     }
 
     public int black(ArrayList<String> A) { //find number of cliques, but using dfs in a matrix
-        int m, n, count;
+        int count;
 
         if (A == null)
             return 0;
@@ -85,7 +86,7 @@ public class BlackShapes {
         for (int i = 0; i < m; i++) { //dfs helper function
             for (int j = 0; j < n; j++) {
                 if (!marked[i][j] && A.get(i).charAt(j) == 'X') { //if white, do dfs
-                    dfs(i, j, m, n);
+                    dfs(i, j);
                     count++; //number of trees/cliques
                 }
             }

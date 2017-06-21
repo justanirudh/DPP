@@ -9,6 +9,7 @@ import java.util.HashMap;
  */
 public class TwoSigma_FriendCircles {
 
+    //white = undiscovered, grey = discovered, black = finished
     private static class Node {
         Integer num;
         String color = "white";
