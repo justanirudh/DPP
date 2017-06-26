@@ -42,13 +42,13 @@ public class Permutations {
             int num = nums[n];
             List<List<Integer>> permsTemp = new ArrayList<>();
 
-            for (List<Integer> arr : permutations) {
-                for (int i = 0; i <= arr.size(); i++) {
-                    List<Integer> newArr = addElement(arr, num, i);
-                    permsTemp.add(newArr);
+            for (List<Integer> arr : permutations) {//for each permutation so far
+                for (int i = 0; i <= arr.size(); i++) {//in every index of the above permutation
+                    List<Integer> newArr = addElement(arr, num, i);//add the element
+                    permsTemp.add(newArr);//remove the previous and add the new one (essentially)
                 }
             }
-            permutations = permsTemp;
+            permutations = permsTemp;//replace old with new
         }
         return permutations;
     }
