@@ -3,12 +3,9 @@ package com.anirudh.dynamic_programming;
 /**
  * Created by paanir on 1/10/17.
  */
+
 /*
-5. Longest Palindromic Substring   Add to List QuestionEditorial Solution  My Submissions
-Total Accepted: 163170
-Total Submissions: 665050
-Difficulty: Medium
-Contributors: Admin
+5. Longest Palindromic Substring
 Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
 
 Example:
@@ -23,18 +20,14 @@ Example:
 Input: "cbbd"
 
 Output: "bb"
+*/
 
- */
 public class LongestPalindromeSubstring {
 
     public static String longestPalindrome(String s) {
 
         //table[i][j] is true if the substring from i to j is a palindrome
         boolean[][] table = new boolean[s.length()][s.length()];
-
-        for (int i = 0; i < s.length(); ++i)
-            for (int j = 0; j < s.length(); ++j)
-                table[i][j] = false;
 
         if (s.length() == 0)
             return "";
