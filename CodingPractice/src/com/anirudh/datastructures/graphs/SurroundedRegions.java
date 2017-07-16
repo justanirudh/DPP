@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.anirudh.datastructures.graphs.NumberOfIslands.Coord;
-import com.anirudh.datastructures.graphs.NumberOfIslands.GraphNode;
 //BFS, can be done by DFS too
 /**
  * Created by paanir on 3/27/17.
@@ -29,6 +27,14 @@ X X X X
 X O X X
  */
 public class SurroundedRegions {
+    /*
+    In this problem, only the cells on the borders can not be surrounded.
+    So we replace O's with '#' if they are on borders, and then scan the board and replace all O's left (if any).
+     */
+    /*
+    http://www.programcreek.com/2014/04/leetcode-surrounded-regions-java/
+    Rather do BFS in the matrix, no need to make an adjacency list
+     */
     private static int leftLim;
     private static int rightLim;
     private static int upLim;
