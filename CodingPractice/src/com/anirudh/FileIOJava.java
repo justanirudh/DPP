@@ -10,13 +10,13 @@ public class FileIOJava {
     public static void main(String[] args) {
         Scanner stdin = new Scanner(System.in);
 
-        //way 1
+        //way 1: when first line has number of lines info
         int numPpl = Integer.parseInt(stdin.nextLine());
         for (int i = 0; i < numPpl; i++) {
             int money = Integer.parseInt(stdin.nextLine());
         }
 
-        //Way 2
+        //Way 2:
         while (stdin.hasNextLine()) {
             int money = Integer.parseInt(stdin.nextLine());
         }
