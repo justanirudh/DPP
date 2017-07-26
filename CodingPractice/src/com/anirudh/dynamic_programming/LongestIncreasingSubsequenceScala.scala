@@ -3,7 +3,7 @@ package com.anirudh.dynamic_programming
 /**
   * Created by anirudh on 25/9/16.
   */
-object LongestIncreasingSubsequence extends App {
+object LongestIncreasingSubsequenceScala extends App {
 
   //bottom-up approach
   //O(n^2)
@@ -31,7 +31,7 @@ object LongestIncreasingSubsequence extends App {
     (revSeq.reverse, size)
   }
 
-  val lis = findLIS(Seq(15, 27, 14, 38, 26, 55, 46, 65, 85))
+  val lis = findLIS(Seq(1,3,6,7,9,4,10,5,6))
 
   println(lis._2)
   println("-----------")
