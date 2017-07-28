@@ -36,7 +36,7 @@ public class NextPermutation {
         }
         if (peak == 0) { //reverse arr
             reverse(nums, 0, nums.length - 1);
-        } else { //swap the (peak-1)th elem with lowest of nums[peak to n-1] that is biiger than (peak-1)th.
+        } else { //swap the (peak-1)th elem with lowest of nums[peak to n-1] that is bigger than (peak-1)th.
             // Then sort nums[peak,n-1]
 
             //find that elem

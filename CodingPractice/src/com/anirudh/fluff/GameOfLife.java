@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.fluff;
 
 /**
  * Created by paanir on 4/10/17.
