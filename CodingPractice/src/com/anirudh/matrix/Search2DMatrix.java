@@ -23,6 +23,38 @@ Given target = 3, return true.
  */
 //O(log(mn))
 public class Search2DMatrix {
+
+    //SOLUTION 2: Treat it as a sorted array, not a matrix!! O(log(m+n))
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
+            return false;
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        int start = 0;
+        int end = m * n - 1;
+
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            int midX = mid / n; //num rows
+            int midY = mid % n; //num cols
+
+            if (matrix[midX][midY] == target)
+                return true;
+
+            if (matrix[midX][midY] < target) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        return false;
+    }
+
+    //------------------------------------------------------
+
     int[][] matrix;
     int target;
     int[] currRow;
@@ -72,7 +104,7 @@ public class Search2DMatrix {
         }
     }
 
-    public boolean searchMatrix(int[][] matrix, int target) {
+    public boolean searchMatrixSlow(int[][] matrix, int target) {
         if (matrix.length == 0)
             return false;
         this.matrix = matrix;
@@ -88,6 +120,4 @@ public class Search2DMatrix {
         int target = 16;
         System.out.println(s.searchMatrix(mat, target));
     }
-
-    //SOLUTION 2: Treat it as a sorted array, not a matrix!! O(log(m+n))
 }

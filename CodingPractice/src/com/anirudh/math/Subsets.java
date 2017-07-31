@@ -28,24 +28,23 @@ If nums = [1,2,3], a solution is:
 ]
  */
 /*
-Idea is to go through all numbers from 0 to 2^nums.length
+Idea is to go through all numbers from 0 until 2^nums.length
 for each of those numbers, its bit representation would give us the subset
 if the bit representation is 1 at a place, include the corresponding number in nums array, else dont
  */
 public class Subsets {
     public List<List<Integer>> subsets(int[] nums) {
-        int bitLength = nums.length;
-        int max = (int) Math.pow(2, bitLength);
+        int numSets = (int) Math.pow(2, nums.length);
         List<List<Integer>> res = new ArrayList<>();
 
-        for (int arrg = 0; arrg < max; ++arrg) { //arrg = arrangement;
+        for (int bitmap = 0; bitmap < numSets; ++bitmap) { //bitmap = arrangement
             List<Integer> subset = new ArrayList<>();
             //populate list
 
-            for (int bitIndex = 0; bitIndex < bitLength; ++bitIndex) {
-                int include = ((arrg >> bitIndex) & 1); //bit at given bit index
+            for (int i = 0; i < nums.length; ++i) {
+                int include = ((bitmap >> i) & 1); //bit at given bit index
                 if (include == 1)
-                    subset.add(nums[bitIndex]);
+                    subset.add(nums[i]);
             }
             res.add(subset);
         }

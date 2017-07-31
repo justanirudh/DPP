@@ -9,12 +9,9 @@ import java.util.Stack;
 //http://www.geeksforgeeks.org/largest-rectangle-under-histogram
 
 /*
-84. Largest Rectangle in Histogram   Add to List QuestionEditorial Solution  My Submissions
-Total Accepted: 79531
-Total Submissions: 309803
-Difficulty: Hard
-Contributors: Admin
-Given n non-negative integers representing the histogram's bar heights where the width of each bar is 1, find the area of largest rectangle in the histogram.
+84. Largest Rectangle in Histogram
+Given n non-negative integers representing the histogram's bar heights where the width of each bar is 1,
+find the area of largest rectangle in the histogram.
 
 
 Above is a histogram where width of each bar is 1, given heights = [2,1,5,6,2,3].
@@ -39,6 +36,7 @@ public class LargestRectangleInHistogram {
             if (stack.isEmpty() || heights[i] >= heights[stack.peek()])
                 stack.push(i++); //if more than previous element in stack, push
             else { //calculate area considering the top element as smallest element
+                //calculate max value when the current height is less than the previous one
                 int top = heights[stack.pop()];
                 int width;
                 if (stack.isEmpty())

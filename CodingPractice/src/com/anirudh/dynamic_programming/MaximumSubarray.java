@@ -13,17 +13,35 @@ the contiguous subarray [4,-1,2,1] has the largest sum = 6.
 public class MaximumSubarray {
 
     //DP, O(n) solution
-    public int maxSubArray(int[] nums) {
+    public int maxSubArray(int[] a) {
+        //http://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
+        /*
+        Kadane's algo
 
-        int maxSoFar = nums[0];
-        int maxEndingHere = nums[0];
+        Initialize:
+        max_so_far = 0
+        max_ending_here = 0
 
-        for (int i = 1; i < nums.length; ++i) {
-            maxEndingHere = Math.max(maxEndingHere + nums[i], nums[i]);
-            maxSoFar = Math.max(maxSoFar, maxEndingHere);
+        Loop for each element of the array
+        (a) max_ending_here = max_ending_here + a[i]
+        (b) if(max_ending_here < 0)
+            max_ending_here = 0
+        (c) if(max_so_far < max_ending_here)
+            max_so_far = max_ending_here
+        return max_so_far
+
+         */
+        int size = a.length;
+        int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
+
+        for (int i = 0; i < size; i++) {
+            max_ending_here = max_ending_here + a[i];
+            if (max_so_far < max_ending_here)
+                max_so_far = max_ending_here;
+            if (max_ending_here < 0)
+                max_ending_here = 0;
         }
-
-        return maxSoFar;
+        return max_so_far;
     }
 
     //------------------------------------------

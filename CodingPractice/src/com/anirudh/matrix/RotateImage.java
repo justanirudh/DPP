@@ -27,12 +27,14 @@ public class RotateImage {
         int r = right;
         int u = up;
 
-        while(l < right){ //for all except the last element
+        //swapping one element at a time in the boundary matrix
+        while(l < right){ //for all except the last element: going from left to righ in the top row of the current portion of the matrix
             int temp = matrix[up][l];
             matrix[up][l] = matrix[d][left];
             matrix[d][left] = matrix[down][r];
             matrix[down][r] = matrix[u][right];
             matrix[u][right] = temp;
+            //positions of next 4 swapped element
             --d;
             --r;
             ++u;

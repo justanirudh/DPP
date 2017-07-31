@@ -58,10 +58,10 @@ public class EditDistance {
                 if (word1.charAt(i) == word2.charAt(j))
                     cost[i + 1][j + 1] = cost[i][j];
                 else {
-                    int a = cost[i][j];
-                    int b = cost[i][j + 1];
-                    int c = cost[i + 1][j];
-                    cost[i + 1][j + 1] = 1 + Math.min(a, Math.min(b, c));
+                    int replace = cost[i][j];
+                    int delete = cost[i][j + 1];
+                    int add = cost[i + 1][j];
+                    cost[i + 1][j + 1] = 1 + Math.min(replace, Math.min(delete, add));
                 }
             }
         }

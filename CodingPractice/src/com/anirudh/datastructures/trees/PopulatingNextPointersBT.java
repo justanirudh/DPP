@@ -7,11 +7,7 @@ import java.util.ArrayList;
  */
 /*
 
-116. Populating Next Right Pointers in Each Node   Add to List QuestionEditorial Solution  My Submissions
-Total Accepted: 117423
-Total Submissions: 318267
-Difficulty: Medium
-Contributors: Admin
+116. Populating Next Right Pointers in Each Node
 Given a binary tree
 
     struct TreeLinkNode {

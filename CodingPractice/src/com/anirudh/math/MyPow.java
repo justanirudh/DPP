@@ -12,7 +12,7 @@ import java.util.List;
 Implement pow(x, n).
  */
 public class MyPow {
-    //memoization + better algorithm for getting power
+    //memoization + better algorithm (Exponentiation_by_squaring: https://en.wikipedia.org/wiki/Exponentiation_by_squaring) for getting power
 
     //List as key as I get equals and hashcode methods for free
     HashMap<List<Double>, Double> map = new HashMap<>();
@@ -27,10 +27,10 @@ public class MyPow {
             list.add(x);
             int half = n / 2;
             list.add((double) half);
-            if (map.containsKey(list))
+            if (map.containsKey(list)) //memoization
                 return map.get(list);
             else {
-                double temp = aux(x, half);
+                double temp = aux(x, half); //(x ^ n/2) * (x ^ n/2)
                 double res = temp * temp;
                 map.put(list, res);
                 return res;
@@ -44,7 +44,7 @@ public class MyPow {
                 return map.get(list);
             else {
                 double temp = aux(x, half);
-                double res = temp * temp * x;
+                double res = temp * temp * x; //(x ^ n-1/2) * (x ^ n-1/2) * x
                 map.put(list, res);
                 return res;
             }
