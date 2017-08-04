@@ -35,7 +35,7 @@ LRUCache cache = new LRUCache( 2 );
 public class LRUCache {
 
     Queue queue;
-    static HashMap<Integer, QueueNode> map;
+    static HashMap<Integer, QueueNode> map; //KEY to the queuenode in the queue
     int capacity;
     int numElems;
 
@@ -70,18 +70,19 @@ public class LRUCache {
         queue.head = qn;
     }
 
-    private void removeFromTail(QueueNode qn){
+    private void removeFromTail(QueueNode qn) {
         QueueNode prev = qn.prev;
-        prev.next = null;
+        if (prev != null)
+            prev.next = null;
         queue.tail = prev;
     }
 
-    private void addToMap(int key, QueueNode qn){
+    private void addToMap(int key, QueueNode qn) {
         map.put(key, qn);
         numElems++;
     }
 
-    private void removeFromMap(int key){
+    private void removeFromMap(int key) {
         map.remove(key);
         numElems--;
     }
@@ -113,42 +114,31 @@ public class LRUCache {
     public void put(int key, int value) {
         if (map.containsKey(key)) {
             get(key); //doing for the side effects, bring it to head
-            queue.head.val = value; //update value
+            queue.head.val = value; //update value for the key, if changed
             return;
         }
+        //LRU does not have the key
+        QueueNode qn = new QueueNode(key, value);
         if (numElems == capacity) { //no space, delete LRU queue node and add the new value to head
-            if (capacity == 1) { // only 1 capacity
-                //remove LRU node from queue
-                QueueNode qn = queue.tail; //= queue.head
-                removeFromMap(qn.key);
-                //add new node to front of queue
-                QueueNode qnNew = new QueueNode(key, value);
-                queue.head = qnNew;
-                queue.tail = qnNew;
-                addToMap(key, qnNew);
-                return;
-            }
             //remove LRU node from queue
-            QueueNode qn = queue.tail;
-            removeFromTail(qn);
-            removeFromMap(qn.key);
+            QueueNode qnLRU = queue.tail;
+            removeFromTail(qnLRU);
+            removeFromMap(qnLRU.key);
             //add new node to front of queue
-            QueueNode qnNew = new QueueNode(key, value);
-            moveToHead(qnNew);
-            addToMap(key, qnNew);
-        } else { //space is there
-            QueueNode qn = new QueueNode(key, value);
-            if (numElems == 0) {
-                //add to front of queue
+            if (capacity == 1) {
                 queue.head = qn;
                 queue.tail = qn;
-                addToMap(key, qn);
-                return;
-            }
+            } else
+                moveToHead(qn);
+        } else { //space is there
             //add to front of queue
-            moveToHead(qn);
-            addToMap(key, qn);
+            if (numElems == 0) {
+                queue.head = qn;
+                queue.tail = qn;
+            } else
+                moveToHead(qn);
         }
+        addToMap(key, qn);
     }
 
 

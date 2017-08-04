@@ -4,12 +4,7 @@ package com.anirudh.general_algos;
  * Created by paanir on 2/25/17.
  */
 /*
-168. Excel Sheet Column Title Add to List
-Description  Submission  Solutions
-Total Accepted: 91655
-Total Submissions: 369086
-Difficulty: Easy
-Contributors: Admin
+168. Excel Sheet Column Title
 Given a positive integer, return its corresponding column title as appear in an Excel sheet.
 
 For example:
@@ -28,10 +23,9 @@ public class ExcelSheetColumnTitle {
         if (n == 0)
             return "";
         else {
-            n = n - 1;
-            int offset = n % 26;
-            int rest = n / 26;
-            return convertToTitle(rest) + (char) ('A' + offset);
+            n = n - 1; //IMP: Instead of 1 -> A, 26 -> Z, we can assume that 0 -> A, 25 -> Z
+            int offset = n % 26; //similar to converting decimal to binary: mod, then divide
+            return convertToTitle(n / 26) + (char) ('A' + offset); //same as how we would make a binary string from decimal
         }
     }
 }
