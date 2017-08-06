@@ -4,11 +4,7 @@ package com.anirudh.general_algos;
  * Created by paanir on 1/5/17.
  */
 /*
-223. Rectangle Area   Add to List QuestionEditorial Solution  My Submissions
-Total Accepted: 54922
-Total Submissions: 172310
-Difficulty: Easy
-Contributors: Admin
+223. Rectangle Area
 Find the total area covered by two rectilinear rectangles in a 2D plane.
 
 Each rectangle is defined by its bottom left corner and top right corner as shown in the figure.
@@ -50,7 +46,6 @@ public class ComputeArea {
         if (common.left < common.right && common.bottom < common.top) {  //common is a valid rectangle
             int commonArea = Math.abs(common.right - common.left) * Math.abs(common.top - common.bottom);
             return area1 + area2 - commonArea;
-
         } else
             return area1 + area2;
     }

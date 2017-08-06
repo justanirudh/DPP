@@ -56,7 +56,7 @@ public class BlackShapes {
     public void dfs(int i, int j) {
 
         marked[i][j] = true; //marked explored in a new matrix! no need waste time and make an adjacency list!!
-        //also, no need to turn it to black, etc. Discovered and Finished are the same state here
+        //also, no need to turn it to black, etc. Discovered and Finished are the same state here (unexplored, discovered, finished)
 
         for (int k = 0; k < 4; k++) { //for each neighbour, (creating the neighbour coordinates)
 
@@ -87,7 +87,7 @@ public class BlackShapes {
             for (int j = 0; j < n; j++) {
                 if (!marked[i][j] && A.get(i).charAt(j) == 'X') { //if white, do dfs
                     dfs(i, j);
-                    count++; //number of trees/cliques
+                    count++; //number of trees
                 }
             }
         }

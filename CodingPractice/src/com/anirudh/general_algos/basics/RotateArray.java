@@ -29,8 +29,33 @@ public class RotateArray {
     *
     * */
 
-    //O(n) space, O(n) time
+    //O(1) space, O(n) time
+    public void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
     public void rotate(int[] nums, int k) {
+        if(nums.length == 0 || nums.length == 1)
+            return;
+        k = k % nums.length;
+        //reverse full array
+        reverse(nums, 0, nums.length - 1);
+        //reverse first k elements
+        reverse(nums, 0, k-1);
+        //reverse rest elements
+        reverse(nums, k, nums.length - 1);
+    }
+
+    //---------------------------------------------------------------------------------
+
+    //O(n) space, O(n) time
+    public void rotateBad(int[] nums, int k) {
         int rot = k % nums.length;
         int buf[] = new int[rot];
         int startIndex = nums.length - rot;
@@ -49,7 +74,7 @@ public class RotateArray {
             back--;
         }
 
-            //put bufferred elems to the right in the array
+        //put bufferred elems to the right in the array
         for (int i = 0; i < buf.length; ++i) {
             nums[i] = buf[i];
         }

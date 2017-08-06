@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.math;
 
 /**
  * Created by paanir on 5/28/17.
@@ -10,7 +10,7 @@ Given an integer, write a function to determine if it is a power of three.
 Follow up:
 Could you do it without using any loop / recursion?
  */
-public class powerOfThree {
+public class PowerOfThree {
 
     public boolean isPowerOfThree(int n) {
         int num = n;

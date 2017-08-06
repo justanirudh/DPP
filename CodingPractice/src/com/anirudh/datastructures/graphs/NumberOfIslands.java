@@ -31,6 +31,51 @@ Answer: 3
  */
 public class NumberOfIslands {
 
+    //Do DFS in matrix
+
+    char[][] grid;
+    boolean[][] visited;
+
+    int[] coordX = {0, 1, 0, -1};
+    int[] coordY = {1, 0, -1, 0};
+
+    boolean isValid(int x, int y) {
+        return x >= 0 && x < grid.length && y >= 0 && y < grid[0].length;
+    }
+
+    void dfs(int x, int y) {
+        visited[x][y] = true; //white -> black (unexplored -> finished)
+        for (int i = 0; i < 4; ++i) {
+            int nx = x + coordX[i];
+            int ny = y + coordY[i];
+            //DFS
+            if (isValid(nx, ny) && grid[nx][ny] == '1' && !visited[nx][ny])
+                dfs(nx, ny);
+        }
+    }
+
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0)
+            return 0;
+        this.grid = grid;
+        visited = new boolean[grid.length][grid[0].length];
+        //helper function of DFS
+        int count = 0;
+        for (int i = 0; i < grid.length; ++i) {
+            for (int j = 0; j < grid[0].length; ++j) {
+                if (grid[i][j] == '1' && !visited[i][j]) {
+                    dfs(i, j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
+//------------------------------------------------------------------------------------------------------------------
+    //by creating a graph. Takes more time to create an adjacency list from an adjacency matrix-kinda
+
     private static int leftLim;
     private static int rightLim;
     private static int upLim;
@@ -89,7 +134,7 @@ public class NumberOfIslands {
         return num;
     }
 
-    public static int numIslands(char[][] grid) {
+    public static int numIslandsLong(char[][] grid) {
         if (grid.length == 0)
             return 0;
         leftLim = 0;
@@ -111,7 +156,7 @@ public class NumberOfIslands {
                 {'0', '0', '0', '1', '1'}
         };
 
-        System.out.println(numIslands(g));
+        System.out.println(new NumberOfIslands().numIslands(g));
 
     }
 }

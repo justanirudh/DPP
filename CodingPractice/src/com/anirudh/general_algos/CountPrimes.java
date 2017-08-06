@@ -57,7 +57,7 @@ public class CountPrimes {
     //-------------------------------------------------
 
     //Even better + fastest
-    //Explaination: Hints for the question: https://leetcode.com/problems/count-primes/#/description
+    //Explanation: Hints for the question: https://leetcode.com/problems/count-primes/#/description
     //The Sieve of Eratosthenes uses an extra O(n) memory and its runtime complexity is O(n log log n).
     public int countPrimesFastest(int n) {
 
@@ -69,12 +69,12 @@ public class CountPrimes {
 
         // Loop's ending condition is i * i < n instead of i < sqrt(n)
         // to avoid repeatedly calling an expensive function sqrt().
-        double nn = Math.sqrt(n);
+        int nn = (int)Math.sqrt(n);
         /*
         Yes, the terminating loop condition can be p < √n, as all non-primes ≥ √n must have already been marked off.
         When the loop terminates, all the numbers in the table that are non-marked are prime.
          */
-        for (int i = 2; i < nn; i++) {
+        for (int i = 2; i <= nn; i++) {
             //taking from i*i as before that have been covered by computations of numbers before this i
             //this also means a separate loop for counting is required as the numbers closer to n might be prime but not yet visited (eg. 17 near 20)
             if (isPrime[i]) {

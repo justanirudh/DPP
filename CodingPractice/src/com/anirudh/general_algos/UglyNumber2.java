@@ -94,6 +94,7 @@ Every step we choose the smallest one, and move one step after,including nums wi
         for (int i = 1; i < n; ++i) {
             System.out.println("factor2: " + factor2 +  " factor3: " + factor3 + " factor5 " + factor5 );
 
+            //this gets added AFTER checking the lowest
             ugly[i] = Math.min(Math.min(factor2, factor3), factor5);
 
             //since equating, reduandant results (2*3 and 3*2) are both incremented, hence no repetition
@@ -110,7 +111,6 @@ Every step we choose the smallest one, and move one step after,including nums wi
                 factor5 = 5 * ugly[index5];
             }
         }
-
         return ugly[n - 1];
     }
 

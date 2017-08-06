@@ -36,10 +36,7 @@ public class KthSmallestElemBST {
         return inOrder(root);
     }
     //-----------------------------------------------
-
-    //O(n), but might take less time? make augmented data structure with size of subtree in nodes,
-    // then would be O(logn) (in AoA slides)
-
+    //Still O(n), might take more time
     public int countNodes(TreeNode node) {
         if(node == null)
             return 0;
@@ -57,5 +54,8 @@ public class KthSmallestElemBST {
         else
             return kthSmallest(root.right, k-numNodes - 1);
     }
+
+    //Use augmented DS: https://leetcode.com/problems/kth-smallest-element-in-a-bst/discuss/ 2nd solution
+    //memoize count in the tree node
 
 }
