@@ -8,12 +8,9 @@ import java.util.List;
  * Created by paanir on 1/25/17.
  */
 /*
-336. Palindrome Pairs   Add to List QuestionEditorial Solution  My Submissions
-Total Accepted: 19613
-Total Submissions: 78896
-Difficulty: Hard
-Contributors: Admin
-Given a list of unique words, find all pairs of distinct indices (i, j) in the given list, so that the concatenation of the two words, i.e. words[i] + words[j] is a palindrome.
+336. Palindrome Pairs
+Given a list of unique words, find all pairs of distinct indices (i, j) in the given list, so that the concatenation of
+the two words, i.e. words[i] + words[j] is a palindrome.
 
 Example 1:
 Given words = ["bat", "tab", "cat"]
@@ -27,11 +24,11 @@ The palindromes are ["dcbaabcd", "abcddcba", "slls", "llssssll"]
  */
 public class PalindromePairs {
 
-    //Time: O(n^3): nC2 * 2 * O(n)
+    //Time: O(n^3): nC2 * 2 * O(n) [num combinations total * ways to combine 2 strings * checking if the resulting string is a palindrome]
     public List<List<Integer>> palindromePairsNaive(String[] words) {
 
-        String s=  "wweee";
-        for(char c: s.toCharArray()){
+        String s = "wweee";
+        for (char c : s.toCharArray()) {
             System.out.println();
         }
 
@@ -62,6 +59,13 @@ public class PalindromePairs {
     //---------------------------------------------------------------------------
     //Time: O(nk), where k is the max length of a word!
     public List<List<Integer>> palindromePairs(String[] words) {
+        /*
+        1. check if a word itself is a palindrom. then check if a null string exists
+        2. check if the reverse of the word exists.
+        3. break the word at each index.
+        33. check if left part is palin. if so, check if reverse of right part is in array. if so, we got 2 words
+        33. do same by first checking if right part is palin
+         */
         List<List<Integer>> result = new ArrayList<List<Integer>>();
 
         HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -76,6 +80,7 @@ public class PalindromePairs {
             if (isPalindrome(s)) {
                 if (map.containsKey("")) { //if null string found, then the two strings can be a palindrome
                     if (map.get("") != i) {// not itself
+                        //add both combinations
                         ArrayList<Integer> l = new ArrayList<Integer>();
                         l.add(i);
                         l.add(map.get(""));
@@ -124,7 +129,6 @@ public class PalindromePairs {
                     String reversedLeft = new StringBuilder(left).reverse().toString();
                     if (map.containsKey(reversedLeft)) {
                         if (map.get(reversedLeft) != i) {
-
                             ArrayList<Integer> l = new ArrayList<Integer>();
                             l.add(i);
                             l.add(map.get(reversedLeft));

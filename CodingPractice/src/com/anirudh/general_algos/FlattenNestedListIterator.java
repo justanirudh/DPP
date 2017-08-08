@@ -64,12 +64,11 @@ public class FlattenNestedListIterator {
         }
 
         @Override
-        public boolean hasNext() { //removes all fluff till an in is found
+        public boolean hasNext() { //removes all fluff till an int is found
             Iterator<NestedInteger> curr = getTop();
             if (curr == null) //stack empty, return false
                 return false;
-            boolean hasNext = curr.hasNext();
-            if (hasNext) {
+            if (curr.hasNext()) {
                 NestedInteger elem = curr.next();
                 if (elem.isInteger()) { //integer
                     currInt = elem;

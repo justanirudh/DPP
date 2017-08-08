@@ -24,8 +24,7 @@ public class BulbSwitcher {
     /*
     only those that are toggled odd times will remain open at the end. means, number with odd factors. means perfect
     squares.
-    for a number n, biggest perfect square less than n would be the square of number less than or equal to (floor)
-    of the root of n
+    for a number n, number of perfect squares <= the number would be the (floor of the) square root of the number itself
     Eg. if n = 12, 9 is biggest perfect square < 12; 3 < root of 12
      */
     public int bulbSwitch(int n) {

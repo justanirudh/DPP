@@ -9,12 +9,9 @@ import static com.anirudh.datastructures.trees.VerifyPrePostInOrderSerialization
  * Created by paanir on 2/1/17.
  */
 /*
-331. Verify Preorder Serialization of a Binary Tree   Add to List QuestionEditorial Solution  My Submissions
-Total Accepted: 29395
-Total Submissions: 83211
-Difficulty: Medium
-Contributors: Admin
-One way to serialize a binary tree is to use pre-order traversal. When we encounter a non-null node, we record the node's value. If it is a null node, we record using a sentinel value such as #.
+331. Verify Preorder Serialization of a Binary Tree
+One way to serialize a binary tree is to use pre-order traversal. When we encounter a non-null node, we record the
+node's value. If it is a null node, we record using a sentinel value such as #.
 
      _9_
     /   \
@@ -25,7 +22,8 @@ One way to serialize a binary tree is to use pre-order traversal. When we encoun
 # # # #   # #
 For example, the above binary tree can be serialized to the string "9,3,4,#,#,1,#,#,2,#,6,#,#", where # represents a null node.
 
-Given a string of comma separated values, verify whether it is a correct preorder traversal serialization of a binary tree. Find an algorithm without reconstructing the tree.
+Given a string of comma separated values, verify whether it is a correct preorder traversal serialization of a binary tree.
+Find an algorithm without reconstructing the tree.
 
 Each comma separated value in the string must be either an integer or a character '#' representing null pointer.
 
@@ -61,7 +59,8 @@ public class VerifyPrePostInOrderSerializationBT {
         for (int i = 0; i < nodes.length; ++i) {
             elems.add(nodes[i]);
 
-            if (o == PREORDER) { //convert 3## to # till the entire string is converted to #
+            //slowly converting leafs to nulls iteratively
+            if (o == PREORDER) { //convert leaf 3## to # till the entire string is converted to #
                 while (elems.size() >= 3
                         && elems.get(elems.size() - 1).equals("#")
                         && elems.get(elems.size() - 2).equals("#")
@@ -71,7 +70,7 @@ public class VerifyPrePostInOrderSerializationBT {
                     elems.remove(elems.size() - 1);
                     elems.add("#");
                 }
-            } else if (o == INORDER) { //convert #3# to # till the entire string is converted to #
+            } else if (o == INORDER) { //convert leaf #3# to # till the entire string is converted to #
                 while (elems.size() >= 3
                         && elems.get(elems.size() - 1).equals("#")
                         && !elems.get(elems.size() - 2).equals("#")
@@ -81,7 +80,7 @@ public class VerifyPrePostInOrderSerializationBT {
                     elems.remove(elems.size() - 1);
                     elems.add("#");
                 }
-            } else {//postorder, convert ##3 to # till the entire string is converted to #
+            } else {//postorder, convert leaf ##3 to # till the entire string is converted to #
                 while (elems.size() >= 3
                         && !elems.get(elems.size() - 1).equals("#")
                         && elems.get(elems.size() - 2).equals("#")

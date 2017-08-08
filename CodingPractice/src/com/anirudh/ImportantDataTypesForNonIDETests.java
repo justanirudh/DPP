@@ -29,8 +29,10 @@ public class ImportantDataTypesForNonIDETests {
         System.out.println(hm);
 
         TreeMap<Integer, String> tm = new TreeMap<>(); //sorted keys
+        TreeSet<Integer> ts = new TreeSet<>();//sorted keys
 
         LinkedHashMap<Integer, String> lhm = new LinkedHashMap<>(); //in the same order as inserted
+        LinkedHashSet<Integer> lhs = new LinkedHashSet<>(); //in the same order as inserted
 
         class Node {
             int val;
@@ -47,5 +49,22 @@ public class ImportantDataTypesForNonIDETests {
         //https://docs.oracle.com/javase/7/docs/api/java/util/Queue.html
         Queue<Node> queue = new LinkedList<Node>();
         System.out.println(queue);
+
+        class Pair{
+            int num;
+            int count;
+            public Pair(int num, int count){
+                this.num=num;
+                this.count=count;
+            }
+        }
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        // create a min heap
+        PriorityQueue<Pair> pQueue = new PriorityQueue<>(new Comparator<Pair>(){
+            public int compare(Pair a, Pair b){
+                return a.count-b.count;
+            }
+        });
+
     }
 }

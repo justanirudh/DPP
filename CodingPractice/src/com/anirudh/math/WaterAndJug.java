@@ -56,7 +56,8 @@ so this input is valid and we have:
 -1 * 4 + 6 * 2 = 8
 
 In this case, there is a solution obtained by filling the 6 gallon jug twice and emptying the 4 gallon jug once.
-(Solution. Fill the 6 gallon jug and empty 4 gallons to the 4 gallon jug. Empty the 4 gallon jug. Now empty the remaining two gallons from the 6 gallon jug to the 4 gallon jug. Next refill the 6 gallon jug. This gives 8 gallons in the end)
+(Solution. Fill the 6 gallon jug and empty 4 gallons to the 4 gallon jug. Empty the 4 gallon jug. Now empty the remaining
+two gallons from the 6 gallon jug to the 4 gallon jug. Next refill the 6 gallon jug. This gives 8 gallons in the end)
 
 See wiki:
 

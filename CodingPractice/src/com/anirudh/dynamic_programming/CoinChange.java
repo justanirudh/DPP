@@ -29,27 +29,21 @@ public class CoinChange {
     public int coinChange(int[] coins, int amount) {
         if (amount == 0)
             return 0;
+
         if (amountToNumber.containsKey(amount))
             return amountToNumber.get(amount);
 
-        int numCoins = Integer.MAX_VALUE;
-
+        int res = Integer.MAX_VALUE;
         for (int coin : coins) {
-            //selected this coin
-            int currNumCoins = Integer.MAX_VALUE;
-
-            if (amount >= coin) { //else, coin cannot be added
-                int numOthers = coinChange(coins, amount - coin);
-                if (numOthers != -1) //because if -1, then no combination found
-                    currNumCoins = 1 + numOthers; //selected (coin) + numOthers
+            if (coin <= amount) {//else, coin cannot be added
+                int num = coinChange(coins, amount - coin); //selected the coin; if number of coins not infinite, pass the left number of coins
+                if (num != -1)//because if -1, then no combination found
+                    res = Math.min(num + 1, res);// + 1 because selected (coin) + numOthers
             }
-
-            numCoins = Math.min(numCoins, currNumCoins);
         }
-
-        int ret = (numCoins == Integer.MAX_VALUE)? -1 : numCoins;
-        amountToNumber.put(amount, ret);
-        return ret;
+        res = res == Integer.MAX_VALUE ? -1 : res;
+        amountToNumber.put(amount, res);
+        return res;
     }
 
     public static void main(String[] args) {

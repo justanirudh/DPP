@@ -26,7 +26,8 @@ Output:
 2
 
 Explanation:
-One way is to shoot one arrow for example at x = 6 (bursting the balloons [2,8] and [1,6]) and another arrow at x = 11 (bursting the other two balloons).
+One way is to shoot one arrow for example at x = 6 (bursting the balloons [2,8] and [1,6])
+and another arrow at x = 11 (bursting the other two balloons).
 
  */
 public class MinimumNumberOfArrows {
@@ -35,7 +36,7 @@ public class MinimumNumberOfArrows {
     public static int findMinArrowShots(int[][] points) {
         if (points.length == 0)
             return 0;
-        //sorted points by ending index
+        //SORT points by ending index OR FINISH times (vs sorting by start times in mergeintervals problem)
         Arrays.sort(points, new Comparator<int[]>() {
             public int compare(int[] a, int[] b) {
                 int ret = Integer.compare(a[1], b[1]);
@@ -46,20 +47,20 @@ public class MinimumNumberOfArrows {
             }
         });
         //Greedy approach: take first activity. then take next activity who's starting time is after current activity's finishing time
-        int startBalloonIndex = 0;
-        int numArrows = 0;
-        int balloonNum = 0;
-        while (balloonNum < points.length) {
-            int endingIndex = points[startBalloonIndex][1];
-            while (balloonNum < points.length && points[balloonNum][0] <= endingIndex) {
-                balloonNum++;
+        int startIndex = 0;
+        int res = 0;
+        int i = 0;
+        while (i < points.length) {
+            int endingIndex = points[startIndex][1];
+            res++;
+            while (i < points.length && points[i][0] <= endingIndex) {
+                i++;
             }
-            numArrows++;
-            if (balloonNum == points.length)
+            if (i == points.length)
                 break;
-            startBalloonIndex = balloonNum;
+            startIndex = i;
         }
-        return numArrows;
+        return res;
     }
 
     public static void main(String[] args) {

@@ -22,7 +22,7 @@ public class MergeIntervals {
   }
 
     public List<Interval> merge(List<Interval> intervals) {
-        //1. SORT by STARTING TIMES
+        //1. SORT by STARTING TIMES (vs MinimumNumberOfArrows where sort by finish times)
         //2. if next's start < current's end, take max of current's end and next's end
         //sorting by end times and taking min of start times doesnt work
         if (intervals.size() <= 1)

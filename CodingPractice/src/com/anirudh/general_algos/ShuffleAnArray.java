@@ -50,10 +50,10 @@ public class ShuffleAnArray {
     /**
      * Returns a random shuffling of the array.
      */
-    public int[] shuffle() { //can also directly use Colllections.shuffle. This one's smarter
+    public int[] shuffle() { //can also directly use Collections.shuffle. This one's smarter
         int[] newArr = this.nums.clone();
         for (int i2 = 1; i2 < newArr.length; ++i2) {// i2 is RHS border, i1 can be b/w 0 and i2-inclusive
-            int i1 = r.nextInt(i2 + 1); //get random number between [0, i2]
+            int i1 = r.nextInt(i2 + 1); //get random number between [0, i2+1) = [0, i2]
             swap(newArr, i1, i2);
         }
         return newArr;
