@@ -23,54 +23,30 @@ The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
  */
 public class Triangle_DP {
 
-    //Memoization,else would be O(2^n)
-    static HashMap<Integer, Map<Integer, Integer>> map = new HashMap<>();
-
-
-    static int getOrCalculate(List<List<Integer>> triangle, int row, int index) {
-        if(map.containsKey(row) && map.get(row).containsKey(index))
-            return map.get(row).get(index);
-        else{
-            int sum = getSum(triangle, row, index); //calculating
-            if(map.containsKey(row)){
-                map.get(row).put(index, sum);
-            }
-            else{
-                HashMap<Integer, Integer> m2 = new HashMap<>();
-                m2.put(index, sum);
-                map.put(row, m2);
-            }
-            return sum;
-        }
-    }
-
-    public static int getSum(List<List<Integer>> triangle, int row, int index){
-        if(row < triangle.size()){
-            int sumleft, sumright;
-            //had to make a map of map becuase java does not support tuples
-            //basically checking if its in hashmap, else calculating
-            sumleft = getOrCalculate(triangle, row + 1, index);
-            sumright = getOrCalculate(triangle, row + 1, index + 1);
-            
-            return triangle.get(row).get(index) + Math.min(sumleft, sumright);
-        }
-        else
+    public int minimumTotal(List<List<Integer>> triangle) {
+        if (triangle.isEmpty() || triangle.get(0).isEmpty())
             return 0;
-    }
+        if (triangle.size() == 1)
+            return triangle.get(0).get(0);
 
-    public static int minimumTotal(List<List<Integer>> triangle) {
-        if(triangle.isEmpty())
-            return 0;
-        int sum = triangle.get(0).get(0);
-        return sum + Math.min(getSum(triangle, 1, 0), getSum(triangle, 1, 1));
-    }
+        int triangleBaseLength = triangle.get(triangle.size() - 1).size();
+        //min path can come from top or top left in this
+        int[][] sums = new int[triangleBaseLength][triangleBaseLength]; //creating max-sums matrix
+        sums[0][0] = triangle.get(0).get(0);
+        for (int i = 1; i < triangle.size(); ++i) { //0th row with 1 element already populated as base case
+            for (int j = 0; j < triangle.get(i).size(); ++j) { //go on;y till end of that row
+                int top = (j != triangle.get(i).size() - 1) ? sums[i - 1][j] : Integer.MAX_VALUE; //last element of row has no top
+                int topLeft = (j != 0) ? sums[i - 1][j - 1] : Integer.MAX_VALUE; //first element of row has no topLeft
+                sums[i][j] = triangle.get(i).get(j) + Math.min(top, topLeft);
+            }
+        }
 
-    public static void main(String[] args){
-        List<List<Integer>> triangle = Arrays.asList(
-                Arrays.asList(-1),
-                Arrays.asList(2,3),
-                Arrays.asList(1,-1,-3));
-//                Arrays.asList(4,1,8,3));
-        System.out.println(minimumTotal(triangle));
+        //check all elements of sums last row. return min of them. last row because it is the base of the triangle
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < triangleBaseLength; ++i) {
+            if (sums[triangleBaseLength - 1][i] < min)
+                min = sums[triangleBaseLength - 1][i];
+        }
+        return min;
     }
 }
