@@ -15,14 +15,14 @@ public class MinimumPathSum {
     public int minPathSum(int[][] grid) {
         int rl = grid.length;
         int cl = grid[0].length;
-        int[][] dists = new int[rl][cl];
+        int[][] dists = new int[rl][cl]; //same dimensions as grid
         dists[0][0] = grid[0][0];
-        for (int i = 1; i < cl; ++i)
+        for (int i = 1; i < cl; ++i) //populating 0th row
             dists[0][i] = dists[0][i - 1] + grid[0][i];
-        for (int i = 1; i < rl; ++i)
+        for (int i = 1; i < rl; ++i)//populating 0th col
             dists[i][0] = dists[i - 1][0] + grid[i][0];
         for (int r = 1; r < rl; ++r) {
-            for (int c = 1; c < cl; ++c) {
+            for (int c = 1; c < cl; ++c) { //populating rest of matrix
                 dists[r][c] = Math.min(dists[r - 1][c], dists[r][c - 1]) + grid[r][c];
             }
         }

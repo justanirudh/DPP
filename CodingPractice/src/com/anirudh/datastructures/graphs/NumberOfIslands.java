@@ -44,7 +44,7 @@ public class NumberOfIslands {
     }
 
     void dfs(int x, int y) {
-        visited[x][y] = true; //white -> black (unexplored -> finished)
+        visited[x][y] = true; //white -> black (undiscovered -> finished)
         for (int i = 0; i < 4; ++i) {
             int nx = x + coordX[i];
             int ny = y + coordY[i];

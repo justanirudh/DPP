@@ -6,7 +6,7 @@ import java.util.*;
  * Created by anirudh on 27/11/16.
  */
 /*
-LeetCode – Triangle_DP (Java)
+120. LeetCode – Triangle_DP (Java) (Like MinimumPathSum)
 
 Given a triangle, find the minimum path sum from top to bottom.
 Each step you may move to adjacent numbers on the row below.
@@ -24,7 +24,7 @@ The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
 public class Triangle_DP {
 
     //Memoization,else would be O(2^n)
-    static HashMap<Integer, Map<Integer, Integer>> map = new HashMap<Integer, Map<Integer, Integer>>();
+    static HashMap<Integer, Map<Integer, Integer>> map = new HashMap<>();
 
 
     static int getOrCalculate(List<List<Integer>> triangle, int row, int index) {
@@ -67,10 +67,10 @@ public class Triangle_DP {
 
     public static void main(String[] args){
         List<List<Integer>> triangle = Arrays.asList(
-                Arrays.asList(2),
-                Arrays.asList(3,4),
-                Arrays.asList(6,5,7),
-                Arrays.asList(4,1,8,3));
+                Arrays.asList(-1),
+                Arrays.asList(2,3),
+                Arrays.asList(1,-1,-3));
+//                Arrays.asList(4,1,8,3));
         System.out.println(minimumTotal(triangle));
     }
 }
