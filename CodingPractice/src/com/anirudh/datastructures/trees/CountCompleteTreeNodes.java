@@ -5,17 +5,12 @@ package com.anirudh.datastructures.trees;
  */
 /*
 222. Count Complete Tree Nodes
-Description  Submission  Solutions  Add to List
-Total Accepted: 53737
-Total Submissions: 198903
-Difficulty: Medium
-Contributors: Admin
+
 Given a complete binary tree, count the number of nodes.
 
 Definition of a complete binary tree from Wikipedia:
-In a complete binary tree every level, except possibly the last, is completely filled, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
-
-Subscribe to see which companies asked this question.
+In a complete binary tree every level, except possibly the last, is completely filled, and all nodes in the last level
+are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
 
  */
 public class CountCompleteTreeNodes {
@@ -77,7 +72,7 @@ public class CountCompleteTreeNodes {
         int rightH = getRightHeight(root.right);
 
         if(leftH == rightH) //perfect binary tree
-            return ((2 <<leftH) - 1); //Math.pow(2, a) is same as 2 << (a-1)
+            return ((2 <<leftH) - 1); //Or Math.pow(2, leftH + 1) - 1. Math.pow(2, a) is same as 2 << (a-1), yup.
         else
             return countNodes(root.left) + countNodes(root.right) + 1;
     }

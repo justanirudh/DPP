@@ -40,11 +40,11 @@ public class FlattenBinaryTreeToLinkedList {
         move(root.right);
         if (root.left != null) {
             TreeNode curr = root.left;
-            while (curr.right != null)
+            while (curr.right != null) //go to rightmost of the node
                 curr = curr.right;
-            curr.right = root.right;
-            root.right = root.left;
-            root.left = null;
+            curr.right = root.right;//move root.right below this node
+            root.right = root.left;//move the entire left branch to right
+            root.left = null; //put left to null
         }
     }
 

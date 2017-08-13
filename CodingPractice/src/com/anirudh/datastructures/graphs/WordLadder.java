@@ -10,7 +10,8 @@ import java.util.*;
  */
 /*
 127. Word Ladder
-Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation sequence from beginWord to endWord, such that:
+Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation
+sequence from beginWord to endWord, such that:
 
 Only one letter can be changed at a time
 Each intermediate word must exist in the word list
@@ -30,18 +31,6 @@ All words contain only lowercase alphabetic characters.
  */
 public class WordLadder {
 
-    private static class Node {
-        String s;
-        String parentString = "";
-        String color = "white";
-        Integer distSrc = -1;
-        ArrayList<String> neighbors = new ArrayList<>();
-
-        public Node(String s) {
-            this.s = s;
-        }
-    }
-
     private static boolean isDiffOne(String s1, String s2) {
         if (s1.length() != s2.length())
             return false;
@@ -56,6 +45,53 @@ public class WordLadder {
             return true;
         else
             return false;
+    }
+
+    //Method 2
+    private static class Word {
+        String s;
+        Integer dist;
+
+        public Word(String s, Integer dist) {
+            this.s = s;
+            this.dist = dist;
+        }
+    }
+
+    public static int ladderLength2(String beginWord, String endWord, Set<String> wordList) {
+        wordList.add(endWord);
+        Queue<Word> q = new LinkedList<>();
+        q.add(new Word(beginWord, 1));
+        while (!q.isEmpty()) {
+            Word wCurr = q.remove();
+            String curr = wCurr.s;
+            HashSet<String> removeThese = new HashSet<>();
+            for (String str : wordList) {
+                if (isDiffOne(curr, str)) {
+                    if (str.equals(endWord))
+                        return wCurr.dist + 1;
+                    Word newW = new Word(str, wCurr.dist + 1);
+                    q.add(newW);
+                    removeThese.add(str);
+                }
+            }
+            wordList.removeAll(removeThese);
+        }
+        return 0;
+    }
+
+    //----------------------------------------------------------------
+
+    private static class Node {
+        String s;
+        String parentString = "";
+        String color = "white";
+        Integer distSrc = -1;
+        ArrayList<String> neighbors = new ArrayList<>();
+
+        public Node(String s) {
+            this.s = s;
+        }
     }
 
     //undirected graph
@@ -131,39 +167,6 @@ public class WordLadder {
         HashMap<String, Node> graphPreBFS = new HashMap<>(graph);
 
         return doBFSAndGetDist(graphPreBFS, beginWord, endWord);
-    }
-
-    //Method 2
-    private static class Word {
-        String s;
-        Integer dist;
-
-        public Word(String s, Integer dist) {
-            this.s = s;
-            this.dist = dist;
-        }
-    }
-
-    public static int ladderLength2(String beginWord, String endWord, Set<String> wordList) {
-        wordList.add(endWord);
-        Queue<Word> q = new LinkedList<>();
-        q.add(new Word(beginWord, 1));
-        while (!q.isEmpty()) {
-            Word wCurr = q.remove();
-            String curr = wCurr.s;
-            HashSet<String> removeThese = new HashSet<>();
-            for (String str : wordList) {
-                if (isDiffOne(curr, str)) {
-                    if (str.equals(endWord))
-                        return wCurr.dist + 1;
-                    Word newW = new Word(str, wCurr.dist + 1);
-                    q.add(newW);
-                    removeThese.add(str);
-                }
-            }
-            wordList.removeAll(removeThese);
-        }
-        return 0;
     }
 
     public static void main(String[] args) {

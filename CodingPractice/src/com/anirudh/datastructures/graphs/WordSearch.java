@@ -36,7 +36,7 @@ public class WordSearch {
         return !(x < 0 || x >= length || y < 0 || y >= breadth);
     }
 
-    boolean dfs(int x, int y, int index) {
+    boolean dfs(int x, int y, int index) { //index is index of word string
         finished[x][y] = true;
         ++index;
         //reached end of word
@@ -50,9 +50,10 @@ public class WordSearch {
             int neighY = y + coordsY[i];
             //is within matrix, is undiscovered and its value is equal to next char
             if (isValid(neighX, neighY) && !finished[neighX][neighY] && board[neighX][neighY] == word.charAt(index))
-                res |= dfs(neighX, neighY, index);
-            else
-                res |= false;
+                res = dfs(neighX, neighY, index);
+            //else res will remain false
+            if (res) //if found 1 true path, break. no need to check further
+                break;
         }
 
         //if all neighbours not suitable, this means we took a wrong turn
@@ -81,7 +82,7 @@ public class WordSearch {
             for (int j = 0; j < breadth; ++j) {
                 if (board[i][j] == word.charAt(0)) {
                     //found a source
-                    finished = new boolean[length][breadth];
+                    finished = new boolean[length][breadth]; //new DFS for each source found
                     exists = dfs(i, j, 0);
                     if (exists)
                         break;

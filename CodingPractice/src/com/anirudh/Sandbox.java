@@ -10,16 +10,11 @@ import static org.junit.Assert.assertEquals;
  */
 public class Sandbox {
 
-    public static class Foo {
 
-    }
-
-    public static int foo(int d) {
-        d = 6;
-        return 8;
-    }
 
     public static void main(String[] args) {
+        System.out.println(Math.pow(2,5));
+        System.out.println(2 << 4);
 
     }
 }

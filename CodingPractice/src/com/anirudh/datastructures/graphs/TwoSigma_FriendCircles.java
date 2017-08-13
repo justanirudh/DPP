@@ -29,7 +29,6 @@ public class TwoSigma_FriendCircles {
                doDFS(graph, i);
         }
 
-
         graph.get(curr).color = "black";
     }
 
