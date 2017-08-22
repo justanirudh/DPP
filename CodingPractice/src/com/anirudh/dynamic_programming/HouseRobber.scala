@@ -15,25 +15,28 @@ money you can rob tonight without alerting the police.
  */
 
 //recurrence relation: amount_stashed_till[i] = max(amount_stashed_till[i-1], amount_stashed_till[i-2] + amount[i])
-object HouseRobber_DP extends App{
+object HouseRobber extends App {
 
-  def rob(amounts:Seq[Int]):Int = {
-    if(amounts.isEmpty) 0
-    else if(amounts.length == 1) amounts.head
+  def rob(amounts: Seq[Int]): Int = {
+    if (amounts.isEmpty) 0
+    else if (amounts.length == 1) amounts.head
     else if (amounts.length == 2) Math.max(amounts.head, amounts(1))
     else {
-      val sums = Array.fill(amounts.length){0}
+      val sums = Array.fill(amounts.length) {
+        0
+      }
       sums(0) = amounts.head
       sums(1) = Math.max(amounts.head, amounts(1))
-      for(index <- 2 until amounts.length){
+      for (index <- 2 until amounts.length) {
         sums(index) = Math.max(sums(index - 1), sums(index - 2) + amounts(index))
       }
       sums(amounts.length - 1)
     }
   }
 
-//  val amounts = Seq(5, 7, 3, 3, 8, 9, 10, 9, 8, 4)
-  val amounts = Seq(1, 3, 2, 1) //4
+  //  val amounts = Seq(5, 7, 3, 3, 8, 9, 10, 9, 8, 4)
+  val amounts = Seq(1, 3, 2, 1)
+  //4
   val sum = rob(amounts)
   println(sum)
 
