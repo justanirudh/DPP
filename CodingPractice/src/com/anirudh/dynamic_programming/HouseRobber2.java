@@ -20,19 +20,29 @@ Special thanks to @Freezen for adding this problem and creating all test cases.
  */
 public class HouseRobber2 {
 
-    int maxRob(int[] nums, int start, int end){
+    int maxRob(int[] nums, int start, int end) {
         int[] dp = new int[nums.length];
         dp[start] = nums[start];
-        dp[start + 1] = (int)Math.max(nums[start], nums[start + 1]);
-        for(int i = 2; i <= end; ++i){
-            dp[start + i] = (int)Math.max(nums[]);
+        if (start + 1 <= end)
+            dp[start + 1] = Math.max(nums[start], nums[start + 1]);
+        else
+            return dp[start];
+        for (int i = start + 2; i <= end; ++i) {
+            dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2]);
         }
+        return dp[end];
     }
 
 
     public int rob(int[] nums) {
-        int max1 = maxRob(nums, 0, nums.length - 2);
-        int max2 = maxRob(nums, 1, nums.length - 1);
-        return (int)Math.max(max1, max2);
+        if (nums == null || nums.length == 0)
+            return 0;
+        if (nums.length == 1)
+            return nums[0];
+        if (nums.length == 2)
+            return Math.max(nums[0], nums[1]);
+        int max1 = maxRob(nums, 0, nums.length - 2); //skip last elem
+        int max2 = maxRob(nums, 1, nums.length - 1); //skip first elem
+        return Math.max(max1, max2);
     }
 }
