@@ -1,79 +1,51 @@
 package com.anirudh.datastructures.graphs;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by paanir on 5/28/17.
- */
-//Leetcode #332. Under-construction
-public class ReconstructItinerary {
+//LC332 under-construction
+class ReconstructItinerary {
 
-    public class Solution {
-
-        List<String> addSortedly(List<String> list, String elem) {
-            //TODO: naive impl
-            list.add(elem);
-            Collections.sort(list);
-            return list;
+    class Node {
+        String from;
+        List<String> tos;
+        Node(String from){
+            this.from = from;
+            tos = new ArrayList<>();
         }
+    }
 
-
-        public List<String> findItinerary(String[][] tickets) {
-            HashMap<String, List<String>> ticketMap = new HashMap<>();
-
-            //created an adjacency list
-            for (String[] ticket : tickets) {
-                String from = ticket[0];
-                List<String> list;
-                if (!ticketMap.containsKey(from)) {
-                    list = new ArrayList<>();
-                    list.add(ticket[1]);
-                } else
-                    list = addSortedly(ticketMap.get(from), ticket[1]);
-                ticketMap.put(from, list);
-            }
-
-
-            String from = "JFK";
-            List<String> itin = new ArrayList<>();
-            itin.add(from);
-            while (!ticketMap.isEmpty()) {
-
-                for (String key : ticketMap.keySet()) {
-                    System.out.print(key + " -> ");
-                    for (String to : ticketMap.get(key)) {
-                        System.out.print(to + ", ");
-                    }
-                    System.out.println();
-                }
-                System.out.println("-------------");
-
-                List<String> tos = ticketMap.get(from);
-                String newFrom = "";
-                for (String to : tos) {
-                    if (ticketMap.containsKey(to)) {
-                        newFrom = to; //it will be the new from
-                        tos.remove(to); //rmeove it from the current from's tos list
-                        if (tos.isEmpty()) //if tos is empty, remove from too
-                            ticketMap.remove(from);
-                        break;
-                    }
-                }
-                if (newFrom == "") {
-                    // ticketMap.remove(from);
-                    from = tos.get(0);
-                    itin.add(from);
-                    break;
-                } else {
-                    from = newFrom;
-                    itin.add(from);
-                }
-                System.out.println(from);
-            }
-            return itin;
+    public List<String> doDFS(Map<String, Node> graph, List<String> itin) {
+        String from = itin.get(itin.size() - 1);
+        Node node = graph.get(from); //get all neighbours of last elem of the itin (curr elem)
+        List<String> tos = node.tos; //get all neighbours of last elem of the itin (curr elem)
+        for(String to : tos){
+            itin.add(to); //add to itin
+            graph.get(from).tos.remove(0); //remove first element (that just got added to itin)
+            doDFS(graph, itin);
         }
+        return itin;
+    }
+
+
+    public List<String> findItinerary(String[][] tickets) {
+        Map<String, Node> graph = new HashMap<>();
+        //graph creation
+        for(String[] path : tickets){
+            String from = path[0];
+            String to = path[1];
+            if(!graph.containsKey(from))
+                graph.put(from, new Node(from));
+            if(!graph.containsKey(to))
+                graph.put(to, new Node(to)); //to not have NPE when reach last destination
+            List<String> tos = graph.get(from).tos;
+            tos.add(to);
+            Collections.sort(tos); //no need to sort everytime. Just put elem in right place lexicographically
+            // graph.put(from, tos);
+        }
+        //DFS
+        List<String> itin = new ArrayList<>();
+        itin.add("JFK");
+        return doDFS(graph, itin );
     }
 }
