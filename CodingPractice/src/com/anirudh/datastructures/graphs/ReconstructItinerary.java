@@ -1,51 +1,46 @@
 package com.anirudh.datastructures.graphs;
 
-import java.util.ArrayList;
-import java.util.List;
+/*
+332. Reconstruct Itinerary
 
-//LC332 under-construction
+Given a list of airline tickets represented by pairs of departure and arrival airports [from, to],
+reconstruct the itinerary in order. All of the tickets belong to a man who departs from JFK. Thus, the itinerary must begin with JFK.
+
+Note:
+If there are multiple valid itineraries, you should return the itinerary that has the smallest lexical order
+when read as a single string. For example, the itinerary ["JFK", "LGA"] has a smaller lexical order than ["JFK", "LGB"].
+All airports are represented by three capital letters (IATA code).
+You may assume all tickets form at least one valid itinerary.
+Example 1:
+tickets = [["MUC", "LHR"], ["JFK", "MUC"], ["SFO", "SJC"], ["LHR", "SFO"]]
+Return ["JFK", "MUC", "LHR", "SFO", "SJC"].
+Example 2:
+tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
+Return ["JFK","ATL","JFK","SFO","ATL","SFO"].
+Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","SFO"]. But it is larger in lexical order.
+ */
+import java.util.*;
+
 class ReconstructItinerary {
 
-    class Node {
-        String from;
-        List<String> tos;
-        Node(String from){
-            this.from = from;
-            tos = new ArrayList<>();
-        }
-    }
-
-    public List<String> doDFS(Map<String, Node> graph, List<String> itin) {
-        String from = itin.get(itin.size() - 1);
-        Node node = graph.get(from); //get all neighbours of last elem of the itin (curr elem)
-        List<String> tos = node.tos; //get all neighbours of last elem of the itin (curr elem)
-        for(String to : tos){
-            itin.add(to); //add to itin
-            graph.get(from).tos.remove(0); //remove first element (that just got added to itin)
-            doDFS(graph, itin);
-        }
-        return itin;
-    }
-
+    Map<String, PriorityQueue<String>> flights;
+    LinkedList<String> path;
 
     public List<String> findItinerary(String[][] tickets) {
-        Map<String, Node> graph = new HashMap<>();
-        //graph creation
-        for(String[] path : tickets){
-            String from = path[0];
-            String to = path[1];
-            if(!graph.containsKey(from))
-                graph.put(from, new Node(from));
-            if(!graph.containsKey(to))
-                graph.put(to, new Node(to)); //to not have NPE when reach last destination
-            List<String> tos = graph.get(from).tos;
-            tos.add(to);
-            Collections.sort(tos); //no need to sort everytime. Just put elem in right place lexicographically
-            // graph.put(from, tos);
+        flights = new HashMap<>();
+        path = new LinkedList<>();
+        for (String[] ticket : tickets) {
+            flights.putIfAbsent(ticket[0], new PriorityQueue<>());
+            flights.get(ticket[0]).add(ticket[1]);
         }
-        //DFS
-        List<String> itin = new ArrayList<>();
-        itin.add("JFK");
-        return doDFS(graph, itin );
+        dfs("JFK");
+        return path;
+    }
+
+    public void dfs(String departure) { //topological sort. the one that gets finished first is prepended first
+        PriorityQueue<String> arrivals = flights.get(departure);
+        while (arrivals != null && !arrivals.isEmpty())
+            dfs(arrivals.remove());
+        path.addFirst(departure);//prepending
     }
 }
