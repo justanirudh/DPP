@@ -28,34 +28,34 @@ Example 2:
  1   3   1
 Maximum amount of money the thief can rob = 4 + 5 = 9.
  */
+
 import com.anirudh.datastructures.trees.TreeNode;
 
 import java.util.*;
 
-//LeetCode #337 Under-construction
 public class HouseRobber3 {
 
+    Map<TreeNode, Integer> map = new HashMap<>();
+
     public int rob(TreeNode root) {
-        return robSub(root, new HashMap<>());
+        return robAux(root);
     }
 
-    private int robSub(TreeNode root, Map<TreeNode, Integer> map) {
-        if (root == null) return 0;
-        if (map.containsKey(root)) return map.get(root);
-
+    public int robAux(TreeNode root) {
+        if (root == null)
+            return 0;
+        if (map.containsKey(root))
+            return map.get(root);
         int val = 0;
+        if (root.left != null)
+            val += robAux(root.left.left) + robAux(root.left.right);
+        if (root.right != null)
+            val += robAux(root.right.left) + robAux(root.right.right);
 
-        if (root.left != null) {
-            val += robSub(root.left.left, map) + robSub(root.left.right, map);
-        }
 
-        if (root.right != null) {
-            val += robSub(root.right.left, map) + robSub(root.right.right, map);
-        }
-
-        val = Math.max(val + root.val, robSub(root.left, map) + robSub(root.right, map));
-        map.put(root, val);
-
-        return val;
+        int total = Math.max(root.val + val, robAux(root.left) + robAux(root.right));
+        map.put(root, total);
+        return total;
     }
+
 }
