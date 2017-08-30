@@ -1,7 +1,5 @@
 package com.anirudh.dynamic_programming;
 
-import java.util.HashMap;
-
 /**
  * Created by paanir on 7/3/17.
  */
@@ -53,13 +51,13 @@ public class JumpGame {
     }
     //-------------------------------------------------------------
 
-    //smarter appraoch
+    //smarter approach
     public boolean canJump(int[] A) {
         //max is the maximum index we can jump to so far
         int max = 0;
         for (int i = 0; i < A.length; i++) {
-            //At any point, check if the index is greatre than maximum jump to an index we can take
-            //if i > maximum we can reach till her, this means we cannot go nay farther
+            //At any point, check if the index is greater than maximum jump to an index we can take
+            //if i > maximum we can reach till here, this means we cannot go any farther
             if (i > max) {
                 return false;
             }
