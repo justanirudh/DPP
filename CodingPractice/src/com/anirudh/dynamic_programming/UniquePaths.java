@@ -19,12 +19,12 @@ Note: m and n will be at most 100.
 public class UniquePaths {
     public int uniquePaths(int m, int n) {
         int[][] ways = new int[m][n];
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i < n; ++i) //entire first row
             ways[0][i] = 1;
-        for (int i = 1; i < m; ++i)
+        for (int i = 1; i < m; ++i) //entire first column
             ways[i][0] = 1;
-        for (int i = 1; i < m; ++i) {
-            for (int j = 1; j < n; ++j) {
+        for (int i = 1; i < m; ++i) { //rest of
+            for (int j = 1; j < n; ++j) {// the grid
                 ways[i][j] = ways[i - 1][j] + ways[i][j - 1];
             }
         }

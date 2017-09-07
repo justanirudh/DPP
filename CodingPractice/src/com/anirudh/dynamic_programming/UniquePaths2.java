@@ -30,7 +30,7 @@ public class UniquePaths2 {
         int cl = obstacleGrid[0].length;
         int[][] ways = new int [rl][cl];
 
-        ways[0][0] = obstacleGrid[0][0]^1; //inverting 1 to 0
+        ways[0][0] = obstacleGrid[0][0]^1; //inverting 1 to 0 and 0 to 1 (0 means there IS a way and vice versa)
 
         for(int i = 1; i < cl; ++i)
             ways[0][i] = (obstacleGrid[0][i]^1) * (ways[0][i-1]);

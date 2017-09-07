@@ -35,11 +35,12 @@ Any room can contain threats or power-ups, even the first room the knight enters
  */
 public class UniquePaths3 {
     public int calculateMinimumHP(int[][] dungeon) {
-        //go backwards
+
+        //work backwards
         if (dungeon == null || dungeon.length == 0 || dungeon[0].length == 0) return 0;
 
-        int m = dungeon.length;
-        int n = dungeon[0].length;
+        int m = dungeon.length; //m rows
+        int n = dungeon[0].length; //n columns
 
         int[][] health = new int[m][n];
 
@@ -47,7 +48,7 @@ public class UniquePaths3 {
 
         for (int i = m - 2; i >= 0; i--) {
             //if current cell negative, min health required increases (1- something negative)
-            //if current sell positive, then min health requried decreases but shouldnt go below 1
+            //if current sell positive, then min health required decreases but shouldnt go below 1 (<= 0 is dead)
             health[i][n - 1] = Math.max(health[i + 1][n - 1] - dungeon[i][n - 1], 1); //rightmost column
         }
 
@@ -57,8 +58,8 @@ public class UniquePaths3 {
 
         for (int i = m - 2; i >= 0; i--) {
             for (int j = n - 2; j >= 0; j--) {
-                int down = Math.max(health[i + 1][j] - dungeon[i][j], 1);
-                int right = Math.max(health[i][j + 1] - dungeon[i][j], 1);
+                int down = Math.max(health[i + 1][j] - dungeon[i][j], 1); //go down after this cell
+                int right = Math.max(health[i][j + 1] - dungeon[i][j], 1); // go right after this cell
                 health[i][j] = Math.min(right, down); //min of both as we require minimum health required
             }
         }
