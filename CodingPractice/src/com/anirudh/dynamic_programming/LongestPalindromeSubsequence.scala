@@ -1,6 +1,6 @@
 package com.anirudh.dynamic_programming
 
-import com.anirudh.dynamic_programming.LongestCommonSubsequence._
+import com.anirudh.dynamic_programming.LongestCommonSubsequenceScala._
 
 /**
   * Created by anirudh on 26/9/16.

@@ -5,7 +5,7 @@ package com.anirudh.dynamic_programming
   */
 
 import scala.collection.mutable
-object LongestCommonSubsequence extends App{
+object LongestCommonSubsequenceScala extends App{
 //Dynamic Programming: Iteration/recursion + memoization
 
   def findLCSString(s1:String, s2:String):String = {

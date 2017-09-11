@@ -17,5 +17,7 @@ public class Sandbox {
         System.out.println(2 << 4);
 
     }
+
+    String a = "\\";
 }
 
