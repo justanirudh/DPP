@@ -24,7 +24,7 @@ You may assume that you have an infinite number of each kind of coin.
  */
 public class CoinChange {
 
-    HashMap<Integer, Integer> amountToNumber = new HashMap<>();
+    HashMap<Integer, Integer> amountToNumber = new HashMap<>(); //amount to minimum number of coins reqd
 
     public int coinChange(int[] coins, int amount) {
         if (amount == 0)
