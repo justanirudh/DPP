@@ -5,17 +5,20 @@ package com.anirudh.general_algos.basics;
  */
 public class QuickSort {
 
+    //Lomuto partition scheme (CLRS)
     public static int partition(int[] arr, int start, int end) {
         int pivotElem = arr[start];
         int large = start;
         for (int small = start + 1; small <= end; small++) {
             if (arr[small] < pivotElem) {
                 large++;
+                //swap
                 int temp = arr[small];
                 arr[small] = arr[large];
                 arr[large] = temp;
             }
         }
+        //put pivot in right location
         int temp = arr[large];
         arr[large] = arr[start];
         arr[start] = temp;
