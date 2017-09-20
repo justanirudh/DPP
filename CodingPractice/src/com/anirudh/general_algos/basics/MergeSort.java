@@ -1,35 +1,47 @@
 package com.anirudh.general_algos.basics;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Created by paanir on 9/19/17.
  */
-//Under-construction
 //https://www.hackerrank.com/contests/hw1/challenges/merge-sort
 public class MergeSort {
+    public static void merge(int[] arr, int start, int mid, int end) {
 
-    public static int[] merge(int[] left, int[] right, int start, int mid, int end) {
-        int[] res = new int[left.length + right.length];
-        int i = 0, j = 0, k = 0;
-        while (i < left.length || j < right.length) {
-            if (i >= left.length && j < right.length) {
-                res[k] = right[j];
+        //first copy to two temp arrays. Then use them to OVERWRITE on the original array
+
+        int lLen = mid - start + 1;
+        int rLen = end - (mid + 1) + 1;
+        int[] left = new int[lLen];
+        int[] right = new int[rLen];
+
+        //make temp arrays
+        System.arraycopy(arr, start, left, 0, lLen); //start, startpos, dest, destpos, len
+        System.arraycopy(arr, mid + 1, right, 0, rLen);
+
+        //merge into original array with right order
+        int i = 0, j = 0, k = start;
+        while (i < lLen || j < rLen) {
+            if (i >= lLen && j < rLen) {
+                arr[k] = right[j];
                 j++;
-            } else if (i < left.length && j >= right.length) {
-                res[k] = left[i];
+            } else if (i < lLen && j >= rLen) {
+                arr[k] = left[i];
                 i++;
             } else { //both < length
                 if (left[i] < right[j]) {
-                    res[k] = left[i];
+                    arr[k] = left[i];
                     i++;
                 } else if (left[i] > right[j]) {
-                    res[k] = right[j];
+                    arr[k] = right[j];
                     j++;
-                } else {
-                    res[k] = right[j];
+                } else { //both equal to each other
+                    arr[k] = right[j];
                     k++;
-                    res[k] = left[i];
+                    arr[k] = left[i];
                     i++;
                     j++;
                 }
@@ -38,25 +50,26 @@ public class MergeSort {
         }
     }
 
-    public static int[] mergeSort(int[] arr, int start, int end) {
+
+    public static void mergeSort(int[] arr, int start, int end) {
+        if (arr == null || arr.length == 0)
+            return;
         if (start < end) {
             int mid = start + (end - start) / 2;
-            int[] left = mergeSort(arr, start, mid);
-            int[] right = mergeSort(arr, mid + 1, end);
-            return merge(left, right, start, mid, end);
+            mergeSort(arr, start, mid);
+            mergeSort(arr, mid + 1, end);
+            merge(arr, start, mid, end);
         }
-        return arr;
     }
 
     public static void main(String[] args) {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner stdin = new Scanner(System.in);
         int size = Integer.parseInt(stdin.nextLine());
-        String[] arrTemp = stdin.nextLine().split(" ");
         int[] arr = new int[size];
         for (int i = 0; i < size; ++i) {
-            arr[i] = Integer.parseInt(arrTemp[i]);
+            arr[i] = Integer.parseInt(stdin.nextLine());
         }
-        int[] sorted = mergeSort(arr, 0, size - 1);
+        mergeSort(arr, 0, size - 1);
+        System.out.print("[" + Arrays.stream(arr).mapToObj(String::valueOf).collect(Collectors.joining(",")) + "]");
     }
 }
