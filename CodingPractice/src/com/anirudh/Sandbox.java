@@ -15,18 +15,25 @@ import static org.junit.Assert.assertEquals;
 public class Sandbox {
 
 
-
     public static void main(String[] args) {
-        System.out.println(Math.pow(2,5));
-        System.out.println(2 << 4);
 
-        String[] foo = {"2", "1"};
-        List<Integer> bar = Arrays.stream(foo).map(x -> Integer.parseInt(x)).collect(Collectors.toList());
-//        int[] arr = new int[] {1, 2, 3, 4, 5, 6, 7};
-//        String result = StringUtils.join(ArrayUtils.toObject(arr), " - ");
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        priorityQueue.add(3);
+        priorityQueue.add(5);
+        priorityQueue.add(2);
+        System.out.println(priorityQueue.poll());
+        System.out.println(priorityQueue.poll());
+        System.out.println(priorityQueue.poll());
+
+        priorityQueue.add(3);
+        priorityQueue.add(5);
+        priorityQueue.add(2);
+        for(int num : priorityQueue){
+            System.out.println(num);
+        }
 
     }
 
-    String a = "\\";
+
 }
 

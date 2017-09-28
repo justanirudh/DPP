@@ -24,7 +24,7 @@ public class RemoveNthNodeFromEndOfList {
         ListNode slow = head;
         ListNode fast = slow;
         int dist = n;
-        while (dist != 0) {
+        while (dist != 0 && fast != null) {
             fast = fast.next;
             --dist;
         }

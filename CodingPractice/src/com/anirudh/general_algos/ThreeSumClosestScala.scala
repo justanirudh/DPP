@@ -11,7 +11,7 @@ For example, given array S = {-1 2 1 -4}, and target = 1.
 The sum that is closest to the target is 2. (-1 + 2 + 1 = 2)
 * */
 
-object ThreeSumClosest extends App{
+object ThreeSumClosestScala extends App{
 
   def findThreeSumsClosest(arr:Seq[Int], target:Int): Int/*((Int, Int, Int), Int)*/ ={
     val arrLastTwoDropped = arr.dropRight(2).zipWithIndex

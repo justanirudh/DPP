@@ -8,11 +8,6 @@ import java.util.List;
  */
 /*
 257. Binary Tree Paths
-Description  Submission  Solutions  Add to List
-Total Accepted: 90813
-Total Submissions: 255969
-Difficulty: Easy
-Contributors: Admin
 Given a binary tree, return all root-to-leaf paths.
 
 For example, given the following binary tree:
@@ -27,16 +22,6 @@ All root-to-leaf paths are:
 ["1->2->5", "1->3"]
  */
 public class BinaryTreePaths {
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 
     public static List<String> getPaths(String yet, TreeNode node) {
         if (node == null)

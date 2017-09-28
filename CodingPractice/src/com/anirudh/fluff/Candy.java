@@ -18,37 +18,34 @@ Similar to Tap Water problem
  */
 public class Candy {
     public int candy(int[] ratings) {
-        if(ratings == null ||  ratings.length == 0)
+        if (ratings == null || ratings.length == 0)
             return 0;
 
-        int[] candies = new int[ratings.length];
-        candies[0] = 1;
+        int[] candiesLR = new int[ratings.length];
+        candiesLR[0] = 1;
 
         //L to R
-        for(int i = 1; i < ratings.length; ++i){
-            if(ratings[i] > ratings[i-1])
-                candies[i] = candies[i-1] + 1;
+        for (int i = 1; i < ratings.length; ++i) {
+            if (ratings[i] > ratings[i - 1])
+                candiesLR[i] = candiesLR[i - 1] + 1;
             else
-                candies[i] = 1; //minimum reqd
+                candiesLR[i] = 1; //minimum reqd
         }
-
-        int res = candies[ratings.length - 1]; //start calculating the total number of candies from R to L
 
         //R to L
-        for(int i = ratings.length - 2; i >= 0; --i){
-            int curr = 1;
-            if(ratings[i] > ratings[i+1]){
-                curr = candies[i + 1] + 1;
-            }
-            res += Math.max(curr, candies[i]);  //get max of what was calculated before to what is calculated now
-            candies[i] = curr; // this is a shortcut
-            /*
-            Ideal way would be:
-             1. Create an array from L to R
-             2. Create an array from R to L
-             3. calculate result by summing up Max(first array[i], second array[i])
-             */
+        int[] candiesRL = new int[ratings.length];
+        candiesRL[ratings.length - 1] = candiesLR[ratings.length - 1];
+        for (int i = ratings.length - 2; i >= 0; --i) {
+            if (ratings[i] > ratings[i + 1])
+                candiesRL[i] = candiesRL[i + 1] + 1;
+            else
+                candiesRL[i] = 1; //minimum reqd
         }
+
+        //find total
+        int res = 0;
+        for (int i = 0; i < ratings.length; ++i)
+            res += Math.max(candiesLR[i], candiesRL[i]);
 
         return res;
     }

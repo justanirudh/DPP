@@ -3,26 +3,28 @@ package com.anirudh.general_algos.basics;
 /**
  * Created by paanir on 2/2/17.
  */
-public class QuickSort {
 
-    //Lomuto partition scheme (CLRS)
+//https://en.wikipedia.org/wiki/Quicksort#Algorithm: //Lomuto partition scheme (same as CLRS)
+public class QuickSortLomutoScheme {
+
+    public static void swap(int[] arr, int i1, int i2) {
+        int temp = arr[i1];
+        arr[i1] = arr[i2];
+        arr[i2] = temp;
+    }
+
     public static int partition(int[] arr, int start, int end) {
         int pivotElem = arr[start];
-        int large = start;
-        for (int small = start + 1; small <= end; small++) {
-            if (arr[small] < pivotElem) {
-                large++;
-                //swap
-                int temp = arr[small];
-                arr[small] = arr[large];
-                arr[large] = temp;
+        int left = start;
+        for (int right = start + 1; right <= end; right++) {
+            if (arr[right] < pivotElem) {
+                left++;
+                swap(arr, right, left);
             }
         }
         //put pivot in right location
-        int temp = arr[large];
-        arr[large] = arr[start];
-        arr[start] = temp;
-        return large;
+        swap(arr, left, start);
+        return left;
     }
 
     public static void quickSort(int[] arr, int start, int end) {

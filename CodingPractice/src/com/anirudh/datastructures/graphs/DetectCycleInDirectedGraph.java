@@ -10,17 +10,27 @@ import java.lang.*;
 
 //http://www.geeksforgeeks.org/detect-cycle-in-a-graph/
 //https://courses.csail.mit.edu/6.006/fall11/rec/rec14.pdf
+
+//Directed graph: If it is visited && it is in the recursion 'stack' (if parent it will be, so no need to check alag se)
+//recursion 'stack' is a hashmap from node to whether it is in the current path or not
 class DetectCycleInDirectedGraph {
+
+    //essentially this:
+    //If it hasn't been visited, visit it
+    //else, check if it is in the path covered till now (using a 'array', or more generically, a hashmap data structure called 'recursion stack' for keeping track)
+    //ADVANTAGE OF ARRAY OVER CHANGING THE COLOR OF NODE: If the graph is used for multiple searches or is being searched concurrently,
+    //one array oer search is better
+    //SO, equivalent to undirect, except, also keep an extra hashmap to track of the current path
     public boolean hasCycle(int v, LinkedList<Integer>[] alist, boolean[] visited, boolean[] recStack) {
         if (!visited[v]) {
-            recStack[v] = true;
-            visited[v] = true;
+            recStack[v] = true; //adding it to the 'path' that lead to the current node
+            visited[v] = true; // can be a property of the node
             for (int i : alist[v]) {
                 if (!visited[i]) { //if hasn't been visited and has cycle
                     boolean cycle = hasCycle(i, alist, visited, recStack);
                     if (cycle)
                         return true;
-                } else {
+                } else { //if visited, check if it is in the recursion 'stack'
                     if (recStack[i]) //if neighbour in recursion stack, then this is a back edge
                         return true;
                 }
@@ -51,7 +61,8 @@ class Graph {
             int v = in.nextInt();
             int e = in.nextInt();
             LinkedList<Integer>[] alist = new LinkedList[v];
-            for (int i = 0; i < v; i++) alist[i] = new LinkedList<Integer>();
+            for (int i = 0; i < v; i++)
+                alist[i] = new LinkedList<Integer>();
             while (e-- > 0) {
                 int n1 = in.nextInt();
                 int n2 = in.nextInt();

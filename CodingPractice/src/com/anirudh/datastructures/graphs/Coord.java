@@ -3,6 +3,7 @@ package com.anirudh.datastructures.graphs;
 /**
  * Created by paanir on 7/15/17.
  */
+// dont use this. If a matrix, do DFS in a matrix
 public class Coord {
     private Integer x;
     private Integer y;

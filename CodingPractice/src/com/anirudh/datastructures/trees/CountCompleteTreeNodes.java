@@ -25,13 +25,12 @@ public class CountCompleteTreeNodes {
         }
     }
 
-    //O(logn)
+    //O(n)
     int traverseInorderSlow(TreeNode tn, int count) {
         if (tn == null)
             return count;
-        count++;
-        int a = (int)Math.pow(2,3);
         count = traverseInorderSlow(tn.left, count);
+        count++;
         return traverseInorderSlow(tn.right, count);
     }
 
@@ -39,7 +38,7 @@ public class CountCompleteTreeNodes {
         return traverseInorderSlow(root, 0);
     }
 
-    //better soln
+    //better soln. O(logn)
 
     public int getLeftHeight(TreeNode tn) {
         int count = 0;
@@ -71,8 +70,8 @@ public class CountCompleteTreeNodes {
         int leftH = getLeftHeight(root.left);
         int rightH = getRightHeight(root.right);
 
-        if(leftH == rightH) //perfect binary tree
-            return ((2 <<leftH) - 1); //Or Math.pow(2, leftH + 1) - 1. Math.pow(2, a) is same as 2 << (a-1), yup.
+        if(leftH == rightH) //perfect/full binary tree
+            return ((2 <<leftH) - 1); //Or Math.pow(2, leftH + 1) - 1. Math.pow(2, a) is same as 2 << (a-1) == 1 << a, yup.
         else
             return countNodes(root.left) + countNodes(root.right) + 1;
     }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class GraphNode {
     private char c; //using in Surrounded Regions problem
-    private Coord coord;
+    private Coord coord; // dont use this. If a matrix, do DFS in a matrix
     private String color;
     private ArrayList<Coord> neighbours;
 

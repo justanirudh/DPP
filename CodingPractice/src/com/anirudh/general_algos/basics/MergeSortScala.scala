@@ -1,6 +1,6 @@
 package com.anirudh.general_algos.basics
 
-object MergeSort extends App{
+object MergeSortScala extends App{
 
 def merge(left:Seq[Int], right:Seq[Int], inversions:Int):(Seq[Int], Int) = {
 	(left, right) match {

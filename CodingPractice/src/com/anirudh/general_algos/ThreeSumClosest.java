@@ -15,7 +15,7 @@ would have exactly one solution.
 
     The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
  */
-public class ThreeSumClosestJ {
+public class ThreeSumClosest {
     public static int threeSumClosest(int[] nums, int target) {
         if (nums.length == 0 || nums.length == 1 || nums.length == 2)
             return -1;

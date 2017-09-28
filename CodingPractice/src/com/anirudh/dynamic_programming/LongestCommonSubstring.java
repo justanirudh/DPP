@@ -19,6 +19,7 @@ class LongestCommonSubstring {
             int n = Integer.parseInt(lengths[1]);
             char[] mSeq = stdin.nextLine().toCharArray();
             char[] nSeq = stdin.nextLine().toCharArray();
+
             //logic starts here
             int[][] matrix = new int[m + 1][n + 1];
             int maxLength = 0;

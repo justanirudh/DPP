@@ -2,7 +2,17 @@ package com.anirudh.datastructures.trees;
 
 import java.util.ArrayList;
 import java.util.Stack;
+/*
+173. Binary Search Tree Iterator
+Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
 
+Calling next() will return the next smallest number in the BST.
+
+Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree.
+
+Credits:
+Special thanks to @ts for adding this problem and creating all test cases.
+ */
 //O(n) space, O(1) time,O(1) time
 public class BSTIterator {
 
@@ -50,7 +60,7 @@ public class BSTIterator {
      */
     public int next() {
         if (index >= nums.size())
-            return -999999;
+            throw new RuntimeException("Index out of bound");
         else {
             return nums.get(index++);
         }

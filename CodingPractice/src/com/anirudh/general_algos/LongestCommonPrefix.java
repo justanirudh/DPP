@@ -4,11 +4,7 @@ package com.anirudh.general_algos;
  * Created by paanir on 1/17/17.
  */
 /*
-14. Longest Common Prefix   Add to List QuestionEditorial Solution  My Submissions
-Total Accepted: 145283
-Total Submissions: 474757
-Difficulty: Easy
-Contributors: Admin
+14. Longest Common Prefix
 
 Write a function to find the longest common prefix string amongst an array of strings.
  */

@@ -53,15 +53,15 @@ public class WordSearch {
                 res = dfs(neighX, neighY, index);
             //else res will remain false
             if (res) //if found 1 true path, break. no need to check further
-                break;
+                return true;
         }
 
         //if all neighbours not suitable, this means we took a wrong turn
-        //hence we need to remark it to be unexplored so that it can be later explored via some other path
-        if (!res) //just discovered 'unrolling' that you implement in DFS by myself!
-            finished[x][y] = false;
+        //hence we need to re-mark it to be unexplored so that it can be later explored via some other path
+        //just discovered 'unrolling' or recursion stack that we use sometimes in DFS by myself!
+        finished[x][y] = false;
 
-        return res;
+        return false;
 
     }
 
@@ -76,21 +76,17 @@ public class WordSearch {
         length = board.length;
         breadth = board[0].length;
 
-        boolean exists = false;
-
         for (int i = 0; i < length; ++i) {
             for (int j = 0; j < breadth; ++j) {
                 if (board[i][j] == word.charAt(0)) {
                     //found a source
                     finished = new boolean[length][breadth]; //new DFS for each source found
-                    exists = dfs(i, j, 0);
+                    boolean exists = dfs(i, j, 0);
                     if (exists)
-                        break;
+                        return true;
                 }
             }
-            if (exists)
-                break;
         }
-        return exists;
+        return false;
     }
 }

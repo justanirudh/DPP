@@ -5,11 +5,6 @@ package com.anirudh.datastructures.linkedlist;
  */
 /*
 142. Linked List Cycle II
-Description  Submission  Solutions  Add to List
-Total Accepted: 102915
-Total Submissions: 331607
-Difficulty: Medium
-Contributors: Admin
 
 Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
 
@@ -46,8 +41,8 @@ public class DetectCycle {
                 fast = fast.next;
         }
         if (slow == null || fast == null)
-            return null;
-        //slow == fast
+            return null; //no cycle
+        //slow == fast right now
         slow = head;
         while (slow != fast) {
             slow = slow.next;

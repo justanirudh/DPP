@@ -20,51 +20,48 @@ GET
 only get if less than curr
 
  */
-public class MyVector{
+public class MyVector {
 
     private int[] arr;
 
     private int curr; //index of next element; also the length
 
-    public MyVector(){
+    public MyVector() {
         curr = 0;
     }
 
-    public void add(int elem){
-        if(curr == 0){ //first element
+    public void add(int elem) {
+        if (curr == 0) { //first element
             arr = new int[1];
             arr[0] = elem;
-        }
-        else{
-            if(curr == arr.length){ //if filled curr array, time to double the length
+        } else {
+            if (curr == arr.length) { //if filled curr array, time to double the length
                 int[] newArr = new int[2 * curr]; //create new array of double length
                 System.arraycopy(arr, 0, newArr, 0, arr.length);//copy all elements
                 arr = newArr; //point to new array
                 arr[curr] = elem;
-            }
-            else{ //still space
+            } else { //still space
                 arr[curr] = elem;
             }
         }
         curr++;
     }
 
-    public int get(int index){
-        if(index >= curr)
+    public int get(int index) {
+        if (index >= curr)
             throw new RuntimeException("Index is out of bounds");
         return arr[index];
     }
 
-    public void delete(int index){
-        if(index >= curr)
+    public void delete(int index) {
+        if (index >= curr)
             throw new RuntimeException("Index is out of bounds");
-        int newLength = arr.length; //check if populated array size is LE half of the actual arr size
-        if(curr - 1 == arr.length/2) //as curr-1 will be new length
-            newLength = arr.length/2;
-        int[] newArr = new int[newLength]; //copy to new array, except element at index 'index'
-        int i = 0, newI = 0;
-        while(i < curr){ //we need to go till the end of old array
-            if(i != index){
+        //check if populated array size is LE half of the actual arr size
+        //curr-1 will be the new length
+        int[] newArr = (curr - 1 == arr.length / 2) ? new int[arr.length / 2] : new int[arr.length];
+        int i = 0, newI = 0; //copy to new array, except element at index 'index'
+        while (i < curr) { //we need to go till the end of old array
+            if (i != index) {
                 newArr[newI] = arr[i];
                 newI++;
             }
@@ -89,22 +86,13 @@ public class MyVector{
         vec.add(6);
         vec.add(7);
 
-        for(int i = 0; i < vec.length(); ++i)
+        for (int i = 0; i < vec.length(); ++i)
             System.out.print(vec.get(i) + " ");
         System.out.println();
 
         vec.delete(2);
 
-        for(int i = 0; i < vec.length(); ++i)
-            System.out.print(vec.get(i) + " ");
-        System.out.println();
-
-        System.out.println(vec.length());
-        System.out.println(vec.arr.length);
-
-        vec.delete(2);
-
-        for(int i = 0; i < vec.length(); ++i)
+        for (int i = 0; i < vec.length(); ++i)
             System.out.print(vec.get(i) + " ");
         System.out.println();
 
@@ -113,7 +101,7 @@ public class MyVector{
 
         vec.delete(2);
 
-        for(int i = 0; i < vec.length(); ++i)
+        for (int i = 0; i < vec.length(); ++i)
             System.out.print(vec.get(i) + " ");
         System.out.println();
 
@@ -122,7 +110,16 @@ public class MyVector{
 
         vec.delete(2);
 
-        for(int i = 0; i < vec.length(); ++i)
+        for (int i = 0; i < vec.length(); ++i)
+            System.out.print(vec.get(i) + " ");
+        System.out.println();
+
+        System.out.println(vec.length());
+        System.out.println(vec.arr.length);
+
+        vec.delete(2);
+
+        for (int i = 0; i < vec.length(); ++i)
             System.out.print(vec.get(i) + " ");
         System.out.println();
 
@@ -131,7 +128,7 @@ public class MyVector{
 
         vec.add(8);
 
-        for(int i = 0; i < vec.length(); ++i)
+        for (int i = 0; i < vec.length(); ++i)
             System.out.print(vec.get(i) + " ");
         System.out.println();
 
@@ -140,7 +137,7 @@ public class MyVector{
 
         vec.add(9);
 
-        for(int i = 0; i < vec.length(); ++i)
+        for (int i = 0; i < vec.length(); ++i)
             System.out.print(vec.get(i) + " ");
         System.out.println();
 

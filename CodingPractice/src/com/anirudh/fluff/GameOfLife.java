@@ -41,7 +41,7 @@ public class GameOfLife {
         int numLiveNeighbours = 0;
         int[] a1 = {x - 1, x - 1, x, x + 1, x + 1, x + 1, x, x - 1};
         int[] a2 = {y, y - 1, y - 1, y - 1, y, y + 1, y + 1, y + 1};
-        for (int i = 0; i < a1.length; ++i) {
+        for (int i = 0; i < a1.length; ++i) { //iterate through all neighbours
             int r = a1[i];
             int c = a2[i];
             if (legal(r, c) && (board[r][c] == 1 || board[r][c] == 30 || board[r][c] == 40)) //legal and live

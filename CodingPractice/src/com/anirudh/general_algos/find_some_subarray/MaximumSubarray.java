@@ -1,4 +1,4 @@
-package com.anirudh.dynamic_programming;
+package com.anirudh.general_algos.find_some_subarray;
 
 /**
  * Created by paanir on 7/19/17.
@@ -31,6 +31,7 @@ public class MaximumSubarray {
         return max_so_far
 
          */
+        //O(n)
         int maxSoFar = nums[0];
         int maxEndingHere = nums[0];
 

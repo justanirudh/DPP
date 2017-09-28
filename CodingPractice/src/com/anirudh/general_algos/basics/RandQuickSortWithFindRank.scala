@@ -5,22 +5,24 @@ import scala.util.Random
 /**
   * Created by anirudh on 1/10/16.
   */
-object RandQuickSortWithFindRank extends App{
+object RandQuickSortWithFindRank extends App {
 
-  def exchangeElems(arr:Seq[Int], index1:Int, index2:Int) = {
+  def exchangeElems(arr: Seq[Int], index1: Int, index2: Int) = {
     val temp = arr(index1)
     arr.updated(index1, arr(index2)).updated(index2, temp)
   }
 
-  def getPartition(seq:Seq[Int], start:Int, end:Int):(Int, Seq[Int])= {
+  def getPartition(seq: Seq[Int], start: Int, end: Int): (Int, Seq[Int]) = {
     var partSeq = seq
     val random = new Random(System.currentTimeMillis())
-    val random_index = start + random.nextInt(end-start+1)
+    val random_index = start + random.nextInt(end - start + 1)
     val pivot = partSeq(random_index)
-    partSeq = exchangeElems(partSeq, random_index, start) //moved pivot to start
+    partSeq = exchangeElems(partSeq, random_index, start)
+    //moved pivot to start
     var small = start
-    for(large <- start + 1 to end){ //small = start, large= start + 1
-      if(partSeq(large) < pivot){
+    for (large <- start + 1 to end) {
+      //small = start, large= start + 1
+      if (partSeq(large) < pivot) {
         small = small + 1
         partSeq = exchangeElems(partSeq, small, large)
       }
@@ -28,8 +30,8 @@ object RandQuickSortWithFindRank extends App{
     (small, exchangeElems(partSeq, start, small))
   }
 
-  def quickSort(seq:Seq[Int], start:Int, end:Int):Seq[Int] = {
-    if(start < end){
+  def quickSort(seq: Seq[Int], start: Int, end: Int): Seq[Int] = {
+    if (start < end) {
       val (partitionIndex, partitionedArray) = getPartition(seq, start, end)
       val leftSorted = quickSort(partitionedArray, start, partitionIndex - 1)
       quickSort(leftSorted, partitionIndex + 1, end)
@@ -39,11 +41,11 @@ object RandQuickSortWithFindRank extends App{
 
   }
 
-  def findElemWithRank(seq:Seq[Int], rank:Int, start:Int, end:Int):Int = {
+  def findElemWithRank(seq: Seq[Int], rank: Int, start: Int, end: Int): Int = {
     //given a rank, give me the corresponding num: O(n) average case
-    if(start == end)
+    if (start == end)
       seq(start)
-    else{
+    else {
       val (partitionIndex, partitionedArray) = getPartition(seq, start, end)
       val rankPartition = partitionIndex - start + 1
       if (rank == rankPartition)
@@ -55,11 +57,11 @@ object RandQuickSortWithFindRank extends App{
     }
   }
 
-    val seq = Seq(6,10,13,5,8,3,2,11, 49, 23, 50, 1, 0)
-    val sortedSeq = quickSort(seq, 0, seq.size - 1)
-    sortedSeq foreach println
+  val seq = Seq(6, 10, 13, 5, 8, 3, 2, 11, 49, 23, 50, 1, 0)
+  val sortedSeq = quickSort(seq, 0, seq.size - 1)
+  sortedSeq foreach println
 
-  val seq2 = Seq(6,10,13,5,8,3,2,11)
+  val seq2 = Seq(6, 10, 13, 5, 8, 3, 2, 11)
   val getNum = findElemWithRank(seq2, 7, 0, seq2.size - 1)
   println(getNum)
 }
