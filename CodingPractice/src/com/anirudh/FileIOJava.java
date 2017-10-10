@@ -1,24 +1,53 @@
 package com.anirudh;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
- * Created by paanir on 1/26/17.
+ * Created by paanir on 10/8/17.
  */
 public class FileIOJava {
+    private static final String FILENAME = "/Users/paanir/kill_safe_connect.sh";
 
     public static void main(String[] args) {
-        Scanner stdin = new Scanner(System.in);
 
-        //way 1: when first line has number of lines info
-        int numPpl = Integer.parseInt(stdin.nextLine());
-        for (int i = 0; i < numPpl; i++) {
-            int money = Integer.parseInt(stdin.nextLine());
+        BufferedReader br = null;
+        FileReader fr = null;
+
+        try {
+
+            //br = new BufferedReader(new FileReader(FILENAME));
+            fr = new FileReader(FILENAME);
+            br = new BufferedReader(fr);
+
+            String sCurrentLine;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+                System.out.println(sCurrentLine);
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+
+                if (br != null)
+                    br.close();
+
+                if (fr != null)
+                    fr.close();
+
+            } catch (IOException ex) {
+
+                ex.printStackTrace();
+
+            }
+
         }
 
-        //Way 2:
-        while (stdin.hasNextLine()) {
-            int money = Integer.parseInt(stdin.nextLine());
-        }
     }
 }
