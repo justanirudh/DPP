@@ -5,4 +5,5 @@ package com.anirudh.math;
  */
 //TODO: LC688
 public class KnightProbabilityinChessboard {
+    
 }
