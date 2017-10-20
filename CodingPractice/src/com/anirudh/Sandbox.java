@@ -3,6 +3,7 @@ package com.anirudh;
 import com.sun.deploy.util.StringUtils;
 import com.sun.tools.javac.util.ArrayUtils;
 
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,25 +16,48 @@ import static org.junit.Assert.assertEquals;
 public class Sandbox {
 
 
+    private static final String FILENAME = "/Users/paanir/kill_safe_connect.sh";
+
     public static void main(String[] args) {
 
-        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
-        priorityQueue.add(3);
-        priorityQueue.add(5);
-        priorityQueue.add(2);
-        System.out.println(priorityQueue.poll());
-        System.out.println(priorityQueue.poll());
-        System.out.println(priorityQueue.poll());
+        BufferedReader br = null;
+        FileReader fr = null;
 
-        priorityQueue.add(3);
-        priorityQueue.add(5);
-        priorityQueue.add(2);
-        for(int num : priorityQueue){
-            System.out.println(num);
+        try {
+
+            //br = new BufferedReader(new FileReader(FILENAME));
+            fr = new FileReader(FILENAME);
+            br = new BufferedReader(fr);
+
+            String sCurrentLine;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+                System.out.println(sCurrentLine);
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+
+                if (br != null)
+                    br.close();
+
+                if (fr != null)
+                    fr.close();
+
+            } catch (IOException ex) {
+
+                ex.printStackTrace();
+
+            }
+
         }
 
     }
-
 
 }
 

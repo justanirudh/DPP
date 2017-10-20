@@ -30,8 +30,7 @@ public class Triangle_DP {
             return triangle.get(0).get(0);
 
         int triangleBaseLength = triangle.get(triangle.size() - 1).size();
-        //min path can come from top or top left in this
-        int[][] sums = new int[triangleBaseLength][triangleBaseLength]; //creating max-sums matrix
+        int[][] sums = new int[triangleBaseLength][triangleBaseLength]; //creating max-sums matrix //min path can come from top or top left in this
         sums[0][0] = triangle.get(0).get(0);
         for (int i = 1; i < triangle.size(); ++i) { //0th row with 1 element already populated as base case
             for (int j = 0; j < triangle.get(i).size(); ++j) { //go on;y till end of that row

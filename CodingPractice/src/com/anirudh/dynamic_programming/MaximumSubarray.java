@@ -31,18 +31,19 @@ public class MaximumSubarray {
         return max_so_far
 
          */
-        //Leetcode discussion top answer
-        int n = a.length;
-        int[] dp = new int[n];//dp[i] means the maximum subarray ending with A[i];
-        dp[0] = a[0];
-        int max = dp[0];
+        int size = a.length;
+        int max_so_far = Integer.MIN_VALUE;
+        int max_ending_here = 0;
 
-        for (int i = 1; i < n; i++) {
-            dp[i] = a[i] + (dp[i - 1] > 0 ? dp[i - 1] : 0);
-            max = Math.max(max, dp[i]);
+        for (int i = 0; i < size; i++)
+        {
+            max_ending_here = max_ending_here + a[i];
+            if (max_so_far < max_ending_here)
+                max_so_far = max_ending_here;
+            if (max_ending_here < 0)
+                max_ending_here = 0;
         }
-
-        return max;
+        return max_so_far;
     }
 
     //------------------------------------------

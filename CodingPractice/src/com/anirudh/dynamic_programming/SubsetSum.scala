@@ -4,6 +4,7 @@ package com.anirudh.dynamic_programming
   * Created by anirudh on 23/11/16.
   */
 /*
+IMPORTANT
 Dynamic Programming | Set 25 (Subset Sum Problem)
 Given a set of non-negative integers, and a value sum, determine if there is a subset of the given set with sum equal
 to given sum.
