@@ -14,8 +14,22 @@ Follow up: Could you solve it without loops/recursion?
 
  */
 public class PowerOfFour {
+
     public boolean isPowerOfFour(int num) {
-        if ((num & (num - 1)) != 0)
+        //0x55555555 = 0101 0101 0101 0101 0101 0101 0101 0101 (32 bit)
+
+        //explanation: if power of four, 1 is in an odd position in the binary rep
+        //so we and 'num' with a number that 1 in all odd positions
+        // the resulting number should be the num itself
+
+        //eight 5's in the hexadecimal
+        return num > 0 && (num & (num - 1)) == 0 && ((num & 0x55555555) == num);
+    }
+
+    //TLE
+    //O(log N)
+    public boolean isPowerOfFourSlow(int num) {
+        if ((num & (num - 1)) != 0) //is power of two
             return false;
         else {
             //number of zeroes on the right side of the only 1 should be even
@@ -26,5 +40,9 @@ public class PowerOfFour {
             }
             return numZeroes % 2 == 0;
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(0x55555555);
     }
 }
