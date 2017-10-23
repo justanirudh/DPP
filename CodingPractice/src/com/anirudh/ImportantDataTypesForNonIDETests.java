@@ -25,6 +25,8 @@ public class ImportantDataTypesForNonIDETests {
         int[] arr = new int[]{2,3,4};
         System.out.println(arr);
 
+
+        //3 kinds of hashmaps
         HashMap<Integer, String> hm = new HashMap<>();
         System.out.println(hm);
 
@@ -46,7 +48,7 @@ public class ImportantDataTypesForNonIDETests {
         Stack<Node> stack = new Stack<Node>();
         System.out.println(stack);
 
-        //https://docs.oracle.com/javase/7/docs/api/java/util/Queue.html
+        //2 kinds of queue
         Queue<Node> queue = new LinkedList<Node>();
         System.out.println(queue);
 

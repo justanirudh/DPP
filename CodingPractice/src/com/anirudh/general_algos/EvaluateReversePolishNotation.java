@@ -1,5 +1,8 @@
 package com.anirudh.general_algos;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -18,26 +21,46 @@ Some examples:
  */
 
 public class EvaluateReversePolishNotation {
-    public int evalRPN(String[] tokens) {
-        if (tokens.length == 0)
-            return 0;
-        Stack<String> stack = new Stack<>();
-        for (int i = 0; i < tokens.length; ++i) {
-            String curr = tokens[i];
-            if (curr.equals("+") || curr.equals("-") || curr.equals("/") || curr.equals("*")) {
-                int right = Integer.parseInt(stack.pop());
-                int left = Integer.parseInt(stack.pop());
-                if (curr.equals("+"))
-                    stack.push(Integer.toString(left + right));
-                else if (curr.equals("-"))
-                    stack.push(Integer.toString(left - right));
-                else if (curr.equals("/"))
-                    stack.push(Integer.toString(left / right));
-                else
-                    stack.push(Integer.toString(left * right));
-            } else
-                stack.push(curr);
+    class RPN {
+        private Stack<String> stack;
+        private String[] equation;
+        private Set<String> operators;
+
+        RPN(String[] s) {
+            stack = new Stack<>();
+            this.equation = s;
+            operators = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
         }
-        return Integer.parseInt(stack.pop());
+
+        private int evaluate(String op) {
+            int right = Integer.parseInt(stack.pop());
+            int left = Integer.parseInt(stack.pop());
+            switch (op) {
+                case "+":
+                    return left + right;
+                case "-":
+                    return left - right;
+                case "*":
+                    return left * right;
+                case "/":
+                    return left / right;
+                default:
+                    throw new RuntimeException("unknown symbol");
+            }
+        }
+
+        public int evaluate() {
+            for (String s : equation) {
+                if (operators.contains(s))
+                    s = Integer.toString(evaluate(s));
+                stack.push(s);
+            }
+            return Integer.parseInt(stack.pop());
+        }
+    }
+
+    public int evalRPN(String[] tokens) {
+        RPN rpn = new RPN(tokens);
+        return rpn.evaluate();
     }
 }

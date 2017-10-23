@@ -5,6 +5,8 @@ import scala.util.Random
 /**
   * Created by anirudh on 1/10/16.
   */
+//average - n, worst - n^2
+//median of median approach - worst n
 object RandQuickSortWithFindRank extends App {
 
   def exchangeElems(arr: Seq[Int], index1: Int, index2: Int) = {

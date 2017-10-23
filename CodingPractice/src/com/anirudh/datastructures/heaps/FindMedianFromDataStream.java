@@ -60,6 +60,7 @@ public class FindMedianFromDataStream {
             lo.offer(high.poll());
     }
 
+    //O(1)
     public double findMedian() {
         if (lo.size() == high.size())
             return (lo.peek() + high.peek()) / 2.0; //2.0 is imp. to get fractional values

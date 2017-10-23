@@ -27,27 +27,52 @@ First, iterate the array counting number of 0's, 1's, and 2's, then overwrite ar
 Could you come up with an one-pass algorithm using only constant space?
  */
 public class SortColors {
+
+
+    //1-pass
+    void swap(int[] nums, int i1, int i2) {
+        int temp = nums[i1];
+        nums[i1] = nums[i2];
+        nums[i2] = temp;
+    }
+
     public void sortColors(int[] nums) {
+        int zero = 0;
+        int second = nums.length - 1;
+        for (int i = 0; i <= second; i++) {//to I reach the 2 pointer
+            while (nums[i] == 2 && i < second) { //while is necessary
+                swap(nums, i, second);
+                second--;
+            }
+            while (nums[i] == 0 && i > zero) {
+                swap(nums, i, zero);
+                zero++;
+            }
+        }
+    }
+
+    //2-pass
+    public void sortColorsTwoPass(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
-        for(int i : nums){
+        for (int i : nums) {
             Integer count = map.putIfAbsent(i, 1); //is null if was not present previously
-            if(count != null)
+            if (count != null)
                 map.put(i, map.get(i) + 1);
         }
         int i = 0;
-        if(map.containsKey(0)){
+        if (map.containsKey(0)) {
             int countRed = i + map.get(0);
-            for(; i < countRed; ++i)
+            for (; i < countRed; ++i)
                 nums[i] = 0;
         }
-        if(map.containsKey(1)){
+        if (map.containsKey(1)) {
             int countWhite = i + map.get(1);
-            for(; i < countWhite; ++i)
+            for (; i < countWhite; ++i)
                 nums[i] = 1;
         }
-        if(map.containsKey(2)){
+        if (map.containsKey(2)) {
             int countBlue = i + map.get(2);
-            for(; i < countBlue; ++i)
+            for (; i < countBlue; ++i)
                 nums[i] = 2;
         }
     }

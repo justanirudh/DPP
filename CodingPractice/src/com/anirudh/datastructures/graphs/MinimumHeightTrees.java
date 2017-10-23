@@ -1,5 +1,9 @@
 package com.anirudh.datastructures.graphs;
 
+import com.anirudh.general_algos.IntegerToEnglishWords;
+
+import java.util.*;
+
 /**
  * Created by paanir on 10/19/17.
  */
@@ -51,4 +55,102 @@ Special thanks to @dietpepsi for adding this problem and creating all test cases
 //LC 310 under construction
 public class MinimumHeightTrees {
 
+    //LOOK MA NO COLOR
+    private class GraphNode {
+        int val;
+        List<Integer> neighbours;
+        int dist;
+
+        public GraphNode(int val) {
+            this.val = val;
+            neighbours = new ArrayList<>();
+            dist = Integer.MAX_VALUE;
+        }
+
+        public void addNeighbours(int i) {
+            neighbours.add(i);
+        }
+    }
+
+    private Map<Integer, GraphNode> createGraph(int n, int[][] edges) {
+        Map<Integer, GraphNode> graph = new HashMap<>();
+        for (int i = 0; i < n; ++i) {
+            graph.put(i, new GraphNode(i));
+        }
+        for (int[] edge : edges) {
+            int v1 = edge[0];
+            int v2 = edge[1];
+            graph.get(v1).addNeighbours(v2);
+            graph.get(v2).addNeighbours(v1);
+        }
+        return graph;
+    }
+
+    //find max distance
+    private int doBFS(int root, Map<Integer, GraphNode> graph, String[] colors) {
+        GraphNode node = graph.get(root);
+        colors[root] = "gray";
+        node.dist = 0;
+        Queue<GraphNode> queue = new LinkedList<>();
+        queue.add(node);
+        int maxDist = Integer.MIN_VALUE;
+        while (!queue.isEmpty()) {
+            GraphNode gn = queue.remove();
+            int currDist = gn.dist;
+            if (currDist > maxDist)
+                maxDist = currDist;
+            for (int neigh : gn.neighbours) {
+                GraphNode neighNode = graph.get(neigh);
+                if (colors[neighNode.val].equals("white")) {
+                    neighNode.dist = currDist + 1;
+                    colors[neighNode.val] = "gray";
+                    queue.add(neighNode);
+                }
+            }
+            colors[gn.val] = "black";
+        }
+        return maxDist;
+    }
+
+
+    public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+
+        //do bfs in all vertices and find the ones with min height
+        Map<Integer, GraphNode> graph = createGraph(n, edges);
+
+        int min = Integer.MAX_VALUE;
+        List<Integer> res = new ArrayList<>();
+        String[] colors = new String[n];
+        for (int i = 0; i < n; ++i) {
+            colors[i] = "white";
+        }
+
+        //Sol.1 : put creation of graph inside loop
+        //Sol.2: separate array for colors
+        for (int root = 0; root < n; ++root) {
+            //create graph
+            //this needs to be inside loop as new graph created everytime is required as
+            //fresh BFS everytime. else deepcopy reqd which is not that straightforward
+
+            int curr_min = doBFS(root, graph, colors.clone());
+            if (curr_min < min) {
+                min = curr_min;
+                res = new ArrayList<>();
+                res.add(root);
+            } else if (curr_min == min)
+                res.add(root);
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int n = 6;
+        int[][] arr = {{3, 0}, {3, 1}, {3, 2}, {3, 4}, {5, 4}};
+        MinimumHeightTrees mht = new MinimumHeightTrees();
+        List<Integer> res = mht.findMinHeightTrees(n, arr);
+        for (int i :
+                res) {
+            System.out.println(i);
+        }
+    }
 }
