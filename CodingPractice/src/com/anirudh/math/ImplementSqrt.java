@@ -10,7 +10,7 @@ Implement int sqrt(int x).
 
 Compute and return the square root of x.
  */
-public class ImplementSqrt {
+public class    ImplementSqrt {
 
     //Naive: O(root(n))
     public int mySqrtNaive(int x) {

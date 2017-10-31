@@ -70,3 +70,11 @@ public class ImportantDataTypesForNonIDETests {
 
     }
 }
+
+/*
+kinds of maps
+TreeMap - RB tree
+EnumMap - array
+hashMap - Hashtable based (array)
+LinkedHashMap - Linked List + HashMap
+ */

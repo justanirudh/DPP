@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.system_design;
 
 
 import java.util.Base64;
@@ -15,6 +15,7 @@ returns a short URL such as http://tinyurl.com/4e9iAk.
 Design the encode and decode methods for the TinyURL service. There is no restriction on how your encode/decode algorithm
 should work. You just need to ensure that a URL can be encoded to a tiny URL and the tiny URL can be decoded to the original URL.
  */
+//Stateless
 public class EncodeDecodeTinyURL {
     // Encodes a URL to a shortened URL.
 

@@ -1,4 +1,4 @@
-package com.anirudh.general_algos
+package com.anirudh.greedy
 
 /**
   * Created by anirudh on 2/6/16.

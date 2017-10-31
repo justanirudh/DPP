@@ -23,7 +23,8 @@ public class BlendLabs_PhoneInterview {
     //essentially simulating what we do by hand
     static public String divide(int nume, int denom) {
 
-        int div = nume / denom; //integer part
+        //integer part
+        int div = nume / denom;
 
         if (nume % denom == 0)
             return Integer.toString(div);
@@ -33,7 +34,7 @@ public class BlendLabs_PhoneInterview {
 
         //if numerator repeats or reaches 0, game over
         while (true) {
-            nume = (nume % denom) * 10; //new numerator
+            nume = (nume % denom) * 10;
             if (nume == 0 || numes.contains(nume))
                 break;
             else

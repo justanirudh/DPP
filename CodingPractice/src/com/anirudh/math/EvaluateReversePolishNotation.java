@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.math;
 
 import java.util.Arrays;
 import java.util.HashSet;

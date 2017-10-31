@@ -23,6 +23,7 @@ The encoded string should be as compact as possible.
 Note: Do not use class member/global/static variables to store states. Your serialize and deserialize algorithms should be stateless.
  */
 public class SerializeAndDeserializeBST {
+    //use inorder and preorder to uniquely identify a tree
 
     private void inOrder(TreeNode root, List<String> list) {
         if (root == null)
@@ -44,13 +45,12 @@ public class SerializeAndDeserializeBST {
     public String serialize(TreeNode root) {
         if (root == null)
             return "";
-        List<String> list = new ArrayList<>();
-        inOrder(root, list);
-        List<String> list2 = new ArrayList<>();
-        preOrder(root, list2);
-        String joined1 = String.join(",", list);
-        String joined2 = String.join(",", list2);
-        System.out.println(joined1 + ";" + joined2);
+        List<String> listIn = new ArrayList<>();
+        inOrder(root, listIn);
+        List<String> listPre = new ArrayList<>();
+        preOrder(root, listPre);
+        String joined1 = String.join(",", listIn);
+        String joined2 = String.join(",", listPre);
         return joined1 + ";" + joined2;
     }
 
@@ -71,7 +71,7 @@ public class SerializeAndDeserializeBST {
         if (inStart > inEnd || preIndex >= preOrder.length) {
             return null;
         }
-        int rootVal = preOrder[preIndex];
+        int rootVal = preOrder[preIndex]; //first num in preorder is the root
         TreeNode root = new TreeNode(rootVal);
         int inIndex = binarySearch(rootVal, inOrder, inStart, inEnd);
         root.left = constructTree(inOrder, inStart, inIndex - 1, preOrder, preIndex + 1);
