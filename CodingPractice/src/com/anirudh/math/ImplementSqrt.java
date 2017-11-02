@@ -10,7 +10,26 @@ Implement int sqrt(int x).
 
 Compute and return the square root of x.
  */
-public class    ImplementSqrt {
+public class ImplementSqrt {
+
+
+    //binary search O(logn) (might look weird but it is exactly what you think it is)
+    public int mySqrt(int x) {
+        if (x == 0)
+            return 0;
+        int left = 1;
+        int right = x;
+        while (true) {
+            int sqrt = left + (right - left) / 2;
+            if (sqrt > x / sqrt) //sqrt * sqrt > x
+                right = sqrt - 1;
+            else { //sqrt * sqrt <= x
+                if (sqrt + 1 > x / (sqrt + 1)) //(sqrt^2 <= num && (sqrt+1)^2 > num)
+                    return sqrt;
+                left = sqrt + 1;
+            }
+        }
+    }
 
     //Naive: O(root(n))
     public int mySqrtNaive(int x) {
@@ -23,34 +42,5 @@ public class    ImplementSqrt {
             return --num;
     }
 
-    //Better - under_construction: O(log(root(n)))
 
-    int x;
-
-    public int aux(int start, int end) {
-        int mid = (start + end) / 2;
-        int midSqrd = mid * mid;
-        if (midSqrd == x)
-            return mid;
-        else if (midSqrd > x) {
-            int midMinusOneSqrd = (mid - 1) * (mid - 1);
-            if (midMinusOneSqrd <= x)
-                return mid - 1;
-            else //midMinusOneSqrd > x
-                return aux(start, mid - 2);
-        } else { //midSqrd < x
-            int midPlusOneSqrd = (mid + 1) * (mid + 1);
-            if (midPlusOneSqrd > x)
-                return mid;
-            else if (midPlusOneSqrd == x)
-                return mid + 1;
-            else //midPlusOneSqrd < x
-                return aux(mid + 2, end);
-        }
-    }
-
-    public int mySqrt(int x) {
-        this.x = x;
-        return aux(0, x);
-    }
 }

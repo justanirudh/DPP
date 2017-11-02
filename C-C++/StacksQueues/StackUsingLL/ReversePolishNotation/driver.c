@@ -3,6 +3,18 @@
 #include<stdbool.h>
 #include<stdlib.h>
 #include<unistd.h>
+
+	bool isSymbol(char* c) {
+		char* symbols[] = {"+", "-", "*", "/"};
+		int i;
+		for(i = 0; i<4; i++){
+		if(symbols[i] == c)
+			return true;
+		}
+		return false;
+	}
+	
+
 int main(){
 
 	//char* rpn2[] = {"2", "1", "+", "3", "*"};
@@ -14,15 +26,7 @@ int main(){
 
 	int j;
 
-	bool isSymbol(char* c) {
-		char* symbols[] = {"+", "-", "*", "/"};
-		int i;
-		for(i = 0; i<4; i++){
-		if(symbols[i] == c)
-			return true;
-		}
-		return false;
-	}
+
 	
 	struct stack S = initializeStack();
 	
