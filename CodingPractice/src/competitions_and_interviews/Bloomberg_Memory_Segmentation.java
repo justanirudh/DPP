@@ -1,4 +1,4 @@
-package competitions;
+package competitions_and_interviews;
 
 import java.util.ArrayList;
 import java.util.Scanner;

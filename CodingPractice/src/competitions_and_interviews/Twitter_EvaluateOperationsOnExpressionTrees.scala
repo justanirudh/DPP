@@ -1,4 +1,4 @@
-package competitions
+package competitions_and_interviews
 
 import scala.collection.mutable.ListBuffer
 import scala.io.StdIn._

@@ -1,4 +1,4 @@
-package competitions;
+package competitions_and_interviews;
 
 /**
  * Created by paanir on 11/3/17.

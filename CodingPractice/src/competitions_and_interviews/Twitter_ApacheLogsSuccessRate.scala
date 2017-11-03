@@ -1,4 +1,4 @@
-package competitions
+package competitions_and_interviews
 
 import java.text.SimpleDateFormat
 import java.util.{Locale, TimeZone}
