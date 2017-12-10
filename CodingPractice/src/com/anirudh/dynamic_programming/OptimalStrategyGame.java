@@ -58,6 +58,7 @@ public class OptimalStrategyGame {
         if (end == start + 1)
             return Math.max(coins[start], coins[end]);
 
+        //I took from left
         int oppoLeft = optimalStrategyResult(coins, start + 2, end); //opponent then also took from left
         addToMap(map, start + 2, end, oppoLeft);
         int oppoRight = optimalStrategyResult(coins, start + 1, end - 1); //opponent them took from right
@@ -65,6 +66,7 @@ public class OptimalStrategyGame {
         int leftEnd = coins[start] + Math.min(oppoLeft, oppoRight); //I took from left end
 
 
+    //I took from right
         oppoLeft = optimalStrategyResult(coins, start + 1, end - 1); //opponent took from left
         addToMap(map, start + 1, end - 1, oppoLeft); // not required but for the sake of symmetry
         oppoRight = optimalStrategyResult(coins, start, end - 2); //opponent also took from right

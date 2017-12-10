@@ -1,5 +1,8 @@
 package com.anirudh.general_algos;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * Created by paanir on 2/5/17.
  */
@@ -24,65 +27,30 @@ Note:
 You may assume k is always valid, ie: 1 ≤ k ≤ input array's size for non-empty array.
 
  */
-//better algo: http://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/
-    //USe AVL/Red-black tree: O((n-k)logk)
+// Can also use AVL/Red-black tree: O((n-k)logk)
 public class SlidingWindowMaximum {
 
-    //O((n-k) * k )
-    public static int[] maxSlidingWindowBad(int[] nums, int k) {
-        if (nums.length == 0)
+    //O(k) space and O(n) (amortized) time
+    static public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length == 0 || k <= 0)
             return new int[0];
-        int[] maxes = new int[nums.length - k + 1];
-        for (int i = 0; i <= nums.length - k; ++i) {
-            System.out.println("here");
-            int max = Integer.MIN_VALUE;
-            for (int j = i; j < i + k; ++j) {
-                if (nums[j] > max)
-                    max = nums[j];
-            }
-            maxes[i] = max;
+        int len = nums.length;
+        int[] res = new int[len - k + 1]; //result
+        Deque<Integer> deq = new LinkedList<>(); //indices in inc order + only those necessary
+        for (int i = 0; i < len; ++i) {
+            //remove all not in window from head (older elems)
+            while (!deq.isEmpty() && deq.peek() < i - k + 1)
+                deq.poll();
+            //remove all who are less than current. remove from tail (newer elems)
+            while (!deq.isEmpty() && nums[deq.peekLast()] < nums[i])
+                deq.pollLast();
+            //add new index to queue
+            deq.offer(i);
+            //add to res after i >=k - 1 (for first k-1 elements, no addition in res )
+            if (i >= k - 1)
+                res[i - k + 1] = nums[deq.peek()];
         }
-        return maxes;
-    }
-
-    public static int[] maxSlidingWindow(int[] nums, int k) {
-        if (nums.length == 0)
-            return new int[0];
-
-        int[] maxes = new int[nums.length - k + 1];
-
-        int maxIndex = 0;
-        int maxValue = Integer.MIN_VALUE;
-        for (int j = 0; j < k; ++j) {
-            if (nums[j] > maxValue) {
-                maxValue = nums[j];
-                maxIndex = j;
-            }
-        }
-        maxes[0] = maxValue;
-
-        for (int i = 1; i <= nums.length - k; ++i) {
-            int newIndex = i + k - 1;
-            int newNum = nums[newIndex];
-            if (maxIndex >= i && maxIndex < newIndex) {
-                if (newNum > maxValue) {
-                    maxValue = newNum;
-                    maxIndex = newIndex;
-                }
-                maxes[i] = maxValue;
-            } else {
-                int max = Integer.MIN_VALUE;
-                for (int j = i; j < i + k; ++j) {
-                    if (nums[j] > max) {
-                        max = nums[j];
-                        maxIndex = j;
-                    }
-                }
-                maxValue = max;
-                maxes[i] = maxValue;
-            }
-        }
-        return maxes;
+        return res;
     }
 
     public static void main(String[] args) {

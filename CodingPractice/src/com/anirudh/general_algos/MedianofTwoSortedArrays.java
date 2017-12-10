@@ -39,7 +39,7 @@ public class MedianofTwoSortedArrays {
          B: 1,2,....j-1 j,.....n-1
          Two conditions:
          1. i + j = (m-i) + (n-j) + 1, as both lengths needs to be equal, property of median (not sure how +1 came)
-          => j = (m + n + 1)/2
+          => j = (m + n + 1)/2 - i
          2. A[i-1] <= B[j] && B[j-1] <= A[i]
         */
 
@@ -72,7 +72,7 @@ public class MedianofTwoSortedArrays {
 
                 //get minRight
                 int minRight;
-                if (i == m) // => A[i] does not exist, only consider B[j]
+                if (i == m) // => A[i] does not exist, only consider B[j    ]
                     minRight = B[j];
                 else if (j == n)
                     minRight = A[i];

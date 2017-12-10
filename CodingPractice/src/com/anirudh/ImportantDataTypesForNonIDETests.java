@@ -67,6 +67,8 @@ public class ImportantDataTypesForNonIDETests {
                 return a.count-b.count;
             }
         });
+        priorityQueue.poll();
+        priorityQueue.offer(3);
 
     }
 }

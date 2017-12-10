@@ -48,16 +48,16 @@ public class TwoSigma_FriendCircles {
             graph.put(i, node);
         }
         //do dfs
-        int cliques = 0;
+        int forests = 0;
 
         for(Integer i : graph.keySet()){
             if(graph.get(i).color.equals("white")){
-                cliques++;
+                forests++;
                 doDFS(graph, i);
             }
         }
 
-        return cliques;
+        return forests;
     }
 
     public static void main(String[] args) {
