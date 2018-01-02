@@ -45,16 +45,7 @@ Output:
 //https://practice.geeksforgeeks.org/problems/sum-tree/1
 public class SumTree {
 
-    class Node {
-        int data;
-        Node left, right;
-
-        Node(int item) {
-            data = item;
-            left = right = null;
-        }
-    }
-
+    //return sum and is valid together
     class Result {
         boolean isSumTree;
         int sum;
