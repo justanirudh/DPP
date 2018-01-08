@@ -1,4 +1,4 @@
-package com.anirudh.general_algos.find_a_number;
+package com.anirudh.general_algos.techniques;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.List;
  * Created by paanir on 12/18/16.
  */
 
-//Given an integer array of size n, find all elements that appear more than ⌊ n/2 ⌋ times.
+//Given an integer array of size n, return the number of elements that appear more than ⌊ n/2 ⌋ times.
 public class MajorityElement {
 
 

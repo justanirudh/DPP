@@ -1,6 +1,4 @@
-package com.anirudh.fluff;
-
-import scala.Char;
+package com.anirudh.general_algos.fluff;
 
 import java.util.HashMap;
 

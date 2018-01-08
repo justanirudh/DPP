@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.math;
 
 /**
  * Created by paanir on 4/28/17.

@@ -1,14 +1,11 @@
-package com.anirudh.general_algos.find_a_number;
+package com.anirudh.general_algos.techniques;
 
 /**
  * Created by paanir on 1/20/17.
  */
 /*
 287. Find the Duplicate Number
-Total Accepted: 51769
-Total Submissions: 123698
-Difficulty: Hard
-Contributors: Admin
+
 Given an array nums containing n + 1 integers where each integer is between 1 and n (inclusive),
 prove that at least one duplicate number must exist. Assume that there is only one duplicate number, find the duplicate one.
 Note:

@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.general_algos.techniques;
 
 import java.util.HashMap;
 
@@ -69,8 +69,7 @@ return [0, 1].
         while (front < back) {
             int sum = numbers[front] + numbers[back];
             if (sum == target) {
-                int[] arr = {front + 1, back + 1};
-                return arr;
+                return new int[]{front + 1, back + 1};
             } else if (sum < target)
                 front++;
             else

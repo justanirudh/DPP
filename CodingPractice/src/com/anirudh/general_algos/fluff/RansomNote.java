@@ -1,4 +1,4 @@
-package com.anirudh.fluff;
+package com.anirudh.general_algos.fluff;
 
 import java.util.HashMap;
 

@@ -15,19 +15,26 @@ import static org.junit.Assert.assertEquals;
  */
 public class Sandbox {
 
-
-    private static final String FILENAME = "/Users/paanir/kill_safe_connect.sh";
-
-    class TreeNode {
-        String str;
-    }
-
     public static void main(String[] args) {
+////        Foo bar = new Bar();
+////        bar.print();
+//
+//        List<Integer> list = new ArrayList<>();
+//        list.add(1);
+//        list.add(2);
+//        list.add(3);
+//        int r = list.remove(1);
+//        System.out.println(r );
+//        for(int a : list)
+//            System.out.println(a);
 
-        System.out.println(Integer.MAX_VALUE);
+        System.out.println("z".compareTo("aa"));
 
-
+        
     }
+
+
+
 
 }
 

@@ -27,13 +27,13 @@ public class ImportantDataTypesForNonIDETests {
 
 
         //3 kinds of hashmaps
-        HashMap<Integer, String> hm = new HashMap<>();
+        Map<Integer, String> hm = new HashMap<>();
         System.out.println(hm);
 
-        TreeMap<Integer, String> tm = new TreeMap<>(); //sorted keys
+        Map<Integer, String> tm = new TreeMap<>(); //sorted keys
         TreeSet<Integer> ts = new TreeSet<>();//sorted keys
 
-        LinkedHashMap<Integer, String> lhm = new LinkedHashMap<>(); //in the same order as inserted
+        Map<Integer, String> lhm = new LinkedHashMap<>(); //in the same order as inserted
         LinkedHashSet<Integer> lhs = new LinkedHashSet<>(); //in the same order as inserted
 
         class Node {

@@ -1,5 +1,6 @@
-package com.anirudh.general_algos.find_a_number;
+package com.anirudh.general_algos.techniques;
 
+import com.anirudh.general_algos.techniques.FindTheDuplicateNumber;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
