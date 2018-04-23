@@ -4,11 +4,8 @@ package com.anirudh.general_algos;
  * Created by paanir on 1/4/17.
  */
 /*
-214. Shortest Palindrome   Add to List QuestionEditorial Solution  My Submissions
-Total Accepted: 32780
-Total Submissions: 143118
-Difficulty: Hard
-Contributors: Admin
+214. Shortest Palindrome
+
 Given a string S, you are allowed to convert it to a palindrome by adding characters in front of it. Find and return the
 shortest palindrome you can find by performing this transformation.
 
@@ -46,23 +43,25 @@ public class ShortestPalindrome {
         return sb.toString() + s; //prepend the sb to the original string. sb already has the strings in reverse.
     }
 
-    public String shortestPalindromeFaster(String s) { //ProgramCreek soln
-        int i = 0;
-        int j = s.length() - 1;
+    //----------------------------------------------------------------------------------------
 
-        while (j >= 0) {
-            if (s.charAt(i) == s.charAt(j)) {
-                i++;
+    public String shortestPalindromeFaster(String s) { //ProgramCreek soln
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (right >= 0) {
+            if (s.charAt(left) == s.charAt(right)) {
+                left++;
             }
-            j--;
+            right--;
         }
 
-        if (i == s.length())
+        if (left == s.length())
             return s;
 
-        String suffix = s.substring(i);
+        String suffix = s.substring(left);
         String prefix = new StringBuilder(suffix).reverse().toString();
-        String mid = shortestPalindrome(s.substring(0, i));
+        String mid = shortestPalindromeFaster(s.substring(0, left));
         return prefix + mid + suffix;
     }
 

@@ -29,15 +29,17 @@ public class FirstMissingPositive {
                 j++;
             }
         }
+
         //now j is where the +ve array starts
         for (int i = j; i < nums.length; ++i) { //if number 5 exists, nums[4] would be negative; j is the offset
             //doing abs even though all +ve because we are changing them to negative
-            int currElemAbs = Math.abs(nums[i]);
-            int currElemAbsPos = currElemAbs - 1 + j;
+            int curr = Math.abs(nums[i]);
+            int currPos = curr - 1 + j;
 
-            if (currElemAbsPos < nums.length && nums[currElemAbsPos] > 0)
-                nums[currElemAbsPos] = -nums[currElemAbsPos];
+            if (currPos < nums.length && nums[currPos] > 0)
+                nums[currPos] = -nums[currPos];
         }
+
         for (int i = j; i < nums.length; ++i) {
             if (nums[i] > 0)
                 return i + 1 - j; //+1 because if index 'y' is neg, num 'y + 1' is present, - j because of offset

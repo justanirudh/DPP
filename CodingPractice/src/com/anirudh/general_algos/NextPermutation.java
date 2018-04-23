@@ -13,6 +13,7 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 1,2,3 → 1,3,2
 3,2,1 → 1,2,3
 1,1,5 → 1,5,1
+1,2,5,3,1 -> 1,3,1,2,5
  */
 public class NextPermutation {
 
@@ -30,7 +31,7 @@ public class NextPermutation {
         if (nums.length == 0 || nums.length == 1)
             return;
         int peak = nums.length - 1;
-        for (; peak >= 0; peak--) {
+        for (; peak >= 0; peak--) { //find [..a,peek, ...] such that a < peek
             if (peak == 0 || nums[peak - 1] < nums[peak])
                 break;
         }
@@ -50,6 +51,15 @@ public class NextPermutation {
             //now just sort the already reverse sorted part (as peak to n-1 was reverse sorted)
             reverse(nums, peak, nums.length - 1);
 
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1,2,5,3,1};
+        NextPermutation np = new NextPermutation();
+        np.nextPermutation(nums);
+        for(int num : nums){
+            System.out.print(num + " ");
         }
     }
 }

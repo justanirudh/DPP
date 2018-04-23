@@ -27,12 +27,15 @@ public class ImportantDataTypesForNonIDETests {
 
 
         //3 kinds of hashmaps
+        //1
         Map<Integer, String> hm = new HashMap<>();
         System.out.println(hm);
 
+        //2
         Map<Integer, String> tm = new TreeMap<>(); //sorted keys
         TreeSet<Integer> ts = new TreeSet<>();//sorted keys
 
+        //3
         Map<Integer, String> lhm = new LinkedHashMap<>(); //in the same order as inserted
         LinkedHashSet<Integer> lhs = new LinkedHashSet<>(); //in the same order as inserted
 
@@ -48,10 +51,12 @@ public class ImportantDataTypesForNonIDETests {
         Stack<Node> stack = new Stack<Node>();
         System.out.println(stack);
 
-        //2 kinds of queue
+        //3 kinds of queue
+        //1
         Queue<Node> queue = new LinkedList<Node>();
         System.out.println(queue);
 
+        //2
         class Pair{
             int num;
             int count;
@@ -69,6 +74,9 @@ public class ImportantDataTypesForNonIDETests {
         });
         priorityQueue.poll();
         priorityQueue.offer(3);
+
+        //3
+        Deque<Integer> deq = new LinkedList<>();//dual ended queue
 
     }
 }

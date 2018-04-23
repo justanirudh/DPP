@@ -21,6 +21,7 @@ The given array size will in the range [2, 10000].
 The given array's numbers won't have any order.
  */
 public class SetMismatch {
+    //O(n) time, O(1) space
     public int[] findErrorNums(int[] nums) {
         int len = nums.length;
 
@@ -46,10 +47,7 @@ public class SetMismatch {
         int expElem = expSum - (actSum - dup);
 
         //return
-        int[] res = new int[2];
-        res[0] = dup;
-        res[1] = expElem;
-        return res;
+        return new int[]{dup, expElem};
 
     }
 }

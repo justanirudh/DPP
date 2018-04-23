@@ -32,8 +32,7 @@ public class SearchForARange {
     public static int[] searchRange(int[] nums, int target) {
         int index = getIndex(nums, target, 0, nums.length - 1);
         if (index == -1) {
-            int arr[] = {-1, -1};
-            return arr;
+            return new int[]{-1, -1};
         }
         int left = index;
         while (left >= 0 && nums[left] == target)
@@ -45,8 +44,7 @@ public class SearchForARange {
             right++;
         right = right - 1;
 
-        int arr[] = {left, right};
-        return arr;
+        return new int[]{left, right};
     }
 
     public static void main(String[] args) {

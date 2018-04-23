@@ -15,6 +15,15 @@ import static org.junit.Assert.assertEquals;
  */
 public class Sandbox {
 
+    int[] foo(int a, int b){
+        return new int[]{a,b};
+    }
+    int foo;
+
+    private Sandbox() {
+        foo = System.identityHashCode(this);
+    }
+
     public static void main(String[] args) {
 ////        Foo bar = new Bar();
 ////        bar.print();
@@ -29,6 +38,9 @@ public class Sandbox {
 //            System.out.println(a);
 
         System.out.println("z".compareTo("aa"));
+        int a = 5;
+        int b = 6;
+
 
         
     }

@@ -8,6 +8,7 @@ package com.anirudh.general_algos;
 
 Write a function to find the longest common prefix string amongst an array of strings.
  */
+//beats 8%. Trie beats 23%
 public class LongestCommonPrefix {
 
     public String longestCommonPrefix(String[] strs) {
