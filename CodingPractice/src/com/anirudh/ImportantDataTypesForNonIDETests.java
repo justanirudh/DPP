@@ -76,7 +76,9 @@ public class ImportantDataTypesForNonIDETests {
         priorityQueue.offer(3);
 
         //3
+        //The preferred way to represent stacks in java is the deque interface
         Deque<Integer> deq = new LinkedList<>();//dual ended queue
+        Deque<Character> deq_arr = new ArrayDeque<>();//faster than Stack and LL
 
     }
 }
@@ -87,4 +89,10 @@ TreeMap - RB tree
 EnumMap - array
 hashMap - Hashtable based (array)
 LinkedHashMap - Linked List + HashMap
+ */
+
+/*
+Arraylist: resizable array/vector
+LinkedList: linked list
+ArrayDeque: backed by array, faster than Stack for stack ops and faster than LinkedList for queue ops.
  */
