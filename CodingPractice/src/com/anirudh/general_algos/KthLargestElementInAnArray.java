@@ -29,7 +29,8 @@ public class KthLargestElementInAnArray {
 
     //O(nlogk) T, O(k) S
     public int findKthLargest2(int[] nums, int k) {
-        final PriorityQueue<Integer> pq = new PriorityQueue<>();
+        //k size min heap
+        final PriorityQueue<Integer> pq = new PriorityQueue<>(k);
         for (int val : nums) {
             pq.offer(val);
 
@@ -40,5 +41,5 @@ public class KthLargestElementInAnArray {
         return pq.peek();
     }
 
-    //Beat approach: O(n) T, O(1) S ON AN AVERAGE: Randomized Quick Select (worst case still O(n^2))
+    //Best approach: O(n) T, O(1) S ON AN AVERAGE: Randomized Quick Select (worst case still O(n^2))
 }

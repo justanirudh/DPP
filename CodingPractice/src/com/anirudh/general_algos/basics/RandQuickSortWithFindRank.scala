@@ -50,6 +50,7 @@ object RandQuickSortWithFindRank extends App {
     else {
       val (partitionIndex, partitionedArray) = getPartition(seq, start, end)
       val rankPartition = partitionIndex - start + 1
+      //binary search
       if (rank == rankPartition)
         partitionedArray(partitionIndex)
       else if (rank < rankPartition)
