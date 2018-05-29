@@ -44,16 +44,6 @@ public class BTisBST {
         if ( curr.val <= min || curr.val >= max)
             return false;
 
-        TreeNode left = curr.left;
-
-        if(left != null && left.val >= curr.val)
-            return false;
-
-        TreeNode right = curr.right;
-
-        if(right != null && right.val <= curr.val)
-            return false;
-
         return isBSTAux(curr.left, min, curr.val) && isBSTAux(curr.right, curr.val, max);
 
     }
@@ -61,16 +51,6 @@ public class BTisBST {
     public boolean isValidBST(TreeNode root){
         if(root == null)
             return true;
-
-        TreeNode left = root.left;
-
-        if(left != null && left.val >= root.val)
-            return false;
-
-        TreeNode right = root.right;
-
-        if(right != null && right.val <= root.val)
-            return false;
 
         double min = Double.NEGATIVE_INFINITY;
         double max = Double.POSITIVE_INFINITY;
