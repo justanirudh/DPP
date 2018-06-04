@@ -12,47 +12,29 @@ import java.util.List;
 Implement pow(x, n).
  */
 public class MyPow {
-    //memoization + better algorithm (Exponentiation_by_squaring: https://en.wikipedia.org/wiki/Exponentiation_by_squaring) for getting power
 
-    //List as key as I get equals and hashcode methods for free
-    HashMap<List<Double>, Double> map = new HashMap<>();
+    //EPI-4.7: exponentiation by squaring
+    //if power%2 == 0, (x^n/2)^2. if power%2=1, x * (x^n/2)^2
+    public double myPow(double x, int n) {
+        int power = n;
+        double curr = x;
+        double result = 1.0;
 
-    public double aux(double x, int n) {
-        if (x == 0 || x == 1 || n == 1)
-            return x;
-        if (n == 0)
+        if (power == 0)
             return 1;
-        if (n % 2 == 0) {
-            List<Double> list = new ArrayList<>();
-            list.add(x);
-            int half = n / 2;
-            list.add((double) half);
-            if (map.containsKey(list)) //memoization
-                return map.get(list);
-            else {
-                double temp = aux(x, half); //(x ^ n/2) * (x ^ n/2)
-                double res = temp * temp;
-                map.put(list, res);
-                return res;
-            }
-        } else {
-            List<Double> list = new ArrayList<>();
-            list.add(x);
-            int half = (n - 1) / 2;
-            list.add((double) half);
-            if (map.containsKey(list))
-                return map.get(list);
-            else {
-                double temp = aux(x, half);
-                double res = temp * temp * x; //(x ^ n-1/2) * (x ^ n-1/2) * x
-                map.put(list, res);
-                return res;
-            }
-        }
-    }
 
-    public double myPow(double x, int exp) {
-        return exp > 0 ? aux(x, exp) : aux(1 / x, -exp);
+        if (power < 0) {
+            power = -power;
+            curr = 1 / curr;
+        }
+
+        while (power != 0) {
+            if ((power & 1) != 0) //power is odd
+                result = curr * result;
+            curr *= curr;
+            power >>>= 1;
+        }
+        return result;
     }
 
     public static void main(String[] args) {

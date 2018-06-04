@@ -14,6 +14,7 @@ Return the starting gas station's index if you can travel around the circuit onc
  */
 public class GasStations {
 
+    //This O(n^2) time. O(n) time algo in EPI 17.6
     public static int canCompleteCircuit(int[] gas, int[] cost) {
 
         for (int startIndex = 0; startIndex < gas.length; ++startIndex) {
