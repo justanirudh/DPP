@@ -21,46 +21,46 @@ Given the following matrix:
 You should return [1,2,3,6,9,8,7,4,5].
  */
 public class SpiralMatrix {
-    int[][] track;
+    boolean[][] visited;
     int[][] matrix;
 
-    public List<Integer> printMat(int left, int right, int up, int down, List<Integer> list) {
+    public List<Integer> printMatrix(int left, int right, int up, int down, List<Integer> list) {
         if (left > right || up > down)
             return list;
 
         for (int i = left; i <= right; ++i) {//top row
-            if (track[up][i] == 0) {
+            if (!visited[up][i]) {
                 list.add(matrix[up][i]);
-                track[up][i] = 1;
+                visited[up][i] = true;
             }
         }
         for (int i = up; i <= down; ++i) {//right column
-            if (track[i][right] == 0) {
+            if (!visited[i][right]) {
                 list.add(matrix[i][right]);
-                track[i][right] = 1;
+                visited[i][right] = true;
             }
         }
         for (int i = right; i >= left; --i) {//bottom row
-            if (track[down][i] == 0) {
+            if (!visited[down][i]) {
                 list.add(matrix[down][i]);
-                track[down][i] = 1;
+                visited[down][i] = true;
             }
         }
         for (int i = down; i >= up; --i) {//left column
-            if (track[i][left] == 0) {
+            if (!visited[i][left]) {
                 list.add(matrix[i][left]);
-                track[i][left] = 1;
+                visited[i][left] = true;
             }
         }
 
-        return printMat(left + 1, right - 1, up + 1, down - 1, list);
+        return printMatrix(left + 1, right - 1, up + 1, down - 1, list);
     }
 
     public List<Integer> spiralOrder(int[][] matrix) {
         if (matrix.length == 0)
             return new ArrayList<>();
-        track = new int[matrix.length][matrix[0].length];
+        visited = new boolean[matrix.length][matrix[0].length];
         this.matrix = matrix;
-        return printMat(0, matrix[0].length - 1, 0, matrix.length - 1, new ArrayList<>());
+        return printMatrix(0, matrix[0].length - 1, 0, matrix.length - 1, new ArrayList<>());
     }
 }

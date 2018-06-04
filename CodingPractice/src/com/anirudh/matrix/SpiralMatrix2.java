@@ -22,36 +22,36 @@ You should return the following matrix:
  */
 public class SpiralMatrix2 {
 
-    int[][] track;
+    boolean[][] visited;
     int[][] matrix;
-    int last;
+    int lastNum;
 
     public void getMat(int left, int right, int up, int down, int num) {
-        if (num > last)
+        if (num > lastNum)
             return;
 
         for (int i = left; i <= right; ++i) {//top row
-            if (track[up][i] == 0) {
+            if (!visited[up][i]) {
                 matrix[up][i] = num++;
-                track[up][i] = 1;
+                visited[up][i] = true;
             }
         }
         for (int i = up; i <= down; ++i) {//right column
-            if (track[i][right] == 0) {
+            if (!visited[i][right]) {
                 matrix[i][right] = num++;
-                track[i][right] = 1;
+                visited[i][right] = true;
             }
         }
         for (int i = right; i >= left; --i) {//bottom row
-            if (track[down][i] == 0) {
+            if (!visited[down][i]) {
                 matrix[down][i] = num++;
-                track[down][i] = 1;
+                visited[down][i] = true;
             }
         }
         for (int i = down; i >= up; --i) {//left column
-            if (track[i][left] == 0) {
+            if (!visited[i][left]) {
                 matrix[i][left] = num++;
-                track[i][left] = 1;
+                visited[i][left] = true;
             }
         }
 
@@ -61,10 +61,10 @@ public class SpiralMatrix2 {
     public int[][] generateMatrix(int n) {
         if (n == 0)
             return new int[0][0];
-        track = new int[n][n];
+        visited = new boolean[n][n];
         matrix = new int[n][n];
 
-        last = (int) Math.pow(n, 2);
+        lastNum = (int) Math.pow(n, 2);
         getMat(0, n - 1, 0, n - 1, 1);
         return matrix;
     }
