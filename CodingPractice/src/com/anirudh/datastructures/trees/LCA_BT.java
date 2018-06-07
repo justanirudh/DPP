@@ -5,16 +5,7 @@ package com.anirudh.datastructures.trees;
  */
 public class LCA_BT {
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
+    //like preorder traversal. O(n) time O(h) space
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null)
             return null;
