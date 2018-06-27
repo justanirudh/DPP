@@ -37,10 +37,12 @@ public class Sandbox {
 //        for(int a : list)
 //            System.out.println(a);
 
-        System.out.println("z".compareTo("aa"));
-        int a = 5;
-        int b = 6;
+//        System.out.println("z".compareTo("aa"));
+//        int a = 5;
+//        int b = 6;
 
+//        System.out.println(Integer.MAX_VALUE + "," +  Float.MAX_VALUE + "," + Double.MAX_VALUE);
+        System.out.println(Math.pow(56.5, 5));
 
         
     }

@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.datastructures.heaps;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;
