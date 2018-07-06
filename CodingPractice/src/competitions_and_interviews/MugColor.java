@@ -1,4 +1,4 @@
-package com.anirudh.general_algos.fluff;
+package competitions_and_interviews;
 
 import java.util.HashMap;
 import java.util.Scanner;

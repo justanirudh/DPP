@@ -1,4 +1,4 @@
-package com.anirudh.general_algos.fluff;
+package com.anirudh.general_algos;
 
 import java.util.*;
 
