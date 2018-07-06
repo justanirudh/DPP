@@ -1,7 +1,6 @@
-package com.anirudh.general_algos.find_some_subarray;
+package com.anirudh.general_algos.find_subarray;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by anirudh on 24/11/16.

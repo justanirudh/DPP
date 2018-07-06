@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package competitions_and_interviews;
 
 import java.util.*;
 

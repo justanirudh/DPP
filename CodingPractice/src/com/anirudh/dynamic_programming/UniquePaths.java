@@ -30,4 +30,16 @@ public class UniquePaths {
         }
         return ways[m - 1][n - 1];
     }
+
+    //O(m + n) but might lead to integer overflow
+    public double fact(double n,double res){
+        if(n == 0)
+            return res;
+        else
+            return fact(n-1, n * res);
+    }
+    public int uniquePaths2(int m, int n) {
+        //(m-1+n-1)C(n-1) = (m+n-2)C(n-1) = (m+n-2)!/(m-1)!(n-1)!
+        return (int)(fact(m+n-2, 1)/(fact(m-1, 1) * fact(n-1, 1)));
+    }
 }

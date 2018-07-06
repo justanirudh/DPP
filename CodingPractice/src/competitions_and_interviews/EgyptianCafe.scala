@@ -1,4 +1,4 @@
-package com.anirudh.general_algos
+package competitions_and_interviews
 
 /**
   * Created by anirudh on 22/9/16.

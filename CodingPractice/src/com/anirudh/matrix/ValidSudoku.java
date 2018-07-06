@@ -1,6 +1,7 @@
 package com.anirudh.matrix;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by paanir on 5/2/17.
@@ -22,8 +23,8 @@ public class ValidSudoku {
 
         //checking rows and columns
         for (int i = 0; i < 9; ++i) {
-            HashSet<Character> hsR = new HashSet<>();
-            HashSet<Character> hsC = new HashSet<>();
+            Set<Character> hsR = new HashSet<>();
+            Set<Character> hsC = new HashSet<>();
             for (int j = 0; j < 9; ++j) {
                 //per row
                 char currR = board[i][j];

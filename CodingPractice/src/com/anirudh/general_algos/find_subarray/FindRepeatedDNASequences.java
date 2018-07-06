@@ -1,4 +1,4 @@
-package com.anirudh.general_algos.find_some_subarray;
+package com.anirudh.general_algos.find_subarray;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.anirudh.general_algos.packaged_problems.wordletter
+package com.anirudh.datastructures.graphs
 
 /**
   * Created by anirudh on 16/9/16.
@@ -23,7 +23,7 @@ Return 0 if there is no such transformation sequence.
 All words have the same length.
 All words contain only lowercase alphabetic characters.*/
 
-object Driver extends App{
+object WorderLadder_Scala extends App{
 
   val endWord = "cog"
 
