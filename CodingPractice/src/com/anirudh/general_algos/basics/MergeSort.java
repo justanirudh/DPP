@@ -18,40 +18,41 @@ public class MergeSort {
 
         //first copy to two temp arrays. Then use them to OVERWRITE on the original array
 
+        // indices like this [start, mid] [mid + 1, end]
         int lLen = mid - start + 1;
         int rLen = end - (mid + 1) + 1;
-        int[] left = new int[lLen];
-        int[] right = new int[rLen];
+        int[] leftArr = new int[lLen];
+        int[] rightArr = new int[rLen];
 
         //make temp arrays
-        System.arraycopy(arr, start, left, 0, lLen); //start, startpos, dest, destpos, len
-        System.arraycopy(arr, mid + 1, right, 0, rLen);
+        System.arraycopy(arr, start, leftArr, 0, lLen); //start, startpos, dest, destpos, len
+        System.arraycopy(arr, mid + 1, rightArr, 0, rLen);
 
-        //merge into original array with right order
+        //merge into original array with rightArr order
         int i = 0, j = 0, k = start;
         while (i < lLen || j < rLen) {
-            if (i >= lLen && j < rLen) {
-                arr[k] = right[j];
+            if (i >= lLen && j < rLen) { //left arr reached end first
+                arr[k] = rightArr[j];
                 j++;
-            } else if (i < lLen && j >= rLen) {
-                arr[k] = left[i];
+            } else if (i < lLen && j >= rLen) { //right arr reached end first
+                arr[k] = leftArr[i];
                 i++;
             } else { //both < length
-                if (left[i] < right[j]) {
-                    arr[k] = left[i];
+                if (leftArr[i] < rightArr[j]) {
+                    arr[k] = leftArr[i];
                     i++;
-                } else if (left[i] > right[j]) {
-                    arr[k] = right[j];
+                } else if (leftArr[i] > rightArr[j]) {
+                    arr[k] = rightArr[j];
                     j++;
                 } else { //both equal to each other
-                    arr[k] = right[j];
+                    arr[k] = rightArr[j];
                     k++;
-                    arr[k] = left[i];
+                    arr[k] = leftArr[i];
                     i++;
                     j++;
                 }
             }
-            k++;
+            k++; //increment result arrs position
         }
     }
 
