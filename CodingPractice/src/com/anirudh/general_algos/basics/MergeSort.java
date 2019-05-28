@@ -8,6 +8,11 @@ import java.util.stream.Collectors;
  * Created by paanir on 9/19/17.
  */
 //https://www.hackerrank.com/contests/hw1/challenges/merge-sort
+
+/**
+ * Space complexity: O(n)
+ * Time complexity = O(nlogn)
+ */
 public class MergeSort {
     public static void merge(int[] arr, int start, int mid, int end) {
 

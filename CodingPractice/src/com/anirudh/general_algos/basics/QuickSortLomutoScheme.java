@@ -5,6 +5,10 @@ package com.anirudh.general_algos.basics;
  */
 
 //https://en.wikipedia.org/wiki/Quicksort#Algorithm: //Lomuto partition scheme (same as CLRS)
+/**
+ * Space complexity: O(1)
+ * Time complexity = O(n^2), @(nlogn)
+ */
 public class QuickSortLomutoScheme {
 
     public static void swap(int[] arr, int i1, int i2) {
@@ -28,7 +32,7 @@ public class QuickSortLomutoScheme {
     }
 
     public static void quickSort(int[] arr, int start, int end) {
-        if (arr.length == 0)
+        if (arr == null || arr.length == 0)
             return;
         if (start < end) { //arr size > 1
             int pivot = partition(arr, start, end);

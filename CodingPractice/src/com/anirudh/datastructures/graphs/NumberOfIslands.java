@@ -74,7 +74,7 @@ public class NumberOfIslands {
 
 
 //------------------------------------------------------------------------------------------------------------------
-    //by creating a graph. Takes more time to create an adjacency list from an adjacency matrix-kinda
+    //by creating a graph. Takes more time to create an adjacency list from an adjacency matrix
 
     private static int leftLim;
     private static int rightLim;

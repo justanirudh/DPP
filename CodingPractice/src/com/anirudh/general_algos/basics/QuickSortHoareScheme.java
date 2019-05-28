@@ -10,7 +10,7 @@ import java.util.Scanner;
 //http://www.geeksforgeeks.org/quick-sort/
 
 //Hoare partition
-//MORE INTUITIVE
+//MORE INTUITIVE btu a lot of edge cases
 //Mind the < and <=.
 class QuickSortHoareScheme {
 
@@ -55,7 +55,6 @@ class QuickSortHoareScheme {
 
         int num_tests = Integer.parseInt(stdin.nextLine());
         while (num_tests != 0) {
-            int len = Integer.parseInt(stdin.nextLine());
             String[] strings = stdin.nextLine().split(" ");
             Integer[] nums = new Integer[strings.length];
             for (int i = 0; i < strings.length; ++i) {
