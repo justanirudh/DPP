@@ -21,14 +21,20 @@ You may assume k is always valid, 1 ≤ k ≤ array's length.
 //Good solutions: https://leetcode.com/problems/kth-largest-element-in-an-array/description/
 public class KthLargestElementInAnArray {
 
-    //O(nlogn) T, O(1) S
+    //O(nlogn) T, O(1) S Heapsort
     public int findKthLargest(int[] nums, int k) {
-         Arrays.sort(nums);
+        /*
+         Implementation note: The sorting algorithm is a Dual-Pivot Quicksort by Vladimir Yaroslavskiy, Jon Bentley,
+         and Joshua Bloch. This algorithm offers O(n log(n)) performance on many data sets that cause other
+         quicksorts to degrade to quadratic performance, and is typically faster than traditional (one-pivot)
+         Quicksort implementations.
+          */
+        Arrays.sort(nums);
          return nums[nums.length-1 - (k-1)];
     }
 
     //O(nlogk) T, O(k) S
-    public int findKthLargest2(int[] nums, int k) {
+    public int findKthLargestBetter(int[] nums, int k) {
         //k size min heap
         final PriorityQueue<Integer> pq = new PriorityQueue<>(k);
         for (int val : nums) {

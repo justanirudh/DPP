@@ -27,7 +27,7 @@ public class PowerOfFour {
     }
 
     //TLE
-    //O(log N)
+    //O(log K)
     public boolean isPowerOfFourSlow(int num) {
         if ((num & (num - 1)) != 0) //is power of two
             return false;

@@ -14,11 +14,17 @@ public class ImportantDataTypesForNonIDETests {
         Integer.toString(Integer.parseInt(s));
 
         StringBuilder sb = new StringBuilder();
-        System.out.println(sb);
+        for (int i = 0; i < 10; ++i) {
+            sb.append(Integer.toString(i));
+        }
+        System.out.println(sb.toString());
+
 
         ArrayList<Integer> arrl = new ArrayList<>();
         System.out.println(arrl);
+        Iterator arrlIter = arrl.iterator();
 
+//--
         int k = 5;
         int[] arr2 = new int[k];
 
@@ -67,6 +73,8 @@ public class ImportantDataTypesForNonIDETests {
         }
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
         // create a min heap
+        //comparator: Returns a negative integer, zero, or a positive integer as the first argument is less than,
+        // equal to, or greater than the second.
         PriorityQueue<Pair> pQueue = new PriorityQueue<>(new Comparator<Pair>(){
             public int compare(Pair a, Pair b){
                 return a.count-b.count;

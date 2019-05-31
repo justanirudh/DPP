@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
  * Time complexity = O(nlogn)
  */
 public class MergeSort {
+
     public static void merge(int[] arr, int start, int mid, int end) {
 
         //first copy to two temp arrays. Then use them to OVERWRITE on the original array

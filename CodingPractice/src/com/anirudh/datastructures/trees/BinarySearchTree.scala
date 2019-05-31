@@ -6,9 +6,6 @@ package com.anirudh.datastructures.trees
 
 class BinarySearchTree extends BinaryTree{
 
-  //TODO: implement delete
-
-
   private def add(newNode:TreeNodeS, node:TreeNodeS):Unit = {
     if(newNode.elem < node.elem){
       if(node.left.isEmpty)

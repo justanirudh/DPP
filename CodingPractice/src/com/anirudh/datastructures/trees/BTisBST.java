@@ -28,33 +28,47 @@ Binary tree [1,2,3], return false.
 public class BTisBST {
 
     class TreeNode {
-        int val;
+        private int val;
         TreeNode left;
         TreeNode right;
-        TreeNode(int val){
+
+        TreeNode(int val) {
             this.val = val;
+            this.left = null;
+            this.right = null;
+        }
+
+        void addLeft(TreeNode tn) {
+            this.left = tn;
+        }
+
+        void addRight(TreeNode tn) {
+            this.right = tn;
         }
     }
 
-    public boolean isBSTAux(TreeNode curr, double min, double max){
+    public boolean isBSTAux(TreeNode curr, double min, double max) {
 
-        if(curr == null)
+        if (curr == null)
             return true;
 
-        if ( curr.val <= min || curr.val >= max)
+        if (curr.val <= min || curr.val >= max) //if the current node violates the BST property
             return false;
 
         return isBSTAux(curr.left, min, curr.val) && isBSTAux(curr.right, curr.val, max);
 
     }
 
-    public boolean isValidBST(TreeNode root){
-        if(root == null)
+    public boolean isValidBST(TreeNode root) {
+        if (root == null)
             return true;
 
         double min = Double.NEGATIVE_INFINITY;
         double max = Double.POSITIVE_INFINITY;
 
-        return isBSTAux(root.left, min, root.val) && isBSTAux(root.right, root.val, max);
+        //Also passing a range to each side of the tree left: [math.min, root] and right: [root, math.max]
+        return isBSTAux(root, min, max) && //trivial check but makes it more symmetric
+                isBSTAux(root.left, min, root.val) &&
+                isBSTAux(root.right, root.val, max);
     }
 }
