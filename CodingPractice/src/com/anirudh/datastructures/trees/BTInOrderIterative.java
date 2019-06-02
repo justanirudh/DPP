@@ -22,6 +22,7 @@ return [1,3,2].
 
 Note: Recursive solution is trivial, could you do it iteratively?
  */
+
 //Same as BSTIterator solution (next() method)
 public class BTInOrderIterative {
 

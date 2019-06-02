@@ -3,35 +3,50 @@ package com.anirudh.datastructures.trees;
 /**
  * Created by paanir on 11/9/17.
  */
-public class MinimumDepthBT {
-    public int minDepthAux(TreeNode root, int depth) {
-        if (root == null)
-            return depth;
-        else {
-            if (root.left == null && root.right == null)
-                return depth + 1;
-            else if (root.left != null && root.right == null)
-                return minDepthAux(root.left, depth + 1);
-            else if (root.left == null && root.right != null)
-                return minDepthAux(root.right, depth + 1);
-            else
-                return Math.min(minDepthAux(root.left, depth + 1), minDepthAux(root.right, depth + 1));
-        }
+/*
+111. Minimum Depth of Binary Tree
+Easy
 
+713
+
+383
+
+Favorite
+
+Share
+Given a binary tree, find its minimum depth.
+
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+
+Note: A leaf is a node with no children.
+
+Example:
+
+Given binary tree [3,9,20,null,null,15,7],
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its minimum depth = 2.
+ */
+public class MinimumDepthBT {
+    private int minDepthAux(TreeNode node, int depth) {
+        if (node == null)
+            return depth;
+        if (node.left == null && node.right == null) { //both null
+            return depth + 1;
+        } else if (node.left == null) {
+            return minDepthAux(node.right, depth + 1);
+        } else if (node.right == null) {
+            return minDepthAux(node.left, depth + 1);
+        } else {
+            return Math.min(minDepthAux(node.left, depth + 1), minDepthAux(node.right, depth + 1));
+        }
     }
 
     public int minDepth(TreeNode root) {
-        if (root == null)
-            return 0;
-        else {
-            if (root.left == null && root.right == null)
-                return 1;
-            else if (root.left != null && root.right == null)
-                return minDepthAux(root.left, 1);
-            else if (root.left == null && root.right != null)
-                return minDepthAux(root.right, 1);
-            else
-                return Math.min(minDepthAux(root.left, 1), minDepthAux(root.right, 1));
-        }
+        return minDepthAux(root, 0);
     }
 }

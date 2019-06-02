@@ -1,7 +1,6 @@
 package com.anirudh.datastructures.heaps;
 
-import java.util.Arrays;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Created by paanir on 9/20/17.
@@ -9,43 +8,68 @@ import java.util.PriorityQueue;
 /*
 215. Kth Largest Element in an Array
 
-Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order,
-not the kth distinct element.
+Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.
 
-For example,
-Given [3,2,1,5,6,4] and k = 2, return 5.
+Example 1:
 
+Input: [3,2,1,5,6,4] and k = 2
+Output: 5
+Example 2:
+
+Input: [3,2,3,1,2,4,5,5,6] and k = 4
+Output: 4
 Note:
 You may assume k is always valid, 1 ≤ k ≤ array's length.
  */
+
 //Good solutions: https://leetcode.com/problems/kth-largest-element-in-an-array/description/
 public class KthLargestElementInAnArray {
-
-    //O(nlogn) T, O(1) S Heapsort
-    public int findKthLargest(int[] nums, int k) {
-        /*
-         Implementation note: The sorting algorithm is a Dual-Pivot Quicksort by Vladimir Yaroslavskiy, Jon Bentley,
-         and Joshua Bloch. This algorithm offers O(n log(n)) performance on many data sets that cause other
-         quicksorts to degrade to quadratic performance, and is typically faster than traditional (one-pivot)
-         Quicksort implementations.
-          */
-        Arrays.sort(nums);
-         return nums[nums.length-1 - (k-1)];
+//TODO later
+    public static void swap(int[] arr, int i1, int i2) {
+        int temp = arr[i1];
+        arr[i1] = arr[i2];
+        arr[i2] = temp;
     }
 
-    //O(nlogk) T, O(k) S
-    public int findKthLargestBetter(int[] nums, int k) {
-        //k size min heap
-        final PriorityQueue<Integer> pq = new PriorityQueue<>(k);
-        for (int val : nums) {
-            pq.offer(val);
-
-            if (pq.size() > k) {
-                pq.poll();
+    public static int partition(int[] arr, int start, int end) {
+        int pivotElem = arr[start];
+        int left = start;
+        for (int right = start + 1; right <= end; right++) {
+            if (arr[right] < pivotElem) {
+                left++;
+                swap(arr, right, left);
             }
         }
-        return pq.peek();
+        //put pivot in right location
+        swap(arr, left, start);
+        return left;
     }
 
-    //Best approach: O(n) T, O(1) S ON AN AVERAGE: Randomized Quick Select (worst case still O(n^2))
+    public int randSelect(int[] nums, int start, int end, int rank) {
+        if (start == end) {
+            return nums[start];
+        }
+        int pivot = partition(nums, start, end); //actual index
+        int currRank = pivot - start + 1;
+        if (currRank == rank)
+            return nums[pivot];
+        else if (currRank < rank)
+            return randSelect(nums, start, pivot - 1, rank);
+        else
+            return randSelect(nums, pivot + 1, end, rank - currRank);
+
+    }
+
+    public int findKthLargest(int[] nums, int k) {
+        if (nums == null || nums.length == 0)
+            return -1;
+//        List<Integer> arrl = new ArrayList<>();
+//        for(int num : nums){
+//            arrl.add(num);
+//        }
+        int rank = nums.length - k + 1;
+
+        return randSelect(nums, 0, nums.length - 1, rank);
+
+    }
 }

@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.general_algos.string_manipulation;
 
 /**
  * Created by paanir on 1/17/17.

@@ -10,26 +10,14 @@ Given an array where elements are sorted in ascending order, convert it to a hei
  */
 public class ConvertSortedArraytoBST {
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public TreeNode createBST(int nums[], int start, int end) {
         if (start > end)
             return null;
-        int mid = (start + end) / 2;
-        TreeNode root = new TreeNode(nums[mid]);
-        TreeNode left = createBST(nums, start, mid - 1);
-        TreeNode right = createBST(nums, mid + 1, end);
-        root.left = left;
-        root.right = right;
-        return root;
+        int mid = start + (end - start) / 2;
+        TreeNode node = new TreeNode(nums[mid]);
+        node.left = createBST(nums, start, mid - 1);
+        node.right = createBST(nums, mid + 1, end);
+        return node;
     }
 
 
@@ -37,12 +25,6 @@ public class ConvertSortedArraytoBST {
         int len = nums.length;
         if (len == 0)
             return null;
-        int mid = len / 2;
-        TreeNode root = new TreeNode(nums[mid]);
-        TreeNode left = createBST(nums, 0, mid - 1);
-        TreeNode right = createBST(nums, mid + 1, len - 1);
-        root.left = left;
-        root.right = right;
-        return root;
+        return createBST(nums, 0, len - 1);
     }
 }

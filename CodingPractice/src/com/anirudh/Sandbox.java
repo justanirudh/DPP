@@ -16,15 +16,13 @@ import static org.junit.Assert.assertEquals;
 public class Sandbox {
 
     public static void main(String[] args) {
-        ArrayList<Integer> arrl = new ArrayList<>();
-
-        for (int i = 0; i < 10; ++i) {
-            arrl.add(i);
-        }
-        Iterator arrlIter = arrl.iterator();
-        while(arrlIter.hasNext()) {
-            System.out.println(arrlIter.next());
-        }
+        Deque<Character> deq_arr = new ArrayDeque<>();//can be used for both stack and queue. faster than Stack and LL
+        deq_arr.addFirst('C');
+        deq_arr.addFirst('B');
+        deq_arr.addFirst('D');
+        System.out.println(deq_arr.removeFirst());
+        System.out.println(deq_arr.removeFirst());
+        System.out.println(deq_arr.removeFirst());
 
 
     }

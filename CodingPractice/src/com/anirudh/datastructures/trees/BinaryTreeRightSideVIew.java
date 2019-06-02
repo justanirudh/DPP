@@ -1,11 +1,40 @@
 package com.anirudh.datastructures.trees;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /**
  * Created by paanir on 1/30/17.
  */
+/*
+199. Binary Tree Right Side View
+Medium
+
+1038
+
+45
+
+Favorite
+
+Share
+Given a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+
+Example:
+
+Input: [1,2,3,null,5,null,4]
+Output: [1, 3, 4]
+Explanation:
+
+   1            <---
+ /   \
+2     3         <---
+ \     \
+  5     4       <---
+ */
+
+//level order traversal with first node on right
 public class BinaryTreeRightSideVIew {
 
     public class TreeNode {
@@ -29,7 +58,7 @@ public class BinaryTreeRightSideVIew {
     }
 
 
-    public List<Integer> rightSideView(TreeNode root) {
+    public List<Integer> rightSideViewBad(TreeNode root) {
 
         ArrayList<NodeWithHeight> queue = new ArrayList<>();
         ArrayList<Integer> rightSides = new ArrayList<>();
@@ -57,5 +86,28 @@ public class BinaryTreeRightSideVIew {
                 queue.add(new NodeWithHeight(curr.node.right, curr.height + 1));
         }
         return rightSides;
+    }
+
+    //------------------------------------------------------------------------------
+
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> r = new ArrayList<>();
+        if (root == null) return r;
+        Deque<TreeNode> dq = new ArrayDeque<>();
+        dq.offer(root);
+        TreeNode cur;
+        int size = 0;
+
+        while (!dq.isEmpty()) {
+            size = dq.size();
+            cur = null;
+            for (int i = 0; i < size; ++i) {
+                cur = dq.poll();
+                if (cur.left != null) dq.offer(cur.left);
+                if (cur.right != null) dq.offer(cur.right);
+            }
+            r.add(cur.val);
+        }
+        return r;
     }
 }

@@ -28,6 +28,14 @@ return its zigzag level order traversal as:
   [15,7]
 
  */
+
+/*
+
+BAD IMPLEMENTATION. NO NEED TO HAVE A LEVEL FIELD
+
+LOOK AT 107. Binary Tree Level Order Traversal II
+
+ */
 public class BTZigZagLevelOrderTraversal {
 
     class Node {

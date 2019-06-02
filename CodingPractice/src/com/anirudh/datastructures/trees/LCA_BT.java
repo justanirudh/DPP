@@ -7,21 +7,32 @@ public class LCA_BT {
 
     //like preorder traversal. O(n) time O(h) space
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+
         if (root == null)
             return null;
-
-        if (root == p || root == q)
+        if (p == null && q == null)
             return root;
+        else if (p == null)
+            return q;
+        else if (q == null)
+            return p;
+        else { //all three are non-null
+            if (root.val == p.val || root.val == q.val)
+                return root;
 
-        TreeNode l = lowestCommonAncestor(root.left, p, q);
-        TreeNode r = lowestCommonAncestor(root.right, p, q);
+            //cant make a decision like BST, so go both ways
+            TreeNode lcaLeft = lowestCommonAncestor(root.left, p, q);
+            TreeNode lcaRight = lowestCommonAncestor(root.right, p, q);
 
-        if (l != null && r != null) {
-            return root;
-        } else if (l == null && r == null) {
-            return null;
-        } else {
-            return l == null ? r : l;
+            if (lcaLeft != null && lcaRight != null) //both non-null
+                return root;
+            else if (lcaLeft == null && lcaRight == null) //both null
+                return null;
+            else if (lcaLeft == null)
+                return lcaRight;
+            else
+                return lcaLeft;
+
         }
     }
 }

@@ -31,53 +31,37 @@ return [2], since 2 happens twice, however -5 only occur once.
 Note: You may assume the sum of values in any subtree is in the range of 32-bit signed integer.
  */
 public class MostFrequentSubtreeSum {
-    class Node {
-        int sum;
-        Node left;
-        Node right;
 
-        Node(int sum) {
-            this.sum = sum;
-        }
-        //getters and setters for sum
-    }
-
-    Map<Integer, Integer> frequency;
-    List<Integer> sumsList;
-
-    Node postOrderCreate(TreeNode tn) {
+    private TreeNode postOrderCreate(TreeNode tn) {
         if (tn == null)
             return null;
-        Node leftNode = postOrderCreate(tn.left);
-        Node rightNode = postOrderCreate(tn.right);
-        int leftSum = leftNode == null ? 0 : leftNode.sum;
-        int rightSum = rightNode == null ? 0 : rightNode.sum;
-        Node root = new Node(leftSum + rightSum + tn.val);
+        TreeNode leftNode = postOrderCreate(tn.left);
+        TreeNode rightNode = postOrderCreate(tn.right);
+
+        int leftSum = leftNode == null ? 0 : leftNode.val;
+        int rightSum = rightNode == null ? 0 : rightNode.val;
+        TreeNode root = new TreeNode(leftSum + rightSum + tn.val);
         root.left = leftNode;
         root.right = rightNode;
+
         return root;
     }
 
-    void inOrderCount(Node n) {
+    private void inOrderCount(TreeNode n, Map<Integer, Integer> frequency) {
         if (n == null)
             return;
-        inOrderCount(n.left);
-        int currSum = n.sum;
-        if (!frequency.containsKey(currSum))
-            frequency.put(currSum, 1);
-        else
-            frequency.put(currSum, frequency.get(currSum) + 1);
-        inOrderCount(n.right);
+        inOrderCount(n.left, frequency);
+
+        Integer val = frequency.putIfAbsent(n.val, 1);
+        if (val != null) //n.val mapping was already present
+            frequency.put(n.val, frequency.get(n.val) + 1);
+
+        inOrderCount(n.right, frequency);
     }
 
-    public int[] findFrequentTreeSum(TreeNode root) {
-        if (root == null)
-            return new int[0];
-        Node rootN = postOrderCreate(root); //create + calculate sum of children + curr in 1 go
-        frequency = new HashMap<>();
-        inOrderCount(rootN); //make hashmap to count each sum's frequency
+    private int[] findMostFrequentSums(Map<Integer, Integer> frequency) {
         int max = Integer.MIN_VALUE;
-        sumsList = new ArrayList<>();
+        List<Integer> sumsList = new ArrayList<>();
         for (int key : frequency.keySet()) { //get ones with highest frequency
             int value = frequency.get(key);
             if (value > max) {
@@ -88,5 +72,18 @@ public class MostFrequentSubtreeSum {
                 sumsList.add(key);
         }
         return sumsList.stream().mapToInt(i -> i).toArray();//convert list of Integers to int arrays //Awesome!!
+    }
+
+    public int[] findFrequentTreeSum(TreeNode root) {
+        if (root == null)
+            return new int[0];
+
+        TreeNode rootN = postOrderCreate(root); //create + calculate sum of (children + curr) in 1 pass
+
+        Map<Integer, Integer> frequency = new HashMap<>();
+        inOrderCount(rootN, frequency); //make hashmap to count each sum's frequency
+
+        return findMostFrequentSums(frequency);
+
     }
 }

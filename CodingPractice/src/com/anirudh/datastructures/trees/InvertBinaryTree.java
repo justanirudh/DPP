@@ -30,8 +30,8 @@ public class InvertBinaryTree {
         if (root == null)
             return null;
         TreeNode tn = new TreeNode(root.val);
-        tn.right = preOrder(root.left);
         tn.left = preOrder(root.right);
+        tn.right = preOrder(root.left);
         return tn;
     }
 

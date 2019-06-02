@@ -24,7 +24,6 @@ public class ImportantDataTypesForNonIDETests {
         System.out.println(arrl);
         Iterator arrlIter = arrl.iterator();
 
-//--
         int k = 5;
         int[] arr2 = new int[k];
 
@@ -32,16 +31,18 @@ public class ImportantDataTypesForNonIDETests {
         System.out.println(arr);
 
 
-        //3 kinds of hashmaps
+        //3 kinds of hashmaps/hashsets
         //1
         Map<Integer, String> hm = new HashMap<>();
+        Set<Integer> hs = new HashSet<>();
         System.out.println(hm);
 
-        //2
-        Map<Integer, String> tm = new TreeMap<>(); //sorted keys
+        //2 Red-Black tree. log(n) time cost for the containsKey, get, put and remove operations
+        Map<Integer, String> tm = new TreeMap<>(); //sorted keys:
         TreeSet<Integer> ts = new TreeSet<>();//sorted keys
 
-        //3
+        //3 https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html
+        //linked list with hasmap. can be used to create LRU caches
         Map<Integer, String> lhm = new LinkedHashMap<>(); //in the same order as inserted
         LinkedHashSet<Integer> lhs = new LinkedHashSet<>(); //in the same order as inserted
 
@@ -84,9 +85,12 @@ public class ImportantDataTypesForNonIDETests {
         priorityQueue.offer(3);
 
         //3
-        //The preferred way to represent stacks in java is the deque interface
-        Deque<Integer> deq = new LinkedList<>();//dual ended queue
-        Deque<Character> deq_arr = new ArrayDeque<>();//faster than Stack and LL
+        //The preferred way to represent stacks/queues in java is the deque interface.
+        Deque<Integer> deq = new LinkedList<>(); //doubly linked list, can be used for both stack and queue
+
+        //Resizable-array implementation of the Deque interface.
+        //This class is likely to be faster than Stack when used as a stack, and faster than LinkedList when used as a queue.
+        Deque<Character> deq_arr = new ArrayDeque<>();
 
     }
 }
@@ -101,6 +105,6 @@ LinkedHashMap - Linked List + HashMap
 
 /*
 Arraylist: resizable array/vector
-LinkedList: linked list
+LinkedList: doubly linked list
 ArrayDeque: backed by array, faster than Stack for stack ops and faster than LinkedList for queue ops.
  */

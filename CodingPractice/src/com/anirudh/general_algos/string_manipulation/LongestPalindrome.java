@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.general_algos.string_manipulation;
 
 import java.util.HashMap;
 
