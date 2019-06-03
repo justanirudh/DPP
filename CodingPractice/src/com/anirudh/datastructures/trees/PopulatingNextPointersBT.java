@@ -1,6 +1,8 @@
 package com.anirudh.datastructures.trees;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 
 /**
  * Created by paanir on 2/1/17.
@@ -39,87 +41,63 @@ After calling your function, the tree should look like:
 
  */
 public class PopulatingNextPointersBT {
+/*
+time: O(n)
+space: O(1) + stack(O(h))
+ */
 
-    public class TreeLinkNode {
-        int val;
-        TreeLinkNode left, right, next;
+    //pre-order traversal
+    private void connectNodes(Node node, Node right) {
+        if (node == null)
+            return;
 
-        TreeLinkNode(int x) {
-            val = x;
-        }
+        //root
+        node.next = right;
+
+        //left subtree
+        connectNodes(node.left, node.right);//connect left child to right child
+
+        //right subtree
+        Node rightChildNext;
+        if (right == null) //root's right is null, so no subtree there
+            rightChildNext = null;
+        else //root's right is another subtree
+            rightChildNext = right.left; //For 5 in the example, it would be 6
+        connectNodes(node.right, rightChildNext);//connect right child to the next subtree of left
     }
 
-    public class TNH {
-        TreeLinkNode tn;
-        int h;
-
-        public TNH(TreeLinkNode tn, int height) {
-            this.tn = tn;
-            this.h = height;
-        }
-    }
-
-    ArrayList<TNH> queue = new ArrayList<>();
-
-    public void connect(TreeLinkNode root) {
-
+    public Node connect(Node root) {
         if (root == null)
-            return;
-        //space = O(n)
-        queue.add(new TNH(root, 0));
-        while (!queue.isEmpty()) {
-            TNH tnh = queue.get(0);
-            System.out.println(queue.size());
-            if (queue.size() == 1) {
-                tnh.tn.next = null;
-            } else {
-                if (tnh.h + 1 == queue.get(1).h)
-                    tnh.tn.next = null;
-                else
-                    tnh.tn.next = queue.get(1).tn;
-            }
-            queue.remove(0);
-            if (tnh.tn.left != null)
-                queue.add(new TNH(tnh.tn.left, tnh.h + 1));
-            if (tnh.tn.right != null)
-                queue.add(new TNH(tnh.tn.right, tnh.h + 1));
-        }
+            return null;
+        connectNodes(root, null);
+        return root;
     }
 
-    //Space = O(1): http://www.programcreek.com/2014/05/leetcode-populating-next-right-pointers-in-each-node-java/
-    public void connect2(TreeLinkNode root) {
-        if(root == null)
-            return;
-
-        TreeLinkNode lastHead = root;//prevous level's head
-        TreeLinkNode lastCurrent = null;//previous level's pointer
-        TreeLinkNode currentHead = null;//currnet level's head
-        TreeLinkNode current = null;//current level's pointer
-
-        while(lastHead!=null){
-            lastCurrent = lastHead;
-
-            while(lastCurrent!=null){
-                if(currentHead == null){
-                    currentHead = lastCurrent.left;
-                    current = currentHead;
-                }else{
-                    current.next = lastCurrent.left;
-                    current = current.next;
-                }
-
-                if(currentHead != null){
-                    current.next = lastCurrent.right;
-                    current = current.next;
-                }
-
-                lastCurrent = lastCurrent.next;
+    //-----------------------------------------------------------------
+    /*
+    Time: O (n)
+    Space: queue O (2^h)
+     */
+    public Node connectIntuitive(Node root) {
+        if (root == null)
+            return null;
+        Deque<Node> nodes = new ArrayDeque<>();
+        nodes.offer(root);
+        while (!nodes.isEmpty()) {
+            int levelLen = nodes.size();
+            for (int i = 0; i < levelLen; ++i) {
+                //in a particular level
+                Node head = nodes.poll();
+                if (head.left != null)
+                    nodes.offer(head.left);
+                if (head.right != null)
+                    nodes.offer(head.right);
+                if (i != levelLen - 1)
+                    head.next = nodes.peek();
+                else
+                    head.next = null;
             }
-
-            //update last head
-            lastHead = currentHead;
-            currentHead = null;
         }
-
+        return root;
     }
 }

@@ -1,87 +1,127 @@
 package com.anirudh.datastructures.trees;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by paanir on 1/1/18.
  */
 /*
-Given a binary tree, your task is to complete the function verticalOrder which takes one argument the root of the
-binary tree and prints the node of the binary tree in vertical order .
+987. Vertical Order Traversal of a Binary Tree
+Medium
 
-          1
-       /     \
-     2       3
-   /        /
-4       5
+103
 
-The nodes of the above tree printed in vertical order will be
-4
-2
-1 5
-3
-Your output should be 4 $2 $1 5 $3 $
+244
 
-Note: Each vertical line will be separated by a "$" without quotes.
+Favorite
 
-Input:
+Share
+Given a binary tree, return the vertical order traversal of its nodes values.
 
-The task is to complete the method which takes one argument, root of Binary Tree. There are multiple test cases.
-For each test case, this method will be called individually.
+For each node at position (X, Y), its left and right children respectively will be at positions (X-1, Y-1) and (X+1, Y-1).
 
-Output:
-The function should print nodes in vertical order where  each vertical line is separated by a "$" without quotes.
+Running a vertical line from X = -infinity to X = +infinity, whenever the vertical line touches some nodes, we report the values of the nodes in order from top to bottom (decreasing Y coordinates).
 
-Constraints:
-1 <=T<= 30
-1 <= Number of nodes<= 20
+If two nodes have the same position, then the value of the node that is reported first is the value that is smaller.
+
+Return an list of non-empty reports in order of X coordinate.  Every report will have a list of values of nodes.
 
 
-Example:
-Input:
-2
-2
-1 2 R 1 3 L
-4
-10 20 L 10 30 R 20 40 L 20 60 R
 
-Output:
-3 $1 $2 $
-40 $20 $10 60 $30 $
+Example 1:
 
 
-There are two test cases.  First case represents a tree with 3 nodes and 2 edges where root is 1, left child of 1 is 3
-and right child of 1 is 2.   Second test case represents a tree with 4 edges and 5 nodes.
+
+Input: [3,9,20,null,null,15,7]
+Output: [[9],[3,15],[20],[7]]
+Explanation:
+Without loss of generality, we can assume the root node is at position (0, 0):
+Then, the node with value 9 occurs at position (-1, -1);
+The nodes with values 3 and 15 occur at positions (0, 0) and (0, -2);
+The node with value 20 occurs at position (1, -1);
+The node with value 7 occurs at position (2, -2).
+Example 2:
 
 
-Example-2
-           1
-        /    \
-       2      3
-      / \    / \
-     4   5  6   7
-             \   \
-              8   9
+
+Input: [1,2,3,4,5,6,7]
+Output: [[4],[2],[1,5,6],[3],[7]]
+Explanation:
+The node with value 5 and the node with value 6 have the same position according to the given scheme.
+However, in the report "[1,5,6]", the node value of 5 comes first since 5 is smaller than 6.
 
 
-The output of print this tree vertically will be:
-4
-2
-1 5 6
-3 8
-7
-9
+Note:
+
+The tree will have between 1 and 1000 nodes.
+Each node's value will be between 0 and 1000.
  */
 
-/*
-Logic
-I attach a number with each node. I subtract 1 if I go left and add 1 if I go right. Start with root with num as 0.
-use a treemap (sorted wrt key) with {this num -> all nodes having that num}. Then just traverse the map and print
- */
-public class PrintaBinaryTreeinVerticalOrder {
+class PrintaBinaryTreeinVerticalOrder  {
+
+    List<Location> locations;
+
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        // Each location is a node's x position, y position, and value
+        locations = new ArrayList<>();
+
+        inOrderTraversal(root, 0, 0); // populate Locations list
+
+        Collections.sort(locations);//sort it
+
+        /*
+        After that, the impl is garbage. just go through sorted array and lump objects with same x value together
+         */
+
+        List<List<Integer>> ans = new ArrayList<>();
+        ans.add(new ArrayList<Integer>());
+
+        int prev = locations.get(0).x;
+
+        for (Location loc: locations) {
+            // If the x value changed, it's part of a new report.
+            if (loc.x != prev) {
+                prev = loc.x;
+                ans.add(new ArrayList<Integer>());
+            }
+
+            // We always add the node's value to the latest report.
+            ans.get(ans.size() - 1).add(loc.val);
+        }
+
+        return ans;
+    }
+
+    public void inOrderTraversal(TreeNode node, int x, int y) {
+        if (node != null) {
+            locations.add(new Location(x, y, node.val));
+            inOrderTraversal(node.left, x-1, y+1);
+            inOrderTraversal(node.right, x+1, y+1);
+        }
+    }
+}
+
+class Location implements Comparable<Location>{
+    int x, y, val;
+    Location(int x, int y, int val) {
+        this.x = x;
+        this.y = y;
+        this.val = val;
+    }
+
+    @Override
+    public int compareTo(Location that) {
+        if (this.x != that.x) //first check x
+            return Integer.compare(this.x, that.x);
+        else if (this.y != that.y) //then check y
+            return Integer.compare(this.y, that.y);
+        else //then check value
+            return Integer.compare(this.val, that.val);
+    }
+}
+
+
+/*public class PrintaBinaryTreeinVerticalOrder {
 
     void print(Map<Integer, List<Integer>> map) {
         for (List<Integer> vals : map.values()) {
@@ -121,4 +161,4 @@ public class PrintaBinaryTreeinVerticalOrder {
 
         print(map);
     }
-}
+}*/
