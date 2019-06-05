@@ -5,10 +5,10 @@ package com.anirudh.datastructures.trees;
  */
 class Node {
     int data;
-    Node left, right, next;
+    Node left, right, next, parent;
 
     Node(int item) {
         data = item;
-        left = right = next = null;
+        left = right = next = parent = null;
     }
 }
