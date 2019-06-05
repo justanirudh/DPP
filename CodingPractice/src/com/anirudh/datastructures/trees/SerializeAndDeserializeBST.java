@@ -3,6 +3,8 @@ package com.anirudh.datastructures.trees;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 /**
  * Created by paanir on 9/25/17.
@@ -25,68 +27,82 @@ Note: Do not use class member/global/static variables to store states. Your seri
 public class SerializeAndDeserializeBST {
     //use inorder and preorder to uniquely identify a tree
 
-    private void inOrder(TreeNode root, List<String> list) {
-        if (root == null)
+    private void inOrder(TreeNode node, StringJoiner sj) {
+        if (node == null)
             return;
-        inOrder(root.left, list);
-        list.add(Integer.toString(root.val));
-        inOrder(root.right, list);
+        inOrder(node.left, sj);
+        sj.add(Integer.toString(node.val));
+        inOrder(node.right, sj);
     }
 
-    private void preOrder(TreeNode root, List<String> list) {
-        if (root == null)
+    private void preOrder(TreeNode node, StringJoiner sj) {
+        if (node == null)
             return;
-        list.add(Integer.toString(root.val));
-        preOrder(root.left, list);
-        preOrder(root.right, list);
+        sj.add(Integer.toString(node.val));
+        preOrder(node.left, sj);
+        preOrder(node.right, sj);
     }
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
+        //i,n,o,r,d,e,r;p,r,e,o,r,d,e,r
         if (root == null)
-            return "";
-        List<String> listIn = new ArrayList<>();
-        inOrder(root, listIn);
-        List<String> listPre = new ArrayList<>();
-        preOrder(root, listPre);
-        String joined1 = String.join(",", listIn);
-        String joined2 = String.join(",", listPre);
-        return joined1 + ";" + joined2;
-    }
-
-    private int binarySearch(int rootVal, int[] inOrder, int start, int end) { //is sorted so can do binary search
-        if (start <= end) {
-            int mid = start + (end - start) / 2;
-            if (rootVal == inOrder[mid])
-                return mid;
-            else if (rootVal > inOrder[mid])
-                return binarySearch(rootVal, inOrder, mid + 1, end);
-            else
-                return binarySearch(rootVal, inOrder, start, mid - 1);
-        }
-        return -1;
-    }
-
-    private TreeNode constructTree(int[] inOrder, int inStart, int inEnd, int[] preOrder, int preIndex) {
-        if (inStart > inEnd || preIndex >= preOrder.length) {
             return null;
-        }
-        int rootVal = preOrder[preIndex]; //first num in preorder is the root
+        StringJoiner in = new StringJoiner(",");
+        StringJoiner pre = new StringJoiner(",");
+        inOrder(root, in);
+        preOrder(root, pre);
+        return in.toString() + ";" + pre.toString();
+    }
+
+    private int doBinarySearch(int start, int end, List<Integer> inOrder, int val) {
+        if (start > end)
+            return -1; //not found
+        int mid = start + (end - start) / 2;
+        int midElem = inOrder.get(mid);
+        if (val == midElem)
+            return mid;
+        else if (val < midElem)
+            return doBinarySearch(start, mid - 1, inOrder, val);
+        else
+            return doBinarySearch(mid + 1, end, inOrder, val);
+    }
+
+
+    private int getLeftSubtreeSize(int rootValIx, int inStartIx) {
+        return rootValIx - inStartIx + 1;
+    }
+
+    private TreeNode contructTree(int preIx, int inStartIx, int inEndIx, List<Integer> inOrder, List<Integer> preOrder) {
+
+        if (inStartIx > inEndIx || preIx >= preOrder.size()) //it is a leaf
+            return null;
+
+        int rootVal = preOrder.get(preIx); //root
         TreeNode root = new TreeNode(rootVal);
-        int inIndex = binarySearch(rootVal, inOrder, inStart, inEnd);
-        root.left = constructTree(inOrder, inStart, inIndex - 1, preOrder, preIndex + 1);
-        root.right = constructTree(inOrder, inIndex + 1, inEnd, preOrder, preIndex + (inIndex - inStart + 1)); //preindex + number of left nodes
+
+        int rootIx = doBinarySearch(inStartIx, inEndIx, inOrder, rootVal);
+        root.left = contructTree(preIx + 1, inStartIx, rootIx - 1, inOrder, preOrder);
+        root.right = contructTree(preIx + getLeftSubtreeSize(rootIx, inStartIx), rootIx + 1, inEndIx, inOrder, preOrder);
         return root;
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        if (data.equals(""))
+        /*
+        1. Get the 1st element of preOrder list
+        2. find the element in inOrder list (do binary search)
+        3. thats the root
+        4. root.left = repeat 1. and 2. (1) would be the Ix(1) + 1 in preOrder list
+        5. root.right = repeat 1. and 2. (1) would be Ix(1) + 1 + size_of_left_subtree  in preOrder list
+         */
+        if (data == null)
             return null;
         String[] traversals = data.split(";");
-        int[] inOrder = Arrays.stream(traversals[0].split(",")).mapToInt(Integer::parseInt).toArray();
-        int[] preOrder = Arrays.stream(traversals[1].split(",")).mapToInt(Integer::parseInt).toArray();
-        return constructTree(inOrder, 0, inOrder.length - 1, preOrder, 0);
+        List<Integer> inOrder = Arrays.stream(traversals[0].split(",")).map(Integer::parseInt).collect(Collectors.toList());
+        List<Integer> preOrder = Arrays.stream(traversals[1].split(",")).map(Integer::parseInt).collect(Collectors.toList());
+
+        return contructTree(0, 0, inOrder.size() - 1, inOrder, preOrder);
     }
 
 }
