@@ -40,16 +40,18 @@ Given tree t:
 Return false.
  */
 public class SubtreeofAnotherTree {
-    public boolean checkValues(TreeNode s, TreeNode t) {
+
+    public boolean checkSameTree(TreeNode s, TreeNode t) {
         if (s == null && t == null)
             return true;
         else if (s == null || t == null)
             return false;
-        else {
-            if (s.val != t.val)
+        else { //both are non-null
+            if (s.val == t.val)
+                return checkSameTree(s.left, t.left) && checkSameTree(s.right, t.right);
+            else {
                 return false;
-            else
-                return checkValues(s.left, t.left) && checkValues(s.right, t.right);
+            }
         }
     }
 
@@ -58,13 +60,13 @@ public class SubtreeofAnotherTree {
             return true;
         else if (s == null || t == null)
             return false;
-        else {
-            //both non-null
+        else { //both are non-null
             if (s.val == t.val) {
-                boolean match = checkValues(s.left, t.left) && checkValues(s.right, t.right);
-                if (match)
+                boolean isSame = checkSameTree(s.left, t.left) && checkSameTree(s.right, t.right);
+                if (isSame)
                     return true;
             }
+            //look at rest of the tree for the subtree
             return isSubtree(s.left, t) || isSubtree(s.right, t);
         }
     }

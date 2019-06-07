@@ -19,6 +19,12 @@ public class ImportantDataTypesForNonIDETests {
         }
         System.out.println(sb.toString());
 
+        StringJoiner sj = new StringJoiner(",");
+        for (int i = 0; i < 10; ++i) {
+            sj.add(Integer.toString(i));
+        }
+        System.out.println(sj.toString());
+
 
         ArrayList<Integer> arrl = new ArrayList<>();
         System.out.println(arrl);

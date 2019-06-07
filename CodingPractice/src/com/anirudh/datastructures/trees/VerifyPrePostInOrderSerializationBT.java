@@ -1,6 +1,7 @@
 package com.anirudh.datastructures.trees;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.anirudh.datastructures.trees.VerifyPrePostInOrderSerializationBT.Order.INORDER;
 import static com.anirudh.datastructures.trees.VerifyPrePostInOrderSerializationBT.Order.PREORDER;
@@ -54,7 +55,7 @@ public class VerifyPrePostInOrderSerializationBT {
     public static boolean isValidSerialization(String str, Order o) {
 
         String[] nodes = str.split(",");
-        ArrayList<String> elems = new ArrayList<>();
+        List<String> elems = new ArrayList<>();
 
         for (int i = 0; i < nodes.length; ++i) {
             elems.add(nodes[i]);

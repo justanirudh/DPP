@@ -4,7 +4,7 @@ package com.anirudh.general_algos.basics;
  * Created by paanir on 9/21/17.
  */
 public class BinarySearch {
-    private static int searchInner(int[] arr, int start, int end, int elem) { //logn
+    static int searchInner(int[] arr, int start, int end, int elem) { //logn
         if (start <= end) {
             int mid = start + (end - start) / 2;
             if (arr[mid] == elem)
