@@ -23,7 +23,7 @@ Return 0 if there is no such transformation sequence.
 All words have the same length.
 All words contain only lowercase alphabetic characters.*/
 
-object WorderLadder_Scala extends App{
+object ScalaWorderLadder extends App{
 
   val endWord = "cog"
 

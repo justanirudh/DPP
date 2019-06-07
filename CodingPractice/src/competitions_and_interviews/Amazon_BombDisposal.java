@@ -1,4 +1,4 @@
-package com.anirudh.datastructures.graphs; /**
+package competitions_and_interviews; /**
  * Created by panirud on 8/15/17.
  */
 import java.util.ArrayList;

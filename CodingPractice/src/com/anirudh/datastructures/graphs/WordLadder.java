@@ -47,6 +47,82 @@ public class WordLadder {
             return false;
     }
 
+    private static class Node {
+        String s;
+        String parentString = "";
+        String color = "white";
+        Integer distSrc = -1;
+        List<String> neighbors = new ArrayList<>();
+
+        public Node(String s) {
+            this.s = s;
+        }
+    }
+
+    //undirected graph
+    private static Map<String, Node> createGraph(Set<String> wordList) {
+        HashMap<String, Node> graph = new HashMap<>();
+        for (String s : wordList) {
+            if (!graph.containsKey(s))
+                graph.put(s, new Node(s));
+            for (String key : graph.keySet()) {
+                if (isDiffOne(s, key)) {
+                    graph.get(s).neighbors.add(key);
+                    graph.get(key).neighbors.add(s);
+                }
+            }
+        }
+        return graph;
+    }
+
+    public static int doBFSAndGetDist(Map<String, Node> graph, String source, String dest) {
+        Node srcNode = graph.get(source);
+        srcNode.color = "gray"; //discovered
+        srcNode.distSrc = 0;
+        QueueLLJava queue = new QueueLLJava<String>();
+        queue.enqueue(source);
+        while (!queue.isEmpty()) {
+            String curr = ((String) queue.dequeue());
+            for (String neigh : graph.get(curr).neighbors) {
+                if (graph.get(neigh).color.equals("white")) { //undiscovered
+                    Node neighNode = graph.get(neigh);
+                    neighNode.color = "gray";
+                    neighNode.distSrc = graph.get(curr).distSrc + 1;
+                    if (neigh.equals(dest))
+                        return neighNode.distSrc + 1;
+                    neighNode.parentString = curr;
+                    queue.enqueue(neigh);
+                }
+            }
+            graph.get(curr).color = "black"; //finished
+        }
+        return 0;
+    }
+
+    public static int ladderLength(String beginWord, String endWord, Set<String> wordList) {
+        //create graph, do BFS
+        wordList.add(beginWord);
+        wordList.add(endWord);
+
+        //create graph
+        Map<String, Node> graph = createGraph(wordList);
+
+        Map<String, Node> graphPreBFS = new HashMap<>(graph);
+
+        return doBFSAndGetDist(graphPreBFS, beginWord, endWord);
+    }
+
+    public static void main(String[] args) {
+//        String beginWord = "hit";
+//        String endWord = "cog";
+//        Set<String> wordList = new HashSet<>(Arrays.asList("hot", "dot", "dog", "lot", "log"));
+
+        String beginWord = "nanny";
+        String endWord = "aloud";
+//        System.out.println(ladderLength2(beginWord, endWord, wordList));
+    }
+
+    /*
     //Method 2
     private static class Word {
         String s;
@@ -78,105 +154,8 @@ public class WordLadder {
             wordList.removeAll(removeThese);
         }
         return 0;
-    }
+    }*/
 
     //----------------------------------------------------------------
-
-    private static class Node {
-        String s;
-        String parentString = "";
-        String color = "white";
-        Integer distSrc = -1;
-        ArrayList<String> neighbors = new ArrayList<>();
-
-        public Node(String s) {
-            this.s = s;
-        }
-    }
-
-    //undirected graph
-    private static HashMap<String, Node> createGraph(Set<String> wordList) {
-        HashMap<String, Node> graph = new HashMap<>();
-        for (String s : wordList) {
-            if (!graph.containsKey(s))
-                graph.put(s, new Node(s));
-            for (String key : graph.keySet()) {
-                if (isDiffOne(s, key)) {
-                    graph.get(s).neighbors.add(key);
-                    graph.get(key).neighbors.add(s);
-                }
-            }
-        }
-        return graph;
-    }
-
-//    public static HashMap<String, Node> doBFS(HashMap<String, Node> graph, String source) {
-//        Node srcNode = graph.get(source);
-//        srcNode.color = "gray"; //discovered
-//        srcNode.distSrc = 0;
-//        QueueLLJava queue = new QueueLLJava<String>();
-//        queue.enqueue(source);
-//        while (!queue.isEmpty()) {
-//            String curr = ((String) queue.dequeue());
-//            for (String neigh : graph.get(curr).neighbors) {
-//                if (graph.get(neigh).color.equals("white")) { //undiscovered
-//                    Node neighNode = graph.get(neigh);
-//                    neighNode.color = "gray";
-//                    neighNode.distSrc = graph.get(curr).distSrc + 1;
-//                    neighNode.parentString = curr;
-//                    queue.enqueue(neigh);
-//                }
-//            }
-//            graph.get(curr).color = "black"; //finished
-//        }
-//        return graph;
-//    }
-
-    public static int doBFSAndGetDist(HashMap<String, Node> graph, String source, String dest) {
-        Node srcNode = graph.get(source);
-        srcNode.color = "gray"; //discovered
-        srcNode.distSrc = 0;
-        QueueLLJava queue = new QueueLLJava<String>();
-        queue.enqueue(source);
-        while (!queue.isEmpty()) {
-            String curr = ((String) queue.dequeue());
-            for (String neigh : graph.get(curr).neighbors) {
-                if (graph.get(neigh).color.equals("white")) { //undiscovered
-                    Node neighNode = graph.get(neigh);
-                    neighNode.color = "gray";
-                    neighNode.distSrc = graph.get(curr).distSrc + 1;
-                    if (neigh.equals(dest))
-                        return neighNode.distSrc + 1;
-                    neighNode.parentString = curr;
-                    queue.enqueue(neigh);
-                }
-            }
-            graph.get(curr).color = "black"; //finished
-        }
-        return 0;
-    }
-
-    public static int ladderLength(String beginWord, String endWord, Set<String> wordList) {
-        //create graph, do BFS
-        wordList.add(beginWord);
-        wordList.add(endWord);
-
-        //create graph
-        HashMap<String, Node> graph = createGraph(wordList);
-
-        HashMap<String, Node> graphPreBFS = new HashMap<>(graph);
-
-        return doBFSAndGetDist(graphPreBFS, beginWord, endWord);
-    }
-
-    public static void main(String[] args) {
-//        String beginWord = "hit";
-//        String endWord = "cog";
-//        Set<String> wordList = new HashSet<>(Arrays.asList("hot", "dot", "dog", "lot", "log"));
-
-        String beginWord = "nanny";
-        String endWord = "aloud";
-//        System.out.println(ladderLength2(beginWord, endWord, wordList));
-    }
 
 }

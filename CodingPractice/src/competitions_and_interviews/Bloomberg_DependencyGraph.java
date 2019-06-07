@@ -1,4 +1,4 @@
-package com.anirudh.datastructures.graphs;
+package competitions_and_interviews;
 
 import java.util.*;
 

@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * Created by paanir on 1/28/17.
  */
-public class TwoSigma_FriendCircles {
+public class TwoSigmaFriendCircles {
 
     //white = undiscovered, grey = discovered, black = finished
     private static class Node {
@@ -19,7 +19,6 @@ public class TwoSigma_FriendCircles {
             this.num = num;
         }
     }
-
 
     static void doDFS(HashMap<Integer, Node> graph, Integer curr) {
         graph.get(curr).color = "grey";

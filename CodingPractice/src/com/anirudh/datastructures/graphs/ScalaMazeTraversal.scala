@@ -35,7 +35,7 @@ Shortest Path is 11
 
 
  */
-object MazeTraversal extends App{
+object ScalaMazeTraversal extends App{
 
   class GraphNode(val coords:(Int, Int)){ //complete definition of a graph node
     var color = "white" //undiscovered

@@ -25,7 +25,7 @@ X X X X
 X X X X
 X X X X
 X O X X
- */
+*/
 public class SurroundedRegions {
     /*
     In this problem, only the cells on the borders can not be surrounded.
