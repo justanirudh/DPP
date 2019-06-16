@@ -31,95 +31,77 @@ All words contain only lowercase alphabetic characters.
  */
 public class WordLadder {
 
-    private static boolean isDiffOne(String s1, String s2) {
-        if (s1.length() != s2.length())
-            return false;
-        int diff = 0;
-        for (int i = 0; i < s1.length(); ++i) {
-            if (s1.charAt(i) != s2.charAt(i))
-                ++diff;
-            if (diff > 1)
-                return false;
-        }
-        if (diff == 1)
-            return true;
-        else
-            return false;
-    }
 
-    private static class Node {
-        String s;
-        String parentString = "";
-        String color = "white";
-        Integer distSrc = -1;
-        List<String> neighbors = new ArrayList<>();
-
-        public Node(String s) {
-            this.s = s;
-        }
-    }
-
-    //undirected graph
-    private static Map<String, Node> createGraph(Set<String> wordList) {
-        HashMap<String, Node> graph = new HashMap<>();
-        for (String s : wordList) {
-            if (!graph.containsKey(s))
-                graph.put(s, new Node(s));
-            for (String key : graph.keySet()) {
-                if (isDiffOne(s, key)) {
-                    graph.get(s).neighbors.add(key);
-                    graph.get(key).neighbors.add(s);
+    private int bfs(List<String> wordList, boolean[] discovered, List<List<Integer>> neighboursList, int[] distances, int beginIndex, String endWord) {
+        Deque<Integer> q = new ArrayDeque<>();
+        q.offer(beginIndex);
+        distances[beginIndex] = 1;
+        discovered[beginIndex] = true;
+        while (!q.isEmpty()) {
+            int wordIndex = q.poll();
+            int wordDistance = distances[wordIndex];
+            if (wordList.get(wordIndex).equals(endWord))
+                return wordDistance;
+            List<Integer> neighbours = neighboursList.get(wordIndex);
+            for (int neighbour : neighbours) {
+                if (!discovered[neighbour]) {
+                    distances[neighbour] = wordDistance + 1;
+                    discovered[neighbour] = true;
+                    q.offer(neighbour);
                 }
             }
-        }
-        return graph;
-    }
-
-    public static int doBFSAndGetDist(Map<String, Node> graph, String source, String dest) {
-        Node srcNode = graph.get(source);
-        srcNode.color = "gray"; //discovered
-        srcNode.distSrc = 0;
-        QueueLLJava queue = new QueueLLJava<String>();
-        queue.enqueue(source);
-        while (!queue.isEmpty()) {
-            String curr = ((String) queue.dequeue());
-            for (String neigh : graph.get(curr).neighbors) {
-                if (graph.get(neigh).color.equals("white")) { //undiscovered
-                    Node neighNode = graph.get(neigh);
-                    neighNode.color = "gray";
-                    neighNode.distSrc = graph.get(curr).distSrc + 1;
-                    if (neigh.equals(dest))
-                        return neighNode.distSrc + 1;
-                    neighNode.parentString = curr;
-                    queue.enqueue(neigh);
-                }
-            }
-            graph.get(curr).color = "black"; //finished
         }
         return 0;
     }
 
-    public static int ladderLength(String beginWord, String endWord, Set<String> wordList) {
-        //create graph, do BFS
-        wordList.add(beginWord);
-        wordList.add(endWord);
-
-        //create graph
-        Map<String, Node> graph = createGraph(wordList);
-
-        Map<String, Node> graphPreBFS = new HashMap<>(graph);
-
-        return doBFSAndGetDist(graphPreBFS, beginWord, endWord);
+    private boolean isDiffOne(String word1, String word2) {
+        int diffs = 0;
+        for (int i = 0; i < word1.length(); ++i) {
+            if (word1.charAt(i) != word2.charAt(i))
+                diffs++;
+            if (diffs > 1)
+                return false;
+        }
+        return true;
     }
 
-    public static void main(String[] args) {
-//        String beginWord = "hit";
-//        String endWord = "cog";
-//        Set<String> wordList = new HashSet<>(Arrays.asList("hot", "dot", "dog", "lot", "log"));
 
-        String beginWord = "nanny";
-        String endWord = "aloud";
-//        System.out.println(ladderLength2(beginWord, endWord, wordList));
+    private List<Integer> getNeighboursOf(String word, List<String> wordList) {
+        List<Integer> neighbours = new ArrayList<>();
+        for (int i = 0; i < wordList.size(); ++i) {
+            String w = wordList.get(i);
+            if (!w.equals(word) && isDiffOne(w, word))
+                neighbours.add(i);
+        }
+        return neighbours;
+    }
+
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if (!wordList.contains(endWord))
+            return 0;
+        int beginIndex;
+        int wordsSize = wordList.size();
+        if (!wordList.contains(beginWord)) {
+            wordList.add(beginWord);
+            wordsSize++;
+            beginIndex = wordsSize - 1;
+        } else {
+            beginIndex = wordList.indexOf(beginWord);
+        }
+
+        //1. create a graph of the wordList
+        /*
+            discovered array: whether a word has been discovered already or not
+            array of neighbours of each word
+        */
+        boolean[] discovered = new boolean[wordsSize];
+        int[] distances = new int[wordsSize];
+        List<List<Integer>> neighbours = new ArrayList<>(); //array of array of indices
+        for (int i = 0; i < wordsSize; ++i) {
+            neighbours.add(i, getNeighboursOf(wordList.get(i), wordList));
+        }
+        //2. BFS with beginWord the source
+        return bfs(wordList, discovered, neighbours, distances, beginIndex, endWord);
     }
 
     /*
@@ -141,7 +123,7 @@ public class WordLadder {
         while (!q.isEmpty()) {
             Word wCurr = q.remove();
             String curr = wCurr.s;
-            HashSet<String> removeThese = new HashSet<>();
+            Set<String> removeThese = new HashSet<>();
             for (String str : wordList) {
                 if (isDiffOne(curr, str)) {
                     if (str.equals(endWord))

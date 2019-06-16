@@ -10,6 +10,7 @@ public class ImportantDataTypesForNonIDETests {
     public static void main(String[] args) {
         String s = "abc";
         System.out.println(s);
+        s.intern();
 
         Integer.toString(Integer.parseInt(s));
 
