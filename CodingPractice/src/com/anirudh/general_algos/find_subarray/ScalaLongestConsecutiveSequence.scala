@@ -10,7 +10,7 @@ For example, given [100, 4, 200, 1, 3, 2], the longest consecutive elements sequ
 
 Your algorithm should run in O(n) complexity
 * */
-object LongestConsecutiveSequence extends App{
+object ScalaLongestConsecutiveSequence extends App{
 
   //using NO library functions
   //assuming no repetitions in input array

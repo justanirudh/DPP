@@ -1,4 +1,4 @@
-package com.anirudh.general_algos.techniques;
+package com.anirudh.general_algos.find_subarray;
 
 import java.util.Deque;
 import java.util.LinkedList;

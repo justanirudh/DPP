@@ -12,7 +12,7 @@ Given a string, find the longest substring that contains only two unique charact
 "abcbbbbcccbdddadacb", the longest substring that contains 2 unique character is "bcbbbbcccb".
 * */
 //TODO: this gets the longest subsequence, not a string
-object LongestSubStringKDistinctChars extends App{
+object ScalaLongestSubStringKDistinctChars extends App{
 
   //using library funcs
   def getLSSKDC(str:String, k:Int):String = {

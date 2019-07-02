@@ -18,7 +18,7 @@ Ouptut: Sum found between indexes 1 and 4
 Input: arr[] = {1, 4}, sum = 0
 Output: No subarray found
 * */
-object FindSubArrayWithGivenSum extends App{
+object ScalaFindSubArrayWithGivenSum extends App{
 
   //Incrementing index (end) till we get sum == or > target. Then incrementing another index
   //from start that decrements sum till we get == or < sum. Like a sliding window.
