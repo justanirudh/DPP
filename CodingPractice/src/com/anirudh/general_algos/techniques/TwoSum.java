@@ -1,6 +1,7 @@
 package com.anirudh.general_algos.techniques;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by paanir on 3/13/17.
@@ -20,30 +21,19 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
  */
 
-    public int[] twoSum(int[] nums, int target) {
-        HashMap<Integer, Integer> hm = new HashMap<>();
-        for (Integer i : nums)
-            hm.put(i, target - i);
-        for (Integer key : hm.keySet()) {
-            int val = hm.get(key);
-            if (hm.containsKey(val)) {
-                int first = 0;
-                int second = 0;
-                for (int i = 0; i < nums.length; ++i) {
-                    if (nums[i] == key) {
-                        first = i;
-                        break;
-                    }
-                }
-                for (int i = 0; i < nums.length; ++i) {
-                    if (nums[i] == val && i != first) {
-                        second = i;
-                        break;
-                    }
-                }
-                int[] arr = {first, second};
-                return arr;
+    //O(1) space, O(n) time
+    public int[] twoSum(int[] nums, int target) { // 1 pass
+        Map<Integer, Integer> sums = new HashMap<>();
+        for (int i = 0; i < nums.length; ++i) {
+            int num = nums[i];
+            int otherNum = target - num;
+            if (sums.containsKey(otherNum) && i != sums.get(otherNum)) { //if other num is also a key to map and it is not the same element we found earlier, we have found the element
+                int[] res = new int[2];
+                res[0] = sums.get(otherNum);
+                res[1] = i;
+                return res;
             }
+            sums.put(num, i);
         }
         return new int[0];
     }
@@ -52,7 +42,8 @@ return [0, 1].
     * 167. Two Sum II - Input array is sorted
     Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
 
-    The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.
+    The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.
+    Please note that your returned answers (both index1 and index2) are not zero-based.
 
     You may assume that each input would have exactly one solution and you may not use the same element twice.
 
