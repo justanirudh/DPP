@@ -39,7 +39,7 @@ public class BinaryTreeLevelOrderTraversalII {
 
         nodesQ.offer(root);
         while(!nodesQ.isEmpty()) {
-            int sizeQ = nodesQ.size();
+            int sizeQ = nodesQ.size(); //use to track levels
             List<Integer> level = new ArrayList<>();
             for(int i = 0; i < sizeQ; ++i){
                 TreeNode tn = nodesQ.poll();

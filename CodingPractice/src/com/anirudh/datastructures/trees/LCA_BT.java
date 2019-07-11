@@ -27,7 +27,7 @@ public class LCA_BT {
             if (lcaLeft != null && lcaRight != null) //both non-null
                 return root;
             else if (lcaLeft == null && lcaRight == null) //both null
-                return null;
+                return null; //elements are not in tree
             else if (lcaLeft == null)
                 return lcaRight;
             else

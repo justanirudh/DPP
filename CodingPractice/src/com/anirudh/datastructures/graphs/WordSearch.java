@@ -3,7 +3,6 @@ package com.anirudh.datastructures.graphs;
 /**
  * Created by paanir on 6/21/17.
  */
-//DFS in matrix
 /*
 79. Word Search
 
@@ -21,6 +20,11 @@ Given board =
 word = "ABCCED", -> returns true,
 word = "SEE", -> returns true,
 word = "ABCB", -> returns false.
+ */
+
+/*
+    DFS in matrix (as multiple sources possible)
+    like finding cycle in a directed graph. maintain a record of path
  */
 public class WordSearch {
     char[][] board;

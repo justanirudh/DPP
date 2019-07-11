@@ -106,13 +106,14 @@ public class MinimumHeightTrees {
 
         while (!leaves.isEmpty()) { //BFS
             lastLeaves = new ArrayList<>(leaves);
-            int size = leaves.size();
+            int size = leaves.size(); //like level order tree traversal
             for (int i = 0; i < size; ++i) {
                 //remove the leaf by changing its degree to 0
                 int leaf = leaves.poll();
                 degrees.set(leaf,0);
                 //loop of all neighbours required even for a leaf because we are not really deleting from the graph.
                 // we are doing all bookkeeping by changing the degrees array
+                //decrement degree of all neighbours. If a degree reaches 1, add it to leaf array
                 for (int neighbour : graph.get(leaf)) {
                     degrees.set(neighbour, degrees.get(neighbour) - 1);
                     if (degrees.get(neighbour) == 1)

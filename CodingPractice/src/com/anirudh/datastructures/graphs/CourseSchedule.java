@@ -1,6 +1,8 @@
 package com.anirudh.datastructures.graphs;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /**
@@ -24,58 +26,55 @@ There are a total of 2 courses to take. To take course 1 you should have finishe
 0 you should also have finished course 1. So it is impossible.
  */
 
-//equivalent to finding a CYCLE IN A DIRECTED GRAPH
+//equivalent to finding a CYCLE IN A DIRECTED GRAPH: DFS
 public class CourseSchedule {
 
     boolean[] visited;
-    boolean[] inRecStack;
+    Deque<Integer> path;
 
-    boolean doDFS(List<Integer>[] graph, int src) {
-        visited[src] = true;
-        inRecStack[src] = true;
-        List<Integer> neighbours = graph[src];
-        if (neighbours == null) { // for leaf courses like 0 -> 1, 1 has no 'to neighbours'
-            inRecStack[src] = false; //unwind
-            return true;
-        }
-        for (int n : neighbours) {
-            if (!visited[n]) {
-                boolean canFinish = doDFS(graph, n);
-                if (!canFinish)
-                    return false;
-            } else {
-                if (inRecStack[n])
-                    return false;
+    // course number (cn) -> all courses that can be taken if cn is taken
+    private List<List<Integer>> createGraph(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int src = 0; src < numCourses; ++src) {
+            graph.add(src, new ArrayList<>());
+            for (int[] prereq : prerequisites) {
+                if (prereq[1] == src) { //got an edge
+                    graph.get(src).add(prereq[0]);
+                }
             }
         }
-        inRecStack[src] = false; //unwind
-        return true;
+        return graph;
     }
 
-    List<Integer>[] createGraph(int numCourses, int[][] prerequisites) {
-        List<Integer>[] lists = (ArrayList<Integer>[]) new ArrayList[numCourses];
-        for (int[] edge : prerequisites) {
-            int source = edge[1];
-            int dest = edge[0];
-            if (lists[source] == null) //initialize
-                lists[source] = new ArrayList<>();
-            lists[source].add(dest);
+    private boolean hasCycle(int src, List<List<Integer>> graph) {
+        visited[src] = true;
+        path.push(src);
+        List<Integer> dists = graph.get(src);
+        for (int dist : dists) {
+            if (!visited[dist]) {
+                //check cycleExists
+                boolean cycleExists = hasCycle(dist, graph);
+                if (cycleExists)
+                    return true;
+            } else {
+                //if already visited, check if visited in this traversal
+                if (path.contains(dist))
+                    return true; //if visited in this traversal, we have a cycle
+            }
         }
-        return lists;
+        //no cycles in this traversal
+        path.pop();
+        return false;
     }
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> graph = createGraph(numCourses, prerequisites);
         visited = new boolean[numCourses];
-        inRecStack = new boolean[numCourses];
-        //create adjacency list a an array of arraylists
-        List<Integer>[] graph = createGraph(numCourses, prerequisites);
-        //DFS to find a cycle in graph
-        for (int i = 0; i < numCourses; ++i) {
-            if (!visited[i]) {
-                boolean canFinish = doDFS(graph, i);
-                if (!canFinish)
-                    return false;
-            }
+        path = new ArrayDeque<>();
+        for (int i = 0; i < numCourses; ++i) {//go over all trees
+            boolean cycleExists = hasCycle(i, graph);
+            if (cycleExists)
+                return false;
         }
         return true;
     }

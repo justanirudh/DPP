@@ -3,6 +3,7 @@ package com.anirudh.datastructures.graphs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by paanir on 1/28/17.
@@ -20,7 +21,7 @@ public class TwoSigmaFriendCircles {
         }
     }
 
-    static void doDFS(HashMap<Integer, Node> graph, Integer curr) {
+    static void doDFS(Map<Integer, Node> graph, Integer curr) {
         graph.get(curr).color = "grey";
 
         for(Integer i: graph.get(curr).neighbors){
@@ -35,7 +36,7 @@ public class TwoSigmaFriendCircles {
     static int friendCircles(String[] friends) {
 
         //create graph
-        HashMap<Integer, Node> graph = new HashMap<>();
+        Map<Integer, Node> graph = new HashMap<>();
         for (int i = 0; i < friends.length; ++i) {
             String curr = friends[i];
             Node node = new Node(i);

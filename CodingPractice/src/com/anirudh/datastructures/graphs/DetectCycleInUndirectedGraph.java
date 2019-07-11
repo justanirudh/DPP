@@ -50,17 +50,17 @@ In the second test case there is a graph with 3 vertices and 3 edges from 0 to 1
 **For More Examples Use Expected Output**
  */
 
-//If it has been visited and it NOT the parent
+//If it has been visited and it NOT the parent (Simplification of directed graphs)
 public class DetectCycleInUndirectedGraph {
-    static Boolean doDFS(int curr, int parent, LinkedList<Integer>[] alist, int[] visited) {
+    static Boolean hasCycle(int curr, int parent, LinkedList<Integer>[] alist, int[] visited) {
         visited[curr] = 1; //visited this
         for (Integer child : alist[curr]) { //all neighbours
             if (visited[child] == 0) {
-                boolean cycle = doDFS(child, curr, alist, visited); //IMP: dont return if false; only return if true
+                boolean cycle = hasCycle(child, curr, alist, visited); //IMP: dont return if false; only return if true
                 if (cycle)
                     return true; //if false, check for next child
-            } else { //visited
-                if (child != parent) //make sure we are not looking at curr's parent
+            } else { // it is a visited vertex
+                if (child != parent) // we found a node that has been visited already and is not a parent. which means there is a cycle
                     return true;
             }
         }
@@ -73,7 +73,7 @@ public class DetectCycleInUndirectedGraph {
             visited[i] = 0; //all not visited to start with
         for (int i = 0; i < V; ++i) {
             if (visited[i] == 0)
-                if (doDFS(i, -1, alist, visited))
+                if (hasCycle(i, -1, alist, visited))
                     return true;
         }
         return false;

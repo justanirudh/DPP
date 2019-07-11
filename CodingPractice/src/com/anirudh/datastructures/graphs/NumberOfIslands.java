@@ -33,43 +33,48 @@ public class NumberOfIslands {
 
     //Do DFS in matrix
 
-    char[][] grid;
-    boolean[][] visited;
+    private boolean[][] visited;
+    private int[] di = {0,0,1,-1};
+    private int[] dj = {1,-1,0,0};
+    private int numRows;
+    private int numCols;
+    private char[][] grid;
 
-    int[] coordX = {0, 1, 0, -1};
-    int[] coordY = {1, 0, -1, 0};
-
-    boolean isValid(int x, int y) {
-        return x >= 0 && x < grid.length && y >= 0 && y < grid[0].length;
+    private boolean isValid(int row, int col){
+        if(row < 0 || col < 0 || row >= numRows || col >= numCols )
+            return false;
+        return true;
     }
 
-    void dfs(int x, int y) {
-        visited[x][y] = true; //white -> black (undiscovered -> finished)
-        for (int i = 0; i < 4; ++i) {
-            int nx = x + coordX[i];
-            int ny = y + coordY[i];
-            //DFS
-            if (isValid(nx, ny) && grid[nx][ny] == '1' && !visited[nx][ny])
-                dfs(nx, ny);
+    private void doDFS(int row, int col) {
+        visited[row][col] = true;
+        for(int i = 0; i < 4; ++i){
+            int x = row + di[i];
+            int y = col + dj[i];
+            if(isValid(x,y) && grid[x][y] == '1' && !visited[x][y]){
+                doDFS(x,y);
+            }
         }
     }
 
     public int numIslands(char[][] grid) {
-        if (grid == null || grid.length == 0)
+        if(grid == null || grid.length == 0)
             return 0;
         this.grid = grid;
-        visited = new boolean[grid.length][grid[0].length];
-        //helper function of DFS
-        int count = 0;
-        for (int i = 0; i < grid.length; ++i) {
-            for (int j = 0; j < grid[0].length; ++j) {
-                if (grid[i][j] == '1' && !visited[i][j]) {
-                    dfs(i, j);
-                    count++;
+        numRows = grid.length;
+        numCols = grid[0].length;
+        visited = new boolean[numRows][numCols]; //all false
+        int numIslands = 0;
+
+        for(int i = 0; i < numRows; ++i){
+            for(int j = 0; j < numCols; ++j){
+                if(grid[i][j] == '1' && !visited[i][j]){
+                    doDFS(i, j);
+                    numIslands++;
                 }
             }
         }
-        return count;
+        return numIslands;
     }
 
 

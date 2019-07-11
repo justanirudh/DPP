@@ -16,14 +16,18 @@ import static org.junit.Assert.assertEquals;
 public class Sandbox {
 
     public static void main(String[] args) {
-        Deque<Character> deq_arr = new ArrayDeque<>();//can be used for both stack and queue. faster than Stack and LL
-        deq_arr.addFirst('C');
-        deq_arr.addFirst('B');
-        deq_arr.addFirst('D');
-        System.out.println(deq_arr.removeFirst());
-        System.out.println(deq_arr.removeFirst());
-        System.out.println(deq_arr.removeFirst());
+//        Deque<Character> deq_arr = new ArrayDeque<>();//can be used for both stack and queue. faster than Stack and LL
+//        deq_arr.addFirst('C');
+//        deq_arr.addFirst('B');
+//        deq_arr.addFirst('D');
+//        System.out.println(deq_arr.removeFirst());
+//        System.out.println(deq_arr.removeFirst());
+//        System.out.println(deq_arr.removeFirst());
 
+        List<Integer> graph = new ArrayList<>(5);
+        System.out.println(graph.get(3));
+
+        Collections.reverseOrder();
 
     }
 

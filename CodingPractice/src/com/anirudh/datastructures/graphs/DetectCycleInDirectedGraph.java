@@ -35,8 +35,8 @@ class DetectCycleInDirectedGraph {
                         return true;
                 }
             }
+            recStack[v] = false; //remove vertex from recursion stack
         }
-        recStack[v] = false; //remove vertex from recursion stack
         return false;
     }
 
@@ -50,10 +50,7 @@ class DetectCycleInDirectedGraph {
         }
         return false;
     }
-}
 
-class Graph {
-    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int t = in.nextInt();
@@ -77,4 +74,4 @@ class Graph {
                 System.out.println(0);
         }
     }
-}/*Complete the function below*/
+}

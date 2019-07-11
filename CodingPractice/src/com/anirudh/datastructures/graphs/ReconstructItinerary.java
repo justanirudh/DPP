@@ -22,6 +22,7 @@ Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","SFO"]. But it
 
 import java.util.*;
 
+//Destructive DFS, like WordLadder
 class ReconstructItinerary {
 
     Map<String, PriorityQueue<String>> flights; //new: priority queue
@@ -43,6 +44,7 @@ class ReconstructItinerary {
         flights = new HashMap<>();
         path = new LinkedList<>();
         for (String[] ticket : tickets) {
+            //create a priority queue which always has lexicographically lowest elem as the 1st elem
             flights.putIfAbsent(ticket[0], new PriorityQueue<>()); //new: map has putIfAbsent
             flights.get(ticket[0]).add(ticket[1]);
         }

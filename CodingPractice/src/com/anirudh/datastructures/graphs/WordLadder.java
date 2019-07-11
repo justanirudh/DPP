@@ -29,8 +29,57 @@ Return 0 if there is no such transformation sequence.
 All words have the same length.
 All words contain only lowercase alphabetic characters.
  */
+
+//Destructive BFS, like ReconstructItinierary
 public class WordLadder {
 
+    private static boolean isDiffOne(String word1, String word2) {
+        int diffs = 0;
+        for (int i = 0; i < word1.length(); ++i) {
+            if (word1.charAt(i) != word2.charAt(i))
+                diffs++;
+            if (diffs > 1)
+                return false;
+        }
+        return true;
+    }
+
+    private static class Word {
+        String s;
+        Integer dist;
+
+        Word(String s, Integer dist) {
+            this.s = s;
+            this.dist = dist;
+        }
+    }
+
+    public static int ladderLength(String beginWord, String endWord, List<String> wL) {
+        Set<String> wordList = new HashSet<>(wL);
+        if (!wordList.contains(endWord))
+            return 0;
+        Queue<Word> q = new LinkedList<>();
+        q.add(new Word(beginWord, 1));
+        while (!q.isEmpty()) {
+            Word wCurr = q.remove();
+            String curr = wCurr.s;
+            Set<String> removeThese = new HashSet<>();
+            for (String str : wordList) {
+                if (isDiffOne(curr, str)) {
+                    if (str.equals(endWord))
+                        return wCurr.dist + 1;
+                    Word newW = new Word(str, wCurr.dist + 1);
+                    //transfer words from undiscovered wordList to discovered Word List
+                    q.add(newW);
+                    removeThese.add(str); //cant remove from wordList here: concurrentmodificationexception
+                }
+            }
+            wordList.removeAll(removeThese);
+        }
+        return 0;
+    }
+
+    //---------------------------------------------------------------------------------------------Method 2
 
     private int bfs(List<String> wordList, boolean[] discovered, List<List<Integer>> neighboursList, int[] distances, int beginIndex, String endWord) {
         Deque<Integer> q = new ArrayDeque<>();
@@ -54,18 +103,6 @@ public class WordLadder {
         return 0;
     }
 
-    private boolean isDiffOne(String word1, String word2) {
-        int diffs = 0;
-        for (int i = 0; i < word1.length(); ++i) {
-            if (word1.charAt(i) != word2.charAt(i))
-                diffs++;
-            if (diffs > 1)
-                return false;
-        }
-        return true;
-    }
-
-
     private List<Integer> getNeighboursOf(String word, List<String> wordList) {
         List<Integer> neighbours = new ArrayList<>();
         for (int i = 0; i < wordList.size(); ++i) {
@@ -76,7 +113,7 @@ public class WordLadder {
         return neighbours;
     }
 
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+    public int ladderLengthLong(String beginWord, String endWord, List<String> wordList) {
         if (!wordList.contains(endWord))
             return 0;
         int beginIndex;
@@ -104,39 +141,8 @@ public class WordLadder {
         return bfs(wordList, discovered, neighbours, distances, beginIndex, endWord);
     }
 
-    /*
-    //Method 2
-    private static class Word {
-        String s;
-        Integer dist;
 
-        public Word(String s, Integer dist) {
-            this.s = s;
-            this.dist = dist;
-        }
-    }
 
-    public static int ladderLength2(String beginWord, String endWord, Set<String> wordList) {
-        wordList.add(endWord);
-        Queue<Word> q = new LinkedList<>();
-        q.add(new Word(beginWord, 1));
-        while (!q.isEmpty()) {
-            Word wCurr = q.remove();
-            String curr = wCurr.s;
-            Set<String> removeThese = new HashSet<>();
-            for (String str : wordList) {
-                if (isDiffOne(curr, str)) {
-                    if (str.equals(endWord))
-                        return wCurr.dist + 1;
-                    Word newW = new Word(str, wCurr.dist + 1);
-                    q.add(newW);
-                    removeThese.add(str);
-                }
-            }
-            wordList.removeAll(removeThese);
-        }
-        return 0;
-    }*/
 
     //----------------------------------------------------------------
 

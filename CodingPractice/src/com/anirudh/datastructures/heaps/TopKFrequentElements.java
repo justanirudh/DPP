@@ -19,53 +19,50 @@ Your algorithm's time complexity must be better than O(n log n), where n is the 
 
 public class TopKFrequentElements {
 
-    class Pair {
+    private class Pair {
         int num;
         int count;
 
-        public Pair(int num, int count) {
+        Pair(int num, int count) {
             this.num = num;
             this.count = count;
         }
     }
 
+    private class CompareByCount implements Comparator<Pair> {
+        public int compare(Pair a, Pair b) {
+            return a.count - b.count;
+        }
+    }
+
     public List<Integer> topKFrequent(int[] nums, int k) {
-        //count the frequency for each element
-        HashMap<Integer, Integer> map = new HashMap<>();
+        //O(n) time
+        Map<Integer, Pair> counts = new HashMap<>(); //num ->counts
         for (int num : nums) {
-            if (map.containsKey(num)) {
-                map.put(num, map.get(num) + 1);
-            } else {
-                map.put(num, 1);
-            }
+            if (!counts.containsKey(num))
+                counts.put(num, new Pair(num, 0));
+            counts.put(num, new Pair(num, counts.get(num).count + 1));
         }
 
-        // create a min heap
-        Queue<Pair> queue = new PriorityQueue<>((Pair a, Pair b)  -> a.count - b.count); //sorting by count
+        Queue<Pair> pairs = new PriorityQueue<>(new CompareByCount());
 
-        //maintain a heap of size k.
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            Pair p = new Pair(entry.getKey(), entry.getValue());
-            queue.add(p);
-            if (queue.size() > k) {
-                Pair pp = queue.remove(); //removes from head (smallest value)
-                System.out.println(pp.num + ", count= " + pp.count);
-            }
+        //O(nlogK)
+        for (Pair value : counts.values()) {
+            pairs.offer(value);
+            if (pairs.size() > k)
+                pairs.poll(); //remove the least frequent
         }
 
-        //get all elements from the heap
-        List<Integer> result = new ArrayList<>();
-        while (queue.size() > 0) {
-            result.add(queue.remove().num);
+        //O(n)
+        List<Integer> res = new ArrayList<>();
+        for (Pair p : pairs) {
+            res.add(p.num);
         }
-        //reverse the order
-        Collections.reverse(result);
-
-        return result;
+        return res;
     }
 
     public static void main(String[] args) {
         TopKFrequentElements tk = new TopKFrequentElements();
-        tk.topKFrequent(new int[]{1,1,1,2,2,3}, 2);
+        tk.topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2);
     }
 }

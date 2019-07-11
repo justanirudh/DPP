@@ -70,6 +70,12 @@ public class ImportantDataTypesForNonIDETests {
         Queue<Node> queue = new LinkedList<Node>();
         System.out.println(queue);
 
+        //Resizable-array implementation of the Deque interface.
+        //This class is likely to be faster than Stack when used as a stack, and faster than LinkedList when used as a queue.
+        Queue<Character> betterQueue = new ArrayDeque<>();
+
+        Deque<Integer> betterStack = new ArrayDeque<>();
+
         //2
         class Pair{
             int num;
@@ -94,10 +100,6 @@ public class ImportantDataTypesForNonIDETests {
         //3
         //The preferred way to represent stacks/queues in java is the deque interface.
         Deque<Integer> deq = new LinkedList<>(); //doubly linked list, can be used for both stack and queue
-
-        //Resizable-array implementation of the Deque interface.
-        //This class is likely to be faster than Stack when used as a stack, and faster than LinkedList when used as a queue.
-        Deque<Character> deq_arr = new ArrayDeque<>();
 
     }
 }

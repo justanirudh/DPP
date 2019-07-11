@@ -60,7 +60,7 @@ public class ImplementQueueUsingStacks {
          * Get the front element.
          */
         public int peek() {
-            int lastElem = pop(); //pop and then push back
+            int lastElem = pop(); //pop and then push back, just reusing pop
             stackPop.push(lastElem);
             return lastElem;
         }
