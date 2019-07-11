@@ -12,12 +12,14 @@ import java.util.*;
 DescriptionHintsSubmissionsDiscussSolution
 Discuss Pick One
 For a undirected graph with tree characteristics, we can choose any node as the root. The result graph is then a rooted
-tree. Among all possible rooted trees, those with minimum height are called minimum height trees (MHTs). Given such a graph, write a function to find all the MHTs and return a list of their root labels.
+tree. Among all possible rooted trees, those with minimum height are called minimum height trees (MHTs).
+Given such a graph, write a function to find all the MHTs and return a list of their root labels.
 
 Format
 The graph contains n nodes which are labeled from 0 to n - 1. You will be given the number n and a list of undirected edges (each edge is a pair of labels).
 
-You can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
+You can assume that no duplicate edges will appear in edges.
+Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
 
 Example 1:
 
@@ -45,16 +47,87 @@ return [3, 4]
 
 Note:
 
-(1) According to the definition of tree on Wikipedia: “a tree is an undirected graph in which any two vertices are connected by exactly one path. In other words, any connected graph without simple cycles is a tree.”
+(1) According to the definition of tree on Wikipedia:
+“a tree is an undirected graph in which any two vertices are connected by exactly one path.
+In other words, any connected graph without simple cycles is a tree.”
 
 (2) The height of a rooted tree is the number of edges on the longest downward path between the root and a leaf.
 
 Credits:
 Special thanks to @dietpepsi for adding this problem and creating all test cases.
  */
-//LC 310 under construction
-public class MinimumHeightTrees {
 
+//BFS
+public class MinimumHeightTrees {
+    /*
+    Go from outside to inside. The most inside ones are the most in center, hence have the least height
+    graph required to traverse inside
+    degrees array required to get leaves for 1 iteration
+     */
+
+    public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+        if (n == 0) {
+            return new ArrayList<>();
+        } else if (n == 1) {
+            List<Integer> res = new ArrayList<>();
+            res.add(0);
+            return res;
+        }
+
+        //create and initialize graph and degrees array
+        List<Set<Integer>> graph = new ArrayList<>();
+        List<Integer> degrees = new ArrayList<>();
+        for (int i = 0; i < n; ++i) {
+            graph.add(new HashSet<>());
+            degrees.add(0);
+        }
+
+        //populate graph and degrees array
+        for (int[] edge : edges) {
+            //add it to graph
+            int node1 = edge[0];
+            int node2 = edge[1];
+            //populate graph
+            graph.get(node1).add(node2);
+            graph.get(node2).add(node1);
+            //increment degrees
+            degrees.set(node1, degrees.get(node1) + 1);
+            degrees.set(node2, degrees.get(node2) + 1);
+        }
+        //Graph and degrees initialized
+
+        Deque<Integer> leaves = new ArrayDeque<>();
+        for (int i = 0; i < n; ++i) {
+            if (degrees.get(i) == 1)
+                leaves.offer(i);
+        }
+
+        List<Integer> lastLeaves = new ArrayList<>();
+
+        while (!leaves.isEmpty()) { //BFS
+            lastLeaves = new ArrayList<>(leaves);
+            int size = leaves.size();
+            for (int i = 0; i < size; ++i) {
+                //remove the leaf by changing its degree to 0
+                int leaf = leaves.poll();
+                degrees.set(leaf,0);
+                //loop of all neighbours required even for a leaf because we are not really deleting from the graph.
+                // we are doing all bookkeeping by changing the degrees array
+                for (int neighbour : graph.get(leaf)) {
+                    degrees.set(neighbour, degrees.get(neighbour) - 1);
+                    if (degrees.get(neighbour) == 1)
+                        leaves.offer(neighbour);
+                }
+            }
+        }
+        return lastLeaves;
+    }
+
+
+    //------------------------------------------------------------------------
+/*
+Brute force
+ */
     //LOOK MA NO COLOR
     private class GraphNode {
         int val;
@@ -113,7 +186,7 @@ public class MinimumHeightTrees {
     }
 
 
-    public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+    public List<Integer> findMinHeightTreesSlow(int n, int[][] edges) {
 
         //do bfs in all vertices and find the ones with min height
         Map<Integer, GraphNode> graph = createGraph(n, edges);
