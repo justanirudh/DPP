@@ -33,7 +33,7 @@ The input is always valid. You may assume that evaluating the queries will resul
  */
 public class EvaluateDivision {
     /*
-    - No GraphNode required: Graph is from string to list of edge with weights
+    - No GraphNode required: Graph is from string to list of <edge with weights>
     - needed an extra visited map as we are using teh graph multiple times
     -- use a visited set. add to set if visited
     - needed an Edge class for per src-dest weights
@@ -61,8 +61,7 @@ public class EvaluateDivision {
         //getters and setters    
     }
 
-    private Map<String, Boolean> populateGraph(Map<String, Set<Edge>> graph, List<List<String>> equations, double[] values) {
-        Map<String, Boolean> visited = new HashMap<>();
+    private void populateGraph(Map<String, Set<Edge>> graph, List<List<String>> equations, double[] values) {
         for (int i = 0; i < equations.size(); ++i) {
             List<String> equation = equations.get(i); // [a,b]
             double value = values[i];// 2
@@ -70,19 +69,16 @@ public class EvaluateDivision {
             String node2 = equation.get(1);
             if (!graph.containsKey(node1)) {
                 graph.put(node1, new HashSet<>());
-                visited.put(node1, false);
             }
             if (!graph.containsKey(node2)) {
                 graph.put(node2, new HashSet<>());
-                visited.put(node2, false);
             }
             graph.get(node1).add(new Edge(value, node2));
             graph.get(node2).add(new Edge(1 / value, node1));
         }
-        return visited;
     }
 
-    private double doBFS(Map<String, Set<Edge>> graph, List<String> query, Map<String, Boolean> visited) {
+    private double doBFS(Map<String, Set<Edge>> graph, List<String> query, Set<String> visited) {
         String source = query.get(0);
         String dest = query.get(1);
         if (!graph.containsKey(source) || !graph.containsKey(dest))
@@ -95,11 +91,11 @@ public class EvaluateDivision {
 
         while (!paths.isEmpty()) {
             Path path = paths.poll();
-            visited.put(path.lastNode, true);
+            visited.add(path.lastNode);
             Set<Edge> edges = graph.get(path.lastNode);
             for (Edge edge : edges) {
                 String neighbour = edge.dest;
-                if (!visited.get(neighbour)) { //not visited
+                if (!visited.contains(neighbour)) { //not visited
                     double pathWeight = path.product * edge.weight;
                     if (neighbour.equals(dest)) {
                         return pathWeight; //found answer
@@ -120,13 +116,12 @@ public class EvaluateDivision {
         //1. create graph: adjacency list
         Map<String, Set<Edge>> graph = new HashMap<>();
         //1.1 populate graph
-        Map<String, Boolean> visited = populateGraph(graph, equations, values);
+        populateGraph(graph, equations, values);
         //2. traverse it and answer queries
         //do BFS for each query
         double[] res = new double[queries.size()];
         for (int i = 0; i < queries.size(); ++i) {
-            Map<String, Boolean> vis = new HashMap<>(visited);
-            res[i] = doBFS(graph, queries.get(i), vis);
+            res[i] = doBFS(graph, queries.get(i), new HashSet<>());
         }
         return res;
     }
