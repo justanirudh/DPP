@@ -9,7 +9,8 @@ import java.util.*;
 15. 3Sum
 Medium
 
-Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0?
+Find all unique triplets in the array which gives the sum of zero.
 
 Note:
 
@@ -31,14 +32,50 @@ public class ThreeSum {
 
     /*
     For O(1) space, sort, choose ith elem and use 2-pointer approach for i+1 to len-1 elements
+    https://leetcode.com/problems/3sum/discuss/7380/Concise-O(N2)-Java-solution
      */
+
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < nums.length; ++i) {
+            if (i != 0 && nums[i] == nums[i - 1]) //skip already visited pivot element
+                continue;
+            int target = 0 - nums[i];
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                int leftNum = nums[left];
+                int rightNum = nums[right];
+                int sum = leftNum + rightNum;
+                if (sum == target) {
+                    res.add(Arrays.asList(nums[i], leftNum, rightNum));
+                    while (left < nums.length && nums[left] == leftNum) {  //skip duplicates
+                        left++;
+                    }
+                    while (right >= 0 && nums[right] == rightNum) {  //skip duplicates
+                        right--;
+                    }
+                } else if (sum < target) {
+                    while (left < nums.length && nums[left] == leftNum) {  //skip duplicates
+                        left++;
+                    }
+                } else { //sum > target
+                    while (right >= 0 && nums[right] == rightNum) {  //skip duplicates
+                        right--;
+                    }
+                }
+            }
+        }
+        return res;
+    }
 
     /*
         Do TwoSum for each element (a + b = 0 - c)
         Time: O(N * N * 3log3) = O(N^2)
         Space: O(N)
      */
-    public List<List<Integer>> threeSum(int[] nums) {
+    public List<List<Integer>> threeSumMoreSpace(int[] nums) {
         Set<List<Integer>> sets = new HashSet<>();
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; ++i) {
