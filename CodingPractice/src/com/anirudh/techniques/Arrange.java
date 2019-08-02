@@ -1,6 +1,7 @@
 package com.anirudh.techniques;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by paanir on 2/3/17.
@@ -24,7 +25,7 @@ Return : [0, 1]
  */
 public class Arrange {
 
-    public static void arrange(ArrayList<Integer> a) {
+    public static void arrange(List<Integer> a) {
 
         boolean isOrdered = false;
 

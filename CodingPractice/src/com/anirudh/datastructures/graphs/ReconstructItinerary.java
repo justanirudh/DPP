@@ -30,12 +30,12 @@ class ReconstructItinerary {
 
     //topological sort. the one that gets finished first is prepended first
     //topological sort is nothing but outputting the reverse order of DFS
-    public void dfs(String departure) {
+    public void doDFS(String departure) {
         PriorityQueue<String> arrivals = flights.get(departure);
         //or can just mark it as discovered
         while (arrivals != null && !arrivals.isEmpty()) {
             String nextStop = arrivals.remove();
-            dfs(nextStop);
+            doDFS(nextStop);
         }
         path.addFirst(departure);//prepending
     }
@@ -43,12 +43,14 @@ class ReconstructItinerary {
     public List<String> findItinerary(String[][] tickets) {
         flights = new HashMap<>();
         path = new LinkedList<>();
+        //create graph
         for (String[] ticket : tickets) {
             //create a priority queue which always has lexicographically lowest elem as the 1st elem
             flights.putIfAbsent(ticket[0], new PriorityQueue<>()); //new: map has putIfAbsent
             flights.get(ticket[0]).add(ticket[1]);
         }
-        dfs("JFK");
+        //do DFS
+        doDFS("JFK");
         return path;
     }
 

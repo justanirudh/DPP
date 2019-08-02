@@ -1,4 +1,4 @@
-package com.anirudh.techniques;
+package com.anirudh.techniques.traverse_twice;
 
 /**
  * Created by paanir on 12/31/16.
@@ -24,21 +24,25 @@ public class TrappingRainwater {
         if (height == null || height.length <= 2) //if 2 bars, nothing to store water in
             return 0;
 
-        int[] left = new int[height.length];
-        left[0] = height[0];
-        for (int i = 1; i < height.length; ++i) //from left to right. finding left max boundary of each bar
-            left[i] = Integer.max(left[i - 1], height[i]);
+        int len = height.length;
 
-        int[] right = new int[height.length];
-        right[height.length - 1] = height[height.length - 1];
-        for (int i = height.length - 2; i >= 0; --i) //from right to left. finding right max boundary of each bar
-            right[i] = Integer.max(right[i + 1], height[i]);
+        //from left to right. finding left max boundary of each bar
+        int[] left = new int[len];
+        left[0] = height[0];
+        for (int i = 1; i < len; ++i)
+            left[i] = Math.max(left[i - 1], height[i]);
+
+        //from right to left. finding right max boundary of each bar
+        int[] right = new int[len];
+        right[len - 1] = height[len - 1];
+        for (int i = len - 2; i >= 0; --i)
+            right[i] = Math.max(right[i + 1], height[i]);
 
         int trapped = 0;
         //for every bar, (minimum of the left and right) - (height of the bar). taking min as barrage will hold water
-        //equal to lesser boundaries height.
-        for (int i = 0; i < height.length; ++i)
-            trapped += Integer.min(left[i], right[i]) - height[i];
+        //equal to lesser boundaries height. And minus height, because until height, there is solid bar
+        for (int i = 0; i < len; ++i)
+            trapped += Math.min(left[i], right[i]) - height[i];
         return trapped;
     }
 

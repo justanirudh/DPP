@@ -73,8 +73,12 @@ public class ImportantDataTypesForNonIDETests {
         //Resizable-array implementation of the Deque interface.
         //This class is likely to be faster than Stack when used as a stack, and faster than LinkedList when used as a queue.
         Queue<Character> betterQueue = new ArrayDeque<>();
+        betterQueue.offer('4');
+        betterQueue.poll();
 
-        Deque<Integer> betterStack = new ArrayDeque<>();
+        Deque<Integer> betterStack = new ArrayDeque<>(); //Stack<Integer> s = new ArrayDeque<>(); doesnt work
+        betterStack.push(5);
+        betterStack.pop();
 
         //2
         class Pair{

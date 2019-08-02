@@ -8,7 +8,26 @@ import java.util.List;
  * Created by paanir on 12/18/16.
  */
 
-//Given an integer array of size n, return the number of elements that appear more than ⌊ n/2 ⌋ times.
+/*
+169. Majority Element
+Easy
+
+Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+
+You may assume that the array is non-empty and the majority element always exist in the array.
+
+Example 1:
+
+Input: [3,2,3]
+Output: 3
+
+Example 2:
+
+Input: [2,2,1,1,1,2,2]
+Output: 2
+
+
+ */
 public class MajorityElement {
 
 
@@ -32,28 +51,27 @@ public class MajorityElement {
         return -9999;
     }
 
-    //O(1) space, O(1) time
+    //O(1) space, O(n) time
     /*
-    When applying the algorithm on an array, only one of below two cases might happen:
+    Approach 6: Boyer-Moore Voting Algorithm
 
-    A. the first candidate’s counter never drops to zero through out the array, or;
+Intuition
 
-    B. the first candidate’s counter drops to zero at some point (reset point).
+If we had some way of counting instances of the majority element as +1+1+1 and instances of any other element as −1-1−1, summing them would make it obvious that the majority element is indeed the majority element.
 
-If A, then apparently this candidate is the majority;
+Algorithm
 
-If B, then (let’s say we have an array of n elements, and by the first time counter drops to zero we have gone through x elements so far):
+Essentially, what Boyer-Moore does is look for a suffix sufsufsuf of nums where suf[0]suf[0]suf[0] is the majority element in that suffix. To do this, we maintain a count, which is incremented whenever we see an instance of our current candidate for majority element and decremented whenever we see anything else. Whenever count equals 0, we effectively forget about everything in nums up to the current index and consider the current number as the candidate for majority element. It is not immediately obvious why we can get away with forgetting prefixes of nums - consider the following examples (pipes are inserted to separate runs of nonzero count).
 
-    If the real majority element M never appeared in the subarray before the reset point, then it will still be the majority
-    in the remaining subarray — do the algorithm again on remaining subarray;
+[7, 7, 5, 7, 5, 1 | 5, 7 | 5, 5, 7, 7 | 7, 7, 7, 7]
 
-    If the majority element M has appeared in the subarray before reset point, then it must only have appeared up to x/2
-    times (because counter is now zero). Thus in remaining subarray we have (n-x) elements in total, of which at least
-    (n/2 +1 – x/2) = (n-x)/2 +1 are M [to be more precise, it's at least (floor(n/2) +1 - x/2) = floor((n-x)/2)+1 ],
-    making it still the majority in remaining subarray — do the algorithm again on remaining subarray;
+Here, the 7 at index 0 is selected to be the first candidate for majority element. count will eventually reach 0 after index 5 is processed, so the 5 at index 6 will be the next candidate. In this case, 7 is the true majority element, so by disregarding this prefix, we are ignoring an equal number of majority and minority elements - therefore, 7 will still be the majority element in the suffix formed by throwing away the first prefix.
 
-And there we have it like a recursive function. Note that this is when there IS a majority (more than half) in the array.
-When there's no majority, this process will give you a wrong candidate, that's why you always have to do a second pass to check.
+[7, 7, 5, 7, 5, 1 | 5, 7 | 5, 5, 7, 7 | 5, 5, 5, 5]
+
+Now, the majority element is 5 (we changed the last run of the array from 7s to 5s), but our first candidate is still 7. In this case, our candidate is not the true majority element, but we still cannot discard more majority elements than minority elements (this would imply that count could reach -1 before we reassign candidate, which is obviously false).
+
+Therefore, given that it is impossible (in both cases) to discard more majority elements than minority elements, we are safe in discarding the prefix and attempting to recursively solve the majority element problem for the suffix. Eventually, a suffix will be found for which count does not hit 0, and the majority element of that suffix will necessarily be the same as the majority element of the overall array.
      */
     public static int majorityElementLTMV(int[] nums) { //Linear Time Majority Vote
         int result = 0, count = 0;

@@ -2,6 +2,7 @@ package com.anirudh.general_algos;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by paanir on 3/29/17.
@@ -39,7 +40,7 @@ public class ThirdMax {
         if (nums.length == 2)
             return Math.max(nums[0], nums[1]);
         //for arrays of length >= 3
-        ArrayList<Integer> record = new ArrayList<>();
+        List<Integer> record = new ArrayList<>();
         for (int curr : nums) {
             if (!record.contains(curr)) {//unique elements
                 if (record.size() < 3) {

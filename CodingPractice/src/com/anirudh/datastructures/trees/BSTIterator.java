@@ -25,7 +25,7 @@ public class BSTIterator { //also a BT iterator as not using BST property at all
     O(1) time for hasNext()
      */
     Deque<TreeNode> leftTreeStack;
-    TreeNode next;
+    TreeNode ans;
 
     public BSTIterator(TreeNode root) { //O(logn) space, O(logn) time
         leftTreeStack = new ArrayDeque<>();
@@ -44,14 +44,14 @@ public class BSTIterator { //also a BT iterator as not using BST property at all
     }
 
     public int next() { //InOrder iterative
-        next = leftTreeStack.pop();
-        populateStack(next.right);
-        return next.val;
+        ans = leftTreeStack.pop();
+        populateStack(ans.right);
+        return ans.val;
     }
 
 //-------------------------------------------------------------------------------------------------------------------------
     public class BSTIteratorBad {
-        //Option2: create array with sorted elem. O(n) space (for both), O(1) time for next ,O(1) time for hasNext
+        //Option2: create array with sorted elem. O(n) space (for both), O(1) time for next ,O(1) time for hasNext, O(nlogn) initialization time
 
         private ArrayList<Integer> populateInOrderTraversal(TreeNode root, ArrayList<Integer> nums) {
             if (root != null) {

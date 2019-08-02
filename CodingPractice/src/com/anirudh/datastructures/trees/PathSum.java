@@ -28,12 +28,8 @@ public class PathSum {
             return hasSum(node.left, sumLeft - node.val);
         else if (node.left == null) //right not null
             return hasSum(node.right, sumLeft - node.val);
-        else {//both non-null
-            boolean left = hasSum(node.left, sumLeft - node.val);
-            if (left)
-                return true;
-            return hasSum(node.right, sumLeft - node.val);
-        }
+        else//both non-null
+            return hasSum(node.left, sumLeft - node.val) || hasPathSum(node.right, sumLeft - node.val);
     }
 
     public boolean hasPathSum(TreeNode root, int sum) {

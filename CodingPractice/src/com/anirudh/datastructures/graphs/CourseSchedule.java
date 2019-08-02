@@ -1,9 +1,6 @@
 package com.anirudh.datastructures.graphs;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by paanir on 9/29/17.
@@ -30,7 +27,8 @@ There are a total of 2 courses to take. To take course 1 you should have finishe
 public class CourseSchedule {
 
     boolean[] visited;
-    Deque<Integer> path;
+    Set<Integer> path;
+
 
     // course number (cn) -> all courses that can be taken if cn is taken
     private List<List<Integer>> createGraph(int numCourses, int[][] prerequisites) {
@@ -48,7 +46,7 @@ public class CourseSchedule {
 
     private boolean hasCycle(int src, List<List<Integer>> graph) {
         visited[src] = true;
-        path.push(src);
+        path.add(src);
         List<Integer> dists = graph.get(src);
         for (int dist : dists) {
             if (!visited[dist]) {
@@ -63,14 +61,14 @@ public class CourseSchedule {
             }
         }
         //no cycles in this traversal
-        path.pop();
+        path.remove(src);
         return false;
     }
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         List<List<Integer>> graph = createGraph(numCourses, prerequisites);
         visited = new boolean[numCourses];
-        path = new ArrayDeque<>();
+        path = new HashSet<>();
         for (int i = 0; i < numCourses; ++i) {//go over all trees
             boolean cycleExists = hasCycle(i, graph);
             if (cycleExists)

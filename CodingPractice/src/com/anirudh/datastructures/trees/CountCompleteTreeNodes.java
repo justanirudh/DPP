@@ -15,16 +15,6 @@ are as far left as possible. It can have between 1 and 2h nodes inclusive at the
  */
 public class CountCompleteTreeNodes {
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     //O(n)
     int traverseInorderSlow(TreeNode tn, int count) {
         if (tn == null)
@@ -37,6 +27,7 @@ public class CountCompleteTreeNodes {
     public int countNodesSlow(TreeNode root) {
         return traverseInorderSlow(root, 0);
     }
+//--------------------------------------------------------------------------------------
 
     //better soln. O(logn)
 

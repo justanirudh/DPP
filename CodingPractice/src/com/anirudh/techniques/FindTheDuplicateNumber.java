@@ -19,9 +19,11 @@ There is only one duplicate number in the array, but it could be repeated more t
 public class FindTheDuplicateNumber {
 
     //or do as in SetMismatch
+    //Like finding a cycle in a graph
     public int findDuplicate(int[] nums) {
-        if (nums == null || nums.length == 0 || nums.length == 1)
+        if (nums == null || nums.length <= 0)
             return -1;
+        //size of nums is n+1 (indices from 0 to n), so can safely go to nums[any elem]
         int slow = nums[0];
         int fast = nums[nums[0]];
         while (slow != fast) {

@@ -1,4 +1,4 @@
-package com.anirudh.subarray_substring;
+package com.anirudh.subarray_substring.string_manipulation;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.anirudh.general_algos.basics;
+package com.anirudh.techniques;
 
 /**
  * Created by paanir on 3/7/17.

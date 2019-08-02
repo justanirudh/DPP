@@ -1,4 +1,4 @@
-package com.anirudh.techniques;
+package com.anirudh.techniques.converging_pointers;
 
 /**
  * Created by paanir on 12/28/16.
@@ -12,6 +12,8 @@ forms a container, such that the container contains the most water.
 
 Note: You may not slant the container and n is at least 2.
  */
+//Easier than trapping rainwater: only 2 lines exist as compared to rainwater where all exist
+//similar to 2-sum
 public class ContainerWithMostWater {
 
     //O(n^2) solution, enumerate all sols

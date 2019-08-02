@@ -23,6 +23,8 @@ Note that the answer must be a substring,  "pwke" is a subsequence and not a sub
  */
 
 //similar to longest substring with atmost k distinct characters
+
+//Sliding window
 public class LongestSubstringWithoutRepeatingCharacters {
 
     private static int lengthOfLongestSubstring(String s) {
@@ -52,11 +54,12 @@ public class LongestSubstringWithoutRepeatingCharacters {
         return max;
     }
 
-}
-
-
     public static void main(String args[]) {
         String s = "pwwkew";
         System.out.println(lengthOfLongestSubstring(s));
     }
 }
+
+
+
+

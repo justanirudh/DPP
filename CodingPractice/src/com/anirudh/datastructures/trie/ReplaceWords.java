@@ -3,6 +3,7 @@ package com.anirudh.datastructures.trie;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.StringJoiner;
 
 /**
  * Created by paanir on 12/27/17.
@@ -42,13 +43,14 @@ public class ReplaceWords {
         TrieNode[] children; //for its children
 
         TrieNode() {
-            children = new TrieNode[26]; //each ndoe can have 26 children amx for each letter
+            children = new TrieNode[26]; //each node can have 26 children max for each letter
         }
     }
 
     public String replaceWords(List<String> dict, String sentence) {
         //create Trie
         TrieNode trieRoot = new TrieNode();
+        //add all words to the sam trie
         for (String root : dict) {
             //add to Trie
             TrieNode curr = trieRoot;
@@ -64,9 +66,10 @@ public class ReplaceWords {
 
         String[] words = sentence.split(" ");
 
+        StringJoiner sj = new StringJoiner(" ");
         //get roots
-        for (int i = 0; i < words.length; ++i) {
-            char[] wordArr = words[i].toCharArray();
+        for (String word : words) {
+            char[] wordArr = word.toCharArray();
             TrieNode curr = trieRoot;
             for (char ch : wordArr) {
                 int idx = ch - 'a';
@@ -75,10 +78,10 @@ public class ReplaceWords {
                 curr = curr.children[idx];
             }
             if (curr.word != null) //if reached a leaf, then got the smallest root word (as breaks in first discovery of word)
-                words[i] = curr.word;
+                sj.add(curr.word);
             //else keep the word as it is
         }
-        return String.join(" ", words);
+        return sj.toString();
     }
 
 

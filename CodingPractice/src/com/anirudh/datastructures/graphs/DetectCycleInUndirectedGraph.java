@@ -51,7 +51,8 @@ In the second test case there is a graph with 3 vertices and 3 edges from 0 to 1
  */
 
 //If it has been visited and it NOT the parent (Simplification of directed graphs)
-public class DetectCycleInUndirectedGraph {
+public class DetectCycleInUndirectedGraph { //should basically be a tree
+
     static Boolean hasCycle(int curr, int parent, LinkedList<Integer>[] alist, int[] visited) {
         visited[curr] = 1; //visited this
         for (Integer child : alist[curr]) { //all neighbours

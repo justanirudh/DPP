@@ -26,8 +26,11 @@ public class MergeSort {
         int[] rightArr = new int[rLen];
 
         //make temp arrays
-        System.arraycopy(arr, start, leftArr, 0, lLen); //start, startpos, dest, destpos, len
+        System.arraycopy(arr, start, leftArr, 0, lLen); //src, srcPos, dest, destPos, len
+//        leftArr = Arrays.copyOfRange(arr, start, mid + 1);
+
         System.arraycopy(arr, mid + 1, rightArr, 0, rLen);
+//        rightArr = Arrays.copyOfRange(arr, mid, end + 1);
 
         //merge into original array with rightArr order
         int i = 0, j = 0, k = start;

@@ -1,4 +1,4 @@
-package com.anirudh.techniques;
+package com.anirudh.techniques.converging_pointers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,12 +26,9 @@ return [0, 1].
         Map<Integer, Integer> sums = new HashMap<>();
         for (int i = 0; i < nums.length; ++i) {
             int num = nums[i];
-            int otherNum = target - num;
-            if (sums.containsKey(otherNum) && i != sums.get(otherNum)) { //if other num is also a key to map and it is not the same element we found earlier, we have found the element
-                int[] res = new int[2];
-                res[0] = sums.get(otherNum);
-                res[1] = i;
-                return res;
+            int complement = target - num;
+            if (sums.containsKey(complement)) {//if complement is already a key to map
+                return new int[]{sums.get(complement), i};
             }
             sums.put(num, i);
         }
@@ -55,16 +52,16 @@ return [0, 1].
     public int[] twoSumSortedInput(int[] numbers, int target) {
         if (numbers.length == 0)
             return new int[0];
-        int front = 0;
-        int back = numbers.length - 1;
-        while (front < back) {
-            int sum = numbers[front] + numbers[back];
+        int left = 0;
+        int right = numbers.length - 1;
+        while (left < right) {
+            int sum = numbers[left] + numbers[right];
             if (sum == target) {
-                return new int[]{front + 1, back + 1};
+                return new int[]{left + 1, right + 1}; //+1 because arrays are not zero-based :-|
             } else if (sum < target)
-                front++;
+                left++;
             else
-                back--;
+                right--;
         }
         return new int[0];
     }

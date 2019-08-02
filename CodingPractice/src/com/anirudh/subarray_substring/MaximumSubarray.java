@@ -12,35 +12,30 @@ the contiguous subarray [4,-1,2,1] has the largest sum = 6.
  */
 public class MaximumSubarray {
 
-    //DP, O(n) solution
-    public int maxSubArray(int[] nums) {
-        //http://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
+    //Greedy, O(n) solution
+    //https://leetcode.com/problems/maximum-subarray/solution/
         /*
-        Kadane's algo
-
-        Initialize:
-        max_so_far = 0
-        max_ending_here = 0
-
-        Loop for each element of the array
-        (a) max_ending_here = max_ending_here + a[i]
-        (b) if(max_ending_here < 0)
-            max_ending_here = 0
-        (c) if(max_so_far < max_ending_here)
-            max_so_far = max_ending_here
-        return max_so_far
-
+        to find the subarray
+        record when each potential array starts (choose nums[i] for maxEndingHere) until next nums[i]
+        find the overall max position in that array, this is the end
+         find the nums[i] chosen as we go left from this index, this is the start
+         return {start index, end index}
          */
-        //O(n)
-        int maxSoFar = nums[0];
-        int maxEndingHere = nums[0];
+    public static int maxSubArray(int[] nums) {
 
-        for (int i=1;i<nums.length;++i){
-            maxEndingHere = Math.max(maxEndingHere + nums[i], nums[i]);
-            maxSoFar = Math.max(maxSoFar, maxEndingHere);
+
+        if (nums == null || nums.length == 0)
+            return 0;
+
+        int maxEndingHere = nums[0], max = nums[0];
+        int start = 0, end = 0;
+
+        for (int i = 1; i < nums.length; ++i) {
+            maxEndingHere = Math.max(nums[i], maxEndingHere + nums[i]); //either start a new subarray or continue from prev
+            max = Math.max(maxEndingHere, max); //finding highest maxEndingHere
         }
+        return max;
 
-        return maxSoFar;
     }
 
     //------------------------------------------
@@ -64,6 +59,11 @@ public class MaximumSubarray {
             }
         }
         return maxSum;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {-2,1,-3,4,-1,2,1,-5,4};
+        System.out.println(maxSubArray(arr));
     }
 
 }

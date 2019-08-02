@@ -54,7 +54,7 @@ public class SurroundedRegions {
     private void doDFS(int i, int j) {
         visited[i][j] = true;
         /*
-        Look at all 4 neighbours and keep converting to #s until we are donewith the DFS
+        Look at all 4 neighbours
          */
         for (int k = 0; k < 4; ++k) {
             int x = i + dx[k];
@@ -76,6 +76,7 @@ public class SurroundedRegions {
 
         visited = new boolean[numRows][numCols]; //all false
 
+        //do DFs and populate visited array
         for (int i = 0; i < numRows; ++i) {
             for (int j = 0; j < numCols; ++j) {
                 if (isBorderO(i, j)) {
@@ -84,6 +85,7 @@ public class SurroundedRegions {
             }
         }
 
+        //convert non-visited Os to Xs
         for (int i = 0; i < numRows; ++i) {
             for (int j = 0; j < numCols; ++j) {
                 if (board[i][j] == 'O' && !visited[i][j])

@@ -11,7 +11,7 @@ import com.anirudh.general_algos.basics.QueueUsingLL
 /*
 Shortest path in a Binary Maze
 Given a MxN matrix where each element can either be 0 or 1. We need to find the shortest path between a given source
-cell to a destination cell. The path can only be created out of a cell if its value is 1.
+cell to a destination cell. The path can only be created out of 1
 
 Expected time complexity is O(MN).
 

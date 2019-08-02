@@ -1,6 +1,7 @@
 package com.anirudh.subarray_substring.string_manipulation;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by paanir on 4/11/17.
@@ -32,8 +33,9 @@ public class LongestPalindrome {
      */
     public int longestPalindrome(String s) {
         char[] arr = s.toCharArray();
-        HashMap<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<>();
         int count = 0;
+
         //make map
         for (char c : arr) {
             if (map.containsKey(c))
@@ -46,8 +48,7 @@ public class LongestPalindrome {
         for (int curr : map.values()) {
             if (curr % 2 != 0) { //odd
                 count += curr - 1;
-                if (!oneOdd)
-                    oneOdd = true;
+                oneOdd = true;
             } else { //even
                 count += curr;
             }

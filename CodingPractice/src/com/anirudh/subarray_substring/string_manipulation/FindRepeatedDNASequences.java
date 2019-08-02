@@ -32,7 +32,7 @@ public class FindRepeatedDNASequences {
             if (!added) //add returns false if sub already present
                 res.add(sub); //also needs to be hashset so that if >= 3 repetitions of a dna segment, it only counts as 1
         }
-        return new ArrayList<String>(res);
+        return new ArrayList<>(res);
     }
 
     public static void main(String[] args) {

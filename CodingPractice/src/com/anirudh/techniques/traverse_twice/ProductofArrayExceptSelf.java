@@ -1,4 +1,4 @@
-package com.anirudh.techniques;
+package com.anirudh.techniques.traverse_twice;
 
 /**
  * Created by paanir on 8/5/17.
@@ -19,7 +19,7 @@ Could you solve it with constant space complexity? (Note: The output array does 
 space for the purpose of space complexity analysis.)
  */
 public class ProductofArrayExceptSelf {
-    public int[] productExceptSelf(int[] nums) {
+    public static int[] productExceptSelf(int[] nums) {
         int[] res = new int[nums.length];
 
         int tmp = 1;
@@ -27,6 +27,12 @@ public class ProductofArrayExceptSelf {
             res[i] = tmp; //no * as compared to below loop
             tmp *= nums[i];
         }
+
+        for(int num : res){
+            System.out.print(num + ",");
+        }
+        System.out.println();
+
         //res[i] has product of all numbers to its left
 
         //now multiplying existing values with values to the right of each number
@@ -35,6 +41,16 @@ public class ProductofArrayExceptSelf {
             res[i] *= tmp;
             tmp *= nums[i];
         }
+
+        for(int num : res){
+            System.out.print(num + ",");
+        }
+
         return res;
+    }
+
+    public static void main(String[] args) {
+        int[] in = {5,8,10,12};
+        int[] res = productExceptSelf(in);
     }
 }

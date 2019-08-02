@@ -21,7 +21,7 @@ The solution set must not contain duplicate triplets.
     (-1, 0, 1)
     (-1, -1, 2)
 * */
-object ThreeSum extends App {
+object ScalaThreeSum extends App {
 
   def findThreeSums(arr: Seq[Int], target: Int): Seq[Seq[Int]] = {
     var result: Seq[Seq[Int]] = Seq()

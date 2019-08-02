@@ -35,7 +35,7 @@ public class SetMismatch {
         int dup = 0;
         for (int i = 0; i < len; ++i) {
             int curr = Math.abs(nums[i]);
-            if (nums[curr - 1] < 0) {
+            if (nums[curr - 1] < 0) { //the num[dup element] will be touched twice, hence checking if it already touched
                 dup = curr;
                 break;
             } else
@@ -44,7 +44,8 @@ public class SetMismatch {
 
         //find expected number
         int expSum = len * (len + 1) / 2;
-        int expElem = expSum - (actSum - dup);
+        int actSumWithoutDup = actSum - dup;
+        int expElem = expSum - actSumWithoutDup;
 
         //return
         return new int[]{dup, expElem};

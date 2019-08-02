@@ -26,6 +26,7 @@ word = "ABCB", -> returns false.
     DFS in matrix (as multiple sources possible)
     like finding cycle in a directed graph. maintain a record of path
  */
+//backtracking
 public class WordSearch {
     char[][] board;
     String word;
@@ -62,7 +63,7 @@ public class WordSearch {
 
         //if all neighbours not suitable, this means we took a wrong turn
         //hence we need to re-mark it to be unexplored so that it can be later explored via some other path
-        //just discovered 'unrolling' or recursion stack that we use sometimes in DFS by myself!
+        //just discovered 'unrolling' or recursion stack that we use for backtracking in DFS by myself!
         finished[x][y] = false;
 
         return false;

@@ -22,35 +22,42 @@ For example,
 ]
  */
 public class Permutations {
-    public static List<Integer> addElement(List<Integer> arr, int num, int index) {
-        List<Integer> newList = new ArrayList<Integer>(arr);
+
+
+    /*
+    Complexity:
+    for calculating N!
+    time complexity = N! + (N-1)! + (N-2)! + . . . .1!
+     */
+    public static List<Integer> addElement(List<Integer> perm, int num, int index) {
+        List<Integer> newList = new ArrayList<>(perm);
         newList.add(index, num);
         return newList;
     }
 
     public static List<List<Integer>> permute(int[] nums) {
 
-        List<List<Integer>> permutations = new ArrayList<>();
+        List<List<Integer>> perms = new ArrayList<>();
         if (nums.length == 0)
-            return permutations;
+            return perms;
 
-        ArrayList<Integer> first = new ArrayList<>();
+        List<Integer> first = new ArrayList<>();
         first.add(nums[0]);
-        permutations.add(first);
+        perms.add(first);
 
         for (int n = 1; n < nums.length; ++n) {
             int num = nums[n];
-            List<List<Integer>> permsTemp = new ArrayList<>();
+            List<List<Integer>> newPerms = new ArrayList<>();
 
-            for (List<Integer> arr : permutations) {//for each permutation so far
-                for (int i = 0; i <= arr.size(); i++) {//in every index of the above permutation
-                    List<Integer> newArr = addElement(arr, num, i);//add the element
-                    permsTemp.add(newArr);//remove the previous and add the new one (essentially)
+            for (List<Integer> perm : perms) {//for each permutation so far
+                for (int i = 0; i <= perm.size(); i++) {//in every index of the above permutation
+                    List<Integer> newArr = addElement(perm, num, i);//add the element
+                    newPerms.add(newArr);//remove the previous element (with one less number) and add the new one (essentially)
                 }
             }
-            permutations = permsTemp;//replace old with new
+            perms = newPerms;//replace old with new
         }
-        return permutations;
+        return perms;
     }
 
     public static void main(String[] args) {

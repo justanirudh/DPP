@@ -1,5 +1,6 @@
 package com.anirudh.subarray_substring;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -7,6 +8,7 @@ import java.util.LinkedList;
  * Created by paanir on 2/5/17.
  */
 /*
+239. Sliding Window Maximum
 Given an array nums, there is a sliding window of size k which is moving from the very left of the array to the very
 right. You can only see the k numbers in the window. Each time the sliding window moves right by one position.
 
@@ -36,7 +38,14 @@ public class SlidingWindowMaximum {
             return new int[0];
         int len = nums.length;
         int[] res = new int[len - k + 1]; //result
-        Deque<Integer> deq = new LinkedList<>(); //indices in inc order + only those necessary
+        /*
+        first element of the deque should always be the index of the max element of the current window
+        loop1: for a new element, before inserting it, remove all indices that are out of the window
+        loop2: for a new element, before inserting, we remove all elements in the deque smaller than the current element
+        before inserting the new element (2nd while loop)
+        loop1 should be run before loop2 so that we remove invalid elements first
+         */
+        Deque<Integer> deq = new ArrayDeque<>(); //indices in inc order + only those necessary
         for (int i = 0; i < len; ++i) {
             //remove all not in window from head (older elems)
             while (!deq.isEmpty() && deq.peek() < i - k + 1)
@@ -47,8 +56,9 @@ public class SlidingWindowMaximum {
             //add new index to queue
             deq.offer(i);
             //add to res after i >=k - 1 (for first k-1 elements, no addition in res )
-            if (i >= k - 1)
-                res[i - k + 1] = nums[deq.peek()];
+            if (i < k - 1)
+                continue;
+            res[i - k + 1] = nums[deq.peek()];
         }
         return res;
     }

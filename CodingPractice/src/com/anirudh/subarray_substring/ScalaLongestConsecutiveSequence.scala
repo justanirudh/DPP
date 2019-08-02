@@ -12,8 +12,9 @@ Your algorithm should run in O(n) complexity
 * */
 object ScalaLongestConsecutiveSequence extends App{
 
-  //using NO library functions
-  //assuming no repetitions in input array
+/*
+bad implementation, rewrite: https://leetcode.com/problems/longest-consecutive-sequence/solution/
+ */
   def findLongestConseq(input:Seq[Int]):Seq[Int] = {
     var max = 0
     for(elem <- input){

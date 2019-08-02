@@ -55,7 +55,11 @@ public class SerializeAndDeserializeBST {
         return in.toString() + ";" + pre.toString();
     }
 
-    private int doBinarySearch(int start, int end, List<Integer> inOrder, int val) {
+
+    private List<Integer> inOrder;
+    private List<Integer> preOrder;
+
+    private int doBinarySearch(int start, int end, int val) {
         if (start > end)
             return -1; //not found
         int mid = start + (end - start) / 2;
@@ -63,27 +67,27 @@ public class SerializeAndDeserializeBST {
         if (val == midElem)
             return mid;
         else if (val < midElem)
-            return doBinarySearch(start, mid - 1, inOrder, val);
+            return doBinarySearch(start, mid - 1, val);
         else
-            return doBinarySearch(mid + 1, end, inOrder, val);
+            return doBinarySearch(mid + 1, end, val);
     }
 
 
-    private int getLeftSubtreeSize(int rootValIx, int inStartIx) {
-        return rootValIx - inStartIx + 1;
+    private int getLeftSubtreeSize(int rootValIdx, int inStartIdx) {
+        return rootValIdx - inStartIdx + 1;
     }
 
-    private TreeNode contructTree(int preIx, int inStartIx, int inEndIx, List<Integer> inOrder, List<Integer> preOrder) {
+    private TreeNode contructTree(int preIdx, int inStartIdx, int inEndIdx) {
 
-        if (inStartIx > inEndIx || preIx >= preOrder.size()) //it is a leaf
+        if (inStartIdx > inEndIdx || preIdx >= preOrder.size()) //it is a leaf
             return null;
 
-        int rootVal = preOrder.get(preIx); //root
+        int rootVal = preOrder.get(preIdx); //root
         TreeNode root = new TreeNode(rootVal);
+        int rootIdx = doBinarySearch(inStartIdx, inEndIdx, rootVal);
 
-        int rootIx = doBinarySearch(inStartIx, inEndIx, inOrder, rootVal);
-        root.left = contructTree(preIx + 1, inStartIx, rootIx - 1, inOrder, preOrder);
-        root.right = contructTree(preIx + getLeftSubtreeSize(rootIx, inStartIx), rootIx + 1, inEndIx, inOrder, preOrder);
+        root.left = contructTree(preIdx + 1, inStartIdx, rootIdx - 1);
+        root.right = contructTree(preIdx + getLeftSubtreeSize(rootIdx, inStartIdx), rootIdx + 1, inEndIdx);
         return root;
     }
 
@@ -93,16 +97,16 @@ public class SerializeAndDeserializeBST {
         1. Get the 1st element of preOrder list
         2. find the element in inOrder list (do binary search)
         3. thats the root
-        4. root.left = repeat 1. and 2. (1) would be the Ix(1) + 1 in preOrder list
-        5. root.right = repeat 1. and 2. (1) would be Ix(1) + 1 + size_of_left_subtree  in preOrder list
+        4. root.left = repeat 1. and 2. (1) would be the Idx(1) + 1 in preOrder list
+        5. root.right = repeat 1. and 2. (1) would be Idx(1) + 1 + size_of_left_subtree  in preOrder list
          */
         if (data == null)
             return null;
         String[] traversals = data.split(";");
-        List<Integer> inOrder = Arrays.stream(traversals[0].split(",")).map(Integer::parseInt).collect(Collectors.toList());
-        List<Integer> preOrder = Arrays.stream(traversals[1].split(",")).map(Integer::parseInt).collect(Collectors.toList());
+        inOrder = Arrays.stream(traversals[0].split(",")).map(Integer::parseInt).collect(Collectors.toList());
+        preOrder = Arrays.stream(traversals[1].split(",")).map(Integer::parseInt).collect(Collectors.toList());
 
-        return contructTree(0, 0, inOrder.size() - 1, inOrder, preOrder);
+        return contructTree(0, 0, inOrder.size() - 1);
     }
 
 }

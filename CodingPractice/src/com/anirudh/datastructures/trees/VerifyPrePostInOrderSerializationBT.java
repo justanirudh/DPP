@@ -42,8 +42,6 @@ Example 3:
 "9,#,#,1"
 Return false
 
-
-
  */
 
 //solution: http://www.programcreek.com/2015/01/leetcode-verify-preorder-serialization-of-a-binary-tree-java/

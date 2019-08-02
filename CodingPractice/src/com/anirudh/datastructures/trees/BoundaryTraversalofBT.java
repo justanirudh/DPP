@@ -49,6 +49,7 @@ public class BoundaryTraversalofBT {
             getRightBoundary(node.left, boundary);
             boundary.add(Integer.toString(node.data));
         }
+        //dont add leaf
     }
 
     void getLeaves(Node node, List<String> boundary) {
@@ -68,7 +69,9 @@ public class BoundaryTraversalofBT {
         boundary.add(Integer.toString(node.data));//add root
 
         getLeftBoundary(node.left, boundary);
-        getLeaves(node, boundary); //from left to right
+        //Not doing getLeaves(node, boundary) because it will add the root again, which has already been added above
+        getLeaves(node.left, boundary); //from left to right
+        getLeaves(node.right, boundary); //from left to right
         getRightBoundary(node.right, boundary);
 
         System.out.print(String.join(" ", boundary));
