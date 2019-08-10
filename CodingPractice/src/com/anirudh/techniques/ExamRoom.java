@@ -1,7 +1,6 @@
 package com.anirudh.techniques;
 
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Created by paanir on 8/3/19.
@@ -45,79 +44,91 @@ Submissions
 42,831
  */
 
-public class ExamRoom {
+/*
+S: O(n)
+seat: T = O(logn)
+leave: T = O(logn)
+ */
+class ExamRoom {
+    private int N;
+    private TreeSet<Interval> intervals;
+    private Map<Integer, Interval> startMap; //use these maps to remove intervals from intervals_set when leave() is called in O(logn) time, rather than O(n) (O(n) when doing a linear search)
+    private Map<Integer, Interval> endMap;
 
-    TreeSet<Integer> positions;
-    int numSeats;
+    private class Interval {
+        int x, y, dist;
+
+        Interval(int x, int y) {
+            this.x = x;
+            this.y = y;
+            if (x == -1) { //dist used for reverse sorting
+                this.dist = y;
+            } else if (y == N) {
+                this.dist = N - 1 - x;
+            } else {
+                this.dist = Math.abs(x - y) / 2;
+            }
+        }
+    }
+
+    private void add(Interval interval) {
+        intervals.add(interval);
+        startMap.put(interval.x, interval);
+        endMap.put(interval.y, interval);
+    }
+
+    private void remove(Interval interval) {
+        intervals.remove(interval);
+        startMap.remove(interval.x);
+        endMap.remove(interval.y);
+    }
 
     public ExamRoom(int N) {
-        positions = new TreeSet<>();
-        numSeats = N;
+        this.N = N;
+        this.startMap = new HashMap<>();
+        this.endMap = new HashMap<>();
+        intervals = new TreeSet<>((a, b) -> {
+            int distA = a.dist;
+            int distB = b.dist;
+            if (distA != distB) {
+                return distB - distA; //reverse sorted
+            } else {
+                return a.x - b.x; //take lowest index
+            }
+        });
+        Interval init = new Interval(-1, N);
+        add(init);
     }
 
-    /*
-    T = O(N)
-     */
+    //
     public int seat() {
-        int res = -1;
-
-        //base cases
-        if (positions.size() == 0) { //empty seats, then sit in the front
-            res = 0;
-            positions.add(res);
-            return res;
+        Interval interval = intervals.pollFirst(); //get the largest interval
+        int pos;
+        if (interval.x == -1) { //student will take first seat
+            pos = 0;
+        } else if (interval.y == N) { //student will take last seat
+            pos = N - 1;
+        } else {
+            pos = interval.x + interval.dist;
         }
 
-        //positions size >=1
+        Interval left = new Interval(interval.x, pos);
+        Interval right = new Interval(pos, interval.y);
+        add(left);
+        add(right);
 
-        /*
-        1. check max distance in every interval
-        2. if 0th position is free, check distance from nearest
-        3. If last position id free, check distance from nearest
-        return position with Min (1,2,3)
-         */
-
-        int maxD = Integer.MIN_VALUE;
-
-        //Opt-1
-        Integer prev = null, curr;
-        for (Integer pos : positions) {
-            if (prev == null) {
-                prev = pos;
-                continue;
-            }
-            curr = pos;
-            int currD = (curr - prev) / 2;
-            if (currD > maxD) { //strictly greater, not equals. because if we find equals, we will ignore as we need to find one with lowest index
-                maxD = currD;
-                res = prev + currD;
-            }
-            prev = curr;
-        }
-
-        //Opt-2
-        if (!positions.contains(0)) {
-            int currD = positions.first(); //no d/2 because we will place the elem at 0, not in between 0 and first pos
-            if (currD >= maxD) { //>= because if this is true, we have found a new lowest index that fulfills all constraints
-                maxD = currD;
-                res = 0;
-            }
-        }
-
-        //Opt-3
-        int lastPos = numSeats - 1;
-        if (!positions.contains(lastPos)) {
-            int currD = lastPos - positions.last();
-            if (currD > maxD) //strictly greater, not equals
-                res = lastPos;
-        }
-
-        positions.add(res);
-        return res;
+        return pos;
     }
 
-    // T = O(logn) This implementation provides guaranteed log(n) time cost for the basic operations (add, remove and contains).
+    //remove 2 intervals and add a new merged interval
     public void leave(int p) {
-        positions.remove(p);
+        Interval left = endMap.get(p);
+        Interval right = startMap.get(p);
+        Interval merged = new Interval(left.x, right.y);
+        remove(left);
+        remove(right);
+        add(merged);
     }
+
 }
+

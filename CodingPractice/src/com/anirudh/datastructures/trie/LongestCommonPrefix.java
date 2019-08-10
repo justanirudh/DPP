@@ -9,6 +9,9 @@ DescriptionHintsSubmissionsDiscussSolution
 DiscussPick One
 Write a function to find the longest common prefix string amongst an array of strings.
  */
+/*
+O(N) time, O(N) space
+ */
 public class LongestCommonPrefix {
 
     //Trie looks like this, in brackets is the value of word: null(null) -> b(null) -> a(null) -> t(bat)
@@ -25,8 +28,8 @@ public class LongestCommonPrefix {
     }
 
     void addToTrie(TrieNode curr, String str) {
-        char[] arr = str.toCharArray();
-        for (char ch : arr) {
+        for (int i = 0; i < str.length(); ++i) {
+            char ch = str.charAt(i);
             if (curr.children[ch - 'a'] == null) {
                 TrieNode tn = new TrieNode();
                 curr.children[ch - 'a'] = tn;
@@ -40,7 +43,7 @@ public class LongestCommonPrefix {
     public String longestCommonPrefix(String[] strs) {
         if (strs == null || strs.length == 0)
             return "";
-        TrieNode root = new TrieNode();
+        TrieNode root = new TrieNode(); //first node is dummy node
         for (String str : strs) {
             addToTrie(root, str);
         }
@@ -50,7 +53,7 @@ public class LongestCommonPrefix {
         TrieNode curr = root;
         int idx = 0;
         String str = strs[0]; //any word would do
-        char[] chars = str.toCharArray(); //any string
+        char[] chars = str.toCharArray();
         while (curr.word == null && curr.size == 1) {
             curr = curr.children[chars[idx] - 'a'];
             idx++;

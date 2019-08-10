@@ -24,6 +24,17 @@ The encoded string should be as compact as possible.
 
 Note: Do not use class member/global/static variables to store states. Your serialize and deserialize algorithms should be stateless.
  */
+
+
+/*
+
+
+DO NOT USE THIS APPROACH IT IS OVERLY COMPLEX AND NOT REQUIRED
+
+SEE HOW TO SERIALIZE/DESERIALIZE BINARY TREE SOLUTION, WHICH CAN BE EXTENDED TO BST AS WELL
+
+ */
+
 public class SerializeAndDeserializeBST {
     //use inorder and preorder to uniquely identify a tree
 

@@ -51,33 +51,48 @@ public class ThreeSumWithMultiplicity {
     public int threeSumMulti(int[] A, int target) {
         if (A == null || A.length == 0)
             return -1;
-        Map<Integer, Integer> counts = new HashMap<>();
-        for (int num : A) {
-            if (!counts.containsKey(num))
-                counts.put(num, 0);
-            counts.put(num, counts.get(num) + 1);
-        }
+
+        /*
+            MOD is distributive over addition
+            (x % c) + (y % c) = (x + y) % c
+         */
+
+//        int MOD = 1_000_000_007; //modulo 10^9 + 7
+        double MOD = Math.pow(10, 9) + 7;
+
         Arrays.sort(A);
         int count = 0;
         for (int i = 0; i < A.length; ++i) {
             int left = i + 1;
             int right = A.length - 1;
-            int sum = target - A[i];
-            while (left < A.length && left < right) {
-                int currSum = A[left] + A[right];
-                if (currSum == sum) {
+            int currTarget = target - A[i];
+
+            while (left < right) {
+                int sum = A[left] + A[right]; //current target
+
+                if (sum == currTarget) {
                     int leftNum = A[left];
                     int rightNum = A[right];
+                    if (leftNum != rightNum) { //if they are different, count frequency of each and add to res
+                        int leftCount = 0, rightCount = 0;
+                        while (left < A.length && A[left] == leftNum) {
+                            left++;
+                            leftCount++;
+                        }
+                        while (right >= 0 && A[right] == rightNum) {
+                            right--;
+                            rightCount++;
+                        }
+                        count += leftCount * rightCount;  //number of ways to get the answer
+                        count %= MOD;
 
-                    count += counts.get(leftNum) * counts.get(rightNum);
-
-                    while (left < A.length && A[left] == leftNum) {
-                        left++;
+                    } else { //if both are equal, total combinations is nC2 (number of ways 2 of these can be selected; selecting 2 because we need total 3: A[i], curr, curr)
+                        int size = right - left + 1;
+                        count += (size * (size - 1) / 2);
+                        count %= MOD;
+                        break; //break after this as and change pivot (i)
                     }
-                    while (right >= 0 && A[right] == rightNum) {
-                        right--;
-                    }
-                } else if (currSum < sum) {
+                } else if (sum < currTarget) {
                     left++;
                 } else
                     right--;

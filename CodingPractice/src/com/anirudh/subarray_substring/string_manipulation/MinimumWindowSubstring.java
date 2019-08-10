@@ -31,7 +31,8 @@ If there are multiple such windows, you are guaranteed that there will always be
 public class MinimumWindowSubstring {
 
     public static String minWindow(String s, String t) {
-
+        String longStr = s;
+        String shortStr = t;
         if (t.length() > s.length())
             return "";
 
@@ -49,7 +50,7 @@ public class MinimumWindowSubstring {
         }
 
         // character counter for s
-        Map<Character, Integer> smap = new HashMap<Character, Integer>();
+        Map<Character, Integer> smap = new HashMap<>();
         int left = 0;
         int minLen = s.length() + 1;
 

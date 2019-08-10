@@ -24,15 +24,21 @@ public class Spider {
      * @param searchWord - The word or string that you are searching for
      */
     public void search(String url, String searchWord) {
+        int count = 0;
+
         while (pagesVisited.size() < MAX_PAGES_TO_SEARCH) {
+//        while (count < MAX_PAGES_TO_SEARCH) {
             String currentUrl;
             SpiderLeg leg = new SpiderLeg();
-            if (pagesToVisit.isEmpty()) {
+
+            //populate current url
+            if (pagesToVisit.isEmpty()) { //handling base case
                 currentUrl = url;
                 pagesVisited.add(url);
             } else {
                 currentUrl = nextUrl();
             }
+
             leg.crawl(currentUrl); // Lots of stuff happening here. Look at the crawl method in SpiderLeg
             boolean success = leg.searchForWord(searchWord);
             if (success) {
@@ -40,6 +46,7 @@ public class Spider {
                 break;
             }
             pagesToVisit.addAll(leg.getLinks());
+            count++;
         }
         System.out.println("\n**Done** Visited " + pagesVisited.size() + " web page(s)");
     }

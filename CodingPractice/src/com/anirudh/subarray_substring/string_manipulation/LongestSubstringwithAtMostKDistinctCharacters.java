@@ -66,7 +66,7 @@ public class LongestSubstringwithAtMostKDistinctCharacters {
             //Keep adding as long as map size is less than k i.e. we are still within K distinct elems limit
             //if more distinct elements in map total than k, start removing from left
             if (map.size() > k) {
-                maxLen = Math.max(maxLen, right - left); //right is off by one (-1) and we are not including the just added elem (+1). Hence, just right-left
+                maxLen = Math.max(maxLen, right - left); //we are not adding the just added element, hence not right - left + 1
                 /*
                     remove elements from left until size of map is equal to k
                     map.size() gives the number of distinct elems

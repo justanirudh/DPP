@@ -23,6 +23,7 @@ Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","SFO"]. But it
 import java.util.*;
 
 //Destructive DFS, like WordLadder
+//can do normal BFS too, I guess
 class ReconstructItinerary {
 
     Map<String, PriorityQueue<String>> flights; //new: priority queue

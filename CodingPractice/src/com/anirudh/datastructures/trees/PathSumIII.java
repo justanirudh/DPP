@@ -69,9 +69,32 @@ public class PathSumIII {
         this.sum = sum;
 
         Map<Integer, Integer> map = new HashMap<>(); //running_sum map
-        map.put(0, 1); //base case. Required if we want to include root in a path as well
+        map.put(0, 1); //base case. Required if we want to include root in a path as well, which we obviosuly do
 
         return calculatePathSums(map, root, 0);
+    }
+
+    /*
+    T = O(n^2)
+    S: O(n)
+     */
+
+    public class Solution {
+
+        private int pathSumFrom(TreeNode node, int sum) {
+            if (node == null) return 0;
+            return (node.val == sum ? 1 : 0)
+                    + pathSumFrom(node.left, sum - node.val) + pathSumFrom(node.right, sum - node.val);
+        }
+
+        public int pathSumSlow(TreeNode root, int sum) {
+            if (root == null) return 0;
+            return pathSumFrom(root, sum) + //path sum starting with this root included
+                    pathSumSlow(root.left, sum) + //path rum with left child included
+                    pathSumSlow(root.right, sum); //path rum with right child included
+        }
+
+
     }
 }
 

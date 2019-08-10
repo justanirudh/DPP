@@ -23,17 +23,39 @@ public class MaximumSubarray {
          */
     public static int maxSubArray(int[] nums) {
 
-
         if (nums == null || nums.length == 0)
             return 0;
 
-        int maxEndingHere = nums[0], max = nums[0];
-        int start = 0, end = 0;
+//        int maxEndingHere = nums[0], max = nums[0];
 
+//        for (int i = 1; i < nums.length; ++i) {
+//            maxEndingHere = Math.max(nums[i], maxEndingHere + nums[i]); //either start a new subarray or continue from prev
+//            max = Math.max(maxEndingHere, max); //finding highest maxEndingHere
+//        }
+
+        int runningSum = nums[0], max = nums[0];
+        int start = 0, end = 0, s = 0;
         for (int i = 1; i < nums.length; ++i) {
-            maxEndingHere = Math.max(nums[i], maxEndingHere + nums[i]); //either start a new subarray or continue from prev
-            max = Math.max(maxEndingHere, max); //finding highest maxEndingHere
+            runningSum += nums[i];
+
+            if (nums[i] > runningSum) { //starting a new array
+                runningSum = nums[i];
+                s = i;
+            }
+
+            if (runningSum > max) { //found a max
+                max = runningSum;
+                start = s;
+                end = i;
+
+            }
         }
+
+        //actual subarray
+        for(int i = start; i <= end; ++i){
+            System.out.print(nums[i] + ",");
+        }
+
         return max;
 
     }
@@ -62,8 +84,8 @@ public class MaximumSubarray {
     }
 
     public static void main(String[] args) {
-        int[] arr = {-2,1,-3,4,-1,2,1,-5,4};
-        System.out.println(maxSubArray(arr));
+        int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        System.out.println( "\nMax sum is " + maxSubArray(arr));
     }
 
 }

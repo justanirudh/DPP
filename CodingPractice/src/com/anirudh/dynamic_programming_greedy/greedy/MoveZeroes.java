@@ -16,21 +16,21 @@ Minimize the total number of operations.
  */
 public class MoveZeroes {
     public void moveZeroes(int[] nums) {
-        int slow = 0;
-        int fast = 0;
+        int left = 0;
+        int right = 0;
         while (true) {
-            //fast pointer helps find all non-zero elements and together with slow, accumulate it in the start
-            while (fast != nums.length && nums[fast] == 0)
-                fast++;
-            if (fast == nums.length)
+            //right pointer helps find all non-zero elements and together with left, accumulate it in the start
+            while (right != nums.length && nums[right] == 0)
+                right++;
+            if (right == nums.length)
                 break;
-            nums[slow] = nums[fast];
-            slow++;
-            fast++;
+            nums[left] = nums[right];
+            left++;
+            right++;
         }
-        while (slow != nums.length) {
-            nums[slow] = 0;
-            slow++;
+        while (left != nums.length) {
+            nums[left] = 0;
+            left++;
         }
         return;
     }

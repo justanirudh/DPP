@@ -52,7 +52,7 @@ public class SerializeandDeserializeBinaryTree {
 
     private void preOrder(TreeNode tn, StringJoiner sj) {
         if (tn == null) {
-            sj.add("null");
+            sj.add("null"); //dont use empty string. new ArrayDeque<>(Arrays.asList(data.split(","))); does work as expected, null strings get ignored
             return;
         }
         sj.add(Integer.toString(tn.val));

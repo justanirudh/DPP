@@ -28,24 +28,24 @@ return
 public class PathSums2 {
     List<List<Integer>> lists = new ArrayList<List<Integer>>();
 
-    public void getSums(TreeNode node, List<Integer> list, int sumLeft) {
+    public void getSums(TreeNode node, List<Integer> list, int sumRemaining) {
         if (node.left == null && node.right == null) { //leaf
-            if (sumLeft - node.val == 0) {
+            if (sumRemaining - node.val == 0) {
                 list.add(node.val);
                 lists.add(list);
             }
         } else if (node.right == null) { //left not null
             list.add(node.val);
-            getSums(node.left, list, sumLeft - node.val);
+            getSums(node.left, list, sumRemaining - node.val);
         } else if (node.left == null) { //right not null
             list.add(node.val);
-            getSums(node.right, list, sumLeft - node.val);
+            getSums(node.right, list, sumRemaining - node.val);
         } else {//both non-null
             List<Integer> list2 = new ArrayList<>(list);
             list.add(node.val);
             list2.add(node.val);
-            getSums(node.left, list, sumLeft - node.val);
-            getSums(node.right, list2, sumLeft - node.val);
+            getSums(node.left, list, sumRemaining - node.val);
+            getSums(node.right, list2, sumRemaining - node.val);
         }
     }
 

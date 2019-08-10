@@ -24,6 +24,10 @@ Explanation: There is no common prefix among the input strings.
 public class LongestCommonPrefix {
 
 
+    /*
+    T = O(n^2)
+    S = O(1)
+     */
     private boolean isAllSame(char curr, int i, String[] strs) {
         for (String str : strs) {
             if (str.charAt(i) != curr)

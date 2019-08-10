@@ -30,7 +30,7 @@ One way is to shoot one arrow for example at x = 6 (bursting the balloons [2,8] 
 and another arrow at x = 11 (bursting the other two balloons).
 
  */
-public class MinimumNumberOfArrows {
+public class  MinimumNumberOfArrows {
 
     //Activity Selection Problem
     public static int findMinArrowShots(int[][] points) {
@@ -53,7 +53,7 @@ public class MinimumNumberOfArrows {
         while (i < points.length) {
             int endingIndex = points[startIndex][1];
             res++;
-            while (i < points.length && points[i][0] <= endingIndex) {
+            while (i < points.length && points[i][0] <= endingIndex) { //keep incrementing until the starting points are less than the current ending point
                 i++;
             }
             if (i == points.length)

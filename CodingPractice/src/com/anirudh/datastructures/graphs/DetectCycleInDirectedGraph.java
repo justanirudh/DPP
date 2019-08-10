@@ -21,22 +21,23 @@ class DetectCycleInDirectedGraph {
     //ADVANTAGE OF ARRAY OVER CHANGING THE COLOR OF NODE: If the graph is used for multiple searches or is being searched concurrently,
     //one array oer search is better
     //SO, equivalent to undirect, except, also keep an extra hashmap to track of the current path
+
+
     public boolean hasCycle(int v, LinkedList<Integer>[] alist, boolean[] visited, boolean[] recStack) {
-        if (!visited[v]) {
-            recStack[v] = true; //adding it to the 'path' that lead to the current node
-            visited[v] = true; // can be a property of the node
-            for (int i : alist[v]) {
-                if (!visited[i]) { //if hasn't been visited and has cycle
-                    boolean cycle = hasCycle(i, alist, visited, recStack);
-                    if (cycle)
-                        return true;
-                } else { //if visited, check if it is in the recursion 'stack'
-                    if (recStack[i]) //if neighbour in recursion stack, then this is a back edge
-                        return true;
-                }
+        visited[v] = true;
+        recStack[v] = true; //adding it to the 'path' that lead to the current node
+
+        for (int i : alist[v]) {
+            if (!visited[i]) { //if hasn't been visited and has cycle
+                boolean cycle = hasCycle(i, alist, visited, recStack);
+                if (cycle)
+                    return true;
+            } else { //if visited, check if it is in the current recursion 'stack'
+                if (recStack[i]) //if neighbour in recursion stack, then this is a back edge
+                    return true;
             }
-            recStack[v] = false; //remove vertex from recursion stack
         }
+        recStack[v] = false; //remove vertex from recursion stack
         return false;
     }
 
@@ -44,8 +45,10 @@ class DetectCycleInDirectedGraph {
     //alist is an array of linked lists; former having nodes and latter having neighbours
     public boolean hasCycleUtil(int v, LinkedList<Integer>[] alist, boolean[] visited, boolean[] recStack) {
         for (int i = 0; i < v; i++) {
-            if (hasCycle(i, alist, visited, recStack)) {
-                return true;
+            if (!visited[i]) {
+                if (hasCycle(i, alist, visited, recStack)) {
+                    return true;
+                }
             }
         }
         return false;

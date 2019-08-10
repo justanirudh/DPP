@@ -35,6 +35,7 @@ public class NextPermutation {
             if (peak == 0 || nums[peak - 1] < nums[peak])
                 break;
         }
+        System.out.println(nums[peak - 1]);
         if (peak == 0) { //reverse arr
             reverse(nums, 0, nums.length - 1);
         } else { //swap the (peak-1)th elem with lowest of nums[peak to n-1] that is bigger than (peak-1)th.
@@ -55,7 +56,8 @@ public class NextPermutation {
     }
 
     public static void main(String[] args) {
-        int[] nums = {1,2,5,3,1};
+//        int[] nums = {1,2,5,3,1};
+        int[] nums = {5,1,2,4,3};
         NextPermutation np = new NextPermutation();
         np.nextPermutation(nums);
         for(int num : nums){

@@ -45,7 +45,7 @@ public class SlidingWindowMaximum {
         before inserting the new element (2nd while loop)
         loop1 should be run before loop2 so that we remove invalid elements first
          */
-        Deque<Integer> deq = new ArrayDeque<>(); //indices in inc order + only those necessary
+        Deque<Integer> deq = new ArrayDeque<>(); //indices in inc order && only those necessary
         for (int i = 0; i < len; ++i) {
             //remove all not in window from head (older elems)
             while (!deq.isEmpty() && deq.peek() < i - k + 1)

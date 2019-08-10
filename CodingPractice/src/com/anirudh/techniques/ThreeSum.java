@@ -31,12 +31,12 @@ A solution set is:
 public class ThreeSum {
 
     /*
-    For O(1) space, sort, choose ith elem and use 2-pointer approach for i+1 to len-1 elements
-    https://leetcode.com/problems/3sum/discuss/7380/Concise-O(N2)-Java-solution
+    S:
+    T: O(nlogn) +
      */
 
     public List<List<Integer>> threeSum(int[] nums) {
-        Arrays.sort(nums);
+        Arrays.sort(nums); //sort the array
         List<List<Integer>> res = new ArrayList<>();
         for (int i = 0; i < nums.length; ++i) {
             if (i != 0 && nums[i] == nums[i - 1]) //skip already visited pivot element

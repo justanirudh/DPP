@@ -14,15 +14,16 @@ Return the starting gas station's index if you can travel around the circuit onc
  */
 public class GasStations {
 
-    //This O(n^2) time. O(n) time algo in EPI 17.6
+    //This O(n^2) time, Brute force approach. O(n) time algo in EPI 17.6
     public static int canCompleteCircuit(int[] gas, int[] cost) {
 
+        //consider starting from each index
         for (int startIndex = 0; startIndex < gas.length; ++startIndex) {
 
             int tank = 0;
             boolean canGo = true;
             for (int i = 0; i < gas.length; ++i) {
-                int actualIndex = (i + startIndex) % gas.length; //circular list
+                int actualIndex = (startIndex + i) % gas.length; //circular list
                 tank = tank + gas[actualIndex]; // total fuel in tank
                 int tankLeft = tank - cost[actualIndex]; // fuel in tank after going the distance
                 if (tankLeft < 0) {

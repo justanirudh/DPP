@@ -67,12 +67,8 @@ public class EvaluateDivision {
             double value = values[i];// 2
             String node1 = equation.get(0);
             String node2 = equation.get(1);
-            if (!graph.containsKey(node1)) {
-                graph.put(node1, new HashSet<>());
-            }
-            if (!graph.containsKey(node2)) {
-                graph.put(node2, new HashSet<>());
-            }
+            graph.put(node1, new HashSet<>());
+            graph.put(node2, new HashSet<>());
             graph.get(node1).add(new Edge(value, node2));
             graph.get(node2).add(new Edge(1 / value, node1));
         }

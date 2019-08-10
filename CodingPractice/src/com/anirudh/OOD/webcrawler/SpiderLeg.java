@@ -29,7 +29,7 @@ public class SpiderLeg {
      * @param url - The URL to visit
      * @return whether or not the crawl was successful
      */
-    public boolean crawl(String url) {
+    public boolean crawl(String url) { //populates links
         try {
             Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
             Document htmlDocument = connection.get();

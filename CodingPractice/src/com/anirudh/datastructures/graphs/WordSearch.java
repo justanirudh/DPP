@@ -31,7 +31,7 @@ public class WordSearch {
     char[][] board;
     String word;
 
-    boolean[][] finished;
+    boolean[][] visited;
 
     int length, breadth;
     int[] coordsX = {-1, 0, 1, 0};
@@ -42,7 +42,7 @@ public class WordSearch {
     }
 
     boolean dfs(int x, int y, int index) { //index is index of word string
-        finished[x][y] = true;
+        visited[x][y] = true;
         ++index;
         //reached end of word
         if (index == word.length())
@@ -54,7 +54,7 @@ public class WordSearch {
             int neighX = x + coordsX[i];
             int neighY = y + coordsY[i];
             //is within matrix, is undiscovered and its value is equal to next char
-            if (isValid(neighX, neighY) && !finished[neighX][neighY] && board[neighX][neighY] == word.charAt(index))
+            if (isValid(neighX, neighY) && board[neighX][neighY] == word.charAt(index) && !visited[neighX][neighY])
                 res = dfs(neighX, neighY, index);
             //else res will remain false
             if (res) //if found 1 true path, break. no need to check further
@@ -64,7 +64,7 @@ public class WordSearch {
         //if all neighbours not suitable, this means we took a wrong turn
         //hence we need to re-mark it to be unexplored so that it can be later explored via some other path
         //just discovered 'unrolling' or recursion stack that we use for backtracking in DFS by myself!
-        finished[x][y] = false;
+        visited[x][y] = false;
 
         return false;
 
@@ -85,7 +85,7 @@ public class WordSearch {
             for (int j = 0; j < breadth; ++j) {
                 if (board[i][j] == word.charAt(0)) {
                     //found a source
-                    finished = new boolean[length][breadth]; //new DFS for each source found
+                    visited = new boolean[length][breadth]; //new DFS for each source found
                     boolean exists = dfs(i, j, 0);
                     if (exists)
                         return true;

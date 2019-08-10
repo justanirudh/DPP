@@ -15,6 +15,6 @@ public class SpiderTest
     {
         Spider spider = new Spider();
         spider.search("http://blog.teamtreehouse.com/passing-google-interview-without-computer-science-degree",
-                "parker");
+                "Google");
     }
 }
