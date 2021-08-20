@@ -1,0 +1,26 @@
+package com.anirudh.interview_prep_2021.facebook;
+
+//import com.anirudh.datastructures.trees.Node;
+
+/**
+ * Created by paanir on 1/3/18.
+ */
+/*
+333. Largest BST Subtree
+Medium
+
+Given the root of a binary tree, find the largest subtree, which is also a Binary Search Tree (BST), where the largest means subtree has the largest number of nodes.
+
+A Binary Search Tree (BST) is a tree in which all the nodes follow the below-mentioned properties:
+
+The left subtree values are less than the value of their parent (root) node's value.
+The right subtree values are greater than the value of their parent (root) node's value.
+Note: A subtree must include all of its descendants.
+
+Follow up: Can you figure out ways to solve it with O(n) time complexity?
+
+ */
+public class LargestBSTSubtreeInaBT {
+
+
+}

@@ -57,7 +57,35 @@ The tree will have between 1 and 1000 nodes.
 Each node's value will be between 0 and 1000.
  */
 
-class PrintaBinaryTreeinVerticalOrder  {
+class VerticalOrderTraversalBT {
+
+    class Location implements Comparable<Location> {
+        int x, y, val;
+
+        Location(int x, int y, int val) {
+            this.x = x;
+            this.y = y;
+            this.val = val;
+        }
+
+        @Override
+        public int compareTo(Location that) {
+            if (this.x != that.x) //first check x
+                return Integer.compare(this.x, that.x);
+            else if (this.y != that.y) //then check y
+                return Integer.compare(this.y, that.y);
+            else //then check value
+                return Integer.compare(this.val, that.val);
+        }
+    }
+
+    public void inOrderTraversal(TreeNode node, int x, int y) {
+        if (node != null) {
+            locations.add(new Location(x, y, node.val));
+            inOrderTraversal(node.left, x - 1, y + 1);
+            inOrderTraversal(node.right, x + 1, y + 1);
+        }
+    }
 
     List<Location> locations;
 
@@ -70,7 +98,7 @@ class PrintaBinaryTreeinVerticalOrder  {
         Collections.sort(locations);//sort it
 
         /*
-        After that, the impl is garbage. just go through sorted array and lump objects with same x value together
+        After that, the impl is simple. just go through sorted array and lump objects with same x value together
          */
 
         List<List<Integer>> ans = new ArrayList<>();
@@ -78,7 +106,7 @@ class PrintaBinaryTreeinVerticalOrder  {
 
         int prev = locations.get(0).x;
 
-        for (Location loc: locations) {
+        for (Location loc : locations) {
             // If the x value changed, it's part of a new report.
             if (loc.x != prev) {
                 prev = loc.x;
@@ -91,37 +119,10 @@ class PrintaBinaryTreeinVerticalOrder  {
 
         return ans;
     }
-
-    public void inOrderTraversal(TreeNode node, int x, int y) {
-        if (node != null) {
-            locations.add(new Location(x, y, node.val));
-            inOrderTraversal(node.left, x-1, y+1);
-            inOrderTraversal(node.right, x+1, y+1);
-        }
-    }
-}
-
-class Location implements Comparable<Location>{
-    int x, y, val;
-    Location(int x, int y, int val) {
-        this.x = x;
-        this.y = y;
-        this.val = val;
-    }
-
-    @Override
-    public int compareTo(Location that) {
-        if (this.x != that.x) //first check x
-            return Integer.compare(this.x, that.x);
-        else if (this.y != that.y) //then check y
-            return Integer.compare(this.y, that.y);
-        else //then check value
-            return Integer.compare(this.val, that.val);
-    }
 }
 
 
-/*public class PrintaBinaryTreeinVerticalOrder {
+/*public class VerticalOrderTraversalBT {
 
     void print(Map<Integer, List<Integer>> map) {
         for (List<Integer> vals : map.values()) {

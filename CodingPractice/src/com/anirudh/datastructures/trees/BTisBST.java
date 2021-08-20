@@ -47,7 +47,7 @@ public class BTisBST {
         }
     }
 
-    public boolean isBSTAux(TreeNode curr, double min, double max) {
+    public boolean isBSTNode(TreeNode curr, double min, double max) {
 
         if (curr == null)
             return true;
@@ -55,7 +55,7 @@ public class BTisBST {
         if (curr.val <= min || curr.val >= max) //if the current node violates the BST property
             return false;
 
-        return isBSTAux(curr.left, min, curr.val) && isBSTAux(curr.right, curr.val, max);
+        return isBSTNode(curr.left, min, curr.val) && isBSTNode(curr.right, curr.val, max);
 
     }
 
@@ -67,8 +67,8 @@ public class BTisBST {
         double max = Double.POSITIVE_INFINITY;
 
         //Also passing a range to each side of the tree left: [math.min, root] and right: [root, math.max]
-        return isBSTAux(root, min, max) && //trivial check but makes it more symmetric
-                isBSTAux(root.left, min, root.val) &&
-                isBSTAux(root.right, root.val, max);
+        return isBSTNode(root, min, max) && //trivial check but makes it more symmetric
+                isBSTNode(root.left, min, root.val) &&
+                isBSTNode(root.right, root.val, max);
     }
 }

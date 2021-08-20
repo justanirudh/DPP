@@ -13,16 +13,6 @@ Note: Do not modify the linked list.
  */
 public class DetectCycle {
 
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
-
     public ListNode detectCycle(ListNode head) {
         if (head == null)
             return null;

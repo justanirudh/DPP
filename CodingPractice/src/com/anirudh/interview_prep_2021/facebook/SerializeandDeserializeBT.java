@@ -1,4 +1,4 @@
-package com.anirudh.datastructures.trees;
+package com.anirudh.interview_prep_2021.facebook;
 
 /**
  * Created by paanir on 8/3/19.
@@ -29,11 +29,6 @@ Note: Do not use class member/global/static variables to store states. Your seri
 
  */
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.StringJoiner;
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -48,41 +43,8 @@ import java.util.StringJoiner;
 Only use preorder. Key is to also encode null values.
 Both pre/post and inorder are required to uniqly identify a tree IF the null values have not been encoded
  */
-public class SerializeandDeserializeBinaryTree {
+public class SerializeandDeserializeBT {
 
-    private void preOrder(TreeNode tn, StringJoiner sj) {
-        if (tn == null) {
-            sj.add("null"); //dont use empty string. new ArrayDeque<>(Arrays.asList(data.split(","))); does work as expected, null strings get ignored
-            return;
-        }
-        sj.add(Integer.toString(tn.val));
-        preOrder(tn.left, sj);
-        preOrder(tn.right, sj);
-    }
-
-    // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
-        StringJoiner sj = new StringJoiner(",");
-        preOrder(root, sj);
-        return sj.toString();
-    }
-
-    private TreeNode createTree(Deque<String> pre) {
-        String curr = pre.poll();
-        if (curr.equals("null"))
-            return null;
-        TreeNode root = new TreeNode(Integer.parseInt(curr));
-        root.left = createTree(pre);
-        root.right = createTree(pre);
-        return root;
-    }
-
-    // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
-        Deque<String> pre = new ArrayDeque<>(Arrays.asList(data.split(",")));
-        return createTree(pre);
-
-    }
 }
 
 // Your Codec object will be instantiated and called as such:

@@ -23,6 +23,12 @@ How would you optimize the kthSmallest routine?
 //BOTH are O(n). see leetcode for O(log n)
 public class KthSmallestElemBST {
 
+    //O(logn) solution same as BSTIterator question
+
+
+
+    //--------------------------------------------------------------------------------------------
+
     //O(n) time
     int rank;
 
@@ -55,16 +61,16 @@ public class KthSmallestElemBST {
         });
     }
 
-    public int kthSmallest(TreeNode root, int k) {
+    public int kthSmallestSlow2(TreeNode root, int k) {
         if (root == null)
             return 0;
         int numNodes = countNodes(root.left);
         if (numNodes == k - 1)
             return root.val;
         else if (numNodes > k - 1)
-            return kthSmallest(root.left, k);
+            return kthSmallestSlow2(root.left, k);
         else
-            return kthSmallest(root.right, k - numNodes - 1);
+            return kthSmallestSlow2(root.right, k - numNodes - 1);
     }
 
     //Use augmented DS: https://leetcode.com/problems/kth-smallest-element-in-a-bst/discuss/ 2nd solution

@@ -27,7 +27,7 @@ public class Permutations {
     /*
     Complexity:
     for calculating N!
-    time complexity = N! + (N-1)! + (N-2)! + . . . .1!
+    time complexity = N! + (N-1)! + (N-2)! + . . . .1! = O(N * N!)
      */
     public static List<Integer> addElement(List<Integer> perm, int num, int index) {
         List<Integer> newList = new ArrayList<>(perm);

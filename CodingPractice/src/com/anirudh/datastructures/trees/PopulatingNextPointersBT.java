@@ -63,6 +63,7 @@ space: O(1) + stack(O(h))
             rightChildNext = null;
         else //root's right is another subtree
             rightChildNext = right.left; //For 5 in the example, it would be 6
+
         connectNodes(node.right, rightChildNext);//connect right child to the next subtree of left
     }
 

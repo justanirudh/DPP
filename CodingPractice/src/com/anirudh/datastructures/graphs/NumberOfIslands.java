@@ -48,7 +48,7 @@ public class NumberOfIslands {
 
     private void doDFS(int row, int col) {
         visited[row][col] = true;
-        for(int i = 0; i < 4; ++i){
+        for(int i = 0; i < 4; ++i){ //neighbours
             int x = row + di[i];
             int y = col + dj[i];
             if(isValid(x,y) && grid[x][y] == '1' && !visited[x][y]){

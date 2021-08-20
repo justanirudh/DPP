@@ -53,10 +53,10 @@ In the second test case there is a graph with 3 vertices and 3 edges from 0 to 1
 //If it has been visited and it NOT the parent (Simplification of directed graphs)
 public class DetectCycleInUndirectedGraph { //should basically be a tree
 
-    static Boolean hasCycle(int curr, int parent, LinkedList<Integer>[] alist, int[] visited) {
-        visited[curr] = 1; //visited this
+    static Boolean hasCycle(int curr, int parent, LinkedList<Integer>[] alist, boolean[] visited) {
+        visited[curr] = true; //visited this
         for (Integer child : alist[curr]) { //all neighbours
-            if (visited[child] == 0) {
+            if (!visited[child]) {
                 boolean cycle = hasCycle(child, curr, alist, visited); //IMP: dont return if false; only return if true
                 if (cycle)
                     return true; //if false, check for next child
@@ -69,11 +69,9 @@ public class DetectCycleInUndirectedGraph { //should basically be a tree
     }
 
     static Boolean isCyclic(int V, LinkedList<Integer>[] alist) { //represented graph as an array of linked lists: index (node) to list of neighbours
-        int[] visited = new int[V]; //no field of color gray or black as just an array. hence, using visited array to tally
-        for (int i = 0; i < V; ++i)
-            visited[i] = 0; //all not visited to start with
+        boolean[] visited = new boolean[V]; //no field of color gray or black as just an array. hence, using visited array to tally
         for (int i = 0; i < V; ++i) {
-            if (visited[i] == 0)
+            if (!visited[i])
                 if (hasCycle(i, -1, alist, visited))
                     return true;
         }

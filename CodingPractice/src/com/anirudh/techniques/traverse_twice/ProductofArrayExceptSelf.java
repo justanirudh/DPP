@@ -28,11 +28,6 @@ public class ProductofArrayExceptSelf {
             tmp *= nums[i];
         }
 
-        for(int num : res){
-            System.out.print(num + ",");
-        }
-        System.out.println();
-
         //res[i] has product of all numbers to its left
 
         //now multiplying existing values with values to the right of each number
@@ -40,10 +35,6 @@ public class ProductofArrayExceptSelf {
         for(int i = nums.length - 1; i >= 0; --i){
             res[i] *= tmp;
             tmp *= nums[i];
-        }
-
-        for(int num : res){
-            System.out.print(num + ",");
         }
 
         return res;

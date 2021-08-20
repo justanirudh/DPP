@@ -75,16 +75,18 @@ public class PathSumIII {
     }
 
     /*
-    T = O(n^2)
+    T = O(n^2) = O(N + (N-1) + (N-2). . . )
     S: O(n)
      */
 
     public class Solution {
 
         private int pathSumFrom(TreeNode node, int sum) {
-            if (node == null) return 0;
-            return (node.val == sum ? 1 : 0)
-                    + pathSumFrom(node.left, sum - node.val) + pathSumFrom(node.right, sum - node.val);
+            if (node == null)
+                return 0;
+            return (node.val == sum ? 1 : 0) +
+                    pathSumFrom(node.left, sum - node.val) +
+                    pathSumFrom(node.right, sum - node.val);
         }
 
         public int pathSumSlow(TreeNode root, int sum) {

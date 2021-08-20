@@ -49,7 +49,7 @@ public class ImportantDataTypesForNonIDETests {
         TreeSet<Integer> ts = new TreeSet<>();//sorted keys
 
         //3 https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html
-        //linked list with hasmap. can be used to create LRU caches
+        //linked list with hashmap. can be used to create LRU caches
         Map<Integer, String> lhm = new LinkedHashMap<>(); //in the same order as inserted
         LinkedHashSet<Integer> lhs = new LinkedHashSet<>(); //in the same order as inserted
 

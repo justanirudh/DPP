@@ -33,7 +33,7 @@ The flattened tree should look like:
  */
 public class FlattenBinaryTreeToLinkedList {
 
-    void move(TreeNode root) {
+   private void move(TreeNode root) {
         if (root == null)
             return;
         move(root.left);

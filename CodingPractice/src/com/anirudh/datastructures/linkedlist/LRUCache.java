@@ -33,6 +33,7 @@ LRUCache cache = new LRUCache( 2 );
 
  */
 public class LRUCache {
+    //Using a Map with a custom queue
     //Or use LinkedHashMap with orderAccess argument as true (LRU gets enabled) and override
     //removeEldestEntry when we hit cache size. EPI Prob.12.3
 

@@ -35,6 +35,7 @@ Explanation:
  */
 
 //level order traversal with first node on right
+//same as boundary traversal
 public class BinaryTreeRightSideVIew {
 
     public class TreeNode {

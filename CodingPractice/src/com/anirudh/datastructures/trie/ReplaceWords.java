@@ -50,7 +50,7 @@ public class ReplaceWords {
     public String replaceWords(List<String> dict, String sentence) {
         //create Trie
         TrieNode trieRoot = new TrieNode();
-        //add all words to the sam trie
+        //add all words to the same trie
         for (String root : dict) {
             //add to Trie
             TrieNode curr = trieRoot;
@@ -59,7 +59,7 @@ public class ReplaceWords {
                 int index = ch - 'a';
                 if (curr.children[index] == null)
                     curr.children[index] = new TrieNode();
-                curr = curr.children[index];
+                curr = curr.children[index]; //bring pointer down to child node
             }
             curr.word = root; //add entire word to leaf
         }
@@ -67,13 +67,13 @@ public class ReplaceWords {
         String[] words = sentence.split(" ");
 
         StringJoiner sj = new StringJoiner(" ");
-        //get roots
+        //get roots for each word in sentence by using the trie
         for (String word : words) {
             char[] wordArr = word.toCharArray();
             TrieNode curr = trieRoot;
             for (char ch : wordArr) {
                 int idx = ch - 'a';
-                if (curr.children[idx] == null || curr.word != null) //reached a node that doesnt have the right branch or reached a leaf
+                if (curr.children[idx] == null || curr.word != null) //reached a node that doesnt have the correct child or reached a leaf
                     break;
                 curr = curr.children[idx];
             }

@@ -1,0 +1,99 @@
+Case #1: 5 Shuttle
+
+Case #2: 2 Walk
+
+Case #3: 5 Shuttle
+
+Case #4: 10 Shuttle
+
+Case #5: 1 Walk
+
+Case #6: 5 Shuttle
+
+Case #7: 5 Shuttle
+
+Case #8: 3 Walk
+
+Case #9: 5 Shuttle
+
+Case #10: 5 Shuttle
+
+Case #11: 5 Shuttle
+
+Case #12: 5 Shuttle
+
+Case #13: 5 Shuttle
+
+Case #14: 5 Shuttle
+
+Case #15: 5 Shuttle
+
+Case #16: 5 Shuttle
+
+Case #17: 5 Shuttle
+
+Case #18: 4 Walk
+
+Case #19: 5 Shuttle
+
+Case #20: 0 Walk
+
+Case #21: 5 Shuttle
+
+Case #22: 0 Walk
+
+Case #23: 19 Shuttle
+
+Case #24: 5 Shuttle
+
+Case #25: 5 Shuttle
+
+Case #26: 5 Shuttle
+
+Case #27: 11 Shuttle
+
+Case #28: 5 Shuttle
+
+Case #29: 5 Shuttle
+
+Case #30: 5 Shuttle
+
+Case #31: 10 Shuttle
+
+Case #32: 6 Shuttle
+
+Case #33: 5 Shuttle
+
+Case #34: 7 Shuttle
+
+Case #35: 5 Shuttle
+
+Case #36: 9 Shuttle
+
+Case #37: 7 Shuttle
+
+Case #38: 5 Shuttle
+
+Case #39: 5 Shuttle
+
+Case #40: 10 Shuttle
+
+Case #41: 5 Shuttle
+
+Case #42: 11 Shuttle
+
+Case #43: 5 Shuttle
+
+Case #44: 5 Shuttle
+
+Case #45: 7 Shuttle
+
+Case #46: 5 Shuttle
+
+Case #47: 5 Shuttle
+
+Case #48: 5 Shuttle
+
+Case #49: 5 Shuttle
+
+Case #50: 6 Shuttle

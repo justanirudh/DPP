@@ -51,7 +51,7 @@ public class BSTIterator { //also a BT iterator as not using BST property at all
 
 //-------------------------------------------------------------------------------------------------------------------------
     public class BSTIteratorBad {
-        //Option2: create array with sorted elem. O(n) space (for both), O(1) time for next ,O(1) time for hasNext, O(nlogn) initialization time
+        //Option2: create array with sorted elem. O(n) space (for both), O(1) time for next ,O(1) time for hasNext, O(n) initialization time
 
         private ArrayList<Integer> populateInOrderTraversal(TreeNode root, ArrayList<Integer> nums) {
             if (root != null) {

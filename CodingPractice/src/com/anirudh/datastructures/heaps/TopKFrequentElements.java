@@ -1,5 +1,7 @@
 package com.anirudh.datastructures.heaps;
 
+import scala.Int;
+
 import java.util.*;
 
 /**
@@ -47,14 +49,14 @@ public class TopKFrequentElements {
 
         //T = O(nlogk)
         Queue<Pair> minHeap = new PriorityQueue<>(new CompareFrequency());
-        for(Pair p : counts.values()){
+        for (Pair p : counts.values()) {
             minHeap.offer(p);
-            if(minHeap.size() == k + 1)
+            if (minHeap.size() == k + 1)
                 minHeap.poll(); //remove the least frequent
         }
 
         List<Integer> res = new ArrayList<>();
-        for(int i = 0; i < k; ++i){
+        for (int i = 0; i < k; ++i) {
             res.add(minHeap.poll().num);
         }
         return res;
@@ -62,6 +64,34 @@ public class TopKFrequentElements {
 
     public static void main(String[] args) {
         TopKFrequentElements tk = new TopKFrequentElements();
-        tk.topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2);
+        int[] arr = {1, 1, 2, 3, 4, 1, 1, 2, 2, 3, 4, 5, 5, 4, 2};
+        System.out.println(tk.topKFrequent(arr, 2));
+//        Map<Integer, Integer> initMap = new HashMap<>();
+//        for (Integer elem : arr) {
+//            if (initMap.containsKey(elem))
+//                initMap.put(elem, initMap.get(elem) + 1);
+//            else
+//                initMap.put(elem, 1);
+//        }
+//        Map<Integer, List<Integer>> map = new TreeMap<>(); //reverse initmap
+//        for (Map.Entry<Integer, Integer> pair : initMap.entrySet()) {
+//            int value = pair.getValue();
+//            int key = pair.getKey();
+//            if (!map.containsKey(value)) {
+//                List<Integer> elems = new ArrayList<>();
+//                elems.add(key);
+//                map.put(value, elems);
+//            } else {
+//                List<Integer> elems = map.get(value);
+//                elems.add(key);
+//                map.put(value, elems);
+//            }
+//        }
+        //Now the map is sorted by key, which is the frequency of each number
+//        int count = k;
+//        while (count != 0) {
+//
+//        }
+
     }
 }

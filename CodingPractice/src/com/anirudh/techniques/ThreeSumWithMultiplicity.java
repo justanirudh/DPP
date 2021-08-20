@@ -61,6 +61,7 @@ public class ThreeSumWithMultiplicity {
         double MOD = Math.pow(10, 9) + 7;
 
         Arrays.sort(A);
+
         int count = 0;
         for (int i = 0; i < A.length; ++i) {
             int left = i + 1;

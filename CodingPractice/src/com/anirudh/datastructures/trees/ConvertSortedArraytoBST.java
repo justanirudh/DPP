@@ -10,7 +10,7 @@ Given an array where elements are sorted in ascending order, convert it to a hei
  */
 public class ConvertSortedArraytoBST {
 
-    public TreeNode createBST(int nums[], int start, int end) {
+    public TreeNode createBST(int[] nums, int start, int end) {
         if (start > end)
             return null;
         int mid = start + (end - start) / 2;

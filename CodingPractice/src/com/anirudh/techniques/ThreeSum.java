@@ -36,8 +36,11 @@ public class ThreeSum {
      */
 
     public List<List<Integer>> threeSum(int[] nums) {
+
         Arrays.sort(nums); //sort the array
+
         List<List<Integer>> res = new ArrayList<>();
+
         for (int i = 0; i < nums.length; ++i) {
             if (i != 0 && nums[i] == nums[i - 1]) //skip already visited pivot element
                 continue;
@@ -67,6 +70,7 @@ public class ThreeSum {
                 }
             }
         }
+
         return res;
     }
 

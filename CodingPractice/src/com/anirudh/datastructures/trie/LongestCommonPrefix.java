@@ -1,5 +1,8 @@
 package com.anirudh.datastructures.trie;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by paanir on 1/8/18.
  */
@@ -30,12 +33,13 @@ public class LongestCommonPrefix {
     void addToTrie(TrieNode curr, String str) {
         for (int i = 0; i < str.length(); ++i) {
             char ch = str.charAt(i);
-            if (curr.children[ch - 'a'] == null) {
+            int index = ch - 'a';
+            if (curr.children[index] == null) {
                 TrieNode tn = new TrieNode();
-                curr.children[ch - 'a'] = tn;
+                curr.children[index] = tn;
                 curr.size++;
             }
-            curr = curr.children[ch - 'a'];
+            curr = curr.children[index];
         }
         curr.word = str;
     }
@@ -59,5 +63,30 @@ public class LongestCommonPrefix {
             idx++;
         }
         return str.substring(0, idx);
+    }
+
+    // faster than 33.26%
+    public String longestCommonPrefix2(String[] strs) {
+        if(strs.length == 0)
+            return "";
+        int minLen = Integer.MAX_VALUE;
+        for (String str : strs) {
+            if (str.length() < minLen)
+                minLen = str.length();
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < minLen; ++i) {
+            Set<Character> singleton = new HashSet<>();
+            for (String str : strs) {
+                Character ch = str.charAt(i);
+                singleton.add(ch);
+                if (singleton.size() > 1)
+                    break;
+            }
+            if (singleton.size() > 1)
+                break;
+            sb.append(strs[0].charAt(i));
+        }
+        return sb.toString();
     }
 }

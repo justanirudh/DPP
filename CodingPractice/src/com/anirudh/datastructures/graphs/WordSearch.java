@@ -42,19 +42,19 @@ public class WordSearch {
     }
 
     boolean dfs(int x, int y, int index) { //index is index of word string
-        visited[x][y] = true;
+        visited[x][y] = true; //S, E
         ++index;
         //reached end of word
         if (index == word.length())
             return true;
 
         boolean res = false;
-
+//curr is E, next find C
         for (int i = 0; i < 4; ++i) {
             int neighX = x + coordsX[i];
             int neighY = y + coordsY[i];
             //is within matrix, is undiscovered and its value is equal to next char
-            if (isValid(neighX, neighY) && board[neighX][neighY] == word.charAt(index) && !visited[neighX][neighY])
+            if (isValid(neighX, neighY) && board[neighX][neighY] == word.charAt(index) && !visited[neighX][neighY]) //found E on top
                 res = dfs(neighX, neighY, index);
             //else res will remain false
             if (res) //if found 1 true path, break. no need to check further

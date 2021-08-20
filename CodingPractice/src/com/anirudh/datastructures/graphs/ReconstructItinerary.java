@@ -22,33 +22,27 @@ Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","SFO"]. But it
 
 import java.util.*;
 
-//Destructive DFS, like WordLadder
-//can do normal BFS too, I guess
 class ReconstructItinerary {
 
-    Map<String, PriorityQueue<String>> flights; //new: priority queue
-    LinkedList<String> path;
+    private Map<String, PriorityQueue<String>> flights;
+    private LinkedList<String> path;
 
-    //topological sort. the one that gets finished first is prepended first
-    //topological sort is nothing but outputting the reverse order of DFS
-    public void doDFS(String departure) {
+    private void doDFS(String departure) {
         PriorityQueue<String> arrivals = flights.get(departure);
-        //or can just mark it as discovered
         while (arrivals != null && !arrivals.isEmpty()) {
-            String nextStop = arrivals.remove();
+            String nextStop = arrivals.poll();
             doDFS(nextStop);
         }
-        path.addFirst(departure);//prepending
+        path.addFirst(departure); //topological sort. the one that gets finished first is prepended first
     }
 
-    public List<String> findItinerary(String[][] tickets) {
+    public List<String> findItinerary(List<List<String>> tickets) {
         flights = new HashMap<>();
         path = new LinkedList<>();
         //create graph
-        for (String[] ticket : tickets) {
-            //create a priority queue which always has lexicographically lowest elem as the 1st elem
-            flights.putIfAbsent(ticket[0], new PriorityQueue<>()); //new: map has putIfAbsent
-            flights.get(ticket[0]).add(ticket[1]);
+        for (List<String> ticket : tickets) {
+            flights.putIfAbsent(ticket.get(0), new PriorityQueue<>()); //create a priority queue which always has lexicographically lowest elem as the 1st elem
+            flights.get(ticket.get(0)).offer(ticket.get(1));
         }
         //do DFS
         doDFS("JFK");

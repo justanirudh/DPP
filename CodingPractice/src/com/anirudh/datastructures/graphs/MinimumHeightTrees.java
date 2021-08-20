@@ -94,8 +94,8 @@ public class MinimumHeightTrees {
             degrees.set(node1, degrees.get(node1) + 1);
             degrees.set(node2, degrees.get(node2) + 1);
         }
-        //Graph and degrees initialized
 
+        //initialize leaves array
         Deque<Integer> leaves = new ArrayDeque<>();
         for (int i = 0; i < n; ++i) {
             if (degrees.get(i) == 1)
@@ -115,8 +115,9 @@ public class MinimumHeightTrees {
                 // we are doing all bookkeeping by changing the degrees array
                 //decrement degree of all neighbours. If a degree reaches 1, add it to leaf array
                 for (int neighbour : graph.get(leaf)) {
-                    degrees.set(neighbour, degrees.get(neighbour) - 1);
-                    if (degrees.get(neighbour) == 1)
+                    degrees.set(neighbour, degrees.get(neighbour) - 1);// decrement neighbour's degree
+                    graph.get(neighbour).remove(leaf); //can be removed
+                    if (degrees.get(neighbour) == 1) //any node with degree <=1 will be added
                         leaves.offer(neighbour);
                 }
             }

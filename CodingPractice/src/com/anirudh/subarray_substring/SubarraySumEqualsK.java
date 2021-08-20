@@ -51,8 +51,7 @@ public class SubarraySumEqualsK {
                 count += sums.get(runningSum - k);
             }
 
-            if (!sums.containsKey(runningSum)) //add running sum to map
-                sums.put(runningSum, 0);
+            sums.putIfAbsent(runningSum, 0); //add running sum to map
             sums.put(runningSum, sums.get(runningSum) + 1);
 
         }

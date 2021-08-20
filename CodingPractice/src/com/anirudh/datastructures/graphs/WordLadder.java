@@ -58,10 +58,12 @@ public class WordLadder {
         Set<String> wordList = new HashSet<>(wL);
         if (!wordList.contains(endWord))
             return 0;
-        Queue<Word> q = new LinkedList<>();
-        q.add(new Word(beginWord, 1));
+
+        Deque<Word> q = new ArrayDeque<>();
+        q.offer(new Word(beginWord, 1));
+
         while (!q.isEmpty()) {
-            Word wCurr = q.remove();
+            Word wCurr = q.poll();
             String curr = wCurr.s;
             Set<String> removeThese = new HashSet<>();
             for (String str : wordList) {
@@ -70,13 +72,13 @@ public class WordLadder {
                         return wCurr.dist + 1;
                     Word newW = new Word(str, wCurr.dist + 1);
                     //transfer words from undiscovered wordList to discovered Word List
-                    q.add(newW);
+                    q.offer(newW);
                     removeThese.add(str); //cant remove from wordList here: concurrentmodificationexception
                 }
             }
-            wordList.removeAll(removeThese);
+            wordList.removeAll(removeThese); //equivalent to being visited
         }
-        return 0;
+        return 0; //no such transformation
     }
 
     //---------------------------------------------------------------------------------------------Method 2
