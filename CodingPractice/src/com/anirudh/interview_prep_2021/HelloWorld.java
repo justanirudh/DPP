@@ -8,17 +8,20 @@ import java.util.Map;
  */
 public class HelloWorld {
     public static void main(String[] args) {
-        Map<Integer, Integer> map = new LinkedHashMap<>();
-        map.put(1,1);
-        map.put(2,1);
-        map.put(3,1);
-        map.put(4,1);
-        map.put(5,1);
-
-        for(int i : map.keySet()){
-            i += 1;
-            System.out.println(i);
-        }
+        String str1 = "apple";
+        String str2 = "ham";
+        System.out.println(str1.compareTo(str2)); //should be -ve
+//        Map<Integer, Integer> map = new LinkedHashMap<>();
+//        map.put(1,1);
+//        map.put(2,1);
+//        map.put(3,1);
+//        map.put(4,1);
+//        map.put(5,1);
+//
+//        for(int i : map.keySet()){
+//            i += 1;
+//            System.out.println(i);
+//        }
 
     }
 }

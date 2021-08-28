@@ -1,4 +1,4 @@
-package com.anirudh.datastructures.heaps;
+package com.anirudh.interview_prep_2021.facebook;
 
 import java.util.Collections;
 import java.util.PriorityQueue;
@@ -135,7 +135,7 @@ public class FindMedianFromDataStream {
     //if size of max heap (smaller elems) > size of min heap (higher elems), just return max elem of max heap as odd num. of elems
     //balancing is important and always,
     // size of smaller elems heap  = size of larger elems heap OR (even elems)
-    //size of smaller elems heap  = 1 + size of larger elems heap (odd elems)
+    //size of smaller elems heap  = size of larger elems heap + 1 (odd elems)
 
     Queue<Integer> lo; //maxHeap
     Queue<Integer> high; //minHeap
@@ -153,7 +153,7 @@ public class FindMedianFromDataStream {
         /*
         The balancing step is required. lets say a number comes that is greater than element of both heaps
         just adding it to lo will be wrong as now we have an elem in low that is greater than an elem in high
-        hence, do a high.offer(lo.poll()) after that so that all elems of low are smaller than all elems in high
+        hence, do a high.offer(lo.poll()) so that all elems of low are smaller than all elems in high
          */
         lo.offer(num); //adding the new element to maxHeap
         high.offer(lo.poll()); //removing max element from maxHeap and add it to minHeap (balancing)

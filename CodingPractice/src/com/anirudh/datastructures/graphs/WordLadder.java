@@ -31,6 +31,7 @@ All words contain only lowercase alphabetic characters.
  */
 
 //Destructive BFS, like ReconstructItinierary
+    // another similar implementation in facebook_2021 interviews
 public class WordLadder {
 
     private static boolean isDiffOne(String word1, String word2) {

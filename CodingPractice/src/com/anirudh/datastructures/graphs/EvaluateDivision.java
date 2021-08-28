@@ -79,7 +79,7 @@ public class EvaluateDivision {
         String dest = query.get(1);
         if (!graph.containsKey(source) || !graph.containsKey(dest))
             return -1;
-        if (source.equals(dest))
+        if (source.equals(dest)) //[a,a]
             return 1;
 
         Deque<Path> paths = new ArrayDeque<>();
@@ -111,7 +111,6 @@ public class EvaluateDivision {
             return new double[0];
         //1. create graph: adjacency list
         Map<String, Set<Edge>> graph = new HashMap<>();
-        //1.1 populate graph
         populateGraph(graph, equations, values);
         //2. traverse it and answer queries
         //do BFS for each query

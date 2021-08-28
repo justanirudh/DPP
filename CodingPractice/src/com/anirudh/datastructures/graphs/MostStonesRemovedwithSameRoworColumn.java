@@ -5,62 +5,47 @@ import java.util.*;
 /**
  * Created by paanir on 8/11/19.
  */
+
+//Problem #947
 public class MostStonesRemovedwithSameRoworColumn {
 
-    Set<Integer> visited; //will have index of coordinates in the graph array
-    List<Integer>[] graph;
-    int[][] stones;
+    Map<Integer, List<Integer>> graph = new HashMap<>();
+    Set<Integer> visited = new HashSet<>();
 
-    private void populateGraph() {
-        for (int i = 0; i < stones.length; ++i) { //going through each coordinate
-            for (int j = i + 1; j < stones.length; ++j) { //comparing the coordinate with rest of the array
-                int[] coordi = stones[i];
-                int[] coordj = stones[j];
-                if (coordi[0] == coordj[0] || coordi[1] == coordj[1]) { //if both x same or both y same
-                    if (graph[i] == null)
-                        graph[i] = new ArrayList<>();
-                    graph[i].add(j);
-                    if (graph[j] == null)
-                        graph[j] = new ArrayList<>();
-                    graph[j].add(i);
+    void doDFS(Integer stone) {
+        visited.add(stone);
+        for (Integer neighbour : graph.get(stone)) {
+            if (!visited.contains(neighbour))
+                doDFS(neighbour);
+        }
+    }
+
+    //find largest number of stones that can be removed
+    public int removeStones(int[][] stones) {
+        //create graph
+        for (int i = 0; i < stones.length; ++i) {
+            int[] src = stones[i];
+            if (!graph.containsKey(i))
+                graph.put(i, new ArrayList<>());
+            for (int j = i + 1; j < stones.length; ++j) {
+                int[] curr = stones[j];
+                if (src[0] == curr[0] || src[1] == curr[1]) {
+                    graph.get(i).add(j);
+                    if (!graph.containsKey(j))
+                        graph.put(j, new ArrayList<>());
+                    graph.get(j).add(i);
                 }
             }
         }
-    }
-
-    private void doDFS(int graphIndex) {
-        visited.add(graphIndex);
-        List<Integer> neighs = graph[graphIndex];
-        for (int neigh : neighs) {
-            if (!visited.contains(neigh)) {
-                doDFS(neigh);
+        //do DFS to find keepStones
+        int keepStones = 0;
+        for (Integer stoneIdx : graph.keySet()) {
+            if (!visited.contains(stoneIdx)) {
+                doDFS(stoneIdx);
+                keepStones++;
             }
         }
-    }
-
-    /*
-    #moves = #stones - #islands
-     */
-    public int removeStones(int[][] stones) {
-        if (stones == null || stones.length == 0)
-            return 0;
-        //create a graph
-        visited = new HashSet<>();
-        graph = (List<Integer>[]) new List[stones.length]; //array of lists
-        this.stones = stones;
-        populateGraph();
-        //do DFS
-        int numIslands = 0;
-        for (int i = 0; i < graph.length; ++i) {
-            if(graph[i] == null){ //this means no neighbours for this guy, so an island
-                numIslands++;
-            } else if (!visited.contains(i)) {
-                doDFS(i);
-                numIslands++;
-            }
-        }
-        //return total reductions = number of stones - number of islands
-        return stones.length - numIslands;
+        return stones.length - keepStones;
     }
 
 }

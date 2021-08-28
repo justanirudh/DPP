@@ -1,6 +1,5 @@
 package com.anirudh.datastructures.graphs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +10,7 @@ import java.util.List;
 /*
 Black Shapes
 Given N * M field of O's and X's, where O=white, X=black
-Return the number of black shapes. A black shape consists of one or more adjacent X's (diagonals not included)
+Return the number of black shapes. input black shape consists of one or more adjacent X's (diagonals not included)
 
 Example:
 
@@ -40,7 +39,7 @@ public class BlackShapes {
     private boolean discovered[][]; //explored
     private int di[] = new int[]{1, -1, 0, 0}; //neighbours: (1,0) (-1, 0) (0, 1) (0,-1)
     private int dj[] = new int[]{0, 0, 1, -1};//neighbours ^
-    private List<String> A;
+    private List<String> input;
     private int nRows, nCols;
 
     private boolean isValid(int i, int j) {
@@ -48,7 +47,7 @@ public class BlackShapes {
         if (i < 0 || i >= nRows || j < 0 || j >= nCols) //are in the matrix
             return false;
 
-        if (A.get(i).charAt(j) != 'X') //is X, word at i and char at j
+        if (input.get(i).charAt(j) != 'X') //is X, word at i and char at j
             return false;
 
         return true;
@@ -71,22 +70,22 @@ public class BlackShapes {
         }
     }
 
-    public int black(List<String> A) { //find number of connected components, by using dfs in a matrix (dfs covers whole of a disconnected graph)
+    public int black(List<String> input) { //find number of connected components, by using dfs in a matrix (dfs covers whole of a disconnected graph)
         int nShapes;
 
-        if (A == null)
+        if (input == null)
             return 0;
 
-        nRows = A.size();
-        nCols = A.get(0).length();
+        nRows = input.size();
+        nCols = input.get(0).length();
 
         discovered = new boolean[nRows][nCols];
         nShapes = 0;
-        this.A = A;
+        this.input = input;
 
         for (int i = 0; i < nRows; i++) { //dfs helper function
             for (int j = 0; j < nCols; j++) {
-                if (!discovered[i][j] && A.get(i).charAt(j) == 'X') { //if white, do dfs
+                if (!discovered[i][j] && input.get(i).charAt(j) == 'X') { //if white, do dfs
                     dfs(i, j);
                     nShapes++; //number of trees
                 }

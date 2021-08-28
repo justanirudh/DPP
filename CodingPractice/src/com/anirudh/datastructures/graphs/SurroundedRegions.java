@@ -39,8 +39,8 @@ public class SurroundedRegions {
     private char[][] board;
     private int numRows;
     private int numCols;
-    private int[] dx;
-    private int[] dy;
+    private int[] dx = new int[]{0, 0, 1, -1};
+    private int[] dy = new int[]{1, -1, 0, 0};
 
 
     private boolean isBorderO(int i, int j) {
@@ -71,8 +71,6 @@ public class SurroundedRegions {
         numRows = board.length;
         numCols = board[0].length;
         this.board = board;
-        dx = new int[]{0, 0, 1, -1};
-        dy = new int[]{1, -1, 0, 0};
 
         visited = new boolean[numRows][numCols]; //all false
 

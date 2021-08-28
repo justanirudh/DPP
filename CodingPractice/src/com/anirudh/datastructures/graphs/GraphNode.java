@@ -7,11 +7,11 @@ import java.util.ArrayList;
  */
 public class GraphNode {
     private char c; //using in Surrounded Regions problem
-    private Coord coord; // dont use this. If a matrix, do DFS in a matrix
+    public Coord coord; // dont use this. If a matrix, do DFS in a matrix
     private String color;
     private ArrayList<Coord> neighbours; //use hashset
 
-    GraphNode(Coord coord) {
+    public GraphNode(Coord coord) {
         this.coord = coord;
         color = "white";
         neighbours = new ArrayList<>();

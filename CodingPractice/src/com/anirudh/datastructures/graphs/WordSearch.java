@@ -26,7 +26,7 @@ word = "ABCB", -> returns false.
     DFS in matrix (as multiple sources possible)
     like finding cycle in a directed graph. maintain a record of path
  */
-//backtracking
+//DFS with backtracking
 public class WordSearch {
     char[][] board;
     String word;
