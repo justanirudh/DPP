@@ -28,6 +28,10 @@ All words have the same length.
 All words contain only lowercase alphabetic characters.
  */
 
+/**
+ * BFS to find shortest distance
+ */
+
 public class WordLadder {
     Map<String, List<String>> graph = new HashMap<>();
     Set<String> visited = new HashSet<>();

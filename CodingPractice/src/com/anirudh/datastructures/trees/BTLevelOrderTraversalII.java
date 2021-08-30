@@ -23,7 +23,7 @@ return its bottom-up level order traversal as:
   [3]
 ]
  */
-public class BinaryTreeLevelOrderTraversalII {
+public class BTLevelOrderTraversalII {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         /*
         1. use a stack to push each level

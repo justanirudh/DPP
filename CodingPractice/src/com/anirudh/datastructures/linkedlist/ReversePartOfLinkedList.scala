@@ -48,7 +48,7 @@ object ReversePartOfLinkedList extends App{
       curr = curr.get.next
       succ = curr.get.next
 
-      while(curr != stopNode){ //TODO: need to check for 'none' pointers here
+      while(curr != stopNode){
         curr.get.next = pred
         pred = curr
         curr = succ

@@ -107,13 +107,12 @@ class VerticalOrderTraversalBT {
         int prev = locations.get(0).x;
 
         for (Location loc : locations) {
-            // If the x value changed, it's part of a new report.
+            // If the x value changed, it's part of a new array.
             if (loc.x != prev) {
                 prev = loc.x;
                 ans.add(new ArrayList<Integer>());
             }
-
-            // We always add the node's value to the latest report.
+            // We always add the node's value to the latest array.
             ans.get(ans.size() - 1).add(loc.val);
         }
 
@@ -121,45 +120,3 @@ class VerticalOrderTraversalBT {
     }
 }
 
-
-/*public class VerticalOrderTraversalBT {
-
-    void print(Map<Integer, List<Integer>> map) {
-        for (List<Integer> vals : map.values()) {
-            for (int data : vals) {
-                System.out.print(data + " ");
-            }
-            System.out.print("$");
-        }
-    }
-
-    void traverse(Node node, Map<Integer, List<Integer>> map, int num) {
-        if (node == null)
-            return;
-        if (map.containsKey(num)) {
-            map.get(num).add(node.data);
-        } else {
-            List<Integer> list = new ArrayList<>();
-            list.add(node.data);
-            map.put(num, list);
-        }
-        traverse(node.left, map, num - 1);
-        traverse(node.right, map, num + 1);
-    }
-
-    void verticalOrder(Node node) {
-        if (node == null)
-            return;
-        Map<Integer, List<Integer>> map = new TreeMap<>();
-        int num = 0;
-
-        List<Integer> list = new ArrayList<>();
-        list.add(node.data);
-        map.put(num, list);
-
-        traverse(node.left, map, num - 1);
-        traverse(node.right, map, num + 1);
-
-        print(map);
-    }
-}*/

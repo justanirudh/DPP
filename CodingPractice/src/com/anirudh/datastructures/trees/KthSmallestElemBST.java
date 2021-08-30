@@ -49,7 +49,7 @@ public class KthSmallestElemBST {
         return inOrder(root);
     }
     //-----------------------------------------------
-    //Still O(n) at max
+    //Still O(n) at pathSum
 
     Map<TreeNode, Integer> countMap = new HashMap<>();
 

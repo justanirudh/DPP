@@ -66,7 +66,7 @@ public class BTisBST {
         double min = Double.NEGATIVE_INFINITY;
         double max = Double.POSITIVE_INFINITY;
 
-        //Also passing a range to each side of the tree left: [math.min, root] and right: [root, math.max]
+        //Also passing a range to each side of the tree left: [math.min, root] and right: [root, math.pathSum]
         return isBSTNode(root, min, max) && //trivial check but makes it more symmetric
                 isBSTNode(root.left, min, root.val) &&
                 isBSTNode(root.right, root.val, max);

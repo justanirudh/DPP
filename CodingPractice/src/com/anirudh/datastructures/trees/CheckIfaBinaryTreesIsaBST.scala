@@ -41,15 +41,15 @@ object CheckIfaBinaryTreesIsaBST extends App{
     else {
       val left = curr.get.left
       val right = curr.get.right
-      (curr.get.elem > min && curr.get.elem < max) && // check if min < curr < max
+      (curr.get.elem > min && curr.get.elem < max) && // check if min < curr < pathSum
       (if(left.isEmpty) true else left.get.elem < curr.get.elem) && // check if left < curr
         (if(right.isEmpty) true else right.get.elem > curr.get.elem) && // check if curr < right
-        checkBSTAux(left, min, curr.get.elem) && checkBSTAux(right, curr.get.elem, max) //update min and max and call recursively
+        checkBSTAux(left, min, curr.get.elem) && checkBSTAux(right, curr.get.elem, max) //update min and pathSum and call recursively
     }
   }
 
   //passing dummy values for root and checking in Aux fn to skip root.
-  //min and max values to make sure ALL nodes in left of curr node are less than node and ALL node in right of curr node
+  //min and pathSum values to make sure ALL nodes in left of curr node are less than node and ALL node in right of curr node
   //are greater than curr node
   def checkIfBinaryTreeaBST(tree:BinaryTree):Boolean = checkBSTAux(tree.root, -1*BIGNUMBER, BIGNUMBER)
 

@@ -67,7 +67,7 @@ public class NumberOfIslands {
         int numIslands = 0;
 
         for(int i = 0; i < numRows; ++i){
-            for(int j = 0; j < numCols; ++j){
+            for(int j = 0; j < numCols; ++j){ //find all trees
                 if(grid[i][j] == '1' && !visited[i][j]){
                     doDFS(i, j);
                     numIslands++;

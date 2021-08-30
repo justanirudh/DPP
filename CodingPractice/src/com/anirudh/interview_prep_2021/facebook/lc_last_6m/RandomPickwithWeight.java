@@ -94,7 +94,7 @@ public class RandomPickwithWeight {
             if(runningSums[mid] == num)
                 return mid;
             else if(runningSums[mid] > num) {
-                end = mid;   // TODO: why mid????????
+                end = mid;   // IMP: Using mid and not mid - 1 because mid is still a possible answer as a number's field is before it
             }
             else // weight < num
                 start = mid + 1;
@@ -112,21 +112,11 @@ public class RandomPickwithWeight {
 
     public int pickIndex() {
         int maxSum = runningSums[runningSums.length - 1];
-        double num = maxSum * Math.random(); //TODO: why rand.nextint doesnt work?????
+        double num = maxSum * Math.random(); //why rand.nextint doesnt give correct answer??
         //find num's potential index in runningSums array
         return binarySearch(num, 0, runningSums.length - 1);
 
     }
-
-
-
-
-
-
-
-
-
-
 
     // Memory limit exceeded
     // For each weight, add the index that many number of times in an array

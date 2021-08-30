@@ -24,13 +24,13 @@ public class LargestBSTSubtreeInaBT {
     //    class ChildInfo {
 //        boolean isBST;
 //        int min;
-//        int max;
+//        int pathSum;
 //        int size;
 //
-//        public ChildInfo(boolean isBST, int min, int max, int size) {
+//        public ChildInfo(boolean isBST, int min, int pathSum, int size) {
 //            this.isBST = isBST;
 //            this.min = min;
-//            this.max = max;
+//            this.pathSum = pathSum;
 //            this.size = size;
 //        }
 //    }
@@ -47,7 +47,7 @@ public class LargestBSTSubtreeInaBT {
 //        }
 //
 //        if (left.isBST && right.isBST) {
-//            if (left.max <= node.data && node.data <= right.min)
+//            if (left.pathSum <= node.data && node.data <= right.min)
 //                return new ChildInfo(true, , left.size + right.size + 1);
 //            else
 //                return left.size > right.size ? left.size : right.size;
@@ -66,7 +66,7 @@ public class LargestBSTSubtreeInaBT {
 //        ChildInfo left = postOrder(node.left, true);
 //        ChildInfo right = postOrder(node.right, false);
 //        if (left.isBST && right.isBST) {
-//            if (left.max <= node.data && node.data <= right.min)
+//            if (left.pathSum <= node.data && node.data <= right.min)
 //                return left.size + right.size + 1;
 //            else
 //                return left.size > right.size ? left.size : right.size;
@@ -126,7 +126,7 @@ public class LargestBSTSubtreeInaBT {
             int min = Integer.MAX_VALUE;
 
             /* A flag variable for left subtree property
-            i.e., max(root->left) < root->data */
+            i.e., pathSum(root->left) < root->data */
             boolean left_flag = false;
 
             /* A flag variable for right subtree property
@@ -157,7 +157,7 @@ public class LargestBSTSubtreeInaBT {
                 right_flag = true;
             }
 
-            // Update min and max values for the parent recursive calls
+            // Update min and pathSum values for the parent recursive calls
             if (min < min_ref.min) {
                 min_ref.min = min;
             }

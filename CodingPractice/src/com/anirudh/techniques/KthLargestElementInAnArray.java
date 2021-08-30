@@ -22,6 +22,10 @@ You may assume k is always valid, 1 ≤ k ≤ array's length.
 
 //Good solutions: https://leetcode.com/problems/kth-largest-element-in-an-array/description/
 public class KthLargestElementInAnArray {
+
+    //Easier solution use min heap of size k
+
+
 //TODO later
     public static void swap(int[] arr, int i1, int i2) {
         int temp = arr[i1];

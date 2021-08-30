@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.facebook;
+package com.anirudh.interview_prep_2021.facebook.lc_last_6m;
 
 import com.anirudh.datastructures.trees.TreeNode;
 
@@ -72,6 +72,9 @@ class VerticalOrderTraversalBT {
             this.val = val;
         }
 
+        //TODO: For Problem 314, instead of comparing values in last "else",
+        // compare left node vs right node. One wa to do it is pass path to ndoes as you go
+        // Eg. "LLR" vs "LRL", first one would take precedence
         @Override
         public int compareTo(Location that) {
             if (this.x != that.x) //first check x
@@ -124,46 +127,3 @@ class VerticalOrderTraversalBT {
         return ans;
     }
 }
-
-
-/*public class VerticalOrderTraversalBT {
-
-    void print(Map<Integer, List<Integer>> map) {
-        for (List<Integer> vals : map.values()) {
-            for (int data : vals) {
-                System.out.print(data + " ");
-            }
-            System.out.print("$");
-        }
-    }
-
-    void traverse(Node node, Map<Integer, List<Integer>> map, int num) {
-        if (node == null)
-            return;
-        if (map.containsKey(num)) {
-            map.get(num).add(node.data);
-        } else {
-            List<Integer> list = new ArrayList<>();
-            list.add(node.data);
-            map.put(num, list);
-        }
-        traverse(node.left, map, num - 1);
-        traverse(node.right, map, num + 1);
-    }
-
-    void verticalOrder(Node node) {
-        if (node == null)
-            return;
-        Map<Integer, List<Integer>> map = new TreeMap<>();
-        int num = 0;
-
-        List<Integer> list = new ArrayList<>();
-        list.add(node.data);
-        map.put(num, list);
-
-        traverse(node.left, map, num - 1);
-        traverse(node.right, map, num + 1);
-
-        print(map);
-    }
-}*/

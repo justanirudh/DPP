@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.facebook;
+package com.anirudh.interview_prep_2021.facebook.lc_last_6m;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -35,6 +35,11 @@ Explanation:
  */
 
 //level order traversal with first node on right
-public class BinaryTreeRightSideVIew {
+public class BTRightSideView {
+
+    //Just use level order traversal.
+    //Use size of level to find the last element
+    // See 107. Binary Tree Level Order Traversal II
+    //TODO: Implement
 
 }

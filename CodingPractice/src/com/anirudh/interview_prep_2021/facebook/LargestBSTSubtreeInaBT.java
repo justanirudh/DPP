@@ -22,5 +22,4 @@ Follow up: Can you figure out ways to solve it with O(n) time complexity?
  */
 public class LargestBSTSubtreeInaBT {
 
-
 }
