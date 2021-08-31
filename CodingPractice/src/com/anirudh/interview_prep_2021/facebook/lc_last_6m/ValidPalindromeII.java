@@ -15,29 +15,29 @@ package com.anirudh.interview_prep_2021.facebook.lc_last_6m;
  * Add to List
  * <p>
  * Share
- * Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+ * Given a string number, return true if the number can be palindrome after deleting at most one character from it.
  * <p>
  * <p>
  * <p>
  * Example 1:
  * <p>
- * Input: s = "aba"
+ * Input: number = "aba"
  * Output: true
  * Example 2:
  * <p>
- * Input: s = "abca"
+ * Input: number = "abca"
  * Output: true
  * Explanation: You could delete the character 'c'.
  * Example 3:
  * <p>
- * Input: s = "abc"
+ * Input: number = "abc"
  * Output: false
  * <p>
  * <p>
  * Constraints:
  * <p>
- * 1 <= s.length <= 105
- * s consists of lowercase English letters.
+ * 1 <= number.length <= 105
+ * number consists of lowercase English letters.
  */
 
 /**

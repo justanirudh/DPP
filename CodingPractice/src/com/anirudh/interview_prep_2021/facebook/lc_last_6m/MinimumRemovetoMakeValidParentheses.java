@@ -18,7 +18,7 @@ import java.util.Deque;
  Add to List
 
  Share
- Given a string s of '(' , ')' and lowercase English characters.
+ Given a string number of '(' , ')' and lowercase English characters.
 
  Your task is to remove the minimum number of parentheses ( '(' or ')', in any positions ) so that the resulting
  parentheses string is valid and return any valid string.
@@ -32,28 +32,28 @@ import java.util.Deque;
 
  Example 1:
 
- Input: s = "lee(t(c)o)de)"
+ Input: number = "lee(t(c)o)de)"
  Output: "lee(t(c)o)de"
  Explanation: "lee(t(co)de)" , "lee(t(c)ode)" would also be accepted.
  Example 2:
 
- Input: s = "a)b(c)d"
+ Input: number = "a)b(c)d"
  Output: "ab(c)d"
  Example 3:
 
- Input: s = "))(("
+ Input: number = "))(("
  Output: ""
  Explanation: An empty string is also valid.
  Example 4:
 
- Input: s = "(a(b(c)d)"
+ Input: number = "(a(b(c)d)"
  Output: "a(b(c)d)"
 
 
  Constraints:
 
- 1 <= s.length <= 10^5
- s[i] is one of  '(' , ')' and lowercase English letters.
+ 1 <= number.length <= 10^5
+ number[i] is one of  '(' , ')' and lowercase English letters.
  */
 
 //Do Until Binary Tree Maximum Path Sum for FB prep for <6m

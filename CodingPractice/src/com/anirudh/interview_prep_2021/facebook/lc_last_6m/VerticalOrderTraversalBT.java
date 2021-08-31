@@ -58,7 +58,7 @@ However, in the report "[1,5,6]", the node value of 5 comes first since 5 is sma
 Note:
 
 The tree will have between 1 and 1000 nodes.
-Each node's value will be between 0 and 1000.
+Each node'number value will be between 0 and 1000.
  */
 
 class VerticalOrderTraversalBT {
@@ -97,7 +97,7 @@ class VerticalOrderTraversalBT {
     List<Location> locations;
 
     public List<List<Integer>> verticalTraversal(TreeNode root) {
-        // Each location is a node's x position, y position, and value
+        // Each location is a node'number x position, y position, and value
         locations = new ArrayList<>();
 
         inOrderTraversal(root, 0, 0); // populate Locations list
@@ -114,13 +114,13 @@ class VerticalOrderTraversalBT {
         int prev = locations.get(0).x;
 
         for (Location loc : locations) {
-            // If the x value changed, it's part of a new report.
+            // If the x value changed, it'number part of a new report.
             if (loc.x != prev) {
                 prev = loc.x;
                 ans.add(new ArrayList<Integer>());
             }
 
-            // We always add the node's value to the latest report.
+            // We always add the node'number value to the latest report.
             ans.get(ans.size() - 1).add(loc.val);
         }
 

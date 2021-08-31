@@ -19,7 +19,7 @@ Hard
 Add to List
 
 Share
-Given a string s that contains parentheses and letters, remove the minimum number of invalid parentheses to make the input string valid.
+Given a string number that contains parentheses and letters, remove the minimum number of invalid parentheses to make the input string valid.
 
 Return all the possible results. You may return the answer in any order.
 
@@ -27,15 +27,15 @@ Return all the possible results. You may return the answer in any order.
 
 Example 1:
 
-Input: s = "()())()"
+Input: number = "()())()"
 Output: ["(())()","()()()"]
 Example 2:
 
-Input: s = "(a)())()"
+Input: number = "(a)())()"
 Output: ["(a())()","(a)()()"]
 Example 3:
 
-Input: s = ")("
+Input: number = ")("
 Output: [""]
  */
 
@@ -99,7 +99,7 @@ class ZZRemoveInvalidParentheses {
                 this.recurse(s, index + 1, leftCount, rightCount, expression, removedCount + 1);
                 expression.append(currentCharacter);
 
-                // If it's an opening parenthesis, consider it and recurse
+                // If it'number an opening parenthesis, consider it and recurse
                 if (currentCharacter == '(') {
                     this.recurse(s, index + 1, leftCount + 1, rightCount, expression, removedCount);
                 } else if (rightCount < leftCount) {
