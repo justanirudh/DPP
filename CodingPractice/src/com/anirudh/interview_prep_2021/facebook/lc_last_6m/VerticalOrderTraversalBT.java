@@ -61,6 +61,12 @@ The tree will have between 1 and 1000 nodes.
 Each node'number value will be between 0 and 1000.
  */
 
+/*
+1. give coordinates to each node as you do preorder traversal in a class called location
+2. in location class, override compareTo() to first check x, then y then left node or right node
+3. to check left, right, pass the path down during preorder traversal
+ */
+
 class VerticalOrderTraversalBT {
 
     class Location implements Comparable<Location> {
@@ -86,11 +92,11 @@ class VerticalOrderTraversalBT {
         }
     }
 
-    public void inOrderTraversal(TreeNode node, int x, int y) {
+    public void preOrderTraversal(TreeNode node, int x, int y) {
         if (node != null) {
             locations.add(new Location(x, y, node.val));
-            inOrderTraversal(node.left, x - 1, y + 1);
-            inOrderTraversal(node.right, x + 1, y + 1);
+            preOrderTraversal(node.left, x - 1, y + 1);
+            preOrderTraversal(node.right, x + 1, y + 1);
         }
     }
 
@@ -100,7 +106,7 @@ class VerticalOrderTraversalBT {
         // Each location is a node'number x position, y position, and value
         locations = new ArrayList<>();
 
-        inOrderTraversal(root, 0, 0); // populate Locations list
+        preOrderTraversal(root, 0, 0); // populate Locations list
 
         Collections.sort(locations);//sort it
 

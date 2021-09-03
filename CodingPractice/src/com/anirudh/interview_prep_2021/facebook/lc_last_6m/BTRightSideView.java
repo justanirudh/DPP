@@ -34,7 +34,21 @@ Explanation:
   5     4       <---
  */
 
-//level order traversal with first node on right
+/*
+do level order traversal with first node on right
+Insert root into Queue
+while(q! empty) {
+    //find size of queue
+
+    for(int i to size) {
+    poll from queue
+    push children to stack
+    tracking the last elem
+}
+    put the last elem in result array
+}
+ */
+
 public class BTRightSideView {
 
     //Just use level order traversal.

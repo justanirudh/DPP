@@ -40,13 +40,13 @@ Output: 42
  */
 
 //Same as diameter of the tree: 543
+/*
+1. At every node we check the sum starting from left child to leaves and right child to leaves: ls and rs
+2. we update the maxSum by node + rs + ls
+3. we return max(ls,rs) for the recursion
+ */
 class BTMaximumPathSum {
     int pathSum = Integer.MIN_VALUE;
-
-    public int maxPathSum(TreeNode root) {
-        getMaxSumStartingFrom(root);
-        return pathSum;
-    }
 
     int getMaxSumStartingFrom(TreeNode node) {
         if(node == null)
@@ -58,6 +58,12 @@ class BTMaximumPathSum {
         pathSum = Math.max(pathSum, node.val + leftPathSum + rightPathSum);
 
         return node.val + Math.max(leftPathSum, rightPathSum);
-
     }
+
+    public int maxPathSum(TreeNode root) {
+        getMaxSumStartingFrom(root);
+        return pathSum;
+    }
+
+
 }

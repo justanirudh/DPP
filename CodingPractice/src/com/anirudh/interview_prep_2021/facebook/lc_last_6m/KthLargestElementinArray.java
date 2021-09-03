@@ -34,6 +34,12 @@ import java.util.*;
  */
 
 //O(nlogk) time, O(k) space
+    /*
+    /**
+ * Similar to 347. Top K Frequent Elements
+ * create a min heap. kick out min item everytime heap hits size k
+ * For largest elems, we are using min heap. So that we can kick off min element in O(logk) time
+ */
 public class KthLargestElementinArray {
     public int findKthLargest(int[] nums, int k) {
         Queue<Integer> minHeap = new PriorityQueue<>(Comparator.naturalOrder());

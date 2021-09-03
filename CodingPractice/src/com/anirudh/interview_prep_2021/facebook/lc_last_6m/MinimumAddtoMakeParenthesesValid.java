@@ -46,7 +46,8 @@ Output: 4
  */
 
 /*
-Do the stack solution for finding unmatched parens
+Do clever balance and rightUnopen bracket calc: O(1) space O(n) time
+Do the stack solution for finding unmatched parens: O(n) space O(n) time
  */
 public class MinimumAddtoMakeParenthesesValid {
 

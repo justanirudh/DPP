@@ -53,7 +53,7 @@ import java.util.Queue;
 /**
  * Similar to 347. Top K Frequent Elements
  * create a max heap. kick out max item everytime heap hits size k
- * easy peasy
+ * For closest distance, we are using max heap. So that we can kick off largest element in O(logk) time
  */
 
 public class KClosestPointstoOrigin {

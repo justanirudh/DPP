@@ -42,7 +42,7 @@ package com.anirudh.interview_prep_2021.facebook.lc_last_6m;
 
 /**
  * go from either side and check until both same
- * after finding first difference, check by removing eother left side letter or right side letter
+ * after finding first difference, check by removing either left side letter or right side letter
  * and then check if the rest of the substring is still a palindrome or not
   */
 public class ValidPalindromeII {

@@ -56,7 +56,7 @@ public class SubarraySumEqualsK {
         Map<Integer, Integer> freq = new HashMap<>();
         int res = 0;
         int runningSum = 0;
-        freq.put(0, 1); //0 has come once; required if k is a runningSum at some point
+        freq.put(0, 1); //0 has come once; required if k is the runningSum at some point
         for (int num : nums) {
             runningSum += num;
             //if complement of the runningSum appears, count would be the number of times it has appeared until now

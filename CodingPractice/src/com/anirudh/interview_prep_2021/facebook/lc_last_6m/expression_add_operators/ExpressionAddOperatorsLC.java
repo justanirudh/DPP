@@ -9,38 +9,65 @@ import java.util.List;
 
 /**
  * 282. Expression Add Operators
- Hard
+ * Hard
+ * <p>
+ * 1859
+ * <p>
+ * 318
+ * <p>
+ * Add to List
+ * <p>
+ * Share
+ * Given a string num that contains only digits and an integer target, return all possibilities to add the binary operators
+ * '+', '-', or '*' between the digits of num so that the resultant expression evaluates to the target value.
+ * <p>
+ * <p>
+ * Example 1:
+ * <p>
+ * Input: num = "123", target = 6
+ * Output: ["1*2*3","1+2+3"]
+ * Example 2:
+ * <p>
+ * Input: num = "232", target = 8
+ * Output: ["2*3+2","2+3*2"]
+ * Example 3:
+ * <p>
+ * Input: num = "105", target = 5
+ * Output: ["1*0+5","10-5"]
+ * Example 4:
+ * <p>
+ * Input: num = "00", target = 0
+ * Output: ["0*0","0+0","0-0"]
+ * Example 5:
+ * <p>
+ * Input: num = "3456237490", target = 9191
+ * Output: []
+ */
 
- 1859
+/*
+ - Do efficient Brute force, no other way to solve this. Use recursion and backtracking to do this.
+ - Add another NOOP operator to lump digits together
 
- 318
+ For the function, pass in these params:
+ 1. Index: index of the string
+ 2. exp: expression we are building
+ 3. solution: this should become target at the end
+ 4. curr: used for NOOP only. current number that can consist of multiple digits and is needed because we have the NOOP operation
+ 5. prev: used for multi only. Used to undo previous operation as multi takes precedence
 
- Add to List
+ For each operator:
+ 1. Add to exp
+ 2. Add/subtract/multi to solution
+ 3. recurse
+ 4. backtrack by removing the last 2 chars ( operation and operand)
 
- Share
- Given a string num that contains only digits and an integer target, return all possibilities to add the binary operators '+', '-', or '*' between the digits of num so that the resultant expression evaluates to the target value.
+ The NOOP operator just iterates the index do that another digit is included
 
+ At the end, if index reaches the end of the string and teh solution is equal to target, add it to answer
 
- Example 1:
+ T = O(n * 4^n): 4 choices in each digit gets to 4^n. In base case we create a string of size N. Hence for 4^n strings, O(n * 4^n)
+ S = O(N) for stack
 
- Input: num = "123", target = 6
- Output: ["1*2*3","1+2+3"]
- Example 2:
-
- Input: num = "232", target = 8
- Output: ["2*3+2","2+3*2"]
- Example 3:
-
- Input: num = "105", target = 5
- Output: ["1*0+5","10-5"]
- Example 4:
-
- Input: num = "00", target = 0
- Output: ["0*0","0+0","0-0"]
- Example 5:
-
- Input: num = "3456237490", target = 9191
- Output: []
  */
 public class ExpressionAddOperatorsLC {
 
@@ -48,10 +75,10 @@ public class ExpressionAddOperatorsLC {
     public String digits;
     public long target;
 
-    public void recurse(
+    void recurse(
             int index,
             long prev, // used to make sure we backtrack if we use multiplication
-            long curr, //used to make sure we dont do NOOP operator on numbers starting with 0
+            long curr, //used by NOOP
             long solution,
             ArrayList<String> exp) {
 
@@ -60,15 +87,17 @@ public class ExpressionAddOperatorsLC {
             // If the final value == target expected AND no operand is left unprocessed
             if (solution == target && curr == 0) {
                 StringBuilder sb = new StringBuilder();
-                exp.subList(1, exp.size()).forEach(v -> sb.append(v)); //Taking from 1 because first character is always a +
+                for(int i = 1; i < exp.size(); ++i) { //Taking from 1 because first character is always a +
+                    sb.append(exp.get(i));
+                }
                 answer.add(sb.toString());
             }
             return;
         }
 
-        // NOOP: Extending the current operand by one digit
         curr = curr * 10 + Character.getNumericValue(digits.charAt(index));
 
+        // NOOP: Extending the current operand by one digit
         // To avoid cases where we have 1 + 05 or 1 * 05 since 05 won't be a valid operand. Hence this check
         if (curr > 0) {
             recurse(index + 1, prev, curr, solution, exp);

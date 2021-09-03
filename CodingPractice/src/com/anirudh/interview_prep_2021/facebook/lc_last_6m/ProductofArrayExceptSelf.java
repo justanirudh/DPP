@@ -22,6 +22,8 @@ space for the purpose of space complexity analysis.)
 /**
  * On first pass from l to r, at index i, save product of elements 0 to i-1
  * On second pass from right to left, calculate rightProduct and multiple with the above array
+ *
+ * [i,j,k,l,m,n] on the 2nd pass, 1st array[l] will have multi of all values to left
  */
 public class ProductofArrayExceptSelf {
     static int[] productExceptSelf(int[] nums) {
@@ -46,27 +48,30 @@ public class ProductofArrayExceptSelf {
 
 
         //------------------------------------------------------------------------
-//        //O(n) space, O(n) time
-//        int[] lr = new int[nums.length]; //left to right cumulative products
-//        int[] rl = new int[nums.length]; //right to left cumulative products
-//
-//        lr[0] = nums[0];
-//        for(int i = 1; i < nums.length; ++i) {
-//            lr[i] = lr[i-1] * nums[i];
-//        }
-//
-//        rl[nums.length - 1] = nums[nums.length - 1];
-//        for(int i = nums.length - 2; i >=0; --i) {
-//            rl[i] = rl[i+1] * nums[i];
-//        }
-//
-//        int[] res = new int[nums.length];
-//        for(int i = 0; i < nums.length; ++i) {
-//            int leftProd = (i-1 >=0) ? lr[i-1] : 1;
-//            int rightProd = (i + 1 < nums.length) ? rl[i + 1] : 1;
-//            res[i] = leftProd * rightProd;
-//        }
-//        return res;
+    }
+
+    static int[] productExceptSelf2(int[] nums) {
+        //O(n) space, O(n) time
+        int[] lr = new int[nums.length]; //left to right cumulative products
+        int[] rl = new int[nums.length]; //right to left cumulative products
+
+        lr[0] = nums[0];
+        for (int i = 1; i < nums.length; ++i) {
+            lr[i] = lr[i - 1] * nums[i];
+        }
+
+        rl[nums.length - 1] = nums[nums.length - 1];
+        for (int i = nums.length - 2; i >= 0; --i) {
+            rl[i] = rl[i + 1] * nums[i];
+        }
+
+        int[] res = new int[nums.length];
+        for (int i = 0; i < nums.length; ++i) {
+            int leftProd = (i - 1 >= 0) ? lr[i - 1] : 1;
+            int rightProd = (i + 1 < nums.length) ? rl[i + 1] : 1;
+            res[i] = leftProd * rightProd;
+        }
+        return res;
     }
 
     public static void main(String[] args) {

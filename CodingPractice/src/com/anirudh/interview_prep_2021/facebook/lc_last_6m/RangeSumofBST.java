@@ -17,7 +17,8 @@ import com.anirudh.datastructures.trees.TreeNode;
  Add to List
 
  Share
- Given the root node of a binary search tree and two integers low and high, return the sum of values of all nodes with a value in the inclusive range [low, high].
+ Given the root node of a binary search tree and two integers low and high,
+ return the sum of values of all nodes with a value in the inclusive range [low, high].
 
 
 

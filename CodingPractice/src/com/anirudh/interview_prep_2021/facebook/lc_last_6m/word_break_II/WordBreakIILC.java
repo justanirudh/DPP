@@ -6,34 +6,41 @@ package com.anirudh.interview_prep_2021.facebook.lc_last_6m.word_break_II;
 
 import java.util.*;
 
-/**
+/*
  * 140. Word Break II
  * Hard
- * <p>
  * 3688
- * <p>
  * 452
- * <p>
  * Add to List
- * <p>
  * Share
- * Given a string s and a dictionary of strings wordDict, add spaces in s to construct a sentence where each word is a valid dictionary word. Return all such possible sentences in any order.
- * <p>
+ *
+ * Given a string s and a dictionary of strings wordDict, add spaces in s to construct a sentence where each word
+ * is a valid dictionary word. Return all such possible sentences in any order.
  * Note that the same word in the dictionary may be reused multiple times in the segmentation.
- * <p>
+ *
  * Example 1:
- * <p>
  * Input: s = "catsanddog", wordDict = ["cat","cats","and","sand","dog"]
  * Output: ["cats and dog","cat sand dog"]
+ *
  * Example 2:
- * <p>
  * Input: s = "pineapplepenapple", wordDict = ["apple","pen","applepen","pine","pineapple"]
  * Output: ["pine apple pen apple","pineapple pen apple","pine applepen apple"]
  * Explanation: Note that you are allowed to reuse a dictionary word.
+ *
  * Example 3:
- * <p>
  * Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
  * Output: []
+ */
+
+/**
+ * Simple greedy dynamic programming
+ * Make a memoization map of String -> ways to break the string: getWaysToBreak()
+ * Use substring(0,i) to find all PREFIXES of the string
+ * For each prefix, check if it in the wordSet
+ * If it is in wordSet, then send the postFix to getWaysToBreak()
+ * With the returned value, add it to memoization map
+ *
+ * use the memoization map first thing to make sure we do no extra processing
  */
 public class WordBreakIILC {
     Set<String> wordSet;
@@ -53,8 +60,9 @@ public class WordBreakIILC {
             breakMap.put(toBeBroken, new ArrayList<>());
         }
 
-        for (int i = 1; i <= toBeBroken.length(); ++i) { //find ways to break it, brute force
+        for (int i = 1; i <= toBeBroken.length(); ++i) { //check all substrings
             String prefix = toBeBroken.substring(0, i);
+
             if (wordSet.contains(prefix)) { //if prefix is in dictionary, then search for postfixes
 
                 String postFix = toBeBroken.substring(i);
@@ -63,7 +71,7 @@ public class WordBreakIILC {
                 for (List<String> brokenPostfix : brokenPostfixes) { //add it to map
                     List<String> wordBreak = new ArrayList<>(brokenPostfix);
                     wordBreak.add(0, prefix); //inserting in right order so that joining is easy
-                    breakMap.get(toBeBroken).add(wordBreak);
+                    breakMap.get(toBeBroken).add(wordBreak); //adding to breakMap for memoization
                 }
             }
         }

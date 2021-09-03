@@ -5,9 +5,11 @@ import com.anirudh.datastructures.trees.TreeNode;
 /**
  * Created by paanir on 1/31/17.
  */
+
+//like preorder traversal. O(n) time O(h) space
+// do lca in left and right both
 public class LCA_BT {
 
-    //like preorder traversal. O(n) time O(h) space
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
         if (root == null)

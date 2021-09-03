@@ -56,8 +56,6 @@ import java.util.Deque;
  number[i] is one of  '(' , ')' and lowercase English letters.
  */
 
-//Do Until Binary Tree Maximum Path Sum for FB prep for <6m
-
 /**
  * normal push/pop for valid paren
  */

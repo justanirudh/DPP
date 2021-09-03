@@ -1,50 +1,6 @@
 package com.anirudh.interview_prep_2021.facebook.lc_last_6m.add_binary;
 
-/**
- * Created by paanir on 8/29/21.
- * <p>
- * 67. Add Binary
- * Easy
- * <p>
- * 3295
- * <p>
- * 392
- * <p>
- * Add to List
- * <p>
- * Share
- * Given two binary strings a and b, return their sum as a binary string.
- * <p>
- * Example 1:
- * <p>
- * Input: a = "11", b = "1"
- * Output: "100"
- * Example 2:
- * <p>
- * Input: a = "1010", b = "1011"
- * Output: "10101"
- * <p>
- * 67. Add Binary
- * Easy
- * <p>
- * 3295
- * <p>
- * 392
- * <p>
- * Add to List
- * <p>
- * Share
- * Given two binary strings a and b, return their sum as a binary string.
- * <p>
- * Example 1:
- * <p>
- * Input: a = "11", b = "1"
- * Output: "100"
- * Example 2:
- * <p>
- * Input: a = "1010", b = "1011"
- * Output: "10101"
- */
+
 
 /**
  * 67. Add Binary
@@ -73,7 +29,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Do addition like we do for decimals, but for binary. With carry and everything in binary (textbook addition)
+ * Do addition like we do for decimals (textbook math), but for binary. With carry and everything in binary
+ * Add normally then use decimalToBinary table to carry:
+ * sumMap.put(0, "00");
+ * sumMap.put(1, "01");
+ * sumMap.put(2, "10");
+ * sumMap.put(3, "11");
+ *
  * Space: O(Max(a.len,b.len)), Time: O(Max(a.len,b.len))
  */
 public class AddBinary {

@@ -63,6 +63,11 @@ import com.anirudh.datastructures.trees.BTLevelOrderTraversal;
  * it says in-place, not constant space
  * use normal inorder traversal with a special way to handle joining first and last elements OR
  * use iterative inorder. Easy to get first element first and no special handling required
+ * iterative inorder:
+ * keep pushing left until null
+ * then pop
+ * then push node.right and then keep pushing left until null
+ * so on and so forth
  */
 public class ConvertBSTtoSortedDoublyLinkedList {
         public BTLevelOrderTraversal.Node treeToDoublyList(BTLevelOrderTraversal.Node root) {

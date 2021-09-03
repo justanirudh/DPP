@@ -34,7 +34,13 @@ Example 2:
 Input: root = [1,2]
 Output: 1
  */
+
 //Similar to Binary Tree Maximum path sum #124
+/*
+1. At every node we check the sum starting from left child to leaves and right child to leaves: ls and rs
+2. we update the diameter by rs + ls
+3. we return 1 + max(ls,rs) for the recursion
+ */
 public class DiameterofBinaryTree {
     int diameter = 0;
 
