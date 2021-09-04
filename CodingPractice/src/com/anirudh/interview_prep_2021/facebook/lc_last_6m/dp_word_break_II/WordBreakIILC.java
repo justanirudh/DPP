@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.facebook.lc_last_6m.word_break_II;
+package com.anirudh.interview_prep_2021.facebook.lc_last_6m.dp_word_break_II;
 
 /**
  * Created by paanir on 8/29/21.

@@ -10,6 +10,10 @@ import java.util.Set;
  */
 public class HelloWorld {
     public static void main(String[] args) {
+        StringBuilder word = new StringBuilder("abcd");
+        StringBuilder currWord = word.deleteCharAt(0);
+        System.out.println(word);
+        System.out.println(currWord);
 //        String str1 = "apple";
 //        String str2 = "ham";
 //        System.out.println(str1.compareTo(str2)); //should be -ve
