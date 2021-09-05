@@ -46,6 +46,7 @@ Input: nums = [1,5,6,14,15]
 Output: 1
  */
 /*
+First sort the array
 We have to minimize difference between largest and smallest. So by intuition we can do any of these in 3 moves:
 1. Decrease the largest 3 elements [to the 4th largest value]
 2. Decrease largest 2 elems (to 3rd largest value) and increase smallest 1 (to 2nd smallest value)

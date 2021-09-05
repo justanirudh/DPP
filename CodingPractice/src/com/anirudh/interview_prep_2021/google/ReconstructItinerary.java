@@ -20,6 +20,13 @@ Return ["JFK","ATL","JFK","SFO","ATL","SFO"].
 Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","SFO"]. But it is larger in lexical order.
 */
 
+/*
+Created directed graph DAG
+Then do DFS.
+DONT use visited set as we are coming back to visited airports because it is a DAG
+Instead just keep polling from value lists until it is null. Destructive but works
+ */
+
 import java.util.*;
 
 class ReconstructItinerary {
@@ -29,8 +36,9 @@ class ReconstructItinerary {
 
     private void doDFS(String departure) {
         PriorityQueue<String> arrivals = flights.get(departure);
+
         while (arrivals != null && !arrivals.isEmpty()) {
-            String nextStop = arrivals.poll();
+            String nextStop = arrivals.remove();
             doDFS(nextStop);
         }
         path.addFirst(departure); //topological sort. the one that gets finished first is prepended first
@@ -39,13 +47,16 @@ class ReconstructItinerary {
     public List<String> findItinerary(List<List<String>> tickets) {
         flights = new HashMap<>();
         path = new ArrayDeque<>();
+
         //create graph
         for (List<String> ticket : tickets) {
             flights.putIfAbsent(ticket.get(0), new PriorityQueue<>()); //create a priority queue which always has lexicographically lowest elem as the 1st elem
             flights.get(ticket.get(0)).offer(ticket.get(1));
         }
+
         //do DFS
         doDFS("JFK");
+
         return new ArrayList<>(path);
     }
 

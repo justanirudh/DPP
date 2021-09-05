@@ -51,6 +51,10 @@ In the second test case there is a graph with 3 vertices and 3 edges from 0 to 1
  */
 
 //If it has been visited and it NOT the parent (Simplification of directed graphs)
+
+//Do DFS for finding cycle in a graph. Keep path for backtracking
+//If a node is not visited, do hasCycle on it recursively. it returns true, return true. Else look at next neighbour
+// If visited, look if it is NOT the parent of curr node
 public class DetectCycleInUndirectedGraph { //should basically be a tree
 
     static Boolean hasCycle(int curr, int parent, LinkedList<Integer>[] alist, boolean[] visited) {

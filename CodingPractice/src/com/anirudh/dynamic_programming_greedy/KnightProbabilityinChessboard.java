@@ -34,17 +34,17 @@ The knight always initially starts on the board.
 public class KnightProbabilityinChessboard {
 
     //https://leetcode.com/articles/knight-probability-in-chessboard/
-//    Let f[r][c][steps] be the probability of being on square (r, c) after steps steps. Based on how a knight moves,
+//    Let f[r][c][dist] be the probability of being on square (r, c) after dist dist. Based on how a knight moves,
 //    we have the following recursion:
 //
-//f[r][c][steps] = \sum_{dr, dc} f[r+dr][c+dc][steps-1] / 8.0f[r][c][steps]=∑dr,dc
-//​​ f[r+dr][c+dc][steps−1]/8.0
+//f[r][c][dist] = \sum_{dr, dc} f[r+dr][c+dc][dist-1] / 8.0f[r][c][dist]=∑dr,dc
+//​​ f[r+dr][c+dc][dist−1]/8.0
 //
 //where the sum is taken over the eight (dr, dc)(dr,dc) pairs (2, 1),(2,1), (2, -1),(2,−1), (-2, 1),(−2,1), (-2, -1),
 //(−2,−1), (1, 2),(1,2), (1, -2),(1,−2), (-1, 2),(−1,2), (-1, -2)(−1,−2).
 //
 //Instead of using a three-dimensional array f, we will use two two-dimensional ones dp and dp2, storing the result of
-//the two most recent layers we are working on. dp2 will represent f[][][steps], and dp will represent f[][][steps-1].
+//the two most recent layers we are working on. dp2 will represent f[][][dist], and dp will represent f[][][dist-1].
 
 
 

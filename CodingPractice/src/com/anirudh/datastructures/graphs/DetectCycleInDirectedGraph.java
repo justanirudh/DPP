@@ -13,6 +13,10 @@ import java.lang.*;
 
 //Directed graph: If it is visited && it is in the recursion 'stack' (if parent it will be, so no need to check alag se)
 //recursion 'stack' is a hashmap from node to whether it is in the current path or not
+
+//Do DFS for finding cycle in a graph. Keep path for backtracking
+//If a node is not visited, do hasCycle on it. it returns true, return true. Else look at next neighbour
+// If visited, look if it s in recursion stack
 class DetectCycleInDirectedGraph {
 
     //essentially this:

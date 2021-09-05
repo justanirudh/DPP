@@ -6,7 +6,7 @@ package com.anirudh.dynamic_programming_greedy;
 /*
 72. Edit Distance
 //also called levenshtein distance: https://en.wikipedia.org/wiki/Levenshtein_distance
-Given two words word1 and word2, find the minimum number of steps required to convert word1 to word2. (each operation is counted as 1 step.)
+Given two words word1 and word2, find the minimum number of dist required to convert word1 to word2. (each operation is counted as 1 step.)
 
 You have the following 3 operations permitted on a word:
 
@@ -18,7 +18,7 @@ c) Replace a character
 Java DP solution - O(nm)
 Let following be the function definition :-
 
-f(i, j) := minimum cost (or steps) required to convert first i characters of word1 to first j characters of word2
+f(i, j) := minimum cost (or dist) required to convert first i characters of word1 to first j characters of word2
 
 Case 1: word1[i] == word2[j], i.e. the ith the jth character matches.
 

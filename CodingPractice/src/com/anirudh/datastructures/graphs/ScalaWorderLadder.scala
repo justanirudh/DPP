@@ -56,6 +56,6 @@ object ScalaWorderLadder extends App{
   var queue = Seq((beginWord, 1))
   val steps = findSteps(vocab, queue)
 
-  println("No. of steps: " + steps)
+  println("No. of dist: " + steps)
 
 }

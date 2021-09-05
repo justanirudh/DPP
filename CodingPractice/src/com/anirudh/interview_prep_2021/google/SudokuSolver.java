@@ -13,9 +13,24 @@ You may assume that there will be only one unique solution.
 A sudoku puzzle...
 ...and its solution numbers marked in red.
  */
-//Complexity: Try 1 through 9 for each cell. The time complexity should be 9 ^ m (m represents the number of blanks to
+
+//Complexity: basically brute force, no clever algo. Try 1 through 9 for each cell.
+// The time complexity should be 9 ^ m (m represents the number of blanks to
 // be filled in), since each blank can have 9 choices.
+
+/*
 //DFS with backtracking
+//For each x, for each y, if '.', try 1-9, check is valid.
+// if is valid, put in arr, recurse.
+// check if recurse is T or F. If true, return true; if false; replace back '.'
+// for being valid, check no same elem in
+//1. same row
+2. same vol
+3. in 3x3 box
+
+*/
+
+
 public class SudokuSolver {
 
     private char[][] board;
@@ -23,14 +38,14 @@ public class SudokuSolver {
     //checking if the digit does not already exist in the same row or same column or same 3 X 3 matrix
     //below is fancy way of doing this. I can instead have 2-3 loops
     private boolean isValid(int row, int col, char c) {
-        int x = 3 * (row / 3); //x start of 3x3 block
-        int y = 3 * (col / 3); //y start of 3x3 block
+        int x = 3 * (row / 3); //x start of 3x3 block    3 * (row/3)
+        int y = 3 * (col / 3); //y start of 3x3 block    3 * (col/3)
         for (int i = 0; i < 9; i++) {
-            if (board[i][col] == c)  //check column
+            if (board[i][col] == c)  //check all rows
                 return false;
-            if (board[row][i] == c) //check row
+            if (board[row][i] == c) //check all columns
                 return false;
-            if (board[x + i / 3][y + i % 3] == c) //left to right
+            if (board[x + i / 3][y + i % 3] == c) //left to right    [x + i/3][y + i%3]
                 return false;
         }
         return true;
