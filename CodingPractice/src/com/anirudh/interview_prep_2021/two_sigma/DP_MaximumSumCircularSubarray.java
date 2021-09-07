@@ -56,7 +56,9 @@ Explanation: Subarray [-1] has maximum sum -1
 2.1. For this case, we can find min subarray in the middle.
 2.2 Then totalSum - min subarray sum = MAX subarray sum!
 3. We can find max of 1 or 2
-4. If all nums are -ve, min = totalSum && max = min_element_of_array (also -ve)
+4. If all nums are -ve, (4.1) min = totalSum && (4.2)max = min_element_of_array (also -ve)
+4.1 means totalSum-min = 0; but problem says atleast 1 elem
+4.2 Hence, if max is -ve, return max
  */
 public class DP_MaximumSumCircularSubarray {
 

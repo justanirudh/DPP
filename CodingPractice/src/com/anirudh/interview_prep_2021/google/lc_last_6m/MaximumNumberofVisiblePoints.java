@@ -91,7 +91,7 @@ public class MaximumNumberofVisiblePoints {
             while (circularAngles.get(fast) - circularAngles.get(slow) > angle) {
                 slow++; //when angle becomes greater, increment slow such that angle becomes less again
             }
-            res = Math.max(res, fast - slow + 1);
+            res = Math.max(res, fast - slow + 1); //this gets called directly while fast - slow < angle
         }
 
         return res + same;
