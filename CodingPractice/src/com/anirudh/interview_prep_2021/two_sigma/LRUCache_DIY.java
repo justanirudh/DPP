@@ -1,4 +1,4 @@
-package com.anirudh.datastructures.linkedlist;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +38,7 @@ LRUCache cache = new LRUCache( 2 );
 Map to DIY queue
 Map has keys as elements to QueueNode {k,v,next, prev}
  */
-public class LRUCache {
+public class LRUCache_DIY {
     //Using a Map with a custom queue
     //Or use LinkedHashMap with orderAccess argument as true (LRU gets enabled) and override
     //removeEldestEntry when we hit cache size. EPI Prob.12.3
@@ -65,7 +65,7 @@ public class LRUCache {
     private int capacity;
     private int numElems = 0;
 
-    public LRUCache(int capacity) {
+    public LRUCache_DIY(int capacity) {
         this.capacity = capacity;
     }
 
@@ -146,7 +146,7 @@ public class LRUCache {
 
 
     public static void main(String[] args) {
-        LRUCache cache = new LRUCache(1 /* capacity */);
+        LRUCache_DIY cache = new LRUCache_DIY(1 /* capacity */);
 
         cache.put(2, 1);
         System.out.println(cache.get(2));       // returns 1

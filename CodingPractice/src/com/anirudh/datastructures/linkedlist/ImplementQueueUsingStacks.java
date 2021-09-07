@@ -6,18 +6,18 @@ import java.util.Stack;
  * Created by paanir on 3/2/17.
  */
 /*
-232. Implement Queue using Stacks Add to List
+232. Implement MyQueue using Stacks Add to List
 
-Implement the following operations of a queue using stacks.
+Implement the following operations of a myQueue using stacks.
 
-push(x) -- Push element x to the back of queue.
-pop() -- Removes the element from in front of queue.
+push(x) -- Push element x to the back of myQueue.
+pop() -- Removes the element from in front of myQueue.
 peek() -- Get the front element.
-empty() -- Return whether the queue is empty.
+empty() -- Return whether the myQueue is empty.
 Notes:
 You must use only standard operations of a stack -- which means only push to top, peek/pop from top, size, and is empty operations are valid.
-Depending on your language, stack may not be supported natively. You may simulate a stack by using a list or deque (double-ended queue), as long as you use only standard operations of a stack.
-You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
+Depending on your language, stack may not be supported natively. You may simulate a stack by using a list or deque (double-ended myQueue), as long as you use only standard operations of a stack.
+You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty myQueue).
  */
 public class ImplementQueueUsingStacks {
 
@@ -38,14 +38,14 @@ public class ImplementQueueUsingStacks {
         }
 
         /**
-         * Push element x to the back of queue.
+         * Push element x to the back of myQueue.
          */
         public void push(int x) {
             stackPush.push(x); //normal case
         }
 
         /**
-         * Removes the element from in front of queue and returns that element.
+         * Removes the element from in front of myQueue and returns that element.
          */
         public int pop() {
             if (stackPop.isEmpty()) { //lazy popping
@@ -66,7 +66,7 @@ public class ImplementQueueUsingStacks {
         }
 
         /**
-         * Returns whether the queue is empty.
+         * Returns whether the myQueue is empty.
          */
         public boolean empty() {
             return stackPush.isEmpty() && stackPop.isEmpty();

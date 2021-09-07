@@ -1,4 +1,4 @@
-package com.anirudh.general_algos;
+package com.anirudh.interview_prep_2021.spotify;
 
 import java.util.HashMap;
 import java.util.Map;

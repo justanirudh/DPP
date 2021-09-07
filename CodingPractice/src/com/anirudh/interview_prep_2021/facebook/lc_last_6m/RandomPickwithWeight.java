@@ -5,6 +5,8 @@ package com.anirudh.interview_prep_2021.facebook.lc_last_6m;
  */
 //528. Random Pick with Weight
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -123,42 +125,44 @@ public class RandomPickwithWeight {
     // Then shuffle that array
     // Then pick a random number from it
 
-    /*    int[] res;
-    Random rand = new Random();
-
-    void swap(int i, int j) {
-        int temp = res[i];
-        res[i] = res[j];
-        res[j] = temp;
-    }
-
-    void randomizeArray() {
-
-        for(int i = 1; i < res.length; ++i) {
-            int swapIdx = rand.nextInt(i); //gives me a random number between 0 and i - 1; swap this with i
-            swap(swapIdx, i);
-        }
-    }
-
-    public RandomPickwithWeight(int[] w) {
-        int sum = 0;
-        for(int weight : w) {
-            sum += weight;
-        }
-        res = new int[sum];
-        int r = 0;
-        for(int i = 0; i <w.length; ++i) {
-            int weight = w[i];
-            for(int j = 0; j < weight; ++j) {
-                res[r] = i;
-                r++;
-            }
-        }
-        randomizeArray(); //Do it yourself
-    }
-
-    public int pickIndex() {
-        return res[rand.nextInt(res.length)];
-
-    }*/
+//    int[] res;
+//    Random rand2 = new Random();
+//
+//    void swap(int i, int j) {
+//        int temp = res[i];
+//        res[i] = res[j];
+//        res[j] = temp;
+//    }
+//
+//    void randomizeArray() {
+//
+//        for(int i = 1; i < res.length; ++i) {
+//            int swapIdx = rand.nextInt(i); //gives me a random number between 0 and i - 1; swap this with i
+//            swap(swapIdx, i);
+//        }
+//        //can also use inbuilt Collections.shuffle method
+//        Collections.shuffle(Arrays.asList(res));
+//    }
+//
+//    public RandomPickwithWeight2(int[] w) {
+//        int sum = 0;
+//        for(int weight : w) {
+//            sum += weight;
+//        }
+//        res = new int[sum];
+//        int r = 0;
+//        for(int i = 0; i <w.length; ++i) {
+//            int weight = w[i];
+//            for(int j = 0; j < weight; ++j) {
+//                res[r] = i;
+//                r++;
+//            }
+//        }
+//        randomizeArray(); //Do it yourself
+//    }
+//
+//    public int pickIndex2() {
+//        return res[rand.nextInt(res.length)];
+//
+//    }
 }

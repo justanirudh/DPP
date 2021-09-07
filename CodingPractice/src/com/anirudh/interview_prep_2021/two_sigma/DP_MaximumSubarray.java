@@ -1,4 +1,4 @@
-package com.anirudh.dynamic_programming_greedy;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /**
  * Created by paanir on 7/19/17.
@@ -10,6 +10,7 @@ Find the contiguous subarray within an array (containing at least one number) wh
 For example, given the array [-2,1,-3,4,-1,2,1,-5,4],
 the contiguous subarray [4,-1,2,1] has the largest sum = 6.
  */
+
 /*
 Approach 2: Dynamic Programming, Kadane's Algorithm
 Intuition
@@ -46,24 +47,19 @@ Implementation
 
 A clever way to update currentSubarray is using currentSubarray = max(num, currentSubarray + num). If currentSubarray is negative, then num > currentSubarray + num.
  */
-public class MaximumSubarray {
+//Kadane's Algo
+public class DP_MaximumSubarray {
 
     public int maxSubArray(int[] nums) {
+        int currMax = nums[0];
+        int max = nums[0];
 
-        // Initialize our variables using the first element.
-        int currentSubarray = nums[0];
-        int maxSubarray = nums[0];
-
-        // Start with the 2nd element since we already used the first one.
-        for (int i = 1; i < nums.length; i++) {
-            int num = nums[i];
-            // If current_subarray is negative, throw it away. Otherwise, keep adding to it.
-            currentSubarray = Math.max(num, currentSubarray + num);
-
-            maxSubarray = Math.max(maxSubarray, currentSubarray);
+        for (int i = 1; i < nums.length; ++i) {
+            currMax = Math.max(currMax + nums[i], nums[i]); //take the subarray until now OR thorw it away and just take current num
+            max = Math.max(max, currMax);
         }
+        return max;
 
-        return maxSubarray;
     }
 
 }

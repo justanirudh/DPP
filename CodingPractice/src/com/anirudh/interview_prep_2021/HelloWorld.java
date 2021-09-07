@@ -14,6 +14,7 @@ public class HelloWorld {
         StringBuilder currWord = word.deleteCharAt(0);
         System.out.println(word);
         System.out.println(currWord);
+        Set<String> set = new HashSet<>();
 //        String str1 = "apple";
 //        String str2 = "ham";
 //        System.out.println(str1.compareTo(str2)); //should be -ve

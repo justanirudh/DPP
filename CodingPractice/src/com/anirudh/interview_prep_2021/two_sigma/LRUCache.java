@@ -1,6 +1,7 @@
-package com.anirudh.interview_prep_2021.facebook;
+package com.anirudh.interview_prep_2021.two_sigma;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by paanir on 2/22/17.
