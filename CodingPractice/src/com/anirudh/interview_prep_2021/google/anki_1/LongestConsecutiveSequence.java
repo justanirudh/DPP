@@ -1,8 +1,6 @@
-package com.anirudh.subarray_substring;
+package com.anirudh.interview_prep_2021.google.anki_1;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**

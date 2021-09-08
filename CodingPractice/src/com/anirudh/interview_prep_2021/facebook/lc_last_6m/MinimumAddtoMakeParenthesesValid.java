@@ -48,24 +48,27 @@ Output: 4
 /*
 Do clever balance and rightUnopen bracket calc: O(1) space O(n) time
 Do the stack solution for finding unmatched parens: O(n) space O(n) time
+
+int balance = 0; //unclosed left brackets, finally
+int unopenedRight = 0; //unopened right brackets
+
  */
 public class MinimumAddtoMakeParenthesesValid {
 
     //O(1) space, O(n) time
     public int minAddToMakeValid(String s) {
         int balance = 0;
-        int unclosedRight = 0;
+        int unopenedRight = 0;
 
-        for (int i = 0; i < s.length(); ++i) {
-            char c = s.charAt(i);
+        for (char c : s.toCharArray()) {
             balance += (c == '(') ? 1 : -1;
 
-            if (balance == -1) { //means at least 1 right bracket that cannot be closed
-                unclosedRight++;
+            if (balance == -1) { //means at least 1 right bracket that was not opened
+                unopenedRight++;
                 balance++;
             }
         }
-        return unclosedRight + balance;
+        return unopenedRight + balance;
 
     }
 

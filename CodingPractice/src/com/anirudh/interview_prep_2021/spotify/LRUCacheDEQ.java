@@ -1,4 +1,4 @@
-package com.anirudh.datastructures.linkedlist;
+package com.anirudh.interview_prep_2021.spotify;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,10 +35,10 @@ LRUCache cache = new LRUCache( 2 );
 
  */
 /*
-Map to DIY double ended queue
+Map to DIY double ended queue implemented as Double Linked List
 Map has keys as elements to QueueNode {k,v,next, prev}
  */
-public class LRUCache {
+public class LRUCacheDEQ {
     //Using a Map with a custom queue
     //Or use LinkedHashMap with orderAccess argument as true (LRU gets enabled) and override
     //removeEldestEntry when we hit cache size. EPI Prob.12.3
@@ -65,7 +65,7 @@ public class LRUCache {
     private int capacity;
     private int numElems = 0;
 
-    public LRUCache(int capacity) {
+    public LRUCacheDEQ(int capacity) {
         this.capacity = capacity;
     }
 
@@ -135,10 +135,10 @@ public class LRUCache {
             } else
                 moveToHead(qn);
         } else { //space is there
-            if (numElems == 0) { //add to front of queue
+            if (numElems == 0) {
                 queue.head = qn;
                 queue.tail = qn;
-            } else
+            } else //add to front of queue
                 moveToHead(qn);
         }
         addToMap(key, qn);
@@ -146,7 +146,7 @@ public class LRUCache {
 
 
     public static void main(String[] args) {
-        LRUCache cache = new LRUCache(1 /* capacity */);
+        LRUCacheDEQ cache = new LRUCacheDEQ(1 /* capacity */);
 
         cache.put(2, 1);
         System.out.println(cache.get(2));       // returns 1
