@@ -1,4 +1,6 @@
-package com.anirudh.datastructures.trees;
+package com.anirudh.interview_prep_2021.spotify;
+
+import com.anirudh.datastructures.trees.TreeNode;
 
 /**
  * Created by paanir on 2/12/17.

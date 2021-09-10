@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.google.anki_1;
+package com.anirudh.interview_prep_2021.google.anki;
 
 import java.util.HashSet;
 import java.util.Set;
