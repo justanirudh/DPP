@@ -44,6 +44,11 @@ Example 5:
 Input: s = "{[]}"
 Output: true
  */
+
+/*
+normal stack push pop but with more brackets
+fail fast
+ */
 public class ValidParentheses {
     public boolean isValid(String s) {
         Deque<Character> stack = new ArrayDeque<>();

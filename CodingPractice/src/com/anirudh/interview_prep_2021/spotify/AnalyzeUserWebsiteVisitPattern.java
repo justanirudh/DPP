@@ -52,7 +52,7 @@ Comparator:compare is passed to an EMPTY list/queue to define how things will be
 Comparable: compareTo is part of the class. Put the object in Collections.sort to sort it the right way
 
 Use brute force. For each user find all combinations by doing 3 loops O(n^3)
-Then fidn the max frequented pattern
+Then find the max frequented pattern
  */
 public class AnalyzeUserWebsiteVisitPattern {
 

@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.facebook;
+package com.anirudh.interview_prep_2021.spotify;
 
 import java.util.*;
 //BFS
@@ -35,7 +35,7 @@ All words contain only lowercase alphabetic characters.
  * 1.1 For each word, put asterix in each position (use substring)
  * 1.2 put that as key in the map and the list of words as values matching the pattern
  * 1.3 This is our adjacency list
- * 2. Create a queue with <beginWord, dist =1> offerred.
+ * 2. Create a queue with <beginWord, dist =1> offered.
  * 2.1 Create a visited hashset. Put both words and patterns as visited in it.
  * 3. Do BFS
  * 3.1 Pull from queue

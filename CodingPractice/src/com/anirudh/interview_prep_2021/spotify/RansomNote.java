@@ -20,6 +20,9 @@ canConstruct("a", "b") -> false
 canConstruct("aa", "ab") -> false
 canConstruct("aa", "aab") -> true
  */
+    /*
+    Use hashmap for magazine
+     */
 public class RansomNote {
     public boolean canConstruct(String ransomNote, String magazine) {
 

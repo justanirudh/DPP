@@ -45,6 +45,10 @@ The first distinct maximum is 3.
 The second distinct maximum is 2 (both 2's are counted together since they have the same value).
 The third distinct maximum is 1.
  */
+    /*
+    Put in 3 size heap
+
+     */
 public class ThirdMax {
 
     public int thirdMax(int[] nums) { //can input the rank of the number

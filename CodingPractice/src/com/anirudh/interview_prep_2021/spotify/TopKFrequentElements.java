@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.facebook;
+package com.anirudh.interview_prep_2021.spotify;
 
 import java.util.*;
 
@@ -17,6 +17,15 @@ You may assume k is always valid, 1 < k < number of unique elements.
 Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
  */
 
+/*
+Create a minHeap of size K with this comparator
+    class CompareFrequency implements Comparator<Pair> {
+        public int compare(Pair a, Pair b) {
+            return a.freq - b.freq;
+        }
+    }
+    Pass in the comparator to PriorityQueue
+ */
 public class TopKFrequentElements {
 
     class Pair {

@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.facebook;
+package com.anirudh.interview_prep_2021.spotify;
 
 /**
  * Created by paanir on 6/21/17.
@@ -61,10 +61,10 @@ public class WordSearch {
     public boolean exist(char[][] board, String word) {
         this.board = board;
         this.word = word;
+        visited = new boolean[board.length][board[0].length]; //no need to create a new arr for each run as all cells are turned to false if there has been no success
         for (int i = 0; i < board.length; ++i) {
             for (int j = 0; j < board[0].length; ++j) {
                 if (word.charAt(0) == board[i][j]) {
-                    visited = new boolean[board.length][board[0].length]; //new visited board for every run
                     boolean wordExists = doDFS(i, j, 1);
                     if (wordExists)
                         return true;

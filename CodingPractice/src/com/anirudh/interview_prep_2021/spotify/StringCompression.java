@@ -48,8 +48,9 @@ Explanation: The groups are "aaa", "bb", and "aa". This compresses to "a3b2a2". 
 
 /*
 3 pointer play:
-start and fast to find lenghts of each group
+start and fast to find lengths of each group
 slow to mutate the array
+start from start of the string
  */
 public class StringCompression {
     public int compress(char[] chars) {

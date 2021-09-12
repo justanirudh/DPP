@@ -1,4 +1,4 @@
-package com.anirudh.techniques;
+package com.anirudh.interview_prep_2021.spotify;
 
 import java.util.*;
 
@@ -37,7 +37,6 @@ Use 3 pointers
 if 1 + 2 = -3, we have 1 sol
 if 1+2 < -3, left++
 if 1+2 > -3, right--
-
  */
 public class ThreeSum {
 

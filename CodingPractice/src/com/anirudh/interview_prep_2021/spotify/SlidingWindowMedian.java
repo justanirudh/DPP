@@ -48,11 +48,12 @@ Output: [2.00000,3.00000,3.00000,3.00000,2.00000,3.00000,2.00000]
  */
 
 /*
+IMPORTANT
 For Median, always remember the min-heap and max-heap solution
 Here use 2 TREESETs of INDICES as they provide these things:
 1. Sorted or reverse sorted indices and hence nums
-2. removal is O(logk) operation. It is O(k) for heap
-3. We put index in set as it helps us break ties
+2. removal of a random elem is O(logk) operation. It is O(k) for heap
+3. We put index in set as it helps us break ties for equal numbers
 
 lo's size will always be equal or 1 more than hi's size
  */
@@ -65,9 +66,9 @@ public class SlidingWindowMedian {
     class CompareElems implements Comparator<Integer> {
         public int compare(Integer idx1, Integer idx2) {
             if (nums[idx1] != nums[idx2]) {
-                return nums[idx1] - nums[idx2];
+                return nums[idx1] - nums[idx2]; //check value then check indices
             } else {
-                return idx1 - idx2; //this will help kick out lower index of equal elems
+                return idx1 - idx2; //this will help kick out lower index of equal elems first
             }
         }
     }
