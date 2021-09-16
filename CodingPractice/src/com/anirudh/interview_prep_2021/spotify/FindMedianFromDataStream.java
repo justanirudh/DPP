@@ -32,16 +32,16 @@ findMedian() -> 2
  */
 //https://leetcode.com/problems/find-median-from-data-stream/solution/#approach-3-two-heaps-accepted
 
+//using two balanced heaps. first heap is a max heap containing lower half of array
+//second heap is a min heap containing upper half of the array
+//if we keep heaps balanced,
+//if the size of two heaps is same, avg of min and max elems will give us the median
+//if size of max heap (smaller elems) > size of min heap (higher elems), just return max elem of max heap as odd num. of elems
+//balancing is important and always,
+// size of smaller elems heap  = size of larger elems heap OR (even elems)
+//size of smaller elems heap  = 1 + size of larger elems heap (odd elems)
 
 public class FindMedianFromDataStream {
-    //using two balanced heaps. first heap is a max heap containing lower half of array
-    //second heap is a min heap containing upper half of the array
-    //if we keep heaps balanced,
-    //if the size of two heaps is same, avg of min and max elems will give us the median
-    //if size of max heap (smaller elems) > size of min heap (higher elems), just return max elem of max heap as odd num. of elems
-    //balancing is important and always,
-    // size of smaller elems heap  = size of larger elems heap OR (even elems)
-    //size of smaller elems heap  = 1 + size of larger elems heap (odd elems)
 
     Queue<Integer> lo; //maxHeap
     Queue<Integer> high; //minHeap

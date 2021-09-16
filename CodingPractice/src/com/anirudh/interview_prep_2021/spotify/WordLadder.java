@@ -97,7 +97,7 @@ public class WordLadder {
                     continue;
 
                 // Next states are all the words which share the same intermediate state.
-                for (String adjacentWord : patternToMatches.getOrDefault(currPattern, new ArrayList<>())) {
+                for (String adjacentWord : patternToMatches.getOrDefault(currPattern, new ArrayList<>())) { //default required because beginWord has not been added into the wordlist earlier
                     // If at any point if we find what we are looking for
                     // i.e. the end word - we can return with the answer.
                     if (adjacentWord.equals(endWord)) {

@@ -86,7 +86,7 @@ public class WallsandGates {
 
         for (int i = 0; i < rooms.length; ++i) { //put gates in queue
             for (int j = 0; j < rooms[0].length; ++j) {
-                if (rooms[i][j] == 0) {
+                if (rooms[i][j] == 0) { //offer gates into queue
                     queue.offer(new Location(i, j));
                 }
             }

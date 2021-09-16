@@ -50,7 +50,7 @@ time cx is complicated
  */
 public class GenerateParentheses {
 
-    List<String> res;
+    List<String> res = new ArrayList<>();;
     int n;
 
     void backtrack(StringBuilder curr, int open, int close) {
@@ -72,7 +72,6 @@ public class GenerateParentheses {
     }
 
     public List<String> generateParenthesis(int n) {
-        res = new ArrayList<>();
         this.n = n;
         backtrack(new StringBuilder(), 0, 0);
         return res;

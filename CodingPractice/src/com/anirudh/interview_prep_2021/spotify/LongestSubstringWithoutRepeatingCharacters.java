@@ -67,7 +67,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
                 slow++;
             }
             slow++; // no need to remove s.charAt(slow) as it is same as curr which we are anyway going to add
-            maxLen = Math.max(maxLen, window.size());
+            //not comparing window size again as we have only removed elems
         }
         return maxLen;
     }

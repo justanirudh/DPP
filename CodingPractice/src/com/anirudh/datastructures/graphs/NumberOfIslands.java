@@ -34,31 +34,29 @@ public class NumberOfIslands {
     //Do DFS in matrix
 
     private boolean[][] visited;
-    private int[] di = {0,0,1,-1};
-    private int[] dj = {1,-1,0,0};
+    private int[] di = {0, 0, 1, -1};
+    private int[] dj = {1, -1, 0, 0};
     private int numRows;
     private int numCols;
     private char[][] grid;
 
-    private boolean isValid(int row, int col){
-        if(row < 0 || col < 0 || row >= numRows || col >= numCols )
-            return false;
-        return true;
+    private boolean isValid(int row, int col) {
+        return row < 0 || col < 0 || row >= numRows || col >= numCols;
     }
 
     private void doDFS(int row, int col) {
         visited[row][col] = true;
-        for(int i = 0; i < 4; ++i){ //neighbours
+        for (int i = 0; i < 4; ++i) { //neighbours
             int x = row + di[i];
             int y = col + dj[i];
-            if(isValid(x,y) && grid[x][y] == '1' && !visited[x][y]){
-                doDFS(x,y);
+            if (isValid(x, y) && grid[x][y] == '1' && !visited[x][y]) {
+                doDFS(x, y);
             }
         }
     }
 
     public int numIslands(char[][] grid) {
-        if(grid == null || grid.length == 0)
+        if (grid == null || grid.length == 0)
             return 0;
         this.grid = grid;
         numRows = grid.length;
@@ -66,9 +64,9 @@ public class NumberOfIslands {
         visited = new boolean[numRows][numCols]; //all false
         int numIslands = 0;
 
-        for(int i = 0; i < numRows; ++i){
-            for(int j = 0; j < numCols; ++j){ //find all trees
-                if(grid[i][j] == '1' && !visited[i][j]){
+        for (int i = 0; i < numRows; ++i) {
+            for (int j = 0; j < numCols; ++j) { //find all trees
+                if (grid[i][j] == '1' && !visited[i][j]) {
                     doDFS(i, j);
                     numIslands++;
                 }
