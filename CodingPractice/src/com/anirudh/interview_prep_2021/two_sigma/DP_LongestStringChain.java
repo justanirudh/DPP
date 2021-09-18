@@ -51,7 +51,7 @@ Explanation: The trivial word chain ["abcd"] is one of the longest word chains.
 /*
 Similar to WordBreakII in Facebook
 Top down DP: for each string find longest chain ENDING in that string
-Memoization: Use String -> length of longest chain ending at the string
+Memoization: Use String -> {length of longest chain ending at the string}
 For each word, delete each char, do recursion, add the char back and delete next char
  */
 public class DP_LongestStringChain {

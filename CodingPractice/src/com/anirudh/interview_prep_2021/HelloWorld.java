@@ -16,6 +16,13 @@ public class HelloWorld {
 //        Map<List<String>, Integer> map = new HashMap<>();
 //        map.put(r1, 1);
 //        System.out.println(map.get(r2));
-        System.out.println(Character.isLowerCase('a'))  ;
+//        System.out.println(Character.isLowerCase('a'))  ;
+//        Map<Integer, Integer> m1 = new HashMap<>();
+//        m1.put(1,1);
+//        m1.put(2,2);
+//        Map<Integer, Integer> m2 = new HashMap<>();
+//        m2.put(1,1);
+//        m2.put(2,2);
+        System.out.println(19/10);
     }
 }

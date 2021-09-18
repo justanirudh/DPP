@@ -25,6 +25,7 @@ Binary tree [1,2,3], return false.
 
  */
 
+//Preorder traversal
 public class BTisBST {
 
     class TreeNode {
@@ -67,8 +68,6 @@ public class BTisBST {
         double max = Double.POSITIVE_INFINITY;
 
         //Also passing a range to each side of the tree left: [math.min, root] and right: [root, math.pathSum]
-        return isBSTNode(root, min, max) && //trivial check but makes it more symmetric
-                isBSTNode(root.left, min, root.val) &&
-                isBSTNode(root.right, root.val, max);
+        return isBSTNode(root, min, max);
     }
 }

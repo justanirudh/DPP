@@ -1,7 +1,7 @@
-package com.anirudh.interview_prep_2021.two_sigma;
+package com.anirudh.interview_prep_2021.two_sigma.anki;
 
 /*
-122. Best Time to Buy and Sell Stock II
+122. Best Time to Buy and Sell Stock II (buy and sell as many times as you want, also allowed on the same day)
 Medium
 
 5270
@@ -13,7 +13,8 @@ Add to List
 Share
 You are given an integer array prices where prices[i] is the price of a given stock on the ith day.
 
-On each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time. However, you can buy it then immediately sell it on the same day.
+On each day, you may decide to buy and/or sell the stock. You can only hold at most one share
+of the stock at any time. However, you can buy it then immediately sell it on the same day.
 
 Find and return the maximum profit you can achieve.
 
@@ -40,24 +41,15 @@ Explanation: There is no way to make a positive profit, so we never buy the stoc
  */
 
 /*
-    Find all {valley<>peak} pairs and make profit from all of them
+    // as long as there is a price gap, we gain a profit.
  */
 public class BestTimeBuySellStockII {
     public int maxProfit(int[] prices) {
-        int maxProfit = 0;
-        int valley;
-        int peak;
-        for (int i = 0; i < prices.length; ++i) {
-            while (i < prices.length - 1 && prices[i] >= prices[i + 1]) {
-                i++;
-            }
-            valley = prices[i];
-            while (i < prices.length - 1 && prices[i] <= prices[i + 1]) {
-                i++;
-            }
-            peak = prices[i];
-            maxProfit += peak - valley;
+        int len = prices.length, profit = 0;
+        for (int i = 1; i < len; i++) {
+            if (prices[i] > prices[i - 1])
+                profit += prices[i] - prices[i - 1];
         }
-        return maxProfit;
+        return profit;
     }
 }

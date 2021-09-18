@@ -21,15 +21,15 @@ return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
  */
 public class PathSum {
 
-    public boolean hasSum(TreeNode node, int sumLeft) {
+    public boolean hasSum(TreeNode node, int sumRemaining) {
         if (node.left == null && node.right == null)  //leaf
-            return sumLeft - node.val == 0;
+            return sumRemaining - node.val == 0;
         else if (node.right == null) //left not null
-            return hasSum(node.left, sumLeft - node.val);
+            return hasSum(node.left, sumRemaining - node.val);
         else if (node.left == null) //right not null
-            return hasSum(node.right, sumLeft - node.val);
+            return hasSum(node.right, sumRemaining - node.val);
         else//both non-null
-            return hasSum(node.left, sumLeft - node.val) || hasPathSum(node.right, sumLeft - node.val);
+            return hasSum(node.left, sumRemaining - node.val) || hasPathSum(node.right, sumRemaining - node.val);
     }
 
     public boolean hasPathSum(TreeNode root, int sum) {

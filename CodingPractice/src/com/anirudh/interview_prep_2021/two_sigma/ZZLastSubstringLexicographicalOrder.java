@@ -35,7 +35,7 @@ Overall complexity = O(n^2)
 Option 2: Some shit i dont understand yet
 
  */
-public class LastSubstringLexicographicalOrder {
+public class ZZLastSubstringLexicographicalOrder {
     public String lastSubstring(String s) {
         int i = 0, j = 1, offset = 0, len = s.length();
         while (i + offset < len && j + offset < len) {

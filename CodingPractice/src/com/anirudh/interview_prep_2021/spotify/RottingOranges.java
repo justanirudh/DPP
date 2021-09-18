@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.spotify.anki;
+package com.anirudh.interview_prep_2021.spotify;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
