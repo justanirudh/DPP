@@ -1,5 +1,6 @@
 package com.anirudh.interview_prep_2021.two_sigma.anki;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -17,8 +18,6 @@ Given an integer array nums of unique elements, return all possible subsets (the
 
 The solution set must not contain duplicate subsets. Return the solution in any order.
 
-
-
 Example 1:
 
 Input: nums = [1,2,3]
@@ -29,11 +28,22 @@ Input: nums = [0]
 Output: [[],[0]]
  */
 /*
-    Use bitmask
+    Use bitmask. Go from 2^n to 2^(n+1) and ignore first bit to get bitmask of fixed n length
  */
 public class Subsets {
     //TODO
     public List<List<Integer>> subsets(int[] nums) {
-        return null;
+        int len = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        for (double i = Math.pow(2, len); i < Math.pow(2, len + 1); ++i) {
+            String bitmask = Integer.toBinaryString((int) i).substring(1);
+            List<Integer> curr = new ArrayList<>();
+            for (int j = 0; j < bitmask.length(); ++j) {
+                if (bitmask.charAt(j) == '1')
+                    curr.add(nums[j]);
+            }
+            res.add(curr);
+        }
+        return res;
     }
 }

@@ -42,22 +42,62 @@ Output: 2.00000
  */
 
 /*
+
 We need to find a partition of arrays X and Y
+
+leftPartitionX = num_elements in a left partition of X
+leftPartitionY = num_elements in a left partition in Y
+
 2 conditions should hold true:
-partitionX = elements in a partition in X
-partitionY = elements in a partition in Y
+1. LeftPartitionX + LeftPartitionY = (lenX + lenY + 1)/2; Using +1 since it plays well with odd and even nums
+2. For the correct partition, maxLeftX <= minRightY && maxLeftY <= minRightX
 
-1. partitionX + partitionY = (lenX + lenY + 1)/2
-2. max(LeftX) <= min(RightY) && max(LeftY) <= min(RightX)
-
+We always make sure LeftPartitionX >= LeftPartitionY, as a rule
 We do binary search in the smaller of the 2 arrays to give time_cx as O(log(min(lenX, lenY)))
+
+Algo:
+    LeftPartitionX + LeftPartitionY = (lenX + lenY + 1)/2
+
+    Found: maxLeftX <= minRightY && maxLeftY <= minRightX
+        If total num_elems is even, median = (max(maxLeftX, maxLeftY) + min(minRightX, minRightY))/2
+        if total num_elems in odd, median = max(maxLeftX, maxLeftY)
+    else if (maxLeftX > minRightY), go towards the left of the x array to find smaller x values
+    else go towards the right in x array
+
  */
 public class MedianTwoSortedArrays {
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        if(nums1.length > nums2.length)
+        if (nums1.length > nums2.length)
             return findMedianSortedArrays(nums2, nums1);
 
+        int lenX = nums1.length;
+        int lenY = nums2.length;
+
+        int start = 0; //x is guaranteed to be shorter array
+        int end = lenX;
+        while (start <= end) {
+            int leftPartitionX = start + (end - start) / 2;
+            int leftPartitionY = (lenX + lenY + 1) / 2 - leftPartitionX; //make sure lenX + lenY + 1, NOT lenX + lenY
+
+            int maxLeftX = leftPartitionX == 0 ? Integer.MIN_VALUE : nums1[leftPartitionX - 1];
+            int minRightX = leftPartitionX == lenX ? Integer.MAX_VALUE : nums1[leftPartitionX];
+
+            int maxLeftY = leftPartitionY == 0 ? Integer.MIN_VALUE : nums2[leftPartitionY - 1];
+            int minRightY = leftPartitionY == lenY ? Integer.MAX_VALUE : nums2[leftPartitionY];
+
+            if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
+                //Found
+                if ((lenX + lenY) % 2 == 0) {
+                    return ((double) Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2;
+                } else {
+                    return Math.max(maxLeftX, maxLeftY);
+                }
+            } else if (maxLeftX > minRightY) //move towards smaller values in x, i.e. left
+                end = leftPartitionX - 1;
+            else
+                start = leftPartitionX + 1;
+        }
         return 0;
     }
 }

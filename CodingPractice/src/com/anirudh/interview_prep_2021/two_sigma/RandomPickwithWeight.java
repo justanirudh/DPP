@@ -71,7 +71,12 @@ import java.util.Random;
  */
 
 /**
- * IMPORTANT
+ *  Option 1:
+ *      // For each weight, add the index that many number of times in an array
+ *     // Then shuffle that array
+ *     // Then pick a random number from it
+ *
+ *  Option2: IMPORTANT
  *
  * Catch: Create a runningSum array from the weights array
  * The range of numbers between runningSums rs1 and rs2 will be basket of rs2 where a random number can fall
