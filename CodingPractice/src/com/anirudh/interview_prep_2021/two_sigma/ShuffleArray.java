@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 import java.util.Random;
 
@@ -53,29 +53,31 @@ public class ShuffleArray {
 
     int[] nums;
     Random rand;
+    int[] original;
 
     public ShuffleArray(int[] nums) {
         this.nums = nums;
         rand = new Random();
+        original = nums.clone();
     }
 
-    /** Resets the array to its original configuration and return it. */
+    /**
+     * Resets the array to its original configuration and return it.
+     */
     public int[] reset() {
-        return nums;
+        return original;
     }
 
-    /** Returns a random shuffling of the array. */
+    /**
+     * Returns a random shuffling of the array.
+     */
     public int[] shuffle() {
-        int[] copy = new int[nums.length];
-        for(int i = 0; i < nums.length; ++i) {
-            copy[i] = nums[i];
-        }
-        for (int i = 1; i < copy.length; ++i) { //no point starting from 0 as 0 repalced by 0 will be 0
+        for (int i = 1; i < nums.length; ++i) { //no point starting from 0 as 0 repalced by 0 will be 0
             int idx = rand.nextInt(i + 1); // for elem at index i, consider self for swapping as well
-            int tmp = copy[i];
-            copy[i] = copy[idx];
-            copy[idx] = tmp;
+            int tmp = nums[i];
+            nums[i] = nums[idx];
+            nums[idx] = tmp;
         }
-        return copy;
+        return nums;
     }
 }

@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /*
 289. Game of Life
@@ -78,7 +78,7 @@ public class GameOfLife_Large {
 
 
     public void gameOfLife(int[][] board) {
-        Set<List<Integer>> live = new HashSet<>();
+        Set<List<Integer>> live = new HashSet<>(); //set of all points
         int m = board.length;
         int n = board[0].length;
         for (int i = 0; i < m; i++) {

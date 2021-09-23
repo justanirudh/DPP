@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /*
 289. Game of Life
@@ -32,7 +32,6 @@ Do it inplace
 Since in-place:
 if 0 -> 1 => 0 -> 2 (current state is 0, next state is 1)
 if 1 -> 0 => 1 -> -2 (current state is 1, next state is 0)
-
 
  */
 public class GameofLife {

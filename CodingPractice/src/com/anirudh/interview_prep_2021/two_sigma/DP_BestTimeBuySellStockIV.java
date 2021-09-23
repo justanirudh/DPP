@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /*
 188. Best Time to Buy and Sell Stock IV (atmost k transactions; cannot sell and buy on the same day)
@@ -81,9 +81,15 @@ and buying the stock at price[j] - this is used for the next loop.
  */
 
 /*
+
+For 2 * k > num day
+    BestTimeBuySellStockII
+else
+    below:
+
+dp[i][j] = The maximum profit you can make from atmost i transactions in j days
 k = 3 transactions
 day = 6 days
-dp[i][j] = The maximum profit you can make from atmost i transactions in j days
 
 d 0 1 2 3 4 5
 k
@@ -92,12 +98,13 @@ k
 2 0
 3 0     j
 
-at a day, we can either do (NOOP/Buy) OR Sell
-dp[i,j] = Math.max(dp[i, j-1], sell)
+On a day, we can either do (NOOP/Buy) OR Sell
+dp[i,j] = Math.max(dp[i, j-1], sell) where dp[i, j-1] is the max profit with atmost i transactions at a previous day from j
 
-sell -> for(int t = 0 to j-1) : Math.max(prices[j] - prices[t] + dp[i-1][t-1])
+sell -> for(int t = 0 to j-1) : Math.max(prices[j] - prices[t] + dp[i-1][t-1]) //For the ith transaction: p[j] - p[t] + profits until now dp[1 transaction less][1 day less]
  = prices[j] + {for(int t = 0 to j-1) : Math.max(- prices[t] + dp[i-1][t-1]) }
 
+Combining all:
  dp[i,j] = Math.max(dp[i, j-1], prices[j] + {for(int t = 0 to j-1) : Math.max(-prices[t] + dp[i-1][t-1]) })
  */
 public class DP_BestTimeBuySellStockIV {

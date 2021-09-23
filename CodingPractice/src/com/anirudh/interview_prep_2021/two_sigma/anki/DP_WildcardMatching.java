@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma;
+package com.anirudh.interview_prep_2021.two_sigma.anki;
 
 /*
 44. Wildcard Matching
@@ -56,6 +56,16 @@ Output: false
 6.1 iterate through row until you see d[pIdx-1][sIdx-1] is true;
 6.2 then d[pIdx][sIdx - 1] to end of row is all true
 7. at the end, return d[pLen][sLen]
+
+Write a function to autogenerate test cases.
+Fix a length. Or randomize that too
+Option 1: 26 letters, 1 *, 1 ? | rand in the array | prob low of getting * and ?
+Option 2: 26 letters, 13 *, 13 ? | 2: 1: 1 prob of each
+Option 3:
+3.1 RandomPickWithWeight: 1:1:1:....1:13:13 weights
+3.2 create runningSum array: 1,2,3,...26, 39, 52
+3.2 pick rand between 1 and 52. Do binary search in array to find where it falls
+
  */
 public class DP_WildcardMatching {
 

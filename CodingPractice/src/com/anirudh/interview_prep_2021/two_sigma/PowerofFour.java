@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /*
 342. Power of Four
@@ -37,6 +37,14 @@ Constraints:
 
 
 Follow up: Could you solve it without loops/recursion?
+ */
+
+/*
+a = 4^x
+log2 a = xlog2 4
+log2 a = 2x
+x = (log2 a) / 2
+hence log2 a should be divisible by 2
  */
 public class PowerofFour {
 

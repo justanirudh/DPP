@@ -65,19 +65,19 @@ public class RandomPickBlacklist {
         bLen = blacklist.length;
         this.n = n;
 
-        Set<Integer> bSet = new HashSet<>();
+        Set<Integer> blacklistSet = new HashSet<>();
 
         List<Integer> bLeft = new ArrayList<>(); //blacklisted elems in [0, n-bLen)
         for (int b : blacklist) {
             if (b < n - bLen) { //range is from 0 to n-bLen, so just check < n-bLen
                 bLeft.add(b);
             }
-            bSet.add(b); //creating set to be used in next iteration
+            blacklistSet.add(b); //also create a blacklist set to be used when getting white side
         }
 
         List<Integer> wRight = new ArrayList<>(); //whitelisted elems in [n-bLen, n)
         for (int i = n - bLen; i < n; ++i) {
-            if (!bSet.contains(i)) {  //i not in blacklist
+            if (!blacklistSet.contains(i)) {  //i not in blacklist
                 wRight.add(i);
             }
         }

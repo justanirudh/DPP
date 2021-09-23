@@ -13,7 +13,13 @@ For example,
 Given [1,3],[2,6],[8,10],[15,18],
 return [1,6],[8,10],[15,18].
  */
+/*
+    //1. SORT by STARTING TIMES (vs MinimumNumberOfArrows/Activity selection where sort by finish times)
+    //2. if next's start < current's end, take max of current's end and next's end
+    //sorting by end times and taking min of start times doesnt work
+*/
 public class MergeIntervals {
+
     public class Interval {
       int start;
       int end;
@@ -21,15 +27,10 @@ public class MergeIntervals {
   }
 
     public List<Interval> merge(List<Interval> intervals) {
-        //1. SORT by STARTING TIMES (vs MinimumNumberOfArrows/Activity selection where sort by finish times)
-        //2. if next's start < current's end, take max of current's end and next's end
-        //sorting by end times and taking min of start times doesnt work
         if (intervals.size() <= 1)
             return intervals;
 
-        // Sort by ascending starting point using an anonymous Comparator
-        //Java 8
-        intervals.sort((i1, i2) -> Integer.compare(i1.start, i2.start));
+        intervals.sort(Comparator.comparingInt(i -> i.start));
 
         List<Interval> result = new ArrayList<>();
         int start = intervals.get(0).start;

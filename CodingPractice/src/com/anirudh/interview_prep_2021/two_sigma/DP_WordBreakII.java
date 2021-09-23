@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /**
  * Created by paanir on 8/29/21.
@@ -69,9 +69,9 @@ public class DP_WordBreakII {
                 List<List<String>> brokenPostfixes = getWaysToBreak(postFix); //sending rest of the String to recurse
 
                 for (List<String> brokenPostfix : brokenPostfixes) { //add it to map
-                    List<String> wordBreak = new ArrayList<>(brokenPostfix);
-                    wordBreak.add(0, prefix); //inserting in right order so that joining is easy
-                    breakMap.get(toBeBroken).add(wordBreak); //adding to breakMap for memoization
+                    List<String> oneWay = new ArrayList<>(brokenPostfix);
+                    oneWay.add(0, prefix); //inserting in right order so that joining is easy
+                    breakMap.get(toBeBroken).add(oneWay); //adding to breakMap for memoization
                 }
             }
         }

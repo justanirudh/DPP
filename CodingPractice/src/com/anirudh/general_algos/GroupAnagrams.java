@@ -25,8 +25,6 @@ Return:
 Note: All inputs will be in lower-case.
  */
 public class GroupAnagrams {
-
-
     private static String sortString(String s) {
         char[] chararr = s.toCharArray();
         Arrays.sort(chararr);

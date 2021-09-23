@@ -38,7 +38,7 @@ LRUCache cache = new LRUCache( 2 );
 Map to DIY double ended queue implemented as Double Linked List
 Map has keys as elements to QueueNode {k,v,next, prev}
  */
-public class LRUCacheDEQ {
+public class LRUCacheDLL {
     //Using a Map with a custom queue
     //Or use LinkedHashMap with orderAccess argument as true (LRU gets enabled) and override
     //removeEldestEntry when we hit cache size. EPI Prob.12.3
@@ -61,11 +61,11 @@ public class LRUCacheDEQ {
     }
 
     private MyQueue queue = new MyQueue();
-    private Map<Integer, QueueNode> map = new HashMap<>(); //KEY to the queuenode in the queue
+    private Map<Integer, QueueNode> cache = new HashMap<>(); //KEY to the queuenode in the queue
     private int capacity;
-    private int numElems = 0;
+    private int size = 0;
 
-    public LRUCacheDEQ(int capacity) {
+    public LRUCacheDLL(int capacity) {
         this.capacity = capacity;
     }
 
@@ -84,20 +84,20 @@ public class LRUCacheDEQ {
     }
 
     private void addToMap(int key, QueueNode qn) {
-        map.put(key, qn);
-        numElems++;
+        cache.put(key, qn);
+        size++;
     }
 
     private void removeFromMap(int key) {
-        map.remove(key);
-        numElems--;
+        cache.remove(key);
+        size--;
     }
 
     public int get(int key) {
-        if (!map.containsKey(key))
+        if (!cache.containsKey(key))
             return -1;
-        else { //get key, change its position in MyQueue, remap map
-            QueueNode qn = map.get(key);
+        else { //get key, change its position in MyQueue
+            QueueNode qn = cache.get(key);
             int val = qn.val;
             //change position in MyQueue to head
             if (queue.head == qn) {
@@ -118,14 +118,14 @@ public class LRUCacheDEQ {
     }
 
     public void put(int key, int value) {
-        if (map.containsKey(key)) {
+        if (cache.containsKey(key)) {
             get(key); //doing for the side effects, bring it to head
             queue.head.val = value; //update value for the key, if changed
             return;
         }
         //LRU does not have the key
         QueueNode qn = new QueueNode(key, value);
-        if (numElems == capacity) { //no space, delete LRU queue node and add the new value to head
+        if (size == capacity) { //no space, delete LRU queue node and add the new value to head
             QueueNode qnLRU = queue.tail; //remove LRU node from queue
             removeFromTail(qnLRU);
             removeFromMap(qnLRU.key);
@@ -135,7 +135,7 @@ public class LRUCacheDEQ {
             } else
                 moveToHead(qn);
         } else { //space is there
-            if (numElems == 0) {
+            if (size == 0) {
                 queue.head = qn;
                 queue.tail = qn;
             } else //add to front of queue
@@ -146,7 +146,7 @@ public class LRUCacheDEQ {
 
 
     public static void main(String[] args) {
-        LRUCacheDEQ cache = new LRUCacheDEQ(1 /* capacity */);
+        LRUCacheDLL cache = new LRUCacheDLL(1 /* capacity */);
 
         cache.put(2, 1);
         System.out.println(cache.get(2));       // returns 1

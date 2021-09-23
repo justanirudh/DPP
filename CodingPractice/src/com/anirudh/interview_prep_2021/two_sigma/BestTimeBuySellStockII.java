@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /*
 122. Best Time to Buy and Sell Stock II (buy and sell as many times as you want, also allowed on the same day)

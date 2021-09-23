@@ -99,15 +99,11 @@ public class SlidingWindowMedian {
         res[0] = getMedian();
 
         for (int i = k; i < nums.length; ++i) {
-
             int inValidIdx = i - k; //first remove invalid elem
             if (!lo.remove(inValidIdx)) //log k operation
                 hi.remove(inValidIdx);
-
             addAndBalance(i);
-
             res[inValidIdx + 1] = getMedian();
-
         }
 
         return res;

@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma;
+package com.anirudh.interview_prep_2021.two_sigma.anki;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -55,7 +55,7 @@ Memoization: Use String -> {length of longest chain ending at the string}
 For each word, delete each char, do recursion, add the char back and delete next char
  */
 public class DP_LongestStringChain {
-
+//TODO: find the actual chain
     Map<String, Integer> maxLenMap = new HashMap<>();
     Set<String> wordSet = new HashSet<>();
 

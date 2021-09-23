@@ -52,7 +52,7 @@ Things to remember:
 
 Option 2: /*
 Map to DIY queue
-Map has {elements -> QueueNode {k,v,next, prev} }
+Map has {k -> QueueNode {k,v,next, prev} }
  */
 public class LRUCache extends LinkedHashMap<Integer, Integer> {
 
