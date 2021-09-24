@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -61,7 +61,7 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
  */
 /*
 Reverse sort valid integers
-Go through the valid_integers array and GREEDILY created roman string by subtracting from original num
+Go through the valid_integers array and GREEDILY create roman string by subtracting from original num
 Keep staying at a valid_integer until it becomes > num
  */
 public class IntegerToRoman {

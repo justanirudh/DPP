@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /*
 264. Ugly Number II
@@ -26,7 +26,7 @@ Input: n = 1
 Output: 1
 Explanation: 1 has no prime factors, therefore all of its prime factors are limited to 2, 3, and 5.
  */
-public class UglyNumberII {
+public class  UglyNumberII {
 
     /*
     The n-th smallest multiples of a set of integers. For example, set = {5,7}, n = 4, answer 14, - n = 5, answer 15,

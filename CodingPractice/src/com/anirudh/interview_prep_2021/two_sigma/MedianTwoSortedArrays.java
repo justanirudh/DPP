@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /*
 4. Median of Two Sorted Arrays

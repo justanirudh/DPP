@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki.multithreading;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 class Stutterer extends Thread {
     static final int ITERS = 5;

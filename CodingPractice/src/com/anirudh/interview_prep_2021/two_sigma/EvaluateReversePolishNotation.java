@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -49,7 +49,7 @@ Explanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
 
 /*
 RPN: Left to Right Stack
-NPN: Right to LEft Stack
+NPN: Right to Left Stack
 
 Now, what if you wanted to support arbitrary operations on some variable number of preceding numbers? How does the code change?
 If arity is given for each operator: it would just be a question of how many numbers to pop

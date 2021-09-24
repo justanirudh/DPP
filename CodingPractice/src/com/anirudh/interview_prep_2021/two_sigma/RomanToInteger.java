@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +60,7 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
  */
 
 /*
-option 1 below: check 1-len and 2-len symbols
+option 1 below: check 1-len and 2-len symbols. Use switch-case
 option 2: in a loop, check if 2-len is in the symbol -> integer map, if not pick 1-len
  */
 public class RomanToInteger {

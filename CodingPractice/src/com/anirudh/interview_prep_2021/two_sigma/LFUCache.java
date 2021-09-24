@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /*
 460. LFU Cache
@@ -58,18 +58,19 @@ lfu.get(4);      // return 4
 
 /*
 Use a Map< Key -> MyQueueNode> | this is cacheMap
-Use a DoubleLinkedList (DLL)
 Use a Map <frequency -> DLL> | this is LRUMap
-Use a minFreq variable to track minimum freq at any point
+Use a DoubleLinkedList (DLL)
+Use a minFreq var to track minimum freq at any point
+
 Node(k, v, prev, next, freq)
 DLL(head, tail): addFirst(), removeLast(), remove(node) | This will be the LRU cache for same frequency nodes
 
 Put(k,v):
-    if k exists in cache
+    if k exists in cacheMap
         k -> Node -> DLL
         Node: update value
         DLL: remove(node), graduate it to {freq+1 -> DLL}
-        if(freq == min && LRUMap{1 -> DLL} is empty list)
+        if(minFreq == freq && LRUMap{minFreq -> DLL} is empty list)
             minFreq++;
     if k doesnt exist
         if we have not reached capacity
@@ -78,7 +79,8 @@ Put(k,v):
             add it to LRUMap, added in {1 -> DLL} using addFirst()
         if we have reached capacity
             minFreq = 1
-            Go to LRUMap{minFreq -> DLL}, do removeLast(), remove from Cache
+            Go to LRUMap{minFreq -> DLL}, Do removeLast()
+            Remove from Cache
             add new Node to cache
             add it to LRUMap, added in {1 -> DLL} using addFirst()
 Get(k):

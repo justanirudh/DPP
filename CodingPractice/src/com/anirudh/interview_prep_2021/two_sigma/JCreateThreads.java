@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki.multithreading;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 class Print0 implements Runnable {
     @Override

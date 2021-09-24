@@ -1,9 +1,6 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by paanir on 9/3/21.
@@ -53,15 +50,45 @@ Similar to WordBreakII in Facebook
 Top down DP: for each string find longest chain ENDING in that string
 Memoization: Use String -> {length of longest chain ending at the string}
 For each word, delete each char, do recursion, add the char back and delete next char
+
+For getting the chain itself,
+have a map of String -> List<String>
+instead of a maxInt 1, have a maxlist of the word itself
+in the for loop, create new collection; check length with maxList,if longer, maxList = currlist
  */
 public class DP_LongestStringChain {
-//TODO: find the actual chain
-    Map<String, Integer> maxLenMap = new HashMap<>();
+    Map<String, Integer> maxChainLenMap = new HashMap<>();
+    Map<String, List<String>> maxChainMap = new HashMap<>();
     Set<String> wordSet = new HashSet<>();
 
+    List<String> maxChainEndingAt(String word) {
+        if (maxChainMap.containsKey(word))
+            return maxChainMap.get(word);
+
+        List<String> maxChain = new ArrayList<>();
+        maxChain.add(word); //just the current word //ba
+
+        StringBuilder wordSB = new StringBuilder(word);
+
+        for (int i = 0; i < wordSB.length(); ++i) {
+            char c = wordSB.charAt(i);
+            wordSB.deleteCharAt(i);
+            if (wordSet.contains(wordSB.toString())) {
+                List<String> currChain = new ArrayList<>(maxChainEndingAt(wordSB.toString()));
+                currChain.add(word);
+                if (currChain.size() > maxChain.size()) {
+                    maxChain = currChain;
+                }
+            }
+            wordSB.insert(i, c); //add it back for next deletion
+        }
+        maxChainMap.put(word, maxChain); //PUT in the MAP
+        return maxChain;
+    }
+
     int maxChainLengthEndingAt(String word) {
-        if (maxLenMap.containsKey(word))
-            return maxLenMap.get(word);
+        if (maxChainLenMap.containsKey(word))
+            return maxChainLenMap.get(word);
 
         int maxLen = 1; //just the current word
 
@@ -77,11 +104,25 @@ public class DP_LongestStringChain {
             }
             wordSB.insert(i, c); //add it back for next deletion
         }
-        maxLenMap.put(word, maxLen); //PUT in the MAP
+        maxChainLenMap.put(word, maxLen); //PUT in the MAP
         return maxLen;
     }
 
-    public int longestStrChain(String[] words) {
+    public List<String> longestStrChain(String[] words) {
+        List<String> res = new ArrayList<>();
+
+        for (String word : words) {
+            wordSet.add(word);
+        }
+        for (String word : words) {
+            List<String> l = maxChainEndingAt(word);
+            if (l.size() > res.size())
+                res = l;
+        }
+        return res;
+    }
+
+    public int longestStrChainLen(String[] words) {
         int maxLen = 0;
 
         for (String word : words) {
@@ -92,5 +133,13 @@ public class DP_LongestStringChain {
             maxLen = Math.max(maxLen, len);
         }
         return maxLen;
+    }
+
+    public static void main(String[] args) {
+        String[] words = {"a","b","ba","bca","bda","bdca"}; //["a","ba","bda","bdca"].
+        DP_LongestStringChain obj = new DP_LongestStringChain();
+        List<String> res = obj.longestStrChain(words);
+
+        res.forEach(System.out::println);
     }
 }

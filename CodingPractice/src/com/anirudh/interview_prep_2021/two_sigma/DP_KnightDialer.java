@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /*
 935. Knight Dialer
@@ -52,7 +52,10 @@ Output: 136006598
 Explanation: Please take care of the mod.
  */
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /*
 Similar to Climbing Stairs
@@ -62,37 +65,33 @@ Map {(i,j,k) -> numWays}
 base case: {i,j,1} = 1; as if we only need 1 number, just place it on any square, so only 1 way
 Use LONG everywhere
  */
-public class DP_KnightDialer_Strings {
+public class DP_KnightDialer {
 
     Map<List<Integer>, Long> memo = new HashMap<>();
     char[][] numpad = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}, {'*', '0', '#'}};
     int max = (int)Math.pow(10, 9) + 7;
-    List<String> resList = new ArrayList<>();
 
     boolean isNotValid(int i, int j) {
         return i < 0 || i >= 4 || j < 0 || j >= 3 || numpad[i][j] == '*' || numpad[i][j] == '#';
     }
 
-    long numWays(int i, int j, int k, String phone) {
+    long numWays(int i, int j, int k) {
         if (isNotValid(i, j))
             return 0;
-        String phoneNext = phone + numpad[i][j];
-        if (k == 1) { //base case
-            resList.add(phoneNext);
+        if (k == 1)
             return 1;
-        }
         List<Integer> state = Arrays.asList(i, j, k);
         if (memo.containsKey(state))
             return memo.get(state);
         long numSteps =
-                numWays(i - 2, j + 1, k - 1, phoneNext) +
-                        numWays(i - 1, j + 2, k - 1, phoneNext) % max +
-                        numWays(i + 1, j + 2, k - 1, phoneNext) % max +
-                        numWays(i + 2, j + 1, k - 1, phoneNext) % max +
-                        numWays(i + 2, j - 1, k - 1, phoneNext) % max +
-                        numWays(i + 1, j - 2, k - 1, phoneNext) % max +
-                        numWays(i - 1, j - 2, k - 1, phoneNext) % max +
-                        numWays(i - 2, j - 1, k - 1, phoneNext) % max;
+                numWays(i - 2, j + 1, k - 1) +
+                        numWays(i - 1, j + 2, k - 1) % max +
+                        numWays(i + 1, j + 2, k - 1) % max +
+                        numWays(i + 2, j + 1, k - 1) % max +
+                        numWays(i + 2, j - 1, k - 1) % max +
+                        numWays(i + 1, j - 2, k - 1) % max +
+                        numWays(i - 1, j - 2, k - 1) % max +
+                        numWays(i - 2, j - 1, k - 1) % max;
         memo.put(state, numSteps);
         return numSteps;
     }
@@ -101,16 +100,14 @@ public class DP_KnightDialer_Strings {
         long res = 0;
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 3; ++j) {
-                res = (res + numWays(i, j, n, "")) % max;
+                res = (res + numWays(i, j, n)) % max;
             }
         }
-        resList.forEach(System.out::println); // All numbers
         return (int)res;
     }
 
     public static void main(String[] args) {
-
-        System.out.println("count: " + new DP_KnightDialer_Strings().knightDialer(2));
+        System.out.println(new DP_KnightDialer().knightDialer(10));
     }
 }
 

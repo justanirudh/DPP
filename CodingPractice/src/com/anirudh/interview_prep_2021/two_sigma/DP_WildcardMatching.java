@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 /*
 44. Wildcard Matching
@@ -126,5 +126,33 @@ public class DP_WildcardMatching {
             }
         }
         return dp[p.length()][s.length()];
+    }
+    /*
+    For x test cases
+        1. randomize length of pattern p
+            p between 1-5
+        2. create pattern of length p
+            out of an array of alphabets, * and ?, choose l chars randomly
+            default: a: *: ? -> 26:1:1
+            we can make it 26:13:13
+            Create array of [all letters, 13 *s, 13 ?s]
+            Shuffle it
+            Then pick randomly
+        3. create 2 true strings
+            3.1 iterate through pattern
+            3.2 for alphabets, copy alphabets
+            3.2 for ?, place a random letter in it: '0' + rand(26)
+            3.3 for *, randomly choose between
+                3.3.1 NOOP
+                3.3.2 a random letter
+                3.3.3 a random number of random letters
+        4. [ONLY IF ASKED]create 2 false strings
+            4.1 iterate through pattern
+            4.2 if alphabet, put an incorrect alphabet; for the rest of the string, follow true string rules
+            4.3 for *, out random elems
+            4.4 for ?, put random elem
+     */
+    public void generateTestCases() {
+
     }
 }

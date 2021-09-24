@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +29,7 @@ Output: [[],[0]]
  */
 /*
     Use bitmask. Go from 2^n to 2^(n+1) and ignore first bit to get bitmask of fixed n length
+    Pick only 1s
  */
 public class Subsets {
     //TODO

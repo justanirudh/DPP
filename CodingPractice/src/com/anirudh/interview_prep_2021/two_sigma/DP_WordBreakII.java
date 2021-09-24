@@ -33,7 +33,7 @@ import java.util.*;
  */
 
 /**
- * Simple greedy dynamic programming
+ * Simple top-down greedy dynamic programming
  * Make a memoization map of String -> ways to break the string: getWaysToBreak()
  * Use substring(0,i) to find all PREFIXES of the string
  * For each prefix, check if it in the wordSet

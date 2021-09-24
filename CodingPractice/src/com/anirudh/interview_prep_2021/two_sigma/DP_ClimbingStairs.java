@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +37,7 @@ Explanation: There are three ways to climb to the top.
 3. 2 steps + 1 step
  */
 /*
+Use DP with memoization
 climb(n) = number of ways to reach n
 climb(n) = climb(n-1) + climb(n-2)
  */
