@@ -46,6 +46,8 @@ Output: false
  */
 
 /*
+
+dp[p][s] = whether pattern until pth index matches the string until sth index
 1st all base cases:
 1. p equals s; p has all *; p and s both empty
 2. Create a 2D array: rows are pattern, columns are letters of string
