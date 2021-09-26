@@ -32,7 +32,6 @@ Output: [[],[0]]
     Pick only 1s
  */
 public class Subsets {
-    //TODO
     public List<List<Integer>> subsets(int[] nums) {
         int len = nums.length;
         List<List<Integer>> res = new ArrayList<>();

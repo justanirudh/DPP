@@ -3,10 +3,10 @@ package com.anirudh.interview_prep_2021.two_sigma;
 import java.util.Random;
 
 class Producer extends Thread {
-    ThreadSafeQueue q;
+    ConcurrentBlockingQueue q;
     Random r;
 
-    Producer(ThreadSafeQueue q) {
+    Producer(ConcurrentBlockingQueue q) {
         this.q = q;
         r = new Random();
     }
@@ -23,9 +23,9 @@ class Producer extends Thread {
 }
 
 class Consumer extends Thread {
-    ThreadSafeQueue q;
+    ConcurrentBlockingQueue q;
 
-    Consumer(ThreadSafeQueue q) {
+    Consumer(ConcurrentBlockingQueue q) {
         this.q = q;
     }
 
@@ -41,10 +41,10 @@ class Consumer extends Thread {
     }
 }
 
-public class TestThreadSafeQueue {
+public class TestConcurrentBlockingQueue {
 
     public static void main(String[] args) {
-        ThreadSafeQueue q = new ThreadSafeQueue();
+        ConcurrentBlockingQueue q = new ConcurrentBlockingQueue();
         Thread p = new Producer(q);
         Thread c1 = new Consumer(q);
         Thread c2 = new Consumer(q);
