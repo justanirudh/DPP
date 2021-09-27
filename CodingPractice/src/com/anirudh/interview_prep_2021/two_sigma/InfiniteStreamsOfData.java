@@ -1,11 +1,9 @@
-package com.anirudh.interview_prep_2021.two_sigma.anki;
+package com.anirudh.interview_prep_2021.two_sigma;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /*
 You are given two infinite streams of data, where each datum has fields (timestamp, value).
@@ -57,9 +55,7 @@ class Buffer {
         while (!buffer.isEmpty() && Math.abs(buffer.peek().ts - elem.ts) > interval) {
             buffer.poll();
         }
-        List<Element> res = new ArrayList<>();
-        res.addAll(buffer);
-        return res;
+        return new ArrayList<>(buffer);
     }
 }
 
