@@ -42,7 +42,7 @@ Its like Kadane + Array Product without Self
 2. Go from front to back and fill Kadane ARRAYs. Also get max NUMBER
 3. Max is required in case we dont want to delete anything, as problem says we can delete ATMOST 1 number
 4. Go from back to front and calculate maxStartingHere array
-5. Now iterate through array [1 to len-2] and find Max(max, maxStartingHere[i-1], maxEndingHere[i+1])
+5. Now iterate through array [1 to len-2] and find Max(max, maxStartingHere[i-1] + maxEndingHere[i+1])
  */
 public class DP_MaximumSubarraySumOneDeletion {
     public int maximumSum(int[] arr) {
@@ -61,7 +61,7 @@ public class DP_MaximumSubarraySumOneDeletion {
             maxStartingHere[i] = Math.max(maxStartingHere[i + 1] + arr[i], arr[i]);
         }
 
-        for (int i = 1; i < arr.length - 1; ++i) {
+        for (int i = 1; i < arr.length - 1; ++i) { //i is the number tht will be deleted
             int maxSumdeleteI = maxEndingHere[i - 1] + maxStartingHere[i + 1];
             max = Math.max(max, maxSumdeleteI);
         }

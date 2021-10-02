@@ -60,7 +60,7 @@ class Buffer {
 }
 
 
-class Consumer extends Thread {
+class Consumer2 extends Thread {
     Buffer bufferA;
     Buffer bufferB;
     CBQ stream;
@@ -71,7 +71,7 @@ class Consumer extends Thread {
         System.out.println("Pair: {" + a.val + b.val + "}");
     }
 
-    public Consumer(CBQ stream, Buffer a, Buffer b, boolean isA) {
+    public Consumer2(CBQ stream, Buffer a, Buffer b, boolean isA) {
         bufferA = a;
         bufferB = b;
         this.stream = stream;
@@ -112,8 +112,8 @@ public class InfiniteStreamsOfData {
         Buffer bufferA = new Buffer(interval);
         Buffer bufferB = new Buffer(interval);
 
-        Thread a = new Consumer(streamA, bufferA, bufferB, true);
-        Thread b = new Consumer(streamB, bufferA, bufferB, false);
+        Thread a = new Consumer2(streamA, bufferA, bufferB, true);
+        Thread b = new Consumer2(streamB, bufferA, bufferB, false);
         a.start();
         b.start();
     }

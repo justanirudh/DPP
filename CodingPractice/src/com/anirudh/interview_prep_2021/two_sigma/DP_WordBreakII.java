@@ -34,6 +34,7 @@ import java.util.*;
 
 /**
  * Simple top-down greedy dynamic programming
+ * define BASE CASE!
  * Make a memoization map of String -> ways to break the string: getWaysToBreak()
  * Use substring(0,i) to find all PREFIXES of the string
  * For each prefix, check if it in the wordSet
@@ -41,6 +42,8 @@ import java.util.*;
  * With the returned value, add it to memoization map
  *
  * use the memoization map first thing to make sure we do no extra processing
+ * Tx: O(n^2 + 2^n + W)
+ * Sx: O(2^n.n + W)
  */
 public class DP_WordBreakII {
     Set<String> wordSet;

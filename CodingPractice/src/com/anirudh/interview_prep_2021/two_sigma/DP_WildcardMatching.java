@@ -93,7 +93,7 @@ public class DP_WildcardMatching {
             return true;
 
         boolean[][] dp = new boolean[p.length() + 1][s.length() + 1]; //initiates all as false
-        dp[0][0] = true;
+        dp[0][0] = true; //base case
 
         for (int pIdx = 1; pIdx < p.length() + 1; ++pIdx) { //go row-wise
             if (p.charAt(pIdx - 1) != '*' && p.charAt(pIdx - 1) != '?') { //alphabet

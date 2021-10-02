@@ -118,9 +118,7 @@ public class ValidNumber {
         //START STRING PARSING, iterative
 
         int currState = 0; //this tells us which index in the list we should look at
-        for(int i = 0; i < s.length(); ++i) {
-
-            char c = s.charAt(i);
+        for(char c : s.toCharArray()) {
 
             String type; //this gives us which key-value to look at in a state
             if(Character.isDigit(c))

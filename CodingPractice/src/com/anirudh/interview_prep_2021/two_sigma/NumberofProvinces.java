@@ -52,10 +52,10 @@ public class NumberofProvinces {
     Set<Integer> visited = new HashSet<>();
     int[][] isConnected;
 
-    void doDFS(Integer node) {
-        visited.add(node);
-        for (int j = 0; j < isConnected[node].length; ++j) {
-            if (j != node && isConnected[node][j] == 1 && !visited.contains(j)) {
+    void doDFS(Integer i) {
+        visited.add(i);
+        for (int j = 0; j < isConnected[i].length; ++j) {
+            if (j != i && isConnected[i][j] == 1 && !visited.contains(j)) {
                 doDFS(j);
             }
         }

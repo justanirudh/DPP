@@ -45,7 +45,8 @@ Explanation: There is no way to make a positive profit, so we never buy the stoc
  */
 public class BestTimeBuySellStockII {
     public int maxProfit(int[] prices) {
-        int len = prices.length, profit = 0;
+        int len = prices.length;
+        int profit = 0;
         for (int i = 1; i < len; i++) {
             if (prices[i] > prices[i - 1])
                 profit += prices[i] - prices[i - 1];

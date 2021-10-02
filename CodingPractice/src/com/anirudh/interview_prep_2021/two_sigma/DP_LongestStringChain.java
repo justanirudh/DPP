@@ -90,7 +90,7 @@ public class DP_LongestStringChain {
         if (maxChainLenMap.containsKey(word))
             return maxChainLenMap.get(word);
 
-        int maxLen = 1; //just the current word
+        int maxLen = 1; //base case
 
         StringBuilder wordSB = new StringBuilder(word);
 

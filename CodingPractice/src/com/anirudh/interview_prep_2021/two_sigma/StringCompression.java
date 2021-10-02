@@ -57,17 +57,15 @@ public class StringCompression {
         int fast = 0;
         int slow = 0; //start of answer for each iteration
         while (fast < chars.length) {
-            int letter = chars[fast];
+            char letter = chars[fast];
             int start = fast; //start of new group
             while (fast < chars.length && chars[fast] == letter) {
                 fast++;
             }
             int freq = fast - start;
-            chars[slow] = chars[start];
-            if (freq == 1) {
-                slow++;
-            } else { //freq > 1
-                slow++;
+            chars[slow] = letter;
+            slow++;
+            if (freq > 1) {
                 char[] freqArr = Integer.toString(freq).toCharArray();
                 int i;
                 for (i = 0; i < freqArr.length; ++i) {

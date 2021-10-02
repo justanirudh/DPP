@@ -55,10 +55,6 @@ public class GroupAnagrams {
                 dictToStrings.get(countMap).add(str);
             }
         }
-        List<List<String>> res = new ArrayList<>();
-        for (List<String> value : dictToStrings.values()) {
-            res.add(value);
-        }
-        return res;
+        return new ArrayList<>(dictToStrings.values());
     }
 }

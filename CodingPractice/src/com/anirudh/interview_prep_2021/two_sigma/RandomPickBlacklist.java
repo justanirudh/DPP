@@ -49,9 +49,9 @@ solution.pick(); // return 4
 Option 1: keep RANDing in range until the number is not in blacklist. This gives TLE (as it says to optimize calls to rand)
 Option 2: create whitelist and randomly select from it : TLE
 Option 3:
-3.1 Break the [0,n) range into [0, n-bLen) and [n-bLen, n) elements. bLen = length of blacklist
-3.2 Create Mapping the blacklisted elems in [0, n-bLen) to "whitelisted" elems in [n-bLen, n)
-3.3 Then just pick a random number from [0, n-bLen). If it in blacklisted, return the mapped whitelisted
+3.1 Break the [0,n-1] range into [0, n-bLen-1] and [n-bLen, n-1] elements. bLen = length of blacklist
+3.2 Create Mapping the blacklisted elems in [0, n-bLen-1] to "whitelisted" elems in [n-bLen, n-1]
+3.3 Then just pick a random number from [0, n-bLen-1]. If it in blacklisted, return the mapped whitelisted
  */
 public class RandomPickBlacklist {
 

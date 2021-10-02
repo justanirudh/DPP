@@ -17,5 +17,17 @@ public class HelloWorld {
 //        System.out.println(Integer.parseInt("-1"));
         char a = 'a';
         System.out.println(a + 1);
+        List<Integer> l = new ArrayList<>();
+        l.add(1);
+        l.add(2);
+        l.add(3);
+        l.add(4);
+        Collections.sort(l, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        });
+
     }
 }

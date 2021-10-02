@@ -43,11 +43,6 @@ public class LRUCache_DIY {
     //Or use LinkedHashMap with orderAccess argument as true (LRU gets enabled) and override
     //removeEldestEntry when we hit cache size. EPI Prob.12.3
 
-    class MyQueue {
-        QueueNode head = null; //MRU
-        QueueNode tail = null; //LRU
-    }
-
     class QueueNode {
         int key;
         int val;
@@ -60,100 +55,82 @@ public class LRUCache_DIY {
         }
     }
 
-    private MyQueue queue = new MyQueue();
-    private Map<Integer, QueueNode> map = new HashMap<>(); //KEY to the queuenode in the queue
+    private Map<Integer, QueueNode> cache = new HashMap<>(); //KEY to the queuenode in the queue
     private int capacity;
-    private int numElems = 0;
+    QueueNode head = null; //MRU
+    QueueNode tail = null; //LRU
 
     public LRUCache_DIY(int capacity) {
         this.capacity = capacity;
     }
 
-    private void moveToHead(QueueNode qn) {
-        qn.next = queue.head;
-        qn.prev = null;
-        queue.head.prev = qn;
-        queue.head = qn;
+    void addNodeToHead(QueueNode qn) {
+        qn.next = head;
+        if (head != null)
+            head.prev = qn;
+        head = qn;
     }
 
-    private void removeFromTail(QueueNode qn) {
+    void moveNodeToHead(QueueNode qn) {
+        if (head == qn)
+            return;
         QueueNode prev = qn.prev;
+        QueueNode next = qn.next;
+        if (prev != null)
+            prev.next = next;
+        if (next != null)
+            next.prev = prev;
+        if (tail == qn) // decrement tail
+            tail = prev;
+        addNodeToHead(qn);
+    }
+
+    QueueNode removeTailNode() {
+        QueueNode last = tail;
+        QueueNode prev = tail.prev;
         if (prev != null)
             prev.next = null;
-        queue.tail = prev;
-    }
-
-    private void addToMap(int key, QueueNode qn) {
-        map.put(key, qn);
-        numElems++;
-    }
-
-    private void removeFromMap(int key) {
-        map.remove(key);
-        numElems--;
+        tail = prev;
+        return last;
     }
 
     public int get(int key) {
-        if (!map.containsKey(key))
+        if (!cache.containsKey(key)) {
             return -1;
-        else { //get key, change its position in MyQueue, remap map
-            QueueNode qn = map.get(key);
-            int val = qn.val;
-            //change position in MyQueue to head
-            if (queue.head == qn) {
-                //if head, DO nothing
-            } else if (queue.tail == qn) { //if tail, bring it to head
-                removeFromTail(qn);
-                moveToHead(qn);
-            } else { // in between
-                //remove from between
-                QueueNode prev = qn.prev;
-                QueueNode next = qn.next;
-                prev.next = next;
-                next.prev = prev;
-                moveToHead(qn);
-            }
-            return val;
         }
+        QueueNode qn = cache.get(key);
+        moveNodeToHead(qn);
+        return qn.val;
     }
 
     public void put(int key, int value) {
-        if (map.containsKey(key)) {
-            get(key); //doing for the side effects, bring it to head
-            queue.head.val = value; //update value for the key, if changed
+        if (cache.containsKey(key)) {
+            QueueNode qn = cache.get(key);
+            moveNodeToHead(qn);
+            qn.val = value;
             return;
         }
-        //LRU does not have the key
-        QueueNode qn = new QueueNode(key, value);
-        if (numElems == capacity) { //no space, delete LRU queue node and add the new value to head
-            QueueNode qnLRU = queue.tail; //remove LRU node from queue
-            removeFromTail(qnLRU);
-            removeFromMap(qnLRU.key);
-            if (capacity == 1) { //add new node to front of queue
-                queue.head = qn;
-                queue.tail = qn;
-            } else
-                moveToHead(qn);
-        } else { //space is there
-            if (numElems == 0) { //add to front of queue
-                queue.head = qn;
-                queue.tail = qn;
-            } else
-                moveToHead(qn);
+        if (cache.size() == capacity) {
+            QueueNode qn = removeTailNode();
+            cache.remove(qn.key);
         }
-        addToMap(key, qn);
+        QueueNode qn = new QueueNode(key, value);
+        cache.put(key, qn);
+        if (cache.size() == 1) {// base case
+            head = qn;
+            tail = qn;
+        } else {
+            addNodeToHead(qn);
+        }
     }
 
-
     public static void main(String[] args) {
-        LRUCache_DIY cache = new LRUCache_DIY(1 /* capacity */);
+        LRUCache_DIY cache = new LRUCache_DIY(2 /* capacity */);
 
-        cache.put(2, 1);
-        System.out.println(cache.get(2));       // returns 1
-        cache.put(3, 2);
-        System.out.println(cache.get(2));       // returns -1
-        System.out.println(cache.get(3));       // returns 2
-
+        cache.put(1, 1);
+        cache.put(2, 2);
+        cache.get(1);       // returns 1
+        cache.put(3, 3);
     }
 }
 

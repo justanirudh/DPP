@@ -4,6 +4,7 @@ import com.anirudh.datastructures.trees.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -69,26 +70,13 @@ Each node'number value will be between 0 and 1000.
 
 class VerticalOrderTraversalBT {
 
-    class Location implements Comparable<Location> {
+    class Location {
         int x, y, val;
 
         Location(int x, int y, int val) {
             this.x = x;
             this.y = y;
             this.val = val;
-        }
-
-        //TODO: For Problem 314, instead of comparing values in last "else",
-        // compare left node vs right node. One wa to do it is pass path to ndoes as you go
-        // Eg. "LLR" vs "LRL", first one would take precedence
-        @Override
-        public int compareTo(Location that) {
-            if (this.x != that.x) //first check x
-                return Integer.compare(this.x, that.x);
-            else if (this.y != that.y) //then check y
-                return Integer.compare(this.y, that.y);
-            else //then check value
-                return Integer.compare(this.val, that.val);
         }
     }
 
@@ -108,7 +96,17 @@ class VerticalOrderTraversalBT {
 
         preOrderTraversal(root, 0, 0); // populate Locations list
 
-        Collections.sort(locations);//sort it
+        //TODO: For Problem 314, instead of comparing values in last "else",
+        // compare left node vs right node. One wa to do it is pass path to ndoes as you go
+        // Eg. "LLR" vs "LRL", first one would take precedence
+        locations.sort((o1, o2) -> {
+            if (o1.x != o2.x) //first check x
+                return Integer.compare(o1.x, o2.x);
+            else if (o1.y != o2.y) //then check y
+                return Integer.compare(o1.y, o2.y);
+            else //then check value
+                return Integer.compare(o1.val, o2.val);
+        });//sort it
 
         /*
         After that, the impl is simple. just go through sorted array and lump objects with same x value together

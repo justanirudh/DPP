@@ -130,10 +130,10 @@ public class DP_BestTimeBuySellStockIV {
 
         int[][] dp = new int[k + 1][prices.length];
         for (int i = 1; i <= k; ++i) { //for k = 0, all are 0
-            int maximize = -prices[0];  //base case, first day for kth transaction
+            int maxProfitUntilNow = -prices[0];  //base case, first day for kth transaction
             for (int j = 1; j < prices.length; ++j) { //cant do anything on first day, hence all are 0
-                dp[i][j] = Math.max(dp[i][j - 1], prices[j] + maximize);
-                maximize = Math.max(maximize, dp[i - 1][j - 1] - prices[j]); //used for next iteration of j+1
+                dp[i][j] = Math.max(dp[i][j - 1], prices[j] + maxProfitUntilNow);
+                maxProfitUntilNow = Math.max(maxProfitUntilNow, dp[i - 1][j - 1] - prices[j]); //used for next iteration of j+1
             }
         }
         return dp[k][prices.length - 1];

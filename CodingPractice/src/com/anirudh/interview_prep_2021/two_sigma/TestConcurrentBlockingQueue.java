@@ -12,12 +12,10 @@ class Producer extends Thread {
     }
 
     public void run() {
-        int i = 0;
         while (true) {
             int rand = r.nextInt(1000);
             q.offer(rand);
             System.out.println("Put " + rand + " in queue by " + Thread.currentThread().getId());
-            i++;
         }
     }
 }
