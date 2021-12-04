@@ -56,7 +56,7 @@ Then find the max frequented pattern
  */
 public class AnalyzeUserWebsiteVisitPattern {
 
-    class Visit implements Comparable<Visit> {
+    class Visit {
         int ts;
         String web;
 
@@ -65,9 +65,6 @@ public class AnalyzeUserWebsiteVisitPattern {
             this.web = web;
         }
 
-        public int compareTo(Visit that) { //sort by timestamp
-            return this.ts - that.ts;
-        }
     }
 
     public List<String> mostVisitedPattern(String[] username, int[] timestamp, String[] website) {
@@ -86,7 +83,7 @@ public class AnalyzeUserWebsiteVisitPattern {
             Set<String> visited = new HashSet<>(); // same 3 strings should not be visited by 1 user
             if (visits.size() < 3)
                 continue;
-            Collections.sort(visits);
+            visits.sort(Comparator.comparingInt(o -> o.ts));
             for (int i = 0; i < visits.size(); ++i) { //all combos
                 for (int j = i + 1; j < visits.size(); ++j) {
                     for (int k = j + 1; k < visits.size(); ++k) {
@@ -99,7 +96,7 @@ public class AnalyzeUserWebsiteVisitPattern {
                             freq.put(pattern, freq.getOrDefault(pattern, 0) + 1);
                             visited.add(pattern);
                         }
-                        if (res.equals("") ||
+                        if (res.equals("") || //first time
                                 freq.get(pattern) > freq.get(res) || //if we get a pattern with more frequency
                                 (freq.get(pattern) == freq.get(res) && pattern.compareTo(res) < 0)) { //we get a pattern with same freq but lexi smaller
                             res = pattern;

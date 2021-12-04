@@ -49,7 +49,7 @@ public class SlidingWindowMaximum {
 
         Deque<Integer> deq = new ArrayDeque<>(); //indices in inc order && only those necessary
         for (int i = 0; i < len; ++i) {
-            while (!deq.isEmpty() && deq.peek() < i - k + 1) //remove all not in window from head (older elems)
+            while (!deq.isEmpty() && deq.peek() <= i - k ) //remove all not in window from head (older elems)
                 deq.poll();
             while (!deq.isEmpty() && nums[deq.peekLast()] < nums[i]) //remove all who are less than current. remove from tail (newer elems)
                 deq.pollLast();

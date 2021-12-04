@@ -65,10 +65,6 @@ public class WallsandGates {
             this.x = x;
             this.y = y;
         }
-
-        //equals
-        //hashcode
-        //toString
     }
 
     int[] dx = {0, 0, 1, -1};

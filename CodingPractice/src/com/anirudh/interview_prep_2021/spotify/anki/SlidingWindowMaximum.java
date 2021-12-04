@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.spotify;
+package com.anirudh.interview_prep_2021.spotify.anki;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -41,23 +41,8 @@ public class SlidingWindowMaximum {
 
     //O(k) space and O(n) (amortized) time
     static int[] maxSlidingWindow(int[] nums, int k) {
-        if (nums == null || nums.length == 0 || k <= 0)
-            return new int[0];
-        int len = nums.length;
-        int[] res = new int[len - k + 1]; //result
-
-        Deque<Integer> deq = new ArrayDeque<>(); //indices in inc order && only those necessary
-        for (int i = 0; i < len; ++i) {
-            while (!deq.isEmpty() && deq.peek() < i - k + 1) //remove all not in window from head (older elems)
-                deq.poll();
-            while (!deq.isEmpty() && nums[deq.peekLast()] < nums[i]) //remove all who are less than current. remove from tail (newer elems)
-                deq.pollLast();
-            deq.offer(i); //add new index to queue
-            if (i < k - 1) //add to res after i >=k - 1 (for first k-1 elements, no addition in res )
-                continue;
-            res[i - k + 1] = nums[deq.peek()];
-        }
-        return res;
+        //TODO
+        return new int[3];
     }
 
     public static void main(String[] args) {

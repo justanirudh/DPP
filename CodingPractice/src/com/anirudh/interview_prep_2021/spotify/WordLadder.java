@@ -67,12 +67,13 @@ public class WordLadder {
         // from any given word. By changing one letter at a time.
         Map<String, List<String>> patternToMatches = new HashMap<>();
 
+        wordList.add(beginWord);
         wordList.forEach(
                 word -> {
                     for (int i = 0; i < wordLen; i++) {
                         // Key is the generic word
                         // Value is a list of words which have the same intermediate generic word.
-                        String pattern = word.substring(0, i) + '*' + word.substring(i + 1, wordLen);
+                        String pattern = word.substring(0, i) + '*' + word.substring(i + 1);
                         List<String> transformations = patternToMatches.getOrDefault(pattern, new ArrayList<>());
                         transformations.add(word);
                         patternToMatches.put(pattern, transformations);
@@ -81,8 +82,9 @@ public class WordLadder {
 
         //BFS
         Queue<Pair> queue = new ArrayDeque<>();
-        queue.add(new Pair(beginWord, 1));
         Set<String> visited = new HashSet<>();
+
+        queue.add(new Pair(beginWord, 1));
         visited.add(beginWord);
 
         while (!queue.isEmpty()) {
@@ -97,7 +99,7 @@ public class WordLadder {
                     continue;
 
                 // Next states are all the words which share the same intermediate state.
-                for (String adjacentWord : patternToMatches.getOrDefault(currPattern, new ArrayList<>())) { //default required because beginWord has not been added into the wordlist earlier
+                for (String adjacentWord : patternToMatches.get(currPattern)) {
                     // If at any point if we find what we are looking for
                     // i.e. the end word - we can return with the answer.
                     if (adjacentWord.equals(endWord)) {

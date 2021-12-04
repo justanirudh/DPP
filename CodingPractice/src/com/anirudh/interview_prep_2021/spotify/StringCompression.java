@@ -64,10 +64,8 @@ public class StringCompression {
             }
             int freq = fast - start;
             chars[slow] = chars[start];
-            if (freq == 1) {
-                slow++;
-            } else { //freq > 1
-                slow++;
+            slow++;
+            if (freq > 1) {
                 char[] freqArr = Integer.toString(freq).toCharArray();
                 int i;
                 for (i = 0; i < freqArr.length; ++i) {

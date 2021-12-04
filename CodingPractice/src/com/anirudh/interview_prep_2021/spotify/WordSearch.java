@@ -37,17 +37,17 @@ public class WordSearch {
     boolean[][] visited;
     String word;
 
-    boolean doDFS(int x, int y, int wordIdx) {
+    boolean doDFS(int x, int y, int nextIdx) {
         visited[x][y] = true;
-        if (wordIdx == word.length())
+        if (nextIdx == word.length())
             return true;
         for (int z = 0; z < 4; z++) {
             int nx = x + dx[z];
             int ny = y + dy[z];
             if (nx >= 0 && nx < board.length && ny >= 0 && ny < board[0].length && !visited[nx][ny]) {
                 char letter = board[nx][ny];
-                if (letter == word.charAt(wordIdx)) {
-                    boolean wordExists = doDFS(nx, ny, wordIdx + 1);
+                if (letter == word.charAt(nextIdx)) {
+                    boolean wordExists = doDFS(nx, ny, nextIdx + 1);
                     if (wordExists)
                         return true;
                 }

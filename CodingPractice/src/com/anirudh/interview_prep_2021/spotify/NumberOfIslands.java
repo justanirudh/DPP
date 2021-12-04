@@ -43,9 +43,7 @@ public class NumberOfIslands {
     private char[][] grid;
 
     private boolean isValid(int row, int col){
-        if(row < 0 || col < 0 || row >= numRows || col >= numCols )
-            return false;
-        return true;
+        return row >= 0 && col >= 0 && row < numRows && col < numCols;
     }
 
     private void doDFS(int row, int col) {

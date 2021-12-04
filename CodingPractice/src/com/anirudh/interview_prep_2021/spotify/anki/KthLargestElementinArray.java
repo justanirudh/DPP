@@ -1,4 +1,4 @@
-package com.anirudh.interview_prep_2021.spotify;
+package com.anirudh.interview_prep_2021.spotify.anki;
 
 /**
  * Created by paanir on 8/29/21.

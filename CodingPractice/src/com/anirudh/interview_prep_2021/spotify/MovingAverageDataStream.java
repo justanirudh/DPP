@@ -49,7 +49,7 @@ Use a deque to store elems. for every next do
 public class MovingAverageDataStream {
 
     Deque<Integer> elems; //always of size "size"
-    int size;
+    int capacity;
     int sum;
     int currSize;
 
@@ -57,7 +57,7 @@ public class MovingAverageDataStream {
     /** Initialize your data structure here. */
     public MovingAverageDataStream(int size) {
         elems = new ArrayDeque<>();
-        this.size = size;
+        this.capacity = size;
         sum = 0;
         currSize = 0;
     }
@@ -67,13 +67,12 @@ public class MovingAverageDataStream {
         currSize++;
         elems.offer(val);
 
-        if(currSize <= size) {
+        if(currSize <= capacity) {
             return sum * 1.0 /currSize;
         }
         else {
             sum -= elems.poll();
-            return sum * 1.0 /size;
-
+            return sum * 1.0 / capacity;
         }
     }
 }
