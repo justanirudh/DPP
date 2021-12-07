@@ -51,17 +51,17 @@ public class ReplaceWords {
         //create Trie
         TrieNode trieRoot = new TrieNode();
         //add all words to the same trie
-        for (String root : dict) {
+        for (String word : dict) {
             //add to Trie
             TrieNode curr = trieRoot;
-            char[] rootArr = root.toCharArray();
+            char[] rootArr = word.toCharArray();
             for (char ch : rootArr) {
                 int index = ch - 'a';
                 if (curr.children[index] == null)
                     curr.children[index] = new TrieNode();
                 curr = curr.children[index]; //bring pointer down to child node
             }
-            curr.word = root; //add entire word to leaf
+            curr.word = word; //add entire word to leaf
         }
 
         String[] words = sentence.split(" ");

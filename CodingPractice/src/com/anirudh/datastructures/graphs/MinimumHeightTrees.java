@@ -16,7 +16,8 @@ tree. Among all possible rooted trees, those with minimum height are called mini
 Given such a graph, write a function to find all the MHTs and return a list of their root labels.
 
 Format
-The graph contains n nodes which are labeled from 0 to n - 1. You will be given the number n and a list of undirected edges (each edge is a pair of labels).
+The graph contains n nodes which are labeled from 0 to n - 1.
+You will be given the number n and a list of undirected edges (each edge is a pair of labels).
 
 You can assume that no duplicate edges will appear in edges.
 Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
@@ -58,6 +59,10 @@ Special thanks to @dietpepsi for adding this problem and creating all test cases
  */
 
 //BFS
+
+/**
+ * parallel BFS from all leaves
+ */
 public class MinimumHeightTrees {
     /*
     Go from outside to inside. The most inside ones are the most in center, hence have the least height

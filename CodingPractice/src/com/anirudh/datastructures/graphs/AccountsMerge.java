@@ -18,7 +18,8 @@ Add to List
 Share
 Given a list of accounts where each element accounts[i] is a list of strings, where the first element accounts[i][0] is a name, and the rest of the elements are emails representing emails of the account.
 
-Now, we would like to merge these accounts. Two accounts definitely belong to the same person if there is some common email to both accounts. Note that even if two accounts have the same name, they may belong to different people as people could have the same name. A person can have any number of accounts initially, but all of their accounts definitely have the same name.
+Now, we would like to merge these accounts. Two accounts definitely belong to the same person if there is some common email to both accounts. Note that even if two accounts have the same name, they may belong to different people as people could have the same name.
+A person can have any number of accounts initially, but all of their accounts definitely have the same name.
 
 After merging the accounts, return the accounts in the following format: the first element of each account is the name, and the rest of the elements are emails in sorted order. The accounts themselves can be returned in any order.
 
@@ -68,11 +69,11 @@ public class AccountsMerge {
         for (List<String> account : accounts) {
             for (int i = 1; i < account.size(); ++i) { //add emails to graph, connect i to i + 1
                 if (!graph.containsKey(account.get(i)))
-                    graph.put(account.get(i), new ArrayList<>());
+                    graph.put(account.get(i), new ArrayList<>()); //email -> empty list
 
-                emailToName.put(account.get(i), account.get(0)); //required later to find name
+                emailToName.put(account.get(i), account.get(0)); //required later to find name; email -> name
 
-                if (i + 1 < account.size()) {
+                if (i + 1 < account.size()) { //if there is a next element, add to each other's vertex list
                     graph.get(account.get(i)).add(account.get(i + 1));
                     if (!graph.containsKey(account.get(i + 1)))
                         graph.put(account.get(i + 1), new ArrayList<>());

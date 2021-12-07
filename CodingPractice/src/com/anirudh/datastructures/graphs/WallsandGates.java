@@ -1,7 +1,9 @@
 package com.anirudh.datastructures.graphs;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
+import java.util.List;
 
 /**
  * Created by paanir on 9/6/21.
@@ -57,20 +59,6 @@ Thing to note: we are finding shortest distance from each gate: rooms[x][y] = ro
 
 public class WallsandGates {
 
-    class Location {
-        int x;
-        int y;
-
-        Location(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        //equals
-        //hashcode
-        //toString
-    }
-
     int[] dx = {0, 0, 1, -1};
     int[] dy = {-1, 1, 0, 0};
     int[][] rooms;
@@ -82,24 +70,24 @@ public class WallsandGates {
     public void wallsAndGates(int[][] rooms) {
 
         this.rooms = rooms;
-        Deque<Location> queue = new ArrayDeque<>();
+        Deque<List<Integer>> queue = new ArrayDeque<>();
 
         for (int i = 0; i < rooms.length; ++i) { //put gates in queue
             for (int j = 0; j < rooms[0].length; ++j) {
                 if (rooms[i][j] == 0) {
-                    queue.offer(new Location(i, j));
+                    queue.offer(Arrays.asList(i,j));
                 }
             }
         }
 
         while (!queue.isEmpty()) { //BFS in a matrix to find shortest distance
-            Location loc = queue.poll();
+            List<Integer> loc = queue.poll();
             for (int i = 0; i < 4; ++i) {
-                int x = loc.x + dx[i];
-                int y = loc.y + dy[i];
+                int x = loc.get(0) + dx[i];
+                int y = loc.get(1) + dy[i];
                 if (isValid(x, y) && rooms[x][y] == Integer.MAX_VALUE) { //using INF value as "visited"
-                    rooms[x][y] = rooms[loc.x][loc.y] + 1; //distance at gates is conviniently assigned 0 already
-                    queue.offer(new Location(x,y));
+                    rooms[x][y] = rooms[loc.get(0)][loc.get(1)] + 1; //distance at gates is conviniently assigned 0 already
+                    queue.offer(Arrays.asList(x,y));
                 }
             }
         }

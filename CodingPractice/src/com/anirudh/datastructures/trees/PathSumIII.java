@@ -54,10 +54,9 @@ public class PathSumIII {
         runningSum += tn.val; //add to running sum
 
         int complement = runningSum - sum; //get complement
-        int res = map.containsKey(complement) ? map.get(complement) : 0; //first get res, then add to map
+        int res = map.getOrDefault(complement, 0); //first get res, then add to map
 
-        map.putIfAbsent(runningSum, 0);  //add running sum to map
-        map.put(runningSum, map.get(runningSum) + 1);
+        map.put(runningSum, map.getOrDefault(runningSum, 0) + 1); //add running sum to map
 
         return res +
                 calculatePathSums(new HashMap<>(map), tn.left, runningSum) +

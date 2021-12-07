@@ -35,11 +35,11 @@ All words contain only lowercase alphabetic characters.
  * 1.1 For each word, put asterix in each position (use substring)
  * 1.2 put that as key in the map and the list of words as values matching the pattern
  * 1.3 This is our adjacency list
- * 2. Create a queue with <beginWord, dist =1> offerred.
+ * 2. Create a queue with <beginWord, dist =1> offered.
  * 2.1 Create a visited hashset. Put both words and patterns as visited in it.
  * 3. Do BFS
  * 3.1 Pull from queue
- * 3.2 Create patterns by placing asterisk in each position.
+ * 3.2 Create patterns by placing asterisk in each position of the word.
  * 3.3 if the pattern has been visited, move to next pattern
  * 3.4 If the pattern is not visited, go to arraylist of words that have pattern as key in the patternMap
  * 3.5 If any of them is endWord, increment dist and return

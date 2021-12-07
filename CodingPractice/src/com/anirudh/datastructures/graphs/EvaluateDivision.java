@@ -31,6 +31,10 @@ queries = [ ["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x", "x"] ].
 The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.
 
  */
+
+/**
+ * Do BFS to start from a source
+ */
 public class EvaluateDivision {
     /*
     - No GraphNode required: Graph is from string to list of <edge with weights>
@@ -39,7 +43,7 @@ public class EvaluateDivision {
     - needed an Edge class for per src-dest weights
     - needed a Path class to save state of product of each path traversed until now
      */
-    private class Edge {
+    private static class Edge { //not accessing other fields of the outer class, hence can be set static
         double weight;
         String dest;
 

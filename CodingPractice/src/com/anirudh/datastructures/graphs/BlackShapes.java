@@ -35,8 +35,12 @@ XXX
 XXX
 is just one single connected black shape.
  */
+
+/**
+ * DFS in a matrix
+ */
 public class BlackShapes {
-    private boolean discovered[][]; //explored
+    private boolean visited[][]; //explored
     private int di[] = new int[]{1, -1, 0, 0}; //neighbours: (1,0) (-1, 0) (0, 1) (0,-1)
     private int dj[] = new int[]{0, 0, 1, -1};//neighbours ^
     private List<String> input;
@@ -55,7 +59,7 @@ public class BlackShapes {
 
     private void dfs(int i, int j) {
 
-        discovered[i][j] = true; //discovered explored in a new matrix! no need waste time and make an adjacency list!!
+        visited[i][j] = true; //discovered explored in a new matrix! no need waste time and make an adjacency list!!
         //also, no need to turn it to black, etc. Discovered and Finished are the same state here (unexplored, discovered, finished)
 
         for (int k = 0; k < 4; k++) { //for each neighbour, (creating the neighbour coordinates)
@@ -64,35 +68,33 @@ public class BlackShapes {
             int jj = j + dj[k];
 
             //(ii, jj) is a neighbour
-            if (isValid(ii, jj) && !discovered[ii][jj]) { //is valid and "white"/undiscovered
+            if (isValid(ii, jj) && !visited[ii][jj]) { //is valid and "white"/undiscovered
                 dfs(ii, jj);
             }
         }
     }
 
     public int black(List<String> input) { //find number of connected components, by using dfs in a matrix (dfs covers whole of a disconnected graph)
-        int nShapes;
-
         if (input == null)
             return 0;
 
         nRows = input.size();
         nCols = input.get(0).length();
 
-        discovered = new boolean[nRows][nCols];
-        nShapes = 0;
+        visited = new boolean[nRows][nCols];
+        int res = 0;
         this.input = input;
 
         for (int i = 0; i < nRows; i++) { //dfs helper function
             for (int j = 0; j < nCols; j++) {
-                if (!discovered[i][j] && input.get(i).charAt(j) == 'X') { //if white, do dfs
+                if (!visited[i][j] && input.get(i).charAt(j) == 'X') { //if black, do dfs
                     dfs(i, j);
-                    nShapes++; //number of trees
+                    res++; //number of trees
                 }
             }
         }
 
-        return nShapes;
+        return res;
     }
 
 }

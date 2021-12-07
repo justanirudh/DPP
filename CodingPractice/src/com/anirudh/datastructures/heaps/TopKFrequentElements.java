@@ -3,6 +3,7 @@ package com.anirudh.datastructures.heaps;
 import scala.Int;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by paanir on 8/6/17.
@@ -21,7 +22,7 @@ Your algorithm's time complexity must be better than O(n log n), where n is the 
 
 public class TopKFrequentElements {
 
-    class Pair {
+    static class Pair {
         int num;
         int freq;
 
@@ -31,7 +32,7 @@ public class TopKFrequentElements {
         }
     }
 
-    class CompareFrequency implements Comparator<Pair> {
+    static class CompareFrequency implements Comparator<Pair> {
         public int compare(Pair a, Pair b) {
             return a.freq - b.freq;
         }
@@ -52,14 +53,10 @@ public class TopKFrequentElements {
         for (Pair p : counts.values()) {
             minHeap.offer(p);
             if (minHeap.size() == k + 1)
-                minHeap.poll(); //remove the least frequent
+                minHeap.poll(); //remove the least frequent, logk operation
         }
 
-        List<Integer> res = new ArrayList<>();
-        for (int i = 0; i < k; ++i) {
-            res.add(minHeap.poll().num);
-        }
-        return res;
+        return new ArrayList<>(minHeap).stream().map(x -> x.num).collect(Collectors.toList());
     }
 
     public static void main(String[] args) {

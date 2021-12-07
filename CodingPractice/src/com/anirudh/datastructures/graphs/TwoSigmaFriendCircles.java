@@ -62,7 +62,7 @@ public class TwoSigmaFriendCircles {
 
     public static void main(String[] args) {
 
-        String[] s = new String[]{"YYNN", "YYYN", "NYYN", "NNNY"};
+        String[] s = new String[]{"YYNN", "YYYN", "NYYN", "NNNY"}; // adjacency matrix
         System.out.println(friendCircles(s));
     }
 }
