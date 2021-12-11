@@ -18,7 +18,8 @@ There are n cars traveling at different speeds in the same direction along a one
 
 positioni is the distance between the ith car and the beginning of the road in meters. It is guaranteed that positioni < positioni+1.
 speedi is the initial speed of the ith car in meters per second.
-For simplicity, cars can be considered as points moving along the number line. Two cars collide when they occupy the same position. Once a car collides with another car, they unite and form a single car fleet. The cars in the formed fleet will have the same position and the same speed, which is the initial speed of the slowest car in the fleet.
+For simplicity, cars can be considered as points moving along the number line. Two cars collide when they occupy the same position. Once a car collides with another car, they unite and form a single car fleet.
+The cars in the formed fleet will have the same position and the same speed, which is the initial speed of the slowest car in the fleet.
 
 Return an array answer, where answer[i] is the time, in seconds, at which the ith car collides with the next car, or -1 if the car does not collide with the next car. Answers within 10-5 of the actual answers are accepted.
 
@@ -81,10 +82,11 @@ Output: [2.00000,1.00000,1.50000,-1.00000]
 Create a stack. Traverse from right to left.
 By default, initialize result array with all -1s
 For every entry pushed also update the result array
-for the current car c , if its speed is greater than next car nc in the stack &&
-the nc's result array entry (time to collide for nc and  nnc) is GREATER than the time to collide for c and nc then,
-push in stack and update res[c] with car collide time
-if the above is not true, pop out the peak car
+for the current car c ,
+if its speed is greater than next car nc in the stack && the nc's result array entry (time to collide for nc and  nnc) is GREATER than the time to collide for c and nc then,
+    push in stack and update res[c] with car collide time
+else
+    if the above is not true, pop out the peek car
 
 collide time = relative distance/ relative speed
 
@@ -92,8 +94,10 @@ collide time = relative distance/ relative speed
 
 public class CarFleetII {
 
+    int[][] cars;
     public double[] getCollisionTimes(int[][] cars) {
 
+        this.cars = cars;
         double[] res = new double[cars.length];
         Arrays.fill(res, -1.0);
 
@@ -108,21 +112,20 @@ public class CarFleetII {
 
                 //-----------------2
                 if (currCar[1] > peekCar[1] &&
-                        (res[peekIdx] == -1.0 || catchTime(cars, currIdx, peekIdx) <= res[peekIdx])) {
-                    res[currIdx] = catchTime(cars, currIdx, peekIdx);
+                        (res[peekIdx] == -1.0 || catchTime(currIdx, peekIdx) <= res[peekIdx])) {
+                    res[currIdx] = catchTime(currIdx, peekIdx);
                     break;
                 }
                 //--------------------------3
-                stack.removeFirst();
+                stack.removeFirst(); //removing all cars in front that will never merge with the current car since they are too fast
             }
             stack.addFirst(currIdx);
         }
         return res;
     }
 
-
     // time for cars[i] to catch cars[j]
-    private double catchTime(int[][] cars, int i, int j) {
+    private double catchTime(int i, int j) {
         int dist = cars[j][0] - cars[i][0]; //rel dist
         int v = cars[i][1] - cars[j][1];// rel speed
 

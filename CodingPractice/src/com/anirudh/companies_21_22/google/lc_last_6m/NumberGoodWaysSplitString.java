@@ -63,18 +63,18 @@ public class NumberGoodWaysSplitString {
 
         int res = 0;
 
+        //base case
         left.put(s.charAt(0), 1);
         for(int i = 1; i < s.length(); ++i) {
             right.put(s.charAt(i), right.getOrDefault(s.charAt(i), 0) + 1);
         }
-
         if(left.size() == right.size())
             res++;
 
         for(int i = 1; i < s.length() - 1; ++i) {
             char charLToR = s.charAt(i); // char being transferred from right to Left
             left.put(charLToR, left.getOrDefault(charLToR, 0) + 1);
-            right.put(charLToR, right.getOrDefault(charLToR, 0) - 1);
+            right.put(charLToR, right.get(charLToR) - 1);
 
             if(right.get(charLToR) == 0)
                 right.remove(charLToR);
@@ -85,6 +85,5 @@ public class NumberGoodWaysSplitString {
         }
 
         return res;
-
     }
 }

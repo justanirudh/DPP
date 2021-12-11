@@ -1,5 +1,4 @@
-package com.anirudh.interview_prep_2021.spotify.anki;
-
+package com.anirudh.companies_21_22.two_sigma.anki;
 /**
  * Created by paanir on 8/27/17.
  */

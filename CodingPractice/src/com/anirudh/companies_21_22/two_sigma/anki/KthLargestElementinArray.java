@@ -1,8 +1,4 @@
-<<<<<<< HEAD:CodingPractice/src/com/anirudh/interview_prep_2021_2022/two_sigma/anki/KthLargestElementinArray.java
-package com.anirudh.interview_prep_2021.spotify.anki;
-=======
-package com.anirudh.interview_prep_2021_2022.spotify;
->>>>>>> d9fa94e1feca12088b4a171501f0b47747e93ffe:CodingPractice/src/com/anirudh/interview_prep_2021_2022/spotify/KthLargestElementinArray.java
+package com.anirudh.companies_21_22.two_sigma.anki;
 
 /**
  * Created by paanir on 8/29/21.

@@ -1,9 +1,6 @@
 package com.anirudh.companies_21_22.google.lc_last_6m;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by paanir on 9/3/21.
@@ -84,9 +81,7 @@ public class DP_LongestStringChain {
     public int longestStrChain(String[] words) {
         int maxLen = 0;
 
-        for (String word : words) {
-            wordSet.add(word);
-        }
+        wordSet.addAll(Arrays.asList(words));
         for (String word : words) {
             int len = maxChainLengthEndingAt(word);
             maxLen = Math.max(maxLen, len);

@@ -1,8 +1,4 @@
-<<<<<<< HEAD:CodingPractice/src/com/anirudh/interview_prep_2021_2022/two_sigma/anki/LetterCasePermutation.java
-package com.anirudh.interview_prep_2021.spotify.anki;
-=======
-package com.anirudh.interview_prep_2021_2022.spotify;
->>>>>>> d9fa94e1feca12088b4a171501f0b47747e93ffe:CodingPractice/src/com/anirudh/interview_prep_2021_2022/spotify/LetterCasePermutation.java
+package com.anirudh.companies_21_22.spotify;
 
 import java.util.List;
 

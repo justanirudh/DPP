@@ -58,19 +58,19 @@ public class AsteroidCollision {
         Deque<Integer> stack = new ArrayDeque<>();
 
         for (int asteroid : asteroids) {
-            if (stack.isEmpty() || stack.peek() < 0 || asteroid > 0) {
+            if (stack.isEmpty() || stack.peek() < 0 || asteroid > 0) { //asteroid is +ve OR stack.peek is -ve
                 stack.push(asteroid);
-            } else { //asteroid is -ve and res.peek is +ve
+            } else { //asteroid is -ve and stack.peek is +ve
                 if (Math.abs(asteroid) > stack.peek()) {
-                    while (!stack.isEmpty() && stack.peek() > 0 && Math.abs(asteroid) > stack.peek()) {
+                    while (!stack.isEmpty() && stack.peek() > 0 && Math.abs(asteroid) > stack.peek()) { // 3 conditions
                         stack.pop();
                     }
                     if (stack.isEmpty() || stack.peek() < 0) { //if the first 2 conditions were violated
                         stack.push(asteroid);
-                    } else if (Math.abs(asteroid) == stack.peek()) {
+                    } else if (Math.abs(asteroid) == stack.peek()) { //if the last condition was violated
                         stack.pop();
-                    } else { // Math.abs(asteroid) < stack.peek()
-                        //NOOP
+                    } else { // Math.abs(asteroid) < stack.peek() //if the last condition was violated
+                        //NOOP, as the asteroid gets destroyed by stack.peek
                     }
                 } else if (Math.abs(asteroid) == stack.peek()) {
                     stack.pop();

@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m;
+package com.anirudh.companies_21_22.practice;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,52 +51,9 @@ Output: 1
 Explanation: You can only see one of the two points, as shown above.
  */
 
-/*
-1. For each point, find the angle between (line joining the point and the person) with the x axis
-2. At any time, person can only view points in "angle" field of view
-3. Sort all angles. Add 360 to each angle and add it to sorted array. This is so that I can go circular back
-4. Do a sliding window in the sorted array. Start from 1st degree, expand 2nd degree until it is greater than "angle".
- Keep recording points. After the angle is greater, increment the smaller angle and then keep incrementing larger angle
- until it crosses "angle". So on and so forth
- */
 
 public class MaximumNumberofVisiblePoints {
     public int visiblePoints(List<List<Integer>> points, int angle, List<Integer> location) {
-
-        //first find angles between {point to location} and x axis
-        List<Double> angles = new ArrayList<>();
-        int same = 0;
-
-        for (List<Integer> point : points) {
-            int dx = location.get(0) - point.get(0);
-            int dy = location.get(1) - point.get(1);
-            if (dx == 0 && dy == 0) {
-                same++; //same point so always in field of view
-                continue;
-            }
-            double currAngle = Math.atan2(dy, dx) * 180 / Math.PI; // (in radians) * 180/pi = in degrees
-            angles.add(currAngle);
-        }
-
-        Collections.sort(angles);
-
-        // To accept circular cases, below and above +ve x axis
-        List<Double> circularAngles = new ArrayList<>(angles);
-        for (Double ang : angles) {
-            circularAngles.add(ang + 360);
-        }
-
-        //Now do sliding window to find max points in field of view
-        int res = 0;
-        int slow = 0;
-        for (int fast = 0; fast < circularAngles.size(); fast++) { //fast goes till end
-            while (circularAngles.get(fast) - circularAngles.get(slow) > angle) {
-                slow++; //when angle becomes greater, increment slow such that angle becomes less again
-            }
-            res = Math.max(res, fast - slow + 1); //this gets called directly while fast - slow < angle
-        }
-
-        return res + same;
-
+        return 0;
     }
 }

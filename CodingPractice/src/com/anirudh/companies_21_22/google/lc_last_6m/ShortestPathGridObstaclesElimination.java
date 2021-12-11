@@ -61,7 +61,7 @@ EVERYTHING else remains the same
  */
 class ShortestPathGridObstaclesElimination {
 
-    class StepState {
+    static class StepState {
         /**
          * data object to keep the state info for each step:
          * <dist, row, col, remaining_eliminations>
@@ -108,7 +108,7 @@ class ShortestPathGridObstaclesElimination {
         // if we have sufficient quotas to eliminate the obstacles in the worst case,
         // then the shortest distance is the Manhattan distance.
         if (k >= rows + cols - 2) {
-            return rows + cols - 2;
+            return rows + cols - 2; // row-1 + col-1
         }
 
         Deque<StepState> queue = new ArrayDeque<>();
