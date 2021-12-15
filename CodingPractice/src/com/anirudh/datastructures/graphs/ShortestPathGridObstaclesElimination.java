@@ -63,7 +63,98 @@ every time we go through an obstacle, decrease it by 1, check if it has been vis
 EVERYTHING else remains the same
  */
 class ShortestPathGridObstaclesElimination {
+
+    static class StepState {
+        /**
+         * data object to keep the state info for each step:
+         * <dist, row, col, remaining_eliminations>
+         */
+        public int dist, row, col, k;
+
+        public StepState(int dist, int row, int col, int k) {
+            this.dist = dist;
+            this.row = row;
+            this.col = col;
+            this.k = k;
+        }
+
+        @Override
+        public int hashCode() {
+            // needed when we put objects into any container class
+            return (this.row + 1) * (this.col + 1) * this.k;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            /**
+             * only (row, col, k) matters as the state info
+             */
+            if (!(other instanceof StepState)) {
+                return false;
+            }
+            StepState newState = (StepState) other;
+            return (this.row == newState.row) && (this.col == newState.col) && (this.k == newState.k);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%d %d %d", this.row, this.col, this.k);
+        }
+    }
+
     public int shortestPath(int[][] grid, int k) {
-        return 0;
+
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int[] target = {rows - 1, cols - 1};
+
+        // if we have sufficient quotas to eliminate the obstacles in the worst case,
+        // then the shortest distance is the Manhattan distance.
+        if (k >= rows + cols - 2) {
+            return rows + cols - 2; // row-1 + col-1
+        }
+
+        Deque<StepState> queue = new ArrayDeque<>();
+        Set<StepState> visited = new HashSet<>();
+
+        // (dist, row, col, remaining quota to eliminate obstacles)
+        StepState start = new StepState(0, 0, 0, k);
+        queue.offer(start);
+        visited.add(start);
+
+        while (!queue.isEmpty()) {
+            StepState curr = queue.poll();
+
+            // we reach the target here
+            if (target[0] == curr.row && target[1] == curr.col) {
+                return curr.dist;
+            }
+
+            int[] nextSteps = {curr.row, curr.col + 1, curr.row + 1, curr.col,
+                    curr.row, curr.col - 1, curr.row - 1, curr.col};
+
+            // explore the four directions in the next step
+            for (int i = 0; i < nextSteps.length; i += 2) {
+                int nextRow = nextSteps[i];
+                int nextCol = nextSteps[i + 1];
+
+                // out of the boundary of grid
+                if (0 > nextRow || nextRow == rows || 0 > nextCol || nextCol == cols) {
+                    continue;
+                }
+
+                int remainingQuota = curr.k - grid[nextRow][nextCol]; //1 is brick
+                StepState newState = new StepState(curr.dist + 1, nextRow, nextCol, remainingQuota);
+
+                // add the next move in the queue if it qualifies.
+                if (remainingQuota >= 0 && !visited.contains(newState)) {
+                    visited.add(newState); //putting visited before putting in queue
+                    queue.offer(newState);
+                }
+            }
+        }
+
+        // did not reach the target
+        return -1;
     }
 }

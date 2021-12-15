@@ -40,32 +40,18 @@ public class ArrayofDoubledPairs {
     public boolean canReorderDoubled(int[] arr) {
         if (arr.length % 2 != 0)
             return false;
-
-        List<Integer> positive = new ArrayList<>();
-        List<Integer> all = new ArrayList<>(); //negative initially, then merged
-        for (int a : arr) {
-            if (a < 0)
-                all.add(a);
-            else {
-                positive.add(a);
-            }
-        }
-        if (all.size() % 2 != 0 || positive.size() % 2 != 0)
-            return false;
-
-        Collections.sort(positive);
-        all.sort(Collections.reverseOrder());
-        all.addAll(positive); //merge to same arr
+        List<Integer> sorted = Arrays.stream(arr).boxed().sorted().collect(Collectors.toList());
 
         Map<Integer, Integer> state = new HashMap<>();
-        for (int a : all) {
-            if (a % 2 != 0 || !state.containsKey(a / 2)) { //is odd or (is even but a/2 not present)
+        for (int a : sorted) {
+            int find = (a >= 0) ? (a / 2) : (a * 2);
+            if ((a >= 0 && a % 2 != 0) || !state.containsKey(find)) { //is odd or (is even but a/2 not present)
                 state.put(a, state.getOrDefault(a, 0) + 1);
-            } else { //is even and a/2 present
-                if (state.containsKey(a / 2)) //has its complement
-                    state.put(a / 2, state.get(a / 2) - 1);
-                if (state.get(a / 2) == 0) //if got its complement, remove from map, so it doesnt disturb next pair
-                    state.remove(a / 2);
+            } else { //is even and a/2 or a*2 is present
+                if (state.containsKey(find)) //has its complement
+                    state.put(find, state.get(find) - 1);
+                if (state.get(find) == 0) //if got its complement, remove from map, so it doesnt disturb next pair
+                    state.remove(find);
             }
         }
         return state.isEmpty();

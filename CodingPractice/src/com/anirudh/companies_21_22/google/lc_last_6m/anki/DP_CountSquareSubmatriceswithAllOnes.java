@@ -53,8 +53,29 @@ Accepted
 141,352
 
  */
+/*
+Idea is to
+1. find a way to get matrix sizes
+2. memoize them
+
+For each cell, if it is NOT in 1st row or 1st col:
+    if(cell == 1)
+        num_matrices with the cell as the bottom-right cell = Min(top, left, top-left) + 1
+adding 1 as each 1 cell is in itself a solution
+ */
 public class DP_CountSquareSubmatriceswithAllOnes {
     public int countSquares(int[][] matrix) {
-        return 0;
+        int sum = 0;
+        for (int i = 0; i < matrix.length; ++i) {
+            for (int j = 0; j < matrix[0].length; ++j) {
+                if (i == 0 || j == 0) {
+                    sum += matrix[i][j]; //each 1 cell is in itself a solution
+                } else if (matrix[i][j] == 1) {
+                    matrix[i][j] = Math.min(matrix[i - 1][j], Math.min(matrix[i][j - 1], matrix[i - 1][j - 1])) + 1;
+                    sum += matrix[i][j];
+                }
+            }
+        }
+        return sum;
     }
 }

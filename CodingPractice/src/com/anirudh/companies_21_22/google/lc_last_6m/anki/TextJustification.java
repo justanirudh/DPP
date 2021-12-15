@@ -28,8 +28,97 @@ A word is defined as a character sequence consisting of non-space characters onl
 Each word's length is guaranteed to be greater than 0 and not exceed maxWidth.
 The input array words contains at least one word.
  */
+/*
+Use 2 pointers left and right to get each line's start and end
+For each line
+    first find the number of words in it
+        greedily get words based on their (length + 1 (for space b/w words))
+    then justify it
+        calculate:
+            total spaces to be distributed
+            total gaps b/w words
+            find spaces per gap
+            remainder spaces to be distributed evenly starting from left
+        distribute spaces per gap and remainder across all words
+        add extra spaces at the end
+
+ */
 public class TextJustification {
+    String[] words;
+    int maxWidth;
+
+    String createSpace(int num) {
+        StringBuilder sb = new StringBuilder();
+        while (num != 0) {
+            sb.append(" ");
+            num--;
+        }
+        return sb.toString();
+    }
+
+    String addSpacesAtTheEnd(String s) {
+        int numSpaces = maxWidth - s.length();
+        return s + createSpace(numSpaces);
+    }
+
+    int sumLetters(int left, int right) {
+        int sum = 0;
+        while (left <= right) {
+            sum += words[left].length();
+            left++;
+        }
+        return sum;
+    }
+
+    String justify(int left, int right) {
+        //if only 1 word, just add spaces at the end
+        if (left == right)
+            return addSpacesAtTheEnd(words[left]);
+
+        int numTotalSpaces = maxWidth - sumLetters(left, right);
+        int numGapsBetweenWords = right - left;
+        boolean isLastLine = (right == words.length - 1);
+
+        String spacesBetweenEachWord = isLastLine ? " " : createSpace(numTotalSpaces / numGapsBetweenWords);
+        int numRemSpaceToBeDistributed = isLastLine ? 0 : numTotalSpaces % numGapsBetweenWords;
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = left; i <= right; ++i) {
+            sb.append(words[i]);
+            sb.append(spacesBetweenEachWord);
+            if (numRemSpaceToBeDistributed != 0) { //add extra remainders from left to right
+                sb.append(" ");
+                numRemSpaceToBeDistributed--;
+            }
+        }
+
+        return addSpacesAtTheEnd(sb.toString().trim());
+    }
+
+    int getWordsForLine(int left) {
+        int right = left;
+        int len = words[right].length();
+        while (len <= maxWidth && right < words.length - 1) {
+            right++;
+            len += words[right].length() + 1; // word + 1 space
+        }
+        if (len > maxWidth) // if right has reached end of all strings, dont decrement right
+            right--;
+        return right;
+    }
+
     public List<String> fullJustify(String[] words, int maxWidth) {
-        return null;
+        this.words = words;
+        this.maxWidth = maxWidth;
+
+        List<String> res = new ArrayList<>();
+        int left = 0;
+        while (left < words.length) {
+            int right = getWordsForLine(left);
+            String justified = justify(left, right); //both inclusive
+            res.add(justified);
+            left = right + 1;
+        }
+        return res;
     }
 }

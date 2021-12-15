@@ -27,88 +27,72 @@ Each Index in the list contains the history of the element in that index
 Used former below, a bit easier with the later
  */
 public class SnapshotArray {
+    static class Commit {
+        int snapId;
+        int val;
+
+        Commit(int snapId, int val) {
+            this.snapId = snapId;
+            this.val = val;
+        }
+    }
+
+    /*
+    first list is the index of the numbers in the snapshot array
+    in each such index we have an array of numbers whose index = snapshot_id and value =value
+     */
+    List<List<Commit>> state; //OR use TreeMap and use map.floorEntry(K key) to get largest key less than or equal to given key: https://leetcode.com/problems/snapshot-array/discuss/350562/JavaPython-Binary-Search
+    int currSnapId;
 
     public SnapshotArray(int length) {
+        state = new ArrayList<>();
+        currSnapId = 0;
+        for (int i = 0; i < length; ++i) {
+            List<Commit> list = new ArrayList<>();
+            list.add(new Commit(currSnapId, 0));
+            state.add(list);
+        }
 
     }
 
     public void set(int index, int val) {
-
+        List<Commit> snapshots = state.get(index); //all past values at this index
+        if (snapshots.get(snapshots.size() - 1).snapId == currSnapId) { //if old value is in the same snapshot as new value, replace it
+            snapshots.get(snapshots.size() - 1).val = val;
+        } else { // add new snapId
+            snapshots.add(new Commit(currSnapId, val));
+        }
     }
 
     public int snap() {
-        return 0;
+        int curr = currSnapId;
+        currSnapId++;
+        return curr;
     }
 
-    public int get(int index, int snap_id) {
-        return 0;
+    static class CompareSnaps implements Comparator<Commit> {
+        @Override
+        public int compare(Commit a, Commit b) {
+            return a.snapId - b.snapId;
+        }
+    }
+
+    //Use TreeMap instead. Way easier
+    public int get(int index, int snap_id) { //logn
+        List<Commit> snapshots = state.get(index); //all past values at this index
+        // find the `snap_id` if present or the largest snap_id less that provided `snap_id` if not present, it is a sorted list, sorted on the basis of snap_id
+        int snapIdx = Collections.binarySearch(snapshots, new Commit(snap_id, -1), new CompareSnaps()); //list, key, comparator
+        if (snapIdx >= 0) //the snap_id exists in the list
+            return snapshots.get(snapIdx).val;
+        else { //otherwise, (-(insertion point) - 1). The insertion point is defined as the point at which the key would be inserted into the list: the index of the first element greater than the key, or list.size() if all elements in the list are less than the specified key
+            return snapshots.get(-snapIdx - 2).val; //get largest snap_id less than the given snap_id
+        }
+
     }
 }
 
 
 // Option 2: Use Collections.sort instead of TreeMap
-
-//    static class Commit {
-//        int snapId;
-//        int val;
-//
-//        Commit(int snapId, int val) {
-//            this.snapId = snapId;
-//            this.val = val;
-//        }
-//    }
-//
-//    /*
-//    first list is the index of the numbers in the snapshot array
-//    in each such index we have an array of numbers whose index = snapshot_id and value =value
-//     */
-//List<List<Commit>> state; //OR use TreeMap and use map.floorEntry(K key) to get largest key less than or equal to given key: https://leetcode.com/problems/snapshot-array/discuss/350562/JavaPython-Binary-Search
-//    int currSnapId;
-//
-//    public SnapshotArray(int length) {
-//        state = new ArrayList<>();
-//        currSnapId = 0;
-//        for (int i = 0; i < length; ++i) {
-//            List<Commit> list = new ArrayList<>();
-//            list.add(new Commit(currSnapId, 0));
-//            state.add(list);
-//        }
-//
-//    }
-//
-//    public void set(int index, int val) {
-//        List<Commit> snapshots = state.get(index); //all past values at this index
-//        if (snapshots.get(snapshots.size() - 1).snapId == currSnapId) { //if old value is in the same snapshot as new value, replace it
-//            snapshots.get(snapshots.size() - 1).val = val;
-//        } else { // add new snapId
-//            snapshots.add(new Commit(currSnapId, val));
-//        }
-//    }
-//
-//    public int snap() {
-//        int curr = currSnapId;
-//        currSnapId++;
-//        return curr;
-//    }
-//
-//static class CompareSnaps implements Comparator<SnapshotArray.Commit> {
-//    @Override
-//    public int compare(SnapshotArray.Commit a, SnapshotArray.Commit b) {
-//        return a.snapId - b.snapId;
-//    }
-//}
-//
-//    public int get(int index, int snap_id) { //logn
-//        List<SnapshotArray.Commit> snapshots = state.get(index); //all past values at this index
-//        // find the `snap_id` if present or the largest snap_id less that provided `snap_id` if not present, it is a sorted list, sorted on the basis of snap_id
-//        int snapIdx = Collections.binarySearch(snapshots, new SnapshotArray.Commit(snap_id, -1), new SnapshotArray.CompareSnaps()); //list, key, comparator
-//        if (snapIdx >= 0) //the snap_id exists in the list
-//            return snapshots.get(snapIdx).val;
-//        else { //otherwise, (-(insertion point) - 1). The insertion point is defined as the point at which the key would be inserted into the list: the index of the first element greater than the key, or list.size() if all elements in the list are less than the specified key
-//            return snapshots.get(-snapIdx - 2).val; //get largest snap_id less than the given snap_id
-//        }
-//
-//    }
 
 // Option 3: Give MLE
 //    int snap_id;

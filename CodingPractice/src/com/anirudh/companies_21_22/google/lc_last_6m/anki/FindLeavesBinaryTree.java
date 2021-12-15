@@ -24,11 +24,31 @@ Repeat until the tree is empty.
 /*
 1. create graph and count degrees
 2. start BFS with degrees = 1, then go inside
+3. Instead of using TreeMap, directly add to res array
  */
 public class FindLeavesBinaryTree {
+    List<List<Integer>> res;
 
-    public List<List<Integer>> findLeaves(TreeNode root) {
-        return null;
+    int postOrder(TreeNode node) {
+        if (node == null)
+            return 0;
+        int leftHeight = postOrder(node.left);
+        int rightHeight = postOrder(node.right);
+        int nodeHeight = Math.max(leftHeight, rightHeight) + 1;
+        if (nodeHeight > res.size()) { //new height
+            res.add(new ArrayList<>());
+        }
+        res.get(nodeHeight - 1).add(node.val);
+
+        return nodeHeight;
+
     }
 
+    public List<List<Integer>> findLeaves(TreeNode root) {
+        if (root == null)
+            return new ArrayList<>();
+        res = new ArrayList<>();
+        postOrder(root);
+        return res;
+    }
 }

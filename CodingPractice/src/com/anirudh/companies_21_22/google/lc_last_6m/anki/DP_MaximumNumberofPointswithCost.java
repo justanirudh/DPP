@@ -27,9 +27,46 @@ x for x >= 0.
 /*
 Take from top or best until now
 Similar to DP_MaximumSubarray
+
+For every row, for every element, find the max sum that ends at that element
+for that, find max from left elements, find max from right elems, and take max of left and right
  */
 public class DP_MaximumNumberofPointswithCost {
     public long maxPoints(int[][] points) {
-        return 0;
+        int[] currTemp = points[0];
+
+        long[] curr = new long[currTemp.length]; //change to long
+        for(int i = 0; i < currTemp.length; ++i) {
+            curr[i] = currTemp[i];
+        }
+
+        for (int i = 1; i < points.length; ++i) {
+
+            long[] left = new long[curr.length]; //find max(s) from left side
+            left[0] = curr[0];
+            for (int j = 1; j < curr.length; ++j) {
+                left[j] = Math.max(left[j - 1] - 1, curr[j]);
+            }
+
+            long[] right = new long[curr.length]; //find max(s) from right side
+            right[curr.length - 1] = curr[curr.length - 1];
+            for (int j = curr.length - 2; j >= 0; --j) {
+                right[j] = Math.max(right[j + 1] - 1, curr[j]);
+            }
+
+            long[] next = new long[curr.length]; //find max overall and add to current row
+            for(int j = 0; j < curr.length; ++j) {
+                next[j] = points[i][j] + Math.max(left[j], right[j]);
+            }
+
+            curr = next; //this is now used for next row
+        }
+
+        long max = Integer.MIN_VALUE;
+        for (long c : curr) {
+            if (c > max)
+                max = c;
+        }
+        return max;
     }
 }
