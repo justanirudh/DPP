@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
 /*
 410. Split Array Largest Sum

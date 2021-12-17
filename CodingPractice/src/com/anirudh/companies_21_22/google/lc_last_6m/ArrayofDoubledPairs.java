@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,7 +14,8 @@ Medium
 Add to List
 
 Share
-Given an integer array of even length arr, return true if it is possible to reorder arr such that arr[2 * i + 1] = 2 * arr[2 * i] for every 0 <= i < len(arr) / 2, or false otherwise.
+Given an integer array of even length arr, return true if it is possible to reorder arr such
+that arr[2 * i + 1] = 2 * arr[2 * i] for every 0 <= i < len(arr) / 2, or false otherwise.
 
 
 
@@ -36,16 +37,24 @@ Example 4:
 Input: arr = [1,2,4,16,8,4]
 Output: false
  */
+/*
+    Sort the array
+    Make a map Integer -> frequency
+    every time integer comes, increment frequency
+    every time integer*2 comes, decrease frequency and remove from array
+
+    for negative, will need to look for integer/2
+ */
 public class ArrayofDoubledPairs {
     public boolean canReorderDoubled(int[] arr) {
         if (arr.length % 2 != 0)
             return false;
         List<Integer> sorted = Arrays.stream(arr).boxed().sorted().collect(Collectors.toList());
 
-        Map<Integer, Integer> state = new HashMap<>();
+        Map<Integer, Integer> state = new HashMap<>(); // number -> frequency
         for (int a : sorted) {
             int find = (a >= 0) ? (a / 2) : (a * 2);
-            if ((a >= 0 && a % 2 != 0) || !state.containsKey(find)) { //is odd or (is even but a/2 not present)
+            if ((a >= 0 && a % 2 != 0) || !state.containsKey(find)) { //is +ve odd or {a/2,2a} not present
                 state.put(a, state.getOrDefault(a, 0) + 1);
             } else { //is even and a/2 or a*2 is present
                 if (state.containsKey(find)) //has its complement

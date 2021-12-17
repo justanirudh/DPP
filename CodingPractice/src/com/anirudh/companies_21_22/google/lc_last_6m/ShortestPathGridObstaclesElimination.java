@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;
@@ -61,6 +61,8 @@ Here we will use 4 vars: x,y,dist, remaining quota of obstacles
 first check if quota > manhattan distance. if so, return true
 every time we go through an obstacle, decrease it by 1, check if it has been visited, then offer it in queue
 EVERYTHING else remains the same
+
+For State's equals and hashcode, use x,y,num_obstacles (NOT distance)
  */
 class ShortestPathGridObstaclesElimination {
 

@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
 import java.util.*;
 
@@ -24,7 +24,7 @@ int get(index, snap_id) returns the value at the given index, at the time we too
 /*
 Use List<List<Commit>> state OR List<TreeMap<Integer, Integer>>
 Each Index in the list contains the history of the element in that index
-Used former below, a bit easier with the later
+Used former below, a bit easier with the later. With TreeMap, use floorEntry(Key k ) method to find largest entry smaller than k
  */
 public class SnapshotArray {
     static class Commit {

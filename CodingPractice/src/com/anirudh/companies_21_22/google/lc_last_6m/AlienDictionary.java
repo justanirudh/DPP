@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
 import java.util.*;
 
@@ -38,7 +38,8 @@ Output: ""
 Explanation: The order is invalid, so return "".
  */
 /*
-Do topological sort with cycle detection
+Create graph by comparing each pair of words
+Do topological sort by using DFS with cycle detection
  */
 public class AlienDictionary {
     Map<Character, List<Character>> graph;

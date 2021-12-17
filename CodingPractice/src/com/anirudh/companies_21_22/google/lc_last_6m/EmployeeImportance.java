@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
 /*
 690. Employee Importance
@@ -44,7 +44,7 @@ import java.util.*;
 /*
 Create a directed graph (DAG) of employees
 Create map of id -> importance
-Do DFS (just because simpler algo)
+Do DFS (just because simpler algo, can also do BFS)
  */
 public class EmployeeImportance {
 

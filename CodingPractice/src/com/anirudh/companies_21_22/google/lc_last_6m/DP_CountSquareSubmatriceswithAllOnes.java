@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
 /*
 1277. Count Square Submatrices with All Ones
@@ -58,10 +58,12 @@ Idea is to
 1. find a way to get matrix sizes
 2. memoize them
 
+For 1st row and 1st col, do nothing
 For each cell, if it is NOT in 1st row or 1st col:
     if(cell == 1)
         num_matrices with the cell as the bottom-right cell = Min(top, left, top-left) + 1
 adding 1 as each 1 cell is in itself a solution
+return sum of all cells
  */
 public class DP_CountSquareSubmatriceswithAllOnes {
     public int countSquares(int[][] matrix) {

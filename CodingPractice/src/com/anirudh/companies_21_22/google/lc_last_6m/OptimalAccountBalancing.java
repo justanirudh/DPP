@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
 /*
 465. Optimal Account Balancing
@@ -56,7 +56,7 @@ import java.util.Map;
 
 /*
 Backtracking
-For every i, transfer debt to any j > i and then find the minimum transactions for i->j transaction
+For every i, transfer all debt to any j > i and then find the minimum transactions for i->j transaction
 Complexity:
 f(n) = n * f(n-1) => O(n!)
  */

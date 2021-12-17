@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
 import com.anirudh.datastructures.trees.TreeNode;
 
@@ -22,9 +22,11 @@ Remove all the leaf nodes.
 Repeat until the tree is empty.
  */
 /*
-1. create graph and count degrees
-2. start BFS with degrees = 1, then go inside
-3. Instead of using TreeMap, directly add to res array
+depth = distance from root => different for all leaves
+height = distance from leaf => same for all leaves
+
+Do post-order traversal and find height of each node
+Collect as you do the traversal
  */
 public class FindLeavesBinaryTree {
     List<List<Integer>> res;
