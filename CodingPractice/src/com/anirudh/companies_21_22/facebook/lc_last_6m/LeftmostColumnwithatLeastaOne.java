@@ -135,13 +135,14 @@ public class LeftmostColumnwithatLeastaOne {
         return -1;
     }
 
-    //LC solution [Better, nlogm]: do binary search in each row to find leftmost 1 and record their indices. Then find the minimum of those indices
+    //LC solution [Better, nlogm]: do binary search in each row to find leftmost 1 and record their indices.
+    // Then find the minimum of those indices
     public int leftMostColumnWithOneBetter(BinaryMatrix binaryMatrix) {
         int rows = binaryMatrix.dimensions().get(0);
         int cols = binaryMatrix.dimensions().get(1);
         int smallestIndex = cols;
         for (int row = 0; row < rows; row++) {
-            // Binary Search for the first 1 in the row.
+            // Binary Search for each row.
             int lo = 0;
             int hi = cols - 1;
             while (lo < hi) {
@@ -149,7 +150,7 @@ public class LeftmostColumnwithatLeastaOne {
                 if (binaryMatrix.get(row, mid) == 0) {
                     lo = mid + 1;
                 }
-                else {
+                else { //if it is 1
                     hi = mid;
                 }
             }

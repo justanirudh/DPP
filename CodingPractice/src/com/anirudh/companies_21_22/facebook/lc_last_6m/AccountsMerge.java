@@ -58,7 +58,6 @@ public class AccountsMerge {
     Map<String, String> emailToName = new HashMap<>();
     Set<String> visited = new HashSet<>();
 
-
     List<String> doDFS(String email, List<String> connected) {
         connected.add(email);
         visited.add(email);

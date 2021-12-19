@@ -1,59 +1,51 @@
 package com.anirudh.companies_21_22.facebook;
 
-/**
- * Created by paanir on 2/2/17.
- */
+/*
+Given an array of integers nums, sort the array in ascending order.
 
-//https://en.wikipedia.org/wiki/Quicksort#Algorithm: //Lomuto partition scheme (same as CLRS)
-/**
- * Space complexity: O(1)
- * Time complexity = O(n^2), @(nlogn)
+Example 1:
+
+Input: nums = [5,2,3,1]
+Output: [1,2,3,5]
+Example 2:
+
+Input: nums = [5,1,1,2,0,0]
+Output: [0,0,1,1,2,5]
  */
 public class QuickSort {
+    int[] nums;
 
-    public static void swap(int[] arr, int i1, int i2) {
-        int temp = arr[i1];
-        arr[i1] = arr[i2];
-        arr[i2] = temp;
-    }
-
-    public static int partition(int[] arr, int start, int end) {
-        int pivotElem = arr[start];
-        int left = start;
+    int getPartition(int start, int end) {
+        int pivot = nums[start];
+        int left = start + 1;
         for (int right = start + 1; right <= end; right++) {
-            if (arr[right] < pivotElem) {
+            if (nums[right] < pivot) {
+                int tmp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = tmp;
                 left++;
-                swap(arr, right, left);
             }
         }
-        //put pivot in right location
-        swap(arr, left, start);
+        left--; //go back to the last <pivot elem
+        int tmp = nums[left];
+        nums[left] = pivot;
+        nums[start] = tmp;
         return left;
     }
 
-    public static void quickSort(int[] arr, int start, int end) {
-        if (arr == null || arr.length == 0)
-            return;
-        if (start < end) { //arr size > 1
-            int pivot = partition(arr, start, end);
-            quickSort(arr, start, pivot - 1);
-            quickSort(arr, pivot + 1, end);
+    void quickSort(int start, int end) {
+        if (start < end) {
+            int pivotIdx = getPartition(start, end);
+            quickSort(start, pivotIdx - 1);
+            quickSort(pivotIdx + 1, end);
         }
     }
 
-    public static void main(String[] args) {
-
-        int[] arr = {6, 10, 13, 5, 8, 3, 2, 11, 49, 23, 50, 1, 0};
-//        int[] arr = {2, 1, 3, 5, 4};
-
-        /*int[] sorted =*/
-        quickSort(arr, 0, arr.length - 1);
-
-        for (int i : arr) {
-            System.out.print(i + ",");
-        }
-
+    public int[] sortArray(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return nums;
+        this.nums = nums;
+        quickSort(0, nums.length - 1);
+        return nums;
     }
-
-
 }

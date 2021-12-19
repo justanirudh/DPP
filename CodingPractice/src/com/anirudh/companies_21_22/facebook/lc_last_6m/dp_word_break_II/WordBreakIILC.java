@@ -39,18 +39,18 @@ import java.util.*;
  * For each prefix, check if it in the wordSet
  * If it is in wordSet, then send the postFix to getWaysToBreak()
  * With the returned value, add it to memoization map
- *
+ * <p>
  * use the memoization map first thing to make sure we do no extra processing
  */
 public class WordBreakIILC {
     Set<String> wordSet;
-    Map<String, List<List<String>>> breakMap = new HashMap<>(); //Map from a string to list of ways it can be broken down
+    Map<String, List<String>> breakMap = new HashMap<>(); //Map from a string to list of ways it can be broken down
 
-    List<List<String>> getWaysToBreak(String toBeBroken) {
+    List<String> getWaysToBreak(String toBeBroken) {
 
         if (toBeBroken.equals("")) { //base case
-            List<List<String>> solutions = new ArrayList<>();
-            solutions.add(new ArrayList<>());
+            List<String> solutions = new ArrayList<>();
+            solutions.add("");
             return solutions;
         }
 
@@ -66,12 +66,13 @@ public class WordBreakIILC {
             if (wordSet.contains(prefix)) { //if prefix is in dictionary, then search for postfixes
 
                 String postFix = toBeBroken.substring(i);
-                List<List<String>> brokenPostfixes = getWaysToBreak(postFix); //sending rest of the String to recurse
+                List<String> brokenPostfixes = getWaysToBreak(postFix); //sending rest of the String to recurse
 
-                for (List<String> brokenPostfix : brokenPostfixes) { //add it to map
-                    List<String> wordBreak = new ArrayList<>(brokenPostfix);
-                    wordBreak.add(0, prefix); //inserting in right order so that joining is easy
-                    breakMap.get(toBeBroken).add(wordBreak); //adding to breakMap for memoization
+                for (String brokenPostfix : brokenPostfixes) { //add it to map
+                    if (brokenPostfix.isEmpty())
+                        breakMap.get(toBeBroken).add(prefix);
+                    else
+                        breakMap.get(toBeBroken).add(prefix + " " + brokenPostfix);
                 }
             }
         }
@@ -81,19 +82,7 @@ public class WordBreakIILC {
     public List<String> wordBreak(String s, List<String> wordDict) {
         wordSet = new HashSet<>(wordDict);
 
-        List<List<String>> waysToBreak = getWaysToBreak(s);
-
-        // make sentences from broken words and return
-        List<String> res = new ArrayList<>();
-        for (List<String> words : waysToBreak) {
-            StringJoiner sj = new StringJoiner(" ");
-            for(String word : words) {
-                sj.add(word);
-            }
-            res.add(sj.toString());
-        }
-
-        return res;
+        return getWaysToBreak(s);
     }
 
 }

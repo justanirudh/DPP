@@ -66,7 +66,7 @@ public class VerifyinganAlienDictionary {
             char c2 = word2.charAt(i);
             if (c1 == c2)
                 continue;
-            return orderMap.get(c1) < orderMap.get(c2);
+            return orderMap.get(c1) < orderMap.get(c2); //first difference
         }
         return word1.length() < word2.length();
     }

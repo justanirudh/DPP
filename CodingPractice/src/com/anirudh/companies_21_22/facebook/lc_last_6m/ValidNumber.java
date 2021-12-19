@@ -56,7 +56,7 @@ import java.util.*;
 /**
  * 1. Create a state machine (DFA) on paper
  * 2. Represent the state machine as this: List<Map<String, Integer>> stateMachine
- * 2.a. Each state is an index of the arraylist
+ * 2.a. Each initial state is an index of the arraylist
  * 2.b. At each state, there is a map from { transition -> next state }
  * E.g. {at A, we see x, we transition to B } will be at [index A, {x -> b}]
  * 3. Final states are in a hashset

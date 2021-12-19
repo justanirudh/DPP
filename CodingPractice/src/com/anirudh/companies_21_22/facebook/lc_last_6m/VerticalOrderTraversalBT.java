@@ -3,6 +3,8 @@ package com.anirudh.companies_21_22.facebook.lc_last_6m;
 import com.anirudh.datastructures.trees.TreeNode;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -97,6 +99,7 @@ class VerticalOrderTraversalBT {
         //TODO: For Problem 314, instead of comparing values in last "else",
         // compare left node vs right node. One wa to do it is pass path to ndoes as you go
         // Eg. "LLR" vs "LRL", first one would take precedence
+
         locations.sort((o1, o2) -> {
             if (o1.x != o2.x) //first check x
                 return Integer.compare(o1.x, o2.x);
@@ -111,7 +114,7 @@ class VerticalOrderTraversalBT {
          */
 
         List<List<Integer>> ans = new ArrayList<>();
-        ans.add(new ArrayList<Integer>());
+        ans.add(new ArrayList<>());
 
         int prev = locations.get(0).x;
 
@@ -119,7 +122,7 @@ class VerticalOrderTraversalBT {
             // If the x value changed, it'number part of a new report.
             if (loc.x != prev) {
                 prev = loc.x;
-                ans.add(new ArrayList<Integer>());
+                ans.add(new ArrayList<>());
             }
 
             // We always add the node'number value to the latest report.

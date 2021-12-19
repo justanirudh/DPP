@@ -24,6 +24,7 @@ import java.util.*;
 
 class ReconstructItinerary {
 
+    private List<List<String>> tickets;
     private Map<String, PriorityQueue<String>> flights;
     private LinkedList<String> path;
 
@@ -36,16 +37,25 @@ class ReconstructItinerary {
         path.addFirst(departure); //topological sort. the one that gets finished first is prepended first
     }
 
-    public List<String> findItinerary(List<List<String>> tickets) {
-        flights = new HashMap<>();
-        path = new LinkedList<>();
+    void createGraph() {
         //create graph
         for (List<String> ticket : tickets) {
             flights.putIfAbsent(ticket.get(0), new PriorityQueue<>()); //create a priority queue which always has lexicographically lowest elem as the 1st elem
             flights.get(ticket.get(0)).offer(ticket.get(1));
         }
+    }
+
+    public List<String> findItinerary(List<List<String>> tickets) {
+        this.tickets = tickets;
+        flights = new HashMap<>();
+        path = new LinkedList<>();
+
+        //Create DAG graph
+        createGraph();
+
         //do DFS
         doDFS("JFK");
+
         return path;
     }
 

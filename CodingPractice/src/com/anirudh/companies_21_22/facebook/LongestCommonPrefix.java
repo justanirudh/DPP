@@ -23,7 +23,7 @@ public class LongestCommonPrefix {
     class TrieNode {
         TrieNode[] children;
         String word;
-        int size; //number of children of a node
+        int numChildren; //number of children of a node
 
         TrieNode() {
             children = new TrieNode[26];
@@ -33,12 +33,13 @@ public class LongestCommonPrefix {
     void addToTrie(TrieNode curr, String str) {
         for (int i = 0; i < str.length(); ++i) {
             char ch = str.charAt(i);
-            if (curr.children[ch - 'a'] == null) {
+            int index = ch - 'a';
+            if (curr.children[index] == null) {
                 TrieNode tn = new TrieNode();
-                curr.children[ch - 'a'] = tn;
-                curr.size++;
+                curr.children[index] = tn;
+                curr.numChildren++;
             }
-            curr = curr.children[ch - 'a'];
+            curr = curr.children[index];
         }
         curr.word = str;
     }
@@ -57,7 +58,7 @@ public class LongestCommonPrefix {
         int idx = 0;
         String str = strs[0]; //any word would do
         char[] chars = str.toCharArray();
-        while (curr.word == null && curr.size == 1) { //curr.size == 1 means only 1 path from root until now in the Trie
+        while (curr.word == null && curr.numChildren == 1) {
             curr = curr.children[chars[idx] - 'a'];
             idx++;
         }
@@ -87,5 +88,28 @@ public class LongestCommonPrefix {
             sb.append(strs[0].charAt(i));
         }
         return sb.toString();
+    }
+
+    // faster than 65.39%
+    String getCommonSubstring(String s1, String s2) {
+        StringBuilder sb = new StringBuilder();
+        char[] s1c = s1.toCharArray();
+        char[] s2c = s2.toCharArray();
+        for(int i = 0; i < Math.min(s1.length(), s2.length()); ++i) {
+            if(s1c[i] == s2c[i])
+                sb.append(s1c[i]);
+            else
+                break;
+        }
+        return sb.toString();
+    }
+
+    public String longestCommonPrefix3(String[] strs) {
+        String res = strs[0];
+        for(int i = 1; i < strs.length; ++i) {
+            String next = strs[i];
+            res = getCommonSubstring(res, next);
+        }
+        return res;
     }
 }

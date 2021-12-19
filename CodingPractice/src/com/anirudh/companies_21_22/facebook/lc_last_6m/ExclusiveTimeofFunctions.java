@@ -107,7 +107,7 @@ public class ExclusiveTimeofFunctions {
                 stack.push(ts);
             } else { // if end, top would be the start for sure of the same pid
                 TimeStamp tsPrev = stack.pop();
-                int duration = ts.timestamp - tsPrev.timestamp + 1;;
+                int duration = ts.timestamp - tsPrev.timestamp + 1;
                 res[ts.pid] += duration;
 
                 if (!stack.isEmpty()) { //subtract this from peek elem

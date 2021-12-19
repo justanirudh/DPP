@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m;
+package com.anirudh.companies_21_22.facebook.lc_last_6m.tbd;
 
 /**
  * Created by paanir on 8/29/21.
@@ -71,7 +71,7 @@ package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 //TODO: Implement
 //https://leetcode.com/problems/minimum-moves-to-move-a-box-to-their-target-location/discuss/709355/Java-use-2-level-BFS-beat-99
-public class ZZMinimumMovestoMoveaBoxtoTheirTargetLocation {
+public class TBDMinimumMovestoMoveaBoxtoTheirTargetLocation {
     //1 BFS for box to Target
     //1 BFS for Storekeeper to Box
 }

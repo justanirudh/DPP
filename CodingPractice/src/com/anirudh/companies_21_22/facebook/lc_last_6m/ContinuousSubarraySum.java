@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Similar to SubarraySumEqualsK
  * IMPORTANT
  * https://leetcode.com/problems/continuous-subarray-sum/discuss/99499/Java-O(n)-time-O(k)-space
  * <p>
@@ -48,14 +49,14 @@ import java.util.Map;
  * Create a mapping of  { Remainders -> Index }
  * For each sum SUM, store (SUM mod k) -> Index
  * If you see a remainder again, take the difference of the indices
- * if the difference >1 (as question asks us to have size of subarray >1), return true
+ * if the difference of indices >1 (as question asks us to have size of subarray >1), return true
  * <p>
- * (x + n*k) % k = x % k
+ * x % k = (x + n*k) % k
  */
 public class ContinuousSubarraySum {
     public boolean checkSubarraySum(int[] nums, int k) {
         Map<Integer, Integer> rems = new HashMap<>();
-        rems.put(0, -1); //runningSum is 0 and its index is -1. required if the entire array's sum is a multiple of k
+        rems.put(0, -1); //remainder is 0 and its index is -1. required if the entire array's sum is a multiple of k
         int runningSum = 0;
         for (int i = 0; i < nums.length; ++i) {
             runningSum += nums[i];

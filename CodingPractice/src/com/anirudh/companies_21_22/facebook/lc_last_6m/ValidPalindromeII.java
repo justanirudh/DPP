@@ -71,10 +71,10 @@ public class ValidPalindromeII {
             if (i < end) {
                 if (s.charAt(i) != s.charAt(end)) {
                     //remove from either side and check
-                    boolean left = isPalindrome(s.substring(i, end));
+                    boolean left = isPalindrome(s.substring(i, end)); //remove from right
                     if (left)
                         return true;
-                    return isPalindrome(s.substring(i + 1, end + 1));
+                    return isPalindrome(s.substring(i + 1, end + 1)); //remove from left
                 }
             } else
                 break;

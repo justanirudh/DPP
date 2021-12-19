@@ -48,7 +48,7 @@ public class AddBinaryOverflow {
         while(num != 0) {
             int quotient = num/2;
             int remainder = num %2;
-            sb.insert(0, Integer.toString(remainder));
+            sb.insert(0, remainder);
             num = quotient;
         }
         return sb.toString();

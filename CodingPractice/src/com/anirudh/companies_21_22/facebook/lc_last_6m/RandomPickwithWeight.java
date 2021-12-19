@@ -20,7 +20,10 @@ import java.util.Random;
  Share
  You are given an array of positive integers w where w[i] describes the weight of ith index (0-indexed).
 
- We need to call the function pickIndex() which randomly returns an integer in the range [0, w.length - 1]. pickIndex() should return the integer proportional to its weight in the w array. For example, for w = [1, 3], the probability of picking the index 0 is 1 / (1 + 3) = 0.25 (i.e 25%) while the probability of picking the index 1 is 3 / (1 + 3) = 0.75 (i.e 75%).
+ We need to call the function pickIndex() which randomly returns an integer in the range [0, w.length - 1].
+ pickIndex() should return the integer proportional to its weight in the w array. For example, for w = [1, 3],
+ the probability of picking the index 0 is 1 / (1 + 3) = 0.25 (i.e 25%) while the probability of picking
+ the index 1 is 3 / (1 + 3) = 0.75 (i.e 75%).
 
  More formally, the probability of picking index i is w[i] / sum(w).
 
@@ -88,7 +91,8 @@ public class RandomPickwithWeight {
     int[] runningSums;
     Random rand = new Random();
 
-    private int binarySearch(double num, int start, int end) {
+    private int binarySearch(double num, int end) {
+        int start = 0;
         while(start < end) {
             int mid  = start + (end-start)/2;
             if(runningSums[mid] == num)
@@ -114,7 +118,7 @@ public class RandomPickwithWeight {
         int maxSum = runningSums[runningSums.length - 1];
         double num = maxSum * Math.random(); //why rand.nextint doesnt give correct answer??
         //find num's potential index in runningSums array
-        return binarySearch(num, 0, runningSums.length - 1);
+        return binarySearch(num,runningSums.length - 1);
 
     }
 
