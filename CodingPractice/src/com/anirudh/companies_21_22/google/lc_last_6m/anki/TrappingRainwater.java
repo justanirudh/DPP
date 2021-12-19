@@ -24,6 +24,8 @@ public class TrappingRainwater {
         return 0;
     }
 
+    //------------------------------------------------
+
     //O(n) time, O(n) space
     public static int trapBad(int[] height) {
 
