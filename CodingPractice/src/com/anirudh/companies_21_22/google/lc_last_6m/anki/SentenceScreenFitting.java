@@ -1,5 +1,7 @@
 package com.anirudh.companies_21_22.google.lc_last_6m.anki;
 
+import java.util.StringJoiner;
+
 /*
 418. Sentence Screen Fitting
 Medium
@@ -53,16 +55,61 @@ Constraints:
 sentence[i] consists of lowercase English letters.
 1 <= rows, cols <= 2 * 104
  */
+/*
+Fill current sentence greedily. Use mod to wrap around in the sentence
+T: O(n^2)
+
+Better soln (T: O (n)): https://leetcode.com/problems/sentence-screen-fitting/discuss/90845/21ms-18-lines-Java-solution
+ */
+
+/*
+Option1: TLE: greedily take words unti leach row is filled: O(n^2)
+
+Option 2:
+Imagine an infinite sentence that are concatenated by words from the given sentence, infiStr. We want to cut the infiStr properly and put a piece at each row of the screen.
+We maintain a pointer ptr. The ptr points to a position at infiStr, where next row will start. Cutting the infiStr and putting a piece at a row can be simulated as advancing the pointer by cols positions.
+After advancing the pointer, if ptr points to a space, it means the piece can fit in row perfectly. If ptr points to the middle of a word, we must retreat the pointer to the beginning of the word, because a word cannot be split into two lines.
+ */
 public class SentenceScreenFitting {
-  public int wordsTyping(String[] sentence, int rows, int cols) {
-    int res = 0;
-    int idx = 0;
 
-    int i = 0;
-    while(i < rows) {
-      int j = 0;
-
+    public int wordsTyping(String[] sentence, int rows, int cols) {
+        String joined = String.join(" ", sentence) + " ";
+        int jLen = joined.length();
+        int idx = 0;
+        for (int i = 0; i < rows; ++i) {
+            idx += cols;
+            if (joined.charAt(idx % jLen) == ' ') { //fits perfectly in current row
+                idx++;
+            } else { //if not a space, in the middle of a word. decrement idx until a space is found
+                while (idx > 0 && joined.charAt((idx - 1) % jLen) != ' ') {
+                    idx--;
+                }
+            }
+        }
+        return idx / jLen;
     }
 
-  }
+    //Gives TLE
+    public int wordsTypingSlow(String[] sentence, int rows, int cols) {
+        int res = 0;
+        int idx = 0; //use idx % sentence.len
+
+        for (int i = 0; i < rows; ++i) {
+            int rem = cols;
+            while (rem > sentence[idx % sentence.length].length()) { //can add word + space
+                rem -= sentence[idx % sentence.length].length();
+                rem -= 1; //space
+                if (idx % sentence.length == sentence.length - 1) //completed a sentence
+                    res++;
+                idx++;
+            }
+            if (rem == sentence[idx % sentence.length].length()) {  //last word in a row
+                if (idx % sentence.length == sentence.length - 1)
+                    res++;
+                idx++;
+            }
+            //if rem < sentence[idx % sentence.length].length(), go to next row
+        }
+        return res;
+    }
 }

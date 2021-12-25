@@ -2,164 +2,122 @@ package com.anirudh.companies_21_22.spotify;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
 
-/**
- * Created by paanir on 2/22/17.
- */
 /*
-146. LRU Cache Add to List
+146. LRU Cache
+Medium
 
-Design and implement a data structure for Least Recently Used (LRU) cache.
-It should support the following operations: get and put.
+11304
 
-get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
-put(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it
-should invalidate the least recently used item before inserting a new item.
+442
 
-Follow up:
-Could you do both operations in O(1) time complexity?
+Add to List
 
-Example:
+Share
+Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
 
-LRUCache cache = new LRUCache( 2 );
+Implement the LRUCache class:
 
-        cache.put(1, 1);
-        cache.put(2, 2);
-        cache.get(1);       // returns 1
-        cache.put(3, 3);    // evicts key 2
-        cache.get(2);       // returns -1 (not found)
-        cache.put(4, 4);    // evicts key 1
-        cache.get(1);       // returns -1 (not found)
-        cache.get(3);       // returns 3
-        cache.get(4);       // returns 4
+LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
+int get(int key) Return the value of the key if the key exists, otherwise return -1.
+void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
+The functions get and put must each run in O(1) average time complexity.
 
- */
-/*
-Map to DIY double ended queue implemented as Double Linked List
-Map has keys as elements to QueueNode {k,v,next, prev}
+
+
+Example 1:
+
+Input
+["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
+[[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
+Output
+[null, null, null, 1, null, -1, null, -1, 3, 4]
+
+Explanation
+LRUCache lRUCache = new LRUCache(2);
+lRUCache.put(1, 1); // cache is {1=1}
+lRUCache.put(2, 2); // cache is {1=1, 2=2}
+lRUCache.get(1);    // return 1
+lRUCache.put(3, 3); // LRU key was 2, evicts key 2, cache is {1=1, 3=3}
+lRUCache.get(2);    // returns -1 (not found)
+lRUCache.put(4, 4); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+lRUCache.get(1);    // return -1 (not found)
+lRUCache.get(3);    // return 3
+lRUCache.get(4);    // return 4
  */
 public class LRUCacheDLL {
-    //Using a Map with a custom queue
-    //Or use LinkedHashMap with orderAccess argument as true (LRU gets enabled) and override
-    //removeEldestEntry when we hit cache size. EPI Prob.12.3
 
-    class MyQueue {
-        QueueNode head = null; //MRU
-        QueueNode tail = null; //LRU
-    }
-
-    class QueueNode {
+    static class DLLNode {
         int key;
-        int val;
-        QueueNode next;
-        QueueNode prev;
+        int value;
+        DLLNode next;
+        DLLNode prev;
 
-        QueueNode(int key, int value) {
-            this.key = key;
-            this.val = value;
+        DLLNode(int k, int v) {
+            key = k;
+            value = v;
+            next = null;
+            prev = null;
         }
     }
 
-    private MyQueue queue = new MyQueue();
-    private Map<Integer, QueueNode> cache = new HashMap<>(); //KEY to the queuenode in the queue
-    private int capacity;
-    private int size = 0;
+    Map<Integer, DLLNode> cache;
+    int capacity;
+    int size;
+    DLLNode head;
+    DLLNode tail;
 
     public LRUCacheDLL(int capacity) {
+        cache = new HashMap<>();
+        head = new DLLNode(-1, -1); //sentinel
+        tail = new DLLNode(-1, -1); //sentinel
+        head.next = tail;
+        tail.prev = head;
         this.capacity = capacity;
+        size = 0;
     }
 
-    private void moveToHead(QueueNode qn) {
-        qn.next = queue.head;
-        qn.prev = null;
-        queue.head.prev = qn;
-        queue.head = qn;
-    }
-
-    private void removeFromTail(QueueNode qn) {
-        QueueNode prev = qn.prev;
-        if (prev != null)
-            prev.next = null;
-        queue.tail = prev;
-    }
-
-    private void addToMap(int key, QueueNode qn) {
-        cache.put(key, qn);
-        size++;
-    }
-
-    private void removeFromMap(int key) {
-        cache.remove(key);
-        size--;
+    void addFirst(DLLNode node) {
+        DLLNode newNext = head.next;
+        head.next = node;
+        node.prev = head;
+        node.next = newNext;
+        newNext.prev = node;
     }
 
     public int get(int key) {
         if (!cache.containsKey(key))
             return -1;
-        else { //get key, change its position in MyQueue
-            QueueNode qn = cache.get(key);
-            int val = qn.val;
-            //change position in MyQueue to head
-            if (queue.head == qn) {
-                //if head, DO nothing
-            } else if (queue.tail == qn) { //if tail, bring it to head
-                removeFromTail(qn);
-                moveToHead(qn);
-            } else { // in between
-                //remove from between
-                QueueNode prev = qn.prev;
-                QueueNode next = qn.next;
-                prev.next = next;
-                next.prev = prev;
-                moveToHead(qn);
-            }
-            return val;
-        }
+        DLLNode node = cache.get(key);
+        //remove from DLL
+        DLLNode prev = node.prev;
+        DLLNode next = node.next;
+        prev.next = next;
+        next.prev = prev;
+        //move it to head
+        addFirst(node);
+        return node.value;
     }
 
     public void put(int key, int value) {
         if (cache.containsKey(key)) {
-            get(key); //doing for the side effects, bring it to head
-            queue.head.val = value; //update value for the key, if changed
+            cache.get(key).value = value;
+            get(key); //for side effects
             return;
         }
-        //LRU does not have the key
-        QueueNode qn = new QueueNode(key, value);
-        if (size == capacity) { //no space, delete LRU queue node and add the new value to head
-            QueueNode qnLRU = queue.tail; //remove LRU node from queue
-            removeFromTail(qnLRU);
-            removeFromMap(qnLRU.key);
-            if (capacity == 1) { //add new node to front of queue
-                queue.head = qn;
-                queue.tail = qn;
-            } else
-                moveToHead(qn);
-        } else { //space is there
-            if (size == 0) {
-                queue.head = qn;
-                queue.tail = qn;
-            } else //add to front of queue
-                moveToHead(qn);
+        if (size == capacity) {
+            //remove LRU elem
+            DLLNode last = tail.prev;
+            DLLNode prev = last.prev;
+            prev.next = tail;
+            tail.prev = prev;
+            size--;
+            cache.remove(last.key);
         }
-        addToMap(key, qn);
-    }
-
-
-    public static void main(String[] args) {
-        LRUCacheDLL cache = new LRUCacheDLL(1 /* capacity */);
-
-        cache.put(2, 1);
-        System.out.println(cache.get(2));       // returns 1
-        cache.put(3, 2);
-        System.out.println(cache.get(2));       // returns -1
-        System.out.println(cache.get(3));       // returns 2
-
+        DLLNode node = new DLLNode(key, value);
+        addFirst(node); //put new elem at head;
+        size++;
+        cache.put(key, node);
     }
 }
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * LRUCache obj = new LRUCache(capacity);
- * int param_1 = obj.get(key);
- * obj.put(key,value);
- */

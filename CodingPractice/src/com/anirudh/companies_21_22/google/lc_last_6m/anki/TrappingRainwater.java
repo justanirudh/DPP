@@ -17,11 +17,40 @@ The above elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In th
 
 
  */
+/*
+    O(n)-S O(n)-T approach:
+        make 2 arrays, for each elem, leftMax and right max
+        then iterate through them and res += Math.min(leftMax, rightMax) - height[i]
+    O(1)-S O(n)-T approach:
+        Use 2 pointers, left and right
+        for each cel, get leftMax and rightMax
+        if leftMax is smaller, calculate res+ and increment left
+
+*/
 public class TrappingRainwater {
 
     //O(n) time, O(1) space
     public static int trap(int[] height) {
-        return 0;
+        int leftIdx = 0;
+        int rightIdx = height.length - 1;
+        int res = 0;
+        int leftMax = Integer.MIN_VALUE;
+        int rightMax = Integer.MIN_VALUE;
+
+        while (leftIdx < rightIdx) {
+            if (height[leftIdx] > leftMax)
+                leftMax = height[leftIdx];
+            if (height[rightIdx] > rightMax)
+                rightMax = height[rightIdx];
+            if (leftMax < rightMax) { //take leftMax as the height of the container
+                res += Math.max(0, leftMax - height[leftIdx]);
+                leftIdx++; //keeping right as is because it is bigger height so possibility of more water to be stored
+            } else { //rightMax <= leftMax   take rightMax as the height of the container
+                res += Math.max(0, rightMax - height[rightIdx]);
+                rightIdx--;
+            }
+        }
+        return res;
     }
 
     //------------------------------------------------

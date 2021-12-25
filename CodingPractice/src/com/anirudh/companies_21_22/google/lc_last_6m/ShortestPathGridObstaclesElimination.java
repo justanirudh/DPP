@@ -66,7 +66,7 @@ For State's equals and hashcode, use x,y,num_obstacles (NOT distance)
  */
 class ShortestPathGridObstaclesElimination {
 
-    class State { //Or just create a list; get equals and hashcode for free
+    class State {
         int x;
         int y;
         int dist;

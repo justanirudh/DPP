@@ -44,6 +44,7 @@ public class ReplaceWords {
 
         TrieNode() {
             children = new TrieNode[26]; //each node can have 26 children max for each letter
+            word= null;
         }
     }
 
