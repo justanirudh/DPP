@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
 import java.util.StringJoiner;
 
@@ -63,7 +63,7 @@ Better soln (T: O (n)): https://leetcode.com/problems/sentence-screen-fitting/di
  */
 
 /*
-Option1: TLE: greedily take words unti leach row is filled: O(n^2)
+Option1: TLE: greedily take words until leach row is filled: O(n^2)
 
 Option 2:
 Imagine an infinite sentence that are concatenated by words from the given sentence, infiStr. We want to cut the infiStr properly and put a piece at each row of the screen.

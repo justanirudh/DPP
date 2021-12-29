@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
 /**
  * Created by paanir on 12/31/16.
@@ -23,7 +23,7 @@ The above elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In th
         then iterate through them and res += Math.min(leftMax, rightMax) - height[i]
     O(1)-S O(n)-T approach:
         Use 2 pointers, left and right
-        for each cel, get leftMax and rightMax
+        for each cell, get leftMax and rightMax
         if leftMax is smaller, calculate res+ and increment left
 
 */
@@ -31,23 +31,23 @@ public class TrappingRainwater {
 
     //O(n) time, O(1) space
     public static int trap(int[] height) {
-        int leftIdx = 0;
-        int rightIdx = height.length - 1;
+        int l = 0;
+        int r = height.length - 1;
         int res = 0;
         int leftMax = Integer.MIN_VALUE;
         int rightMax = Integer.MIN_VALUE;
 
-        while (leftIdx < rightIdx) {
-            if (height[leftIdx] > leftMax)
-                leftMax = height[leftIdx];
-            if (height[rightIdx] > rightMax)
-                rightMax = height[rightIdx];
+        while (l < r) {
+            if (height[l] > leftMax)
+                leftMax = height[l];
+            if (height[r] > rightMax)
+                rightMax = height[r];
             if (leftMax < rightMax) { //take leftMax as the height of the container
-                res += Math.max(0, leftMax - height[leftIdx]);
-                leftIdx++; //keeping right as is because it is bigger height so possibility of more water to be stored
+                res += Math.max(0, leftMax - height[l]);
+                l++; //keeping right as is because it is bigger height so possibility of more water to be stored
             } else { //rightMax <= leftMax   take rightMax as the height of the container
-                res += Math.max(0, rightMax - height[rightIdx]);
-                rightIdx--;
+                res += Math.max(0, rightMax - height[r]);
+                r--;
             }
         }
         return res;
