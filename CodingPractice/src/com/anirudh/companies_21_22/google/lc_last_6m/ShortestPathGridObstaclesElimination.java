@@ -56,8 +56,8 @@ We need to eliminate at least two obstacles to find such a walk.
 
 /*
 Do BFS in matrix
-Normally, for BFS in a matrix we use 3 vars: x, y, distance from source
-Here we will use 4 vars: x,y,dist, remaining quota of obstacles
+Normally, for BFS in a matrix we use 3 vars: x, y, distance from source (dist)
+Here we will use 4 vars: x,y,dist, remaining quota of obstacles (num_obstacles)
 first check if quota > manhattan distance. if so, return true
 every time we go through an obstacle, decrease it by 1, check if it has been visited, then offer it in queue
 EVERYTHING else remains the same

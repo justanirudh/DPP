@@ -35,13 +35,13 @@ class ReconstructItinerary {
     private Deque<String> path;
 
     private void doDFS(String departure) {
-        PriorityQueue<String> arrivals = flights.get(departure);
+        Queue<String> arrivals = flights.get(departure);
 
         while (arrivals != null && !arrivals.isEmpty()) {
-            String nextStop = arrivals.remove();
+            String nextStop = arrivals.poll();
             doDFS(nextStop);
         }
-        path.addFirst(departure); //topological sort. the one that gets finished first is prepended first
+        path.push(departure); //topological sort. the one that gets finished first is prepended first
     }
 
     public List<String> findItinerary(List<List<String>> tickets) {

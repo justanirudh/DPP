@@ -50,7 +50,7 @@ Explanation:
 "ec" does not occur at index 2 in s, so we do nothing.
  */
 /*
-1. Go over indices array, if string.substring(index[i]).startsWith(sources[i]) = target[i]
+1. Go over indices array, if string.substring(index[i]).startsWith(sources[i])
 create map of index  -> {num_letters_to_be_replaced, target string}
 2. Go over original string, while creating new string; if index is not in map, copy from orig string
 if index is in map, copy from map's target string and increment index on original string by num_letters_to_be_replaced

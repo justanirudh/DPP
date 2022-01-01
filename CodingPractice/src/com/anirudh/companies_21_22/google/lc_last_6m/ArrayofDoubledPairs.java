@@ -41,7 +41,7 @@ Output: false
     Sort the array
     Make a map Integer -> frequency
     every time integer comes, increment frequency
-    every time integer*2 comes, decrease frequency and remove from array
+    every time integer*2 comes, decrease frequency and remove from map
 
     for negative, will need to look for integer/2
  */

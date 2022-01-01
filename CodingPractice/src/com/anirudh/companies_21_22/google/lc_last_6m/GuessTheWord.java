@@ -95,6 +95,52 @@ public class GuessTheWord {
         }
     }
 
+    //Option 3: Give every word a score which is the sum of frequency of each of its characters in each position across all the words
+    //This is the score of similarity of the word with the other words
+    //The higher the score, the more the word is similar with other words
+    //BEST approach
+    public void findSecretWord3(String[] wordlist, Master master) {
+
+        for (int i = 0; i < 10; ++i) {
+            //create score-chart
+            int[][] scores = new int[6][26];
+            for (String word : wordlist) {
+                for (int j = 0; j < 6; ++j) {
+                    scores[j][word.charAt(j) - 'a']++;
+                }
+            }
+
+            //find word with the best overall score
+            int bestScore = Integer.MIN_VALUE;
+            String currGuess = "";
+            for (String word : wordlist) {
+                //calculate score
+                int score = 0;
+                for(int j = 0; j < 6; ++j) {
+                    score += scores[j][word.charAt(j) - 'a'];
+                }
+                if(score > bestScore) {
+                    bestScore = score;
+                    currGuess = word;
+                }
+            }
+            //guess word
+            int numMatches = master.guess(currGuess);
+            if(numMatches == 6)
+                break;
+
+            //filter in similar words
+            List<String> newWordList = new ArrayList<>();
+            for (String word : wordlist) {
+                if (!word.equals(currGuess) && getNumMatches(word, currGuess) == numMatches) {
+                    newWordList.add(word);
+                }
+            }
+            wordlist = newWordList.toArray(new String[0]);
+        }
+
+    }
+
     //Option 2: Minimize worst case then match [Not accepted]
     public void findSecretWord2(String[] wordlist, Master master) {
 
@@ -148,49 +194,4 @@ public class GuessTheWord {
         }
     }
 
-    //Option 3: Give every word a score which is the sum of frequency of each of its characters in each position across all the words
-    //This is the score of similarity of the word with the other words
-    //The higher the score, the more the word is similar with other words
-    //BEST approach
-    public void findSecretWord3(String[] wordlist, Master master) {
-
-        for (int i = 0; i < 10; ++i) {
-            //create score-chart
-            int[][] scores = new int[6][26];
-            for (String word : wordlist) {
-                for (int j = 0; j < 6; ++j) {
-                    scores[j][word.charAt(j) - 'a']++;
-                }
-            }
-
-            //find word with the best overall score
-            int bestScore = Integer.MIN_VALUE;
-            String currGuess = "";
-            for (String word : wordlist) {
-                //calculate score
-                int score = 0;
-                for(int j = 0; j < 6; ++j) {
-                    score += scores[j][word.charAt(j) - 'a'];
-                }
-                if(score > bestScore) {
-                    bestScore = score;
-                    currGuess = word;
-                }
-            }
-            //guess word
-            int numMatches = master.guess(currGuess);
-            if(numMatches == 6)
-                break;
-
-            //filter in similar words
-            List<String> newWordList = new ArrayList<>();
-            for (String word : wordlist) {
-                if (!word.equals(currGuess) && getNumMatches(word, currGuess) == numMatches) {
-                    newWordList.add(word);
-                }
-            }
-            wordlist = newWordList.toArray(new String[0]);
-        }
-
-    }
 }

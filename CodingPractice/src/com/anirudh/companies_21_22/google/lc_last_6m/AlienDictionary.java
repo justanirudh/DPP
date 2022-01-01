@@ -72,7 +72,7 @@ public class AlienDictionary {
                 break;
             }
         }
-        //now just add rest to the graph so that we dont miss any uncompared letterd
+        //now just add rest to the graph so that we dont miss any uncompared letters
         for (int j = i + 1; j < w1.length(); ++j) {
             if (!graph.containsKey(w1.charAt(j)))
                 graph.put(w1.charAt(j), new ArrayList<>());

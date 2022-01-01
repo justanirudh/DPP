@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m;
+package com.anirudh.datastructures.graphs;
 
 /*
 407. Trapping Rain Water II

@@ -55,7 +55,7 @@ import java.util.List;
 import java.util.Map;
 
 /*
-Backtracking
+Backtracking Brute Force
 For every i, transfer all debt to any j > i and then find the minimum transactions for i->j transaction
 Complexity:
 f(n) = n * f(n-1) => O(n!)

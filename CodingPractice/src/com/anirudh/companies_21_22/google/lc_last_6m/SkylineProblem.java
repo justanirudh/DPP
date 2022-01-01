@@ -70,7 +70,7 @@ https://www.youtube.com/watch?v=GSBLe8cKu0s
 5. after addition/deletion from map, if newMaxHeight != prevMaxHeight
 5.1 res.add(x, newMaxHeight)
  */
-public class TheSkylineProblem {
+public class SkylineProblem {
     class Point {
         int x;
         boolean isStart;
@@ -112,7 +112,7 @@ public class TheSkylineProblem {
         heights.put(0, 1); //base case
         List<List<Integer>> res = new ArrayList<>();
 
-        int prevMaxHeight = heights.lastKey(); //heighest key of the map = 0 right now
+        int prevMax = heights.lastKey(); //heighest key of the map = 0 right now
         for (Point p : points) { //go from left to right in points
             if (p.isStart) {
                 heights.put(p.height, heights.getOrDefault(p.height, 0) + 1);
@@ -121,10 +121,10 @@ public class TheSkylineProblem {
                 if (heights.get(p.height) == 0)
                     heights.remove(p.height);
             }
-            int currMaxHeight = heights.lastKey();
-            if(currMaxHeight != prevMaxHeight) { //less than or greater than
-                res.add(Arrays.asList(p.x, currMaxHeight));
-                prevMaxHeight = currMaxHeight;
+            int currMax = heights.lastKey();
+            if(currMax != prevMax) { //less than or greater than
+                res.add(Arrays.asList(p.x, currMax));
+                prevMax = currMax;
             }
         }
         return res;

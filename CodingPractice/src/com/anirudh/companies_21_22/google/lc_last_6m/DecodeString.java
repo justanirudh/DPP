@@ -73,7 +73,7 @@ public class DecodeString {
                     } else { //just push the number
                         stack.push(str);
                     }
-                } else { //just push for [ and alphabets
+                } else { //just push for first number, [ and alphabets
                     stack.push(str);
                 }
             } else {

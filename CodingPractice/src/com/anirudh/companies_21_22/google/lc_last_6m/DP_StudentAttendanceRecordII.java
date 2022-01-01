@@ -54,7 +54,7 @@ num(n) = num(n-1)L + num(n-1)P
     num(n-1)P is alright
     num(n-1)L = num(n-3)PPL + num(n-3)PLL + num(n-3)LPP + num(n-3)LLL
     The last one is not rewardable. Thats true if num(n-3) is rewardable.
-    num(n-3) is rewardable and num(n-1) is not rewardable iff it ends with P i.e num(n-4)P LLL
+    num(n-3) is rewardable and num(n-1) is not rewardable iff it ends with P i.e num(n-4)P LLL and NOT with L i.e. num(n-4)LLLL
 Hence,
     num(n) = 2*num(n-1) - num(n-4)
 Now consider A. Only 0 or 1 As are allowed
