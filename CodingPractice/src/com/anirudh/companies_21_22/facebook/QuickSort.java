@@ -26,7 +26,7 @@ public class QuickSort {
                 left++;
             }
         }
-        left--; //go back to the last <pivot elem
+        left--; //go back to the last < pivot elem
         int tmp = nums[left];
         nums[left] = pivot;
         nums[start] = tmp;

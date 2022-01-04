@@ -20,6 +20,6 @@ Note: A subtree must include all of its descendants.
 Follow up: Can you figure out ways to solve it with O(n) time complexity?
 
  */
-public class TBD_LargestBSTSubtreeInaBT {
+public class LargestBSTSubtreeInaBT {
 
 }

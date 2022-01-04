@@ -43,7 +43,7 @@ Output: [""]
  * TODO: To be understood; Implement
  * https://leetcode.com/problems/remove-invalid-parentheses/solution/
  */
-class TBDRemoveInvalidParentheses {
+class RemoveInvalidParentheses {
 
     private Set<String> validExpressions = new HashSet<>();
     private int minimumRemoved;

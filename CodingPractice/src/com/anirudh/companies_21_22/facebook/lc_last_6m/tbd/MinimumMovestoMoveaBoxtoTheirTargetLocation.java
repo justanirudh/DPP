@@ -71,7 +71,7 @@ package com.anirudh.companies_21_22.facebook.lc_last_6m.tbd;
 
 //TODO: Implement
 //https://leetcode.com/problems/minimum-moves-to-move-a-box-to-their-target-location/discuss/709355/Java-use-2-level-BFS-beat-99
-public class TBDMinimumMovestoMoveaBoxtoTheirTargetLocation {
+public class MinimumMovestoMoveaBoxtoTheirTargetLocation {
     //1 BFS for box to Target
     //1 BFS for Storekeeper to Box
 }

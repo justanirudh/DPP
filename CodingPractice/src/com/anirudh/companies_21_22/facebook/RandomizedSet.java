@@ -56,7 +56,6 @@ randomizedSet.getRandom(); // Since 2 is the only number in the set, getRandom()
 class RandomizedSet {
     Map<Integer, Integer> elemToIdx;
     List<Integer> elems;
-    int curr;
     Random r;
 
     /**
@@ -65,7 +64,6 @@ class RandomizedSet {
     public RandomizedSet() {
         elemToIdx = new HashMap<>();
         elems = new ArrayList<>();
-        curr = 0;
         r = new Random();
     }
 
@@ -76,9 +74,8 @@ class RandomizedSet {
         if (elemToIdx.containsKey(val))
             return false;
         else {
-            elemToIdx.put(val, curr);
+            elemToIdx.put(val, elems.size());
             elems.add(val);
-            curr++;
             return true;
         }
     }
@@ -98,8 +95,6 @@ class RandomizedSet {
 
             elemToIdx.remove(val); //remove mapping of val to be deleted
             elems.remove(elems.size() - 1); //remove last elem from list
-
-            curr--; //decrement pointer for next insert/delete
 
             return true;
 

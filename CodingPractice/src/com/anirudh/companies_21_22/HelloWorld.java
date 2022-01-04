@@ -8,8 +8,11 @@ import java.util.*;
 public class HelloWorld {
     public static void main(String[] args) {
 
-        List<Integer> list = new ArrayList<>(5);
-        System.out.println(list.get(3));
+//        List<Integer> list = new ArrayList<>(5);
+//        System.out.println("91283472332".compareTo("2147483648"));
+//        System.out.println("2147483648".compareTo("91283472332"));
+
+        System.out.println(Integer.parseInt("-2147483649"));
 
 //        int n = 3;
 //        for (int i = 0; i < Math.pow(2, n); ++i) {

@@ -54,6 +54,8 @@ Output: true
 import java.util.*;
 
 /**
+ * https://leetcode.com/problems/valid-number/solution/
+ *
  * 1. Create a state machine (DFA) on paper
  * 2. Represent the state machine as this: List<Map<String, Integer>> stateMachine
  * 2.a. Each initial state is an index of the arraylist
