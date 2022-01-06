@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 /*
 871. Minimum Number of Refueling Stops
 Hard
@@ -47,12 +47,60 @@ Constraints:
 
 1 <= target, startFuel <= 109
 0 <= stations.length <= 500
-0 <= positioni <= positioni+1 < target
+0 <= positioni <= positioni+1 < target => sorted
 1 <= fueli < 109
 Accepted
 63,706
 Submissions
 179,592
  */
+
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+/*
+- As I pass through stations, I offer them in a PriorityQueue<Reverse-SOrted-by-gas>
+- If after reaching a station I have negative gas, I poll from PQ until gas is >=0
+- I do the same after reaching target
+ */
 public class MinimumNumberRefuelingStops {
+    public int minRefuelStops(int target, int startFuel, int[][] stations) {
+        if (stations.length == 0) {
+            return startFuel - target >= 0 ? 0 : -1;
+        }
+        Queue<Integer> gasStations = new PriorityQueue<>(Comparator.reverseOrder());
+        int res = 0;
+        int gasLeft = startFuel;
+        int prevStation = 0;
+
+        for (int[] station : stations) {
+            gasLeft -= station[0] - prevStation;
+            if (gasLeft < 0) { //couldnt reach here without a fuel stop
+                while (!gasStations.isEmpty() && gasLeft < 0) {
+                    gasLeft += gasStations.poll(); //start from largest fuel content station
+                    res++;
+                }
+                if (gasLeft < 0) { //if all stations combined couldnt fill up tank
+                    return -1;
+                }
+            }
+            gasStations.offer(station[1]); //offer this station's fuel only if car can reach it
+            prevStation = station[0];
+        }
+
+        //now do it once for target
+        gasLeft -= target - stations[stations.length - 1][0];
+        if (gasLeft < 0) { //couldnt reach here without a fuel stop
+            while (!gasStations.isEmpty() && gasLeft < 0) {
+                gasLeft += gasStations.poll(); //start from largest fuel content station
+                res++;
+            }
+            if (gasLeft < 0) { //if all stations combined couldnt fill up tank
+                return -1;
+            }
+        }
+
+        return res;
+    }
 }
