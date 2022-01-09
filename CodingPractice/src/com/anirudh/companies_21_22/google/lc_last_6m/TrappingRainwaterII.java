@@ -99,7 +99,7 @@ public class TrappingRainwaterII {
                 int y = curr.y + dy[i];
                 if (isValid(x, y) && !visited[x][y]) {
                     res += Math.max(0, curr.height - heightMap[x][y]); //add water to neighbour
-                    visited[x][y] = true;
+                    visited[x][y] = true; //filled water in it
                     queue.offer(new Cell(x, y, Math.max(curr.height, heightMap[x][y])));
                 }
             }

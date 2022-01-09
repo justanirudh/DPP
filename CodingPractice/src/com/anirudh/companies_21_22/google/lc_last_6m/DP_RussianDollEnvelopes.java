@@ -49,12 +49,12 @@ after doing this, find Longest Increasing Subsequence
  */
 public class DP_RussianDollEnvelopes {
 
-    class CompareElems implements Comparator<int[]> {
+    static class CompareElems implements Comparator<int[]> {
         public int compare(int[] a, int[] b) {
             if (a[0] != b[0])
                 return a[0] - b[0]; //sort by width
             else
-                return b[1] - a[1]; //reverse sort by height
+                return b[1] - a[1]; //reverse sort by height if width is same
         }
     }
 

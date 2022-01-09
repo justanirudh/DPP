@@ -72,7 +72,7 @@ public class SplitArrayLargestSum {
                 }
             }
             numSubArrays++; //to close the last subarray
-            if (numSubArrays > m) {
+            if (numSubArrays > m) { //created more than reqd, need to lump more elems together, per split sum will increase, do mid+1
                 binarySearch(mid + 1, hi);
             } else { // num_sub_arrays <= m
                 minSum = Math.min(minSum, mid); //potential solution

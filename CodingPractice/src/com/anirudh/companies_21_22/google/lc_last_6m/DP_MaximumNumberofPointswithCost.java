@@ -34,11 +34,11 @@ for that, find max from left elements, find max from right elems, and take max o
  */
 public class DP_MaximumNumberofPointswithCost {
     public long maxPoints(int[][] points) {
-        int[] currTemp = points[0];
+        int[] currInt = points[0];
 
-        long[] curr = new long[currTemp.length]; //change first row to long
-        for(int i = 0; i < currTemp.length; ++i) {
-            curr[i] = currTemp[i];
+        long[] curr = new long[currInt.length]; //change first row to long
+        for(int i = 0; i < currInt.length; ++i) {
+            curr[i] = currInt[i];
         }
 
         for (int i = 1; i < points.length; ++i) {

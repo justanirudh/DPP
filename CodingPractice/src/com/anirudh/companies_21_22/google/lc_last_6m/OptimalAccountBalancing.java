@@ -64,18 +64,18 @@ public class OptimalAccountBalancing {
 
     List<Integer> debtsArr;
 
-    int settle(int startIdx) {
-        while (startIdx < debtsArr.size() && debtsArr.get(startIdx) == 0) { //ignore already settled people
-            startIdx++;
+    int settle(int i) {
+        while (i < debtsArr.size() && debtsArr.get(i) == 0) { //ignore already settled people
+            i++;
         }
-        if (startIdx == debtsArr.size())
+        if (i == debtsArr.size())
             return 0; //reached end of arr
         int minTransactions = Integer.MAX_VALUE;
-        for (int i = startIdx + 1; i < debtsArr.size(); ++i) {
-            if (debtsArr.get(startIdx) * debtsArr.get(i) < 0) { //they are of opposing signs
-                debtsArr.set(i, debtsArr.get(i) + debtsArr.get(startIdx)); //give all of debt of startIdx TO i
-                minTransactions = Math.min(minTransactions, 1 + settle(startIdx + 1)); //calculate min
-                debtsArr.set(i, debtsArr.get(i) - debtsArr.get(startIdx)); //backtrack
+        for (int j = i + 1; j < debtsArr.size(); ++j) {
+            if (debtsArr.get(i) * debtsArr.get(j) < 0) { //they are of opposing signs
+                debtsArr.set(j, debtsArr.get(j) + debtsArr.get(i)); //give all of debt of i to j
+                minTransactions = Math.min(minTransactions, 1 + settle(i + 1)); //calculate min, settle the next person
+                debtsArr.set(j, debtsArr.get(j) - debtsArr.get(i)); //backtrack
             }
         }
         return minTransactions;
@@ -84,6 +84,7 @@ public class OptimalAccountBalancing {
 
     public int minTransfers(int[][] transactions) {
         Map<Integer, Integer> debts = new HashMap<>(); //person -> their debt
+        //Get net debts
         for (int[] transaction : transactions) {
             int from = transaction[0];
             int to = transaction[1];
@@ -92,6 +93,6 @@ public class OptimalAccountBalancing {
             debts.put(to, debts.getOrDefault(to, 0) + amt);
         }
         debtsArr = new ArrayList<>(debts.values());
-        return settle(0);
+        return settle(0); //get min settlements required; start settling from the 1st guy
     }
 }

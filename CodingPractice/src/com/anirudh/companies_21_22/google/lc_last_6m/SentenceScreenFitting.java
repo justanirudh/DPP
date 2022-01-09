@@ -73,38 +73,38 @@ After advancing the pointer, if ptr points to a space, it means the piece can fi
 public class SentenceScreenFitting {
 
     public int wordsTyping(String[] sentence, int rows, int cols) {
-        String joined = String.join(" ", sentence) + " ";
-        int jLen = joined.length();
+        String joined = String.join(" ", sentence) + " "; //or use string joiner
+        int len = joined.length();
         int idx = 0;
         for (int i = 0; i < rows; ++i) {
             idx += cols;
-            if (joined.charAt(idx % jLen) == ' ') { //fits perfectly in current row
+            if (joined.charAt(idx % len) == ' ') { //fits perfectly in current row
                 idx++;
-            } else { //if not a space, in the middle of a word. decrement idx until a space is found
-                while (idx > 0 && joined.charAt((idx - 1) % jLen) != ' ') {
+            } else { //if not a space, in the middle of a word. decrement idx until the start of a word is found
+                while (idx > 0 && joined.charAt((idx - 1) % len) != ' ') {
                     idx--;
                 }
             }
         }
-        return idx / jLen;
+        return idx / len;
     }
 
     //Gives TLE
     public int wordsTypingSlow(String[] sentence, int rows, int cols) {
         int res = 0;
         int idx = 0; //use idx % sentence.len
-
+        int len = sentence.length;
         for (int i = 0; i < rows; ++i) {
             int rem = cols;
-            while (rem > sentence[idx % sentence.length].length()) { //can add word + space
-                rem -= sentence[idx % sentence.length].length();
+            while (rem > sentence[idx % len].length()) { //can add word + space
+                rem -= sentence[idx % len].length();
                 rem -= 1; //space
-                if (idx % sentence.length == sentence.length - 1) //completed a sentence
+                if (idx % len == len - 1) //completed a sentence
                     res++;
                 idx++;
             }
-            if (rem == sentence[idx % sentence.length].length()) {  //last word in a row
-                if (idx % sentence.length == sentence.length - 1)
+            if (rem == sentence[idx % len].length()) {  //last word in a row
+                if (idx % len == len - 1)
                     res++;
                 idx++;
             }

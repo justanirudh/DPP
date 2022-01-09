@@ -107,21 +107,21 @@ public class RobotRoomCleaner {
     void comeBack() {
         robot.turnRight();
         robot.turnRight();
-        robot.move(); //is now in previous cell
+        robot.move(); //is now in previous cell but facing in the opposite direction
         robot.turnRight();
         robot.turnRight(); //is now facing in the original direction
     }
 
-    void backtrack(List<Integer> curr, int dir) {
+    void dfs(List<Integer> curr, int dir) {
         robot.clean();
         visited.add(curr);
         for (int i = 0; i < 4; ++i) {
-            int nextDir = (dir + i) % 4; //this calculation makes it so that nextRow and nextCol become compatible with the turn we took at the end of previous loop
+            int nextDir = (dir + i) % 4; // i is the offset from the current dir; this calculation makes it so that nextRow and nextCol become compatible with the turn we took at the end of previous loop
             int nextRow = curr.get(0) + dx[nextDir];
             int nextCol = curr.get(1) + dy[nextDir];
             List<Integer> nextCell = Arrays.asList(nextRow, nextCol);
             if (!visited.contains(nextCell) && robot.move()) {
-                backtrack(nextCell, nextDir);
+                dfs(nextCell, nextDir);
                 comeBack(); //come back to current cell and face in the current direction again
             }
             robot.turnRight(); //turn clockwise
@@ -132,6 +132,6 @@ public class RobotRoomCleaner {
         this.robot = robot;
         visited = new HashSet<>();
         List<Integer> start = Arrays.asList(0, 0);
-        backtrack(start, 0);
+        dfs(start, 0);
     }
 }

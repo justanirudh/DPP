@@ -73,6 +73,14 @@ Output: [2.00000,1.00000,1.50000,-1.00000]
  * ==> get the result for c1
  * <p>
  * Note neither c1 nor c2 is polled out from the stack considering the rule of stack.
+ * If both conditions are satisfied:
+ * 1. c1 is faster than c2
+ * 2. c1 catches c2 before c2 vanishes into other car
+ * <p>
+ * Then we know that c2 is the car that c1 catches first (i.e., c1 vanishes into c2)
+ * ==> get the result for c1
+ * <p>
+ * Note neither c1 nor c2 is polled out from the stack considering the rule of stack.
  */
 
 //-----------------2
@@ -123,7 +131,7 @@ public class CarFleetII {
 
     int[][] cars;
 
-    double catchTime(int curr, int next) {
+    double catchTime(int curr, int next) { //assuming curr is faster than next
         int relSpeed = cars[curr][1] - cars[next][1];
         int relDistance = cars[next][0] - cars[curr][0];
         return relDistance * 1.0 / relSpeed;
@@ -133,7 +141,7 @@ public class CarFleetII {
         double[] res = new double[cars.length];
         this.cars = cars;
         Deque<Integer> collisions = new ArrayDeque<>(); //cars with decreasing speeds from top to bottom
-        for (int i = cars.length - 1; i >= 0; --i) { //cars already sorted according to their position
+        for (int i = cars.length - 1; i >= 0; --i) { //cars are already sorted according to their position
             res[i] = -1; //default
             while (!collisions.isEmpty()) {
                 int currSpeed = cars[i][1];
@@ -143,8 +151,9 @@ public class CarFleetII {
                 if (currSpeed > nextSpeed && (res[nextIdx] == -1 || currCatchTime <= res[nextIdx])) { //if curr speed > nextSpeed && currCatchTime < next's catch time
                     res[i] = currCatchTime;
                     break;
-                } //else if currSpeed < nextSpeed || currCatchTime >= res[nextIdx]
-                collisions.pop(); //it can still collide with the combined fleet after the next one merges with its' next
+                } else { //else if currSpeed < nextSpeed || currCatchTime >= res[nextIdx]
+                    collisions.pop(); //it can still collide with the combined fleet after the next one merges with its' next, hence do another loop
+                }
             }
             collisions.push(i);
         }

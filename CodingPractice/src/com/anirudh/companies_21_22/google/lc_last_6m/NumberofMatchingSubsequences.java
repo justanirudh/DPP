@@ -68,8 +68,8 @@ public class NumberofMatchingSubsequences {
             char startingChar = word.charAt(0);
             map.get(startingChar).add(new Subseq(word, 0));
         }
-        int res = 0;
 
+        int res = 0;
         for(char c : s.toCharArray()) {
             List<Subseq> waiting = map.get(c);
             map.put(c, new ArrayList<>()); //reset list first, so that if there are repeating letters, they are added back
@@ -86,28 +86,28 @@ public class NumberofMatchingSubsequences {
         }
         return res;
     }
+
+ //-----------------------------------   //    //Gives TLE
+    boolean isSubsequence(String string, String sub) {
+        int subI = 0;
+        for(int i = 0; i < string.length(); ++i) {
+            if(subI == sub.length()) {
+                return true;
+            }
+            if(string.charAt(i) == sub.charAt(subI)) {
+                subI++;
+            }
+        }
+        return subI == sub.length();
+    }
+
+    public int numMatchingSubseqSlow(String s, String[] words) {
+        int count = 0;
+        for(String word : words) {
+            if(isSubsequence(s, word))
+                count++;
+        }
+        return count;
+    }
 }
 
-
-//    //Gives TLE
-//    boolean isSubsequence(String string, String sub) {
-//        int subI = 0;
-//        for(int i = 0; i < string.length(); ++i) {
-//            if(subI == sub.length()) {
-//                return true;
-//            }
-//            if(string.charAt(i) == sub.charAt(subI)) {
-//                subI++;
-//            }
-//        }
-//        return subI == sub.length();
-//    }
-//
-//    public int numMatchingSubseq(String s, String[] words) {
-//        int count = 0;
-//        for(String word : words) {
-//            if(isSubsequence(s, word))
-//                count++;
-//        }
-//        return count;
-//    }

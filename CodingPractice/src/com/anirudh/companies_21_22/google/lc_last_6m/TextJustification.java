@@ -95,16 +95,16 @@ public class TextJustification {
         return addSpacesAtTheEnd(sb.toString().trim());
     }
 
-    int getWordsForLine(int l) {
-        int r = l;
-        int len = words[r].length();
-        while (len <= maxWidth && r < words.length - 1) {
-            r++;
-            len += words[r].length() + 1; // word + 1 space
+    int getWordsForLine(int left) {
+        int right = left;
+        int len = words[right].length(); // no space added
+        while (len <= maxWidth && right < words.length - 1) {
+            right++;
+            len += 1 + words[right].length(); // 1 space + word
         }
-        if (len > maxWidth) // if right has reached end of all strings, dont decrement right
-            r--;
-        return r;
+        if (len > maxWidth) // but if right has reached end of all strings (right >= words.length - 1), dont decrement right
+            right--;
+        return right;
     }
 
     public List<String> fullJustify(String[] words, int maxWidth) {

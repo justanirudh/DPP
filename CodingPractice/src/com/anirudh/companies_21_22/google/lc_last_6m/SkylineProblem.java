@@ -57,6 +57,7 @@ Submissions
 /*
 https://www.youtube.com/watch?v=GSBLe8cKu0s
 
+0. Create Points {x, isStart, height}
 1. Sort the buildings based on these rules:
 1.1 if x are diff, x1 < x2
 1.2 if x are same
@@ -87,13 +88,13 @@ public class SkylineProblem {
         public int compare(Point a, Point b) {
             if (a.x != b.x) {
                 return a.x - b.x;
-            } else {
+            } else { //x are same
                 if (a.isStart && b.isStart) { //both starts
-                    return b.height - a.height; // decreasing order of height
+                    return b.height - a.height; // decreasing order of height, so that max height remains same after addition of smaller height
                 } else if (!a.isStart && !b.isStart) { //both ends
-                    return a.height - b.height; //increasing order of height
+                    return a.height - b.height; //increasing order of height, so that max height changes after addition of bigger height
                 } else if (a.isStart) {
-                    return -1; //put a before b
+                    return -1; //put a before b; always put start before end so that the next reading does not go to the floor and start is already there in the map to hold the fort
                 } else
                     return 1;
             }
@@ -108,11 +109,11 @@ public class SkylineProblem {
         }
         points.sort(new ComparePoints());
 
-        TreeMap<Integer, Integer> heights = new TreeMap<>(); //use treemap as need lastKey()
+        TreeMap<Integer, Integer> heights = new TreeMap<>(); //use treemap as need lastKey(); height -> frequency
         heights.put(0, 1); //base case
         List<List<Integer>> res = new ArrayList<>();
 
-        int prevMax = heights.lastKey(); //heighest key of the map = 0 right now
+        int prevMax = heights.lastKey(); //highest key of the map = 0 right now
         for (Point p : points) { //go from left to right in points
             if (p.isStart) {
                 heights.put(p.height, heights.getOrDefault(p.height, 0) + 1);
@@ -122,7 +123,7 @@ public class SkylineProblem {
                     heights.remove(p.height);
             }
             int currMax = heights.lastKey();
-            if(currMax != prevMax) { //less than or greater than
+            if(currMax != prevMax) { //if maximum height changed because of addition/deletion, add to res
                 res.add(Arrays.asList(p.x, currMax));
                 prevMax = currMax;
             }

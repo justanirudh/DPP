@@ -48,7 +48,7 @@ class ReconstructItinerary {
         flights = new HashMap<>();
         path = new ArrayDeque<>();
 
-        //create graph
+        //create a DAG
         for (List<String> ticket : tickets) {
             flights.putIfAbsent(ticket.get(0), new PriorityQueue<>()); //create a priority queue which always has lexicographically lowest elem as the 1st elem
             flights.get(ticket.get(0)).offer(ticket.get(1));

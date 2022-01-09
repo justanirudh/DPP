@@ -32,18 +32,18 @@ Proof here (easy): https://leetcode.com/problems/gas-station/solution/
 public class GasStations {
 
     public int canCompleteCircuit(int[] gas, int[] cost) {
-        int totalGasLeft = 0;
+        int totGasLeft = 0;
         int currGasLeft = 0;
         int startStation = 0;
         for (int i = 0; i < gas.length; ++i) {
-            totalGasLeft += gas[i] - cost[i];
+            totGasLeft += gas[i] - cost[i];
             currGasLeft += gas[i] - cost[i];
             if (currGasLeft < 0) {
                 currGasLeft = 0;
                 startStation = i + 1;
             }
         }
-        return totalGasLeft >= 0 ? startStation : -1;
+        return totGasLeft >= 0 ? startStation : -1;
     }
 
     public static int canCompleteCircuitSlow(int[] gas, int[] cost) {

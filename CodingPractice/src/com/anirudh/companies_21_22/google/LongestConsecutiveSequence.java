@@ -43,7 +43,7 @@ public class LongestConsecutiveSequence {
                 int curr = num;
                 while (numSet.contains(curr)) {
                     count++;
-                    curr = curr + 1;
+                    curr++;
                 }
                 max = Math.max(max, count);
             }

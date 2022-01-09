@@ -52,9 +52,10 @@ yi + yj + |xi - xj| = yi + yj + xj - xi (as xj > xi for j < i)
 
 Sliding window problem: need to keep the window such that xj - xi <= k
 
-Deque has int[(yi-xi), xi].
-    1st elem is used to remove elems from tail such that we have decreasing order of (yi-xi) from start to end
-    2nd elem is used to remove elem from head such that (xj-xi) remains <=k
+Deque has int[xi, (yi-xi)].
+    1st elem is used to remove elem from head such that (xj-xi) remains <=k
+    2nd elem is used to remove elems from tail such that we have decreasing order of (yi-xi) from start to end
+
 Deque has elems in decreasing order of yi-xi from head to tail
 
 when a new elem comes in: xj,yj
@@ -64,21 +65,21 @@ when a new elem comes in: xj,yj
  */
 public class MaxValueofEquation {
     public int findMaxValueOfEquation(int[][] points, int k) {
-        Deque<List<Integer>> richPoints = new ArrayDeque<>(); //int[(yi-xi), xi]
+        Deque<List<Integer>> richPoints = new ArrayDeque<>(); //int[xi, (yi-xi)]
         int max = Integer.MIN_VALUE;
         for (int[] point : points) {
             //first remove all that are no longer valid from head
-            while (!richPoints.isEmpty() && point[0] - richPoints.peekFirst().get(1) > k) { // while xj-xi > k
+            while (!richPoints.isEmpty() && point[0] - richPoints.peekFirst().get(0) > k) { // while xj-xi > k
                 richPoints.pollFirst();
             }
             if (!richPoints.isEmpty()) {
-                max = Math.max(max, richPoints.peekFirst().get(0) + point[0] + point[1]); // (yi-xi) + xj + yj
+                max = Math.max(max, richPoints.peekFirst().get(1) + point[0] + point[1]); // (yi-xi) + xj + yj
             }
             //remove smaller elems(yi-xi) from tail
-            while (!richPoints.isEmpty() && richPoints.peekLast().get(0) < point[1] - point[0]) { //if peek(yi-xi) < yj-xj, remove
+            while (!richPoints.isEmpty() && richPoints.peekLast().get(1) < point[1] - point[0]) { //if peek(yi-xi) < yj-xj, remove
                 richPoints.pollLast();
             }
-            richPoints.offer(Arrays.asList(point[1] - point[0], point[0])); //add {yi-xi, xi}
+            richPoints.offer(Arrays.asList(point[0], point[1] - point[0])); //add {xi, yi-xi}
         }
         return max;
     }

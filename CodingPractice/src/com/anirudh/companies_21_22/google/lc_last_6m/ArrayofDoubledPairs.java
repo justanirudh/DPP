@@ -52,15 +52,15 @@ public class ArrayofDoubledPairs {
         List<Integer> sorted = Arrays.stream(arr).boxed().sorted().collect(Collectors.toList());
 
         Map<Integer, Integer> state = new HashMap<>(); // number -> frequency
-        for (int a : sorted) {
-            int find = (a >= 0) ? (a / 2) : (a * 2);
-            if ((a >= 0 && a % 2 != 0) || !state.containsKey(find)) { //is +ve odd or {a/2,2a} not present
-                state.put(a, state.getOrDefault(a, 0) + 1);
+        for (int elem : sorted) {
+            int complement = (elem >= 0) ? (elem / 2) : (elem * 2);
+            if ((elem >= 0 && elem % 2 != 0) || !state.containsKey(complement)) { //is +ve odd(odd required because 3/2 = 1 which can be in map and give false positive; +ve required because {-6,-3} will give false negative ) or complement not present
+                state.put(elem, state.getOrDefault(elem, 0) + 1);
             } else { //is even and a/2 or a*2 is present
-                if (state.containsKey(find)) //has its complement
-                    state.put(find, state.get(find) - 1);
-                if (state.get(find) == 0) //if got its complement, remove from map, so it doesnt disturb next pair
-                    state.remove(find);
+                if (state.containsKey(complement)) //has its complement
+                    state.put(complement, state.get(complement) - 1);
+                if (state.get(complement) == 0) //if got its complement, remove from map, so it doesnt disturb next pair
+                    state.remove(complement);
             }
         }
         return state.isEmpty();

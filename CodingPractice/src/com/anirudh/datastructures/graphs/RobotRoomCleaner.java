@@ -110,7 +110,7 @@ public class RobotRoomCleaner {
         robot.turnRight(); //is now facing in the original direction
     }
 
-    void backtrack(int[] curr, int dir) {
+    void dfs(int[] curr, int dir) {
         robot.clean();
         visited.add(curr);
         for (int i = 0; i < 4; ++i) {
@@ -119,7 +119,7 @@ public class RobotRoomCleaner {
             int nextCol = curr[1] + dy[nextDir];
             int[] nextCell = {nextRow, nextCol};
             if (!visited.contains(nextCell) && robot.move()) {
-                backtrack(nextCell, nextDir);
+                dfs(nextCell, nextDir);
                 comeBack(); //come back to current cell and face in the current direction again
             }
             robot.turnRight(); //turn clockwise
@@ -130,6 +130,6 @@ public class RobotRoomCleaner {
         this.robot = robot;
         visited = new HashSet<>();
         int[] start = {0, 0};
-        backtrack(start, 0);
+        dfs(start, 0);
     }
 }
