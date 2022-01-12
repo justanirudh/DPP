@@ -1,11 +1,9 @@
 package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
+import com.anirudh.companies_21_22.facebook.lc_last_6m.anki.BTVerticalOrderTraversal;
 import com.anirudh.datastructures.trees.TreeNode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by paanir on 1/1/18.
@@ -69,66 +67,53 @@ Each node'number value will be between 0 and 1000.
  */
 
 class VerticalOrderTraversalBT {
+    static class RichNode {
+        int val;
+        int x;
+        int y;
 
-    class Location {
-        int x, y, val;
-
-        Location(int x, int y, int val) {
+        RichNode(int val, int x, int y) {
+            this.val = val;
             this.x = x;
             this.y = y;
-            this.val = val;
         }
     }
 
-    public void preOrderTraversal(TreeNode node, int x, int y) {
-        if (node != null) {
-            locations.add(new Location(x, y, node.val));
-            preOrderTraversal(node.left, x - 1, y + 1);
-            preOrderTraversal(node.right, x + 1, y + 1);
+    Queue<RichNode> order;
+
+    static class CompareRichNodes implements Comparator<RichNode> {
+        public int compare(RichNode n1, RichNode n2) {
+            if (n1.x != n2.x)
+                return n1.x - n2.x; //x from left to right
+            else if (n1.y != n2.y)
+                return n2.y - n1.y; // y should be top to down
+            else
+                return n1.val - n2.val;
         }
     }
 
-    List<Location> locations;
+    void preOrder(TreeNode node, int x, int y) {
+        if (node == null)
+            return;
+        order.offer(new RichNode(node.val, x, y));
+        preOrder(node.left, x - 1, y - 1);
+        preOrder(node.right, x + 1, y - 1);
+    }
 
     public List<List<Integer>> verticalTraversal(TreeNode root) {
-        // Each location is a node'number x position, y position, and value
-        locations = new ArrayList<>();
-
-        preOrderTraversal(root, 0, 0); // populate Locations list
-
-        //TODO: For Problem 314, instead of comparing values in last "else",
-        // compare left node vs right node. One wa to do it is pass path to ndoes as you go
-        // Eg. "LLR" vs "LRL", first one would take precedence
-
-        locations.sort((o1, o2) -> {
-            if (o1.x != o2.x) //first check x
-                return Integer.compare(o1.x, o2.x);
-            else if (o1.y != o2.y) //then check y
-                return Integer.compare(o1.y, o2.y);
-            else //then check value
-                return Integer.compare(o1.val, o2.val);
-        });//sort it
-
-        /*
-        After that, the impl is simple. just go through sorted array and lump objects with same x value together
-         */
-
-        List<List<Integer>> ans = new ArrayList<>();
-        ans.add(new ArrayList<>());
-
-        int prev = locations.get(0).x;
-
-        for (Location loc : locations) {
-            // If the x value changed, it'number part of a new report.
-            if (loc.x != prev) {
-                prev = loc.x;
-                ans.add(new ArrayList<>());
-            }
-
-            // We always add the node'number value to the latest report.
-            ans.get(ans.size() - 1).add(loc.val);
+        order = new PriorityQueue<>(new CompareRichNodes());
+        // do preOrder
+        preOrder(root, 0, 0); //nlogn as inserting into PQ
+        //create result
+        List<List<Integer>> res = new ArrayList<>();
+        int prevX = Integer.MIN_VALUE;
+        while (!order.isEmpty()) {
+            RichNode n = order.poll();
+            if (n.x > prevX) //start of new list
+                res.add(new ArrayList<>());
+            res.get(res.size() - 1).add(n.val);
+            prevX = n.x;
         }
-
-        return ans;
+        return res;
     }
 }

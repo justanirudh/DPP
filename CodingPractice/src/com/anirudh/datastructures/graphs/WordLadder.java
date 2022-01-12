@@ -29,7 +29,7 @@ All words contain only lowercase alphabetic characters.
  */
 
 /*
- * BFS to find the shortest distance
+ * BFS to find the shortest distance (For BFS, always mark as visited before putting in queue)
  * All words of same length
  * 1. Create a patternMap of pattern -> words matching the pattern
  * 1.1 For each word, put asterix in each position (use substring)

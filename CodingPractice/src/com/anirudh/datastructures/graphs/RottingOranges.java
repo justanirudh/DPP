@@ -1,9 +1,6 @@
 package com.anirudh.datastructures.graphs;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 /*
 994. Rotting Oranges
@@ -50,6 +47,10 @@ public class RottingOranges {
     int[] dx = {0, 0, -1, 1};
     int[] dy = {-1, 1, 0, 0};
 
+    boolean isValid(int x, int y) {
+        return x >= 0 && x < grid.length && y >= 0 && y < grid[0].length;
+    }
+
     public int orangesRotting(int[][] grid) {
         this.grid = grid;
         int maxTime = Integer.MIN_VALUE;
@@ -58,17 +59,12 @@ public class RottingOranges {
         for (int i = 0; i < grid.length; ++i) {
             for (int j = 0; j < grid[0].length; ++j) {
                 if (grid[i][j] == 2) {
-                    List<Integer> point = new ArrayList<>();
-                    point.add(i); //x
-                    point.add(j); //y
-                    point.add(0); //distance
-                    queue.offer(point);
-                }
-                if(grid[i][j] == 1)
+                    queue.offer(Arrays.asList(i, j, 0)); //x,y,time
+                } else if (grid[i][j] == 1)
                     allRotten = false;
             }
         }
-        if(allRotten)
+        if (allRotten)
             return 0;
         //queue has all rotten oranges
         while (!queue.isEmpty()) {
@@ -76,14 +72,10 @@ public class RottingOranges {
             for (int i = 0; i < 4; ++i) {
                 int x = curr.get(0) + dx[i];
                 int y = curr.get(1) + dy[i];
-                if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length && grid[x][y] == 1) {
+                if (isValid(x, y) && grid[x][y] == 1) { //grid[x][y] == 1 acts as visited set
                     grid[x][y] = 2; //change to rotten
-                    List<Integer> next = new ArrayList<>();
-                    next.add(x);
-                    next.add(y);
                     int time = curr.get(2) + 1;
-                    next.add(time);
-                    queue.offer(next); //add to queue
+                    queue.offer(Arrays.asList(x, y, time)); //x,y, time of current + 1
                     maxTime = Math.max(maxTime, time);
                 }
             }
@@ -92,7 +84,7 @@ public class RottingOranges {
         for (int i = 0; i < grid.length; ++i) {
             for (int j = 0; j < grid[0].length; ++j) {
                 if (grid[i][j] == 1)
-                    return -1;
+                    return -1; //if any fresh remaining
             }
         }
         return maxTime;
