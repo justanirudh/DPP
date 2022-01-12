@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 /*
 138. Copy List with Random Pointer
@@ -93,7 +93,7 @@ public class CopyListwithRandomPointer {
         Node prev = null;
         Node headNew = null;
         int i = 0;
-        while (currOld != null) {
+        while (currOld != null) { //make next nodes
             oldNodeToIdx.put(currOld, i);
             Node n = new Node(currOld.val);
             idxToNewNode.put(i, n);
@@ -108,7 +108,7 @@ public class CopyListwithRandomPointer {
             i++;
         }
 
-        Node curr = headNew;
+        Node curr = headNew; //correct random nodes now
         while (curr != null) {
             Node randomOld = curr.random;
             curr.random = idxToNewNode.get(oldNodeToIdx.get(randomOld));

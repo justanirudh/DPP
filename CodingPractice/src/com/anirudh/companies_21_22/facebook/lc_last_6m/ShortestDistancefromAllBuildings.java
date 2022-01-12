@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 /*
 317. Shortest Distance from All Buildings
@@ -61,17 +61,15 @@ import java.util.*;
 
 /*
 - Do sequential BFS from all buildings (as need visited set for each) and find shortest distance of each cell from each building
-    - Sum them all as you traverse
+    - Sum them all as you traverse to find total shortest
     - OPTIMIZATION: Create a new cumulative visited matrix. Increment cell everytime a building reaches it. For the
     BFS of the next building, use a filter of num_visited from the previous traversal
-    - This way, only those cells vsisted in the last building traversal will be visited in this traversal, so on and so forth
-- To make sure a valid cell can be reached by all buildings, make a Map {coordinate -> #buildings}
--- Only when #buildings is total buildings for a cell is it a valid cell
+    - This way, only those cells visited in the last building traversal will be visited in this traversal, so on and so forth
+- Count all buildings. Only when #buildings is total buildings for a cell is it a valid cell
+
 1. convert all obstacles to -2 to not interrupt in counting distances, all buildings to -1
-2. count all buildings
-3. Do sequential BFS from all buildings (as need visited set for each) and find shortest distance of each cell from each building and sum them up
-    Create Map {coordinate -> Set<visited>} so that each building has its own visited map
-    To make sure a valid cell can be reached by all buildings, make a Map {coordinate -> #buildings}
+2. Do sequential BFS from all buildings (as need visited set for each) and find shortest distance of each cell from each building and sum them up
+    To make sure a valid cell can be reached by all buildings, check cumVisited[i][j] == totalBuildings at the end
 4. Go through matrix, if the cell is a valid cell that can be reached by all buildings, it is a contender for min distance
  */
 public class ShortestDistancefromAllBuildings {
@@ -104,7 +102,7 @@ public class ShortestDistancefromAllBuildings {
         }
         this.grid = grid; //initialize after the changes above
 
-        int[][] cumulativeVisited = new int[grid.length][grid[0].length];
+        int[][] cumulativeVisited = new int[grid.length][grid[0].length]; //initially all 0s
         int currVisitedVal = -1;
 
         while (!buildingsQ.isEmpty()) {
@@ -113,7 +111,7 @@ public class ShortestDistancefromAllBuildings {
             Queue<List<Integer>> q = new ArrayDeque<>();
             q.offer(building); //has x,y,dist
 
-            currVisitedVal++;
+            currVisitedVal++; //becomes 0 for first building
 
             while (!q.isEmpty()) {
                 List<Integer> cell = q.poll();
@@ -125,7 +123,6 @@ public class ShortestDistancefromAllBuildings {
                         int dist = cell.get(2) + 1;
                         q.offer(Arrays.asList(x, y, dist)); //add to queue with new dist
                         grid[x][y] += dist; //add distance from current building
-
                     }
                 }
             }

@@ -1,6 +1,5 @@
 package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
-import com.anirudh.companies_21_22.facebook.lc_last_6m.anki.BTVerticalOrderTraversal;
 import com.anirudh.datastructures.trees.TreeNode;
 
 import java.util.*;

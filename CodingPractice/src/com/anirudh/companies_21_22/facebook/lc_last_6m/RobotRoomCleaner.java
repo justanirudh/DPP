@@ -1,4 +1,9 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /*
 489. Robot Room Cleaner
@@ -71,5 +76,62 @@ room[i][j] is either 0 or 1.
 room[row][col] == 1
 All the empty cells can be visited from the starting position.
  */
+/*
+DFS + backtracking
+- Doesnt matter where you start as we have .move() to tell us if we hit a wall or not
+- Pick a direction: left or right. And always turn that way after exploring the current dir
+- Picking right -> going clockwise
+ */
 public class RobotRoomCleaner {
+    interface Robot {
+        // returns true if next cell is open and robot moves into the cell.
+        // returns false if next cell is obstacle and robot stays on the current cell.
+        boolean move();
+
+        // Robot will stay on the same cell after calling turnLeft/turnRight.
+        // Each turn will be 90 degrees.
+        void turnLeft();
+
+        void turnRight();
+
+        // Clean the current cell.
+        void clean();
+    }
+
+    //----------up, right, down, left: going clockwise, hence this order
+    int[] dx = {-1, 0, 1, 0};
+    int[] dy = {0, 1, 0, -1};
+    Robot robot;
+    Set<List<Integer>> visited;
+
+    void comeBack() {
+        robot.turnRight();
+        robot.turnRight();
+        robot.move(); //is now in previous cell but facing in the opposite direction
+        robot.turnRight();
+        robot.turnRight(); //is now facing in the original direction
+    }
+
+    void dfs(List<Integer> curr, int dir) {
+        robot.clean();
+        visited.add(curr);
+        for (int i = 0; i < 4; ++i) {
+            int nextDir = (dir + i) % 4; // i is the offset from the current dir; this calculation makes it so that nextRow and nextCol become compatible with the turn we took at the end of previous loop
+            int nextRow = curr.get(0) + dx[nextDir];
+            int nextCol = curr.get(1) + dy[nextDir];
+            List<Integer> nextCell = Arrays.asList(nextRow, nextCol);
+            if (!visited.contains(nextCell) && robot.move()) {
+                dfs(nextCell, nextDir);
+                comeBack(); //come back to current cell and face in the current direction again
+            }
+            robot.turnRight(); //turn clockwise
+        }
+    }
+
+    public void cleanRoom(Robot robot) {
+        this.robot = robot;
+        visited = new HashSet<>();
+        List<Integer> start = Arrays.asList(0, 0);
+        dfs(start, 0);
+    }
 }

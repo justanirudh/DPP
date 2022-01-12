@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,6 +78,7 @@ Constraints:
 0 <= s.length <= 200
 s consists of English letters (lower-case and upper-case), digits (0-9), ' ', '+', '-', and '.'.
  */
+
 /*
 Create DFA
 Use good logic to find if we reached INT_MAX/INT_MIN
@@ -94,10 +95,10 @@ public class StringtoInteger {
                 res = Integer.MAX_VALUE;
             } else {
                 res = Integer.MIN_VALUE;
-                isPositive = true; //so that at the end we dont multiple -ve * -ve to make it positive
+                isPositive = true; //so that at the end we dont multiple -ve * -ve to make it positive again
             }
             return "default"; //halt execution
-        } else {
+        } else { //happy case
             res = res * 10 + d;
             return "digit";
         }

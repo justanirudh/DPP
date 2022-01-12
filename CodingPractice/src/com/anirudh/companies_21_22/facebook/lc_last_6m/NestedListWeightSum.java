@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 import java.util.List;
 
@@ -46,9 +46,14 @@ The values of the integers in the nested list is in the range [-100, 100].
 The maximum depth of any integer is less than or equal to 50.
  */
 
+/*
+if isInteger, return depth, else iterate through list with depth + 1
+ */
+
+interface NestedInteger {
 // This is the interface that allows for creating nested lists.
 // You should not implement it, or speculate about its implementation
-interface NestedInteger {
+
 //    // Constructor initializes an empty nested list.
 //    public NestedInteger();
 //
