@@ -62,6 +62,9 @@ import java.util.*;
 /*
 - Do sequential BFS from all buildings (as need visited set for each) and find shortest distance of each cell from each building
     - Sum them all as you traverse
+    - OPTIMIZATION: Create a new cumulative visited matrix. Increment cell everytime a building reaches it. For the
+    BFS of the next building, use a filter of num_visited from the previous traversal
+    - This way, only those cells vsisted in the last building traversal will be visited in this traversal, so on and so forth
 - To make sure a valid cell can be reached by all buildings, make a Map {coordinate -> #buildings}
 -- Only when #buildings is total buildings for a cell is it a valid cell
 1. convert all obstacles to -2 to not interrupt in counting distances, all buildings to -1
@@ -101,7 +104,8 @@ public class ShortestDistancefromAllBuildings {
         }
         this.grid = grid; //initialize after the changes above
 
-        Map<List<Integer>, Integer> cellToNumBuildings = new HashMap<>();
+        int[][] cumulativeVisited = new int[grid.length][grid[0].length];
+        int currVisitedVal = -1;
 
         while (!buildingsQ.isEmpty()) {
             List<Integer> building = buildingsQ.poll();
@@ -109,34 +113,29 @@ public class ShortestDistancefromAllBuildings {
             Queue<List<Integer>> q = new ArrayDeque<>();
             q.offer(building); //has x,y,dist
 
-            Set<List<Integer>> visited = new HashSet<>(); //has x,y
-            visited.add(Arrays.asList(building.get(0), building.get(1))); //always mark visited BEFORE putting in queue
+            currVisitedVal++;
 
             while (!q.isEmpty()) {
                 List<Integer> cell = q.poll();
                 for (int i = 0; i < 4; ++i) {
                     int x = cell.get(0) + dx[i];
                     int y = cell.get(1) + dy[i];
-                    List<Integer> coord = Arrays.asList(x, y);
-                    if (isValid(x, y) && isNotBuildOrObs(x, y) && !visited.contains(coord)) { //valid, not a building, not an obstacle, not visited
-                        visited.add(coord); //mark visited before putting in queue!
+                    if (isValid(x, y) && isNotBuildOrObs(x, y) && cumulativeVisited[x][y] == currVisitedVal) { //valid, not a building, not an obstacle, not visited
+                        cumulativeVisited[x][y]++; //mark visited before putting in queue!
                         int dist = cell.get(2) + 1;
                         q.offer(Arrays.asList(x, y, dist)); //add to queue with new dist
                         grid[x][y] += dist; //add distance from current building
-                        cellToNumBuildings.put(coord, cellToNumBuildings.getOrDefault(coord, 0) + 1); //to count per cell later on
 
                     }
                 }
             }
-
         }
 
         //grid is populated with sum of distances. Now get max while making sure the cell can reached by all buildings
         int res = Integer.MAX_VALUE;
         for (int i = 0; i < grid.length; ++i) {
             for (int j = 0; j < grid[0].length; ++j) {
-                List<Integer> coord = Arrays.asList(i, j);
-                if (isNotBuildOrObs(i, j) && cellToNumBuildings.get(coord) != null && cellToNumBuildings.get(coord) == totBuildings) {
+                if (isNotBuildOrObs(i, j) && cumulativeVisited[i][j] == totBuildings) {
                     res = Math.min(res, grid[i][j]);
                 }
             }
