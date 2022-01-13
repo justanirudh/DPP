@@ -39,16 +39,30 @@ Explanation:
 //same as boundary traversal
 public class BinaryTreeRightSideVIew {
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> r = new ArrayList<>();
+        if (root == null)
+            return r;
+        Deque<TreeNode> dq = new ArrayDeque<>();
+        dq.offer(root);
+        int size = 0;
 
-        TreeNode(int x) {
-            val = x;
+        while (!dq.isEmpty()) {
+            size = dq.size();
+            TreeNode cur = null;
+            for (int i = 0; i < size; ++i) {
+                cur = dq.poll();
+                if (cur.left != null)
+                    dq.offer(cur.left);
+                if (cur.right != null)
+                    dq.offer(cur.right);
+            }
+            r.add(cur.val);
         }
+        return r;
     }
 
+    //------------------------------------------------------------------------------
     class NodeWithHeight {
         int height;
         TreeNode node;
@@ -88,28 +102,5 @@ public class BinaryTreeRightSideVIew {
                 queue.add(new NodeWithHeight(curr.node.right, curr.height + 1));
         }
         return rightSides;
-    }
-
-    //------------------------------------------------------------------------------
-
-    public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> r = new ArrayList<>();
-        if (root == null) return r;
-        Deque<TreeNode> dq = new ArrayDeque<>();
-        dq.offer(root);
-        TreeNode cur;
-        int size = 0;
-
-        while (!dq.isEmpty()) {
-            size = dq.size();
-            cur = null;
-            for (int i = 0; i < size; ++i) {
-                cur = dq.poll();
-                if (cur.left != null) dq.offer(cur.left);
-                if (cur.right != null) dq.offer(cur.right);
-            }
-            r.add(cur.val);
-        }
-        return r;
     }
 }
