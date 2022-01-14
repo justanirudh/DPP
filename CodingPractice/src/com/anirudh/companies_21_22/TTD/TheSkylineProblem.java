@@ -57,8 +57,8 @@ Submissions
 /*
 https://www.youtube.com/watch?v=GSBLe8cKu0s
 
-1. Sort the buildings based on these rules:
-1.1 if x are diff, x1 < x2
+1. Sort the building points (x,y,isStart) based on these rules:
+1.1 [MAIN] if x are diff, x1 < x2
 1.2 if x are same
 1.2.1 if both are start, h1 > h2
 1.2.2 if both are end, h1 < h2
@@ -68,7 +68,7 @@ https://www.youtube.com/watch?v=GSBLe8cKu0s
 3. Iterate from sorted array and put them in treemap
 4. if it is start, add to map; if it is end, remove from map
 5. after addition/deletion from map, if newMaxHeight != prevMaxHeight
-5.1 res.add(x, newMaxHeight)
+5.1 res.add(curr.x, newMaxHeight)
  */
 public class TheSkylineProblem {
     class Point {
@@ -87,12 +87,12 @@ public class TheSkylineProblem {
         public int compare(Point a, Point b) {
             if (a.x != b.x) {
                 return a.x - b.x;
-            } else {
-                if (a.isStart && b.isStart) { //both starts
-                    return b.height - a.height; // decreasing order of height
-                } else if (!a.isStart && !b.isStart) { //both ends
+            } else { //x are same
+                if (a.isStart && b.isStart) { //both starts, decreasing order of heights
+                    return b.height - a.height;
+                } else if (!a.isStart && !b.isStart) { //both ends, increasing order of heights
                     return a.height - b.height;
-                } else if (a.isStart) {
+                } else if (a.isStart) { //if 1s and 1e, put s before e
                     return -1; //put a before b
                 } else
                     return 1;

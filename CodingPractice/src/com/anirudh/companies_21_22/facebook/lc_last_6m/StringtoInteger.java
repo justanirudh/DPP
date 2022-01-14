@@ -136,7 +136,7 @@ public class StringtoInteger {
         for (char c : s.toCharArray()) {
             if (state == 3)
                 break;
-            Map<String, Integer> states = dfa.get(state);
+            Map<String, Integer> transitions = dfa.get(state);
             String transition;
             if (c == ' ')
                 transition = "space";
@@ -144,12 +144,12 @@ public class StringtoInteger {
                 transition = processDigit(c - '0');
             } else if (c == '+' || c == '-') {
                 transition = "sign";
-                if (states.containsKey(transition) && c == '-') //only if it is a valid transition
+                if (transitions.containsKey(transition) && c == '-') //only if it is a valid transition
                     isPositive = false;
             } else
                 transition = "default";
 
-            state = states.getOrDefault(transition, 3); //if transition doesnt exist, go to dead state
+            state = transitions.getOrDefault(transition, 3); //if transition doesnt exist, go to dead state
         }
 
         return isPositive ? res : -1 * res;

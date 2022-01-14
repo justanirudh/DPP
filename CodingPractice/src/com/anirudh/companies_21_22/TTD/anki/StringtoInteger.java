@@ -85,6 +85,7 @@ option 1: follow all the rules
     7. check if it can overflow or underflow
     8. parseInt and return
 option 2: Create a DFA: https://leetcode.com/problems/string-to-integer-atoi/solution/
+: Look at facebook's question implementation
  */
 public class StringtoInteger {
     String INTMAX = "2147483647";

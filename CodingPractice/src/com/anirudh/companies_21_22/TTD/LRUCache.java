@@ -63,11 +63,11 @@ public class LRUCache extends LinkedHashMap<Integer, Integer> {
     }
 
     public int get(int key) {
-        return getOrDefault(key, -1);
+        return super.getOrDefault(key, -1);
     }
 
     public void put(int key, int value) {
-        put(key, value);
+        super.put(key, value);
     }
 
     @Override

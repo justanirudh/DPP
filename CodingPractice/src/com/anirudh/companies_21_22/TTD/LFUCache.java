@@ -84,10 +84,10 @@ Put(k,v):
             add it cache
             add it to LRUMap, added in {1 -> DLL} using addFirst()
         if we have reached capacity
-            minFreq = 1
             Go to LRUMap{minFreq -> DLL}, Do removeLast()
             Remove from Cache
             add new Node to cache
+            minFreq = 1
             add it to LRUMap, added in {1 -> DLL} using addFirst()
 Get(k):
     if k doesnt exist in cache
@@ -205,6 +205,8 @@ public class LFUCache {
         if (cacheMap.size() == capacity) {
             DLL dll = freqMap.get(minFreq);
             QNode qn = dll.removeLast(); //LRU
+            if(dll.size == 0)
+                freqMap.remove(minFreq);
             cacheMap.remove(qn.k);
         }
         minFreq = 1;
