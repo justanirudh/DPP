@@ -36,31 +36,32 @@ Output: 42
 
 
  */
-/*
-At every node we check
-1. sum starting from the node to one of the leaves
-2. sum that goes through the node to both leaves
-And find pathSum of the two
- */
-//Same as diameter of the tree: #543
-public class BTMaximumPathSum {
 
+//Same as diameter of the tree: 543
+/*
+1. At every node we check the sum starting from left child to leaves and right child to leaves: ls and rs
+2. we update the maxSum by node + rs + ls
+3. we return max(ls,rs) for the recursion
+ */
+class BTMaximumPathSum {
     int pathSum = Integer.MIN_VALUE;
 
-    private int getMaxSumStartingFrom(TreeNode node) {
-        if (node == null)
+    int getMaxSumStartingFrom(TreeNode node) {
+        if(node == null)
             return 0;
 
-        int sumFromLeftChild = Math.max(getMaxSumStartingFrom(node.left), 0); // 0 if we are not taking the branch in case it is negative
-        int sumFromRightChild = Math.max(getMaxSumStartingFrom(node.right), 0);
+        int leftPathSum =  Math.max(getMaxSumStartingFrom(node.left), 0); //take it or dont take it if it is -ve
+        int rightPathSum = Math.max(getMaxSumStartingFrom(node.right), 0);
 
-        pathSum = Math.max(pathSum, node.val + sumFromLeftChild + sumFromRightChild); //pathSum until now vs current sum through node
+        pathSum = Math.max(pathSum, node.val + leftPathSum + rightPathSum);
 
-        return node.val + Math.max(sumFromLeftChild, sumFromRightChild); //return sum starting from node, for recursion
+        return node.val + Math.max(leftPathSum, rightPathSum);
     }
 
     public int maxPathSum(TreeNode root) {
         getMaxSumStartingFrom(root);
         return pathSum;
     }
+
+
 }

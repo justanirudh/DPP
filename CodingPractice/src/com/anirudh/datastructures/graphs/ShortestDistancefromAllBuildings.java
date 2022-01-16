@@ -116,19 +116,18 @@ public class ShortestDistancefromAllBuildings {
             Queue<List<Integer>> q = new ArrayDeque<>();
             q.offer(building); //has x,y,dist
 
-            currVisitedVal++;
+            currVisitedVal++; //increment for each building
 
             while (!q.isEmpty()) {
                 List<Integer> cell = q.poll();
                 for (int i = 0; i < 4; ++i) {
                     int x = cell.get(0) + dx[i];
                     int y = cell.get(1) + dy[i];
-                    if (isValid(x, y) && isNotBuildOrObs(x, y) && cumulativeVisited[x][y] == currVisitedVal) { //valid, not a building, not an obstacle, not visited
+                    if (isValid(x, y) && isNotBuildOrObs(x, y) && cumulativeVisited[x][y] == currVisitedVal) { //valid, not a building, not an obstacle, has been visited in all building traversals before it
                         cumulativeVisited[x][y]++; //mark visited before putting in queue!
                         int dist = cell.get(2) + 1;
                         q.offer(Arrays.asList(x, y, dist)); //add to queue with new dist
                         grid[x][y] += dist; //add distance from current building
-
                     }
                 }
             }

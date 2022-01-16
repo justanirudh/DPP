@@ -54,69 +54,63 @@ However, in the report "[1,5,6]", the node value of 5 comes first since 5 is sma
 Note:
 
 The tree will have between 1 and 1000 nodes.
-Each node's value will be between 0 and 1000.
+Each node'number value will be between 0 and 1000.
+ */
+
+/*
+1. give coordinates to each node as you do preorder traversal in a class called location
+2. in location class, override compareTo() to first check x, then y then left node or right node
+3. to check left, right, pass the path down during preorder traversal
  */
 
 class VerticalOrderTraversalBT {
+    static class RichNode {
+        int val;
+        int x;
+        int y;
 
-    class Location implements Comparable<Location> {
-        int x, y, val;
-
-        Location(int x, int y, int val) {
+        RichNode(int val, int x, int y) {
+            this.val = val;
             this.x = x;
             this.y = y;
-            this.val = val;
-        }
-
-        @Override
-        public int compareTo(Location that) {
-            if (this.x != that.x) //first check x
-                return Integer.compare(this.x, that.x);
-            else if (this.y != that.y) //then check y
-                return Integer.compare(this.y, that.y);
-            else //then check value
-                return Integer.compare(this.val, that.val);
         }
     }
 
-    public void inOrderTraversal(TreeNode node, int x, int y) {
-        if (node != null) {
-            locations.add(new Location(x, y, node.val));
-            inOrderTraversal(node.left, x - 1, y + 1);
-            inOrderTraversal(node.right, x + 1, y + 1);
+    Queue<RichNode> order;
+
+    static class CompareRichNodes implements Comparator<RichNode> {
+        public int compare(RichNode n1, RichNode n2) {
+            if (n1.x != n2.x)
+                return n1.x - n2.x; //x from left to right
+            else if (n1.y != n2.y)
+                return n2.y - n1.y; // y should be top to down
+            else
+                return n1.val - n2.val;
         }
     }
 
-    List<Location> locations;
+    void preOrder(TreeNode node, int x, int y) {
+        if (node == null)
+            return;
+        order.offer(new RichNode(node.val, x, y));
+        preOrder(node.left, x - 1, y - 1);
+        preOrder(node.right, x + 1, y - 1);
+    }
 
     public List<List<Integer>> verticalTraversal(TreeNode root) {
-        // Each location is a node's x position, y position, and value
-        locations = new ArrayList<>();
-
-        inOrderTraversal(root, 0, 0); // populate Locations list
-
-        Collections.sort(locations);//sort it
-
-        /*
-        After that, the impl is simple. just go through sorted array and lump objects with same x value together
-         */
-
-        List<List<Integer>> ans = new ArrayList<>();
-        ans.add(new ArrayList<Integer>());
-
-        int prev = locations.get(0).x;
-
-        for (Location loc : locations) {
-            // If the x value changed, it's part of a new array.
-            if (loc.x != prev) {
-                prev = loc.x;
-                ans.add(new ArrayList<Integer>());
-            }
-            // We always add the node's value to the latest array.
-            ans.get(ans.size() - 1).add(loc.val);
+        order = new PriorityQueue<>(new CompareRichNodes());
+        // do preOrder
+        preOrder(root, 0, 0); //nlogn as inserting into PQ
+        //create result
+        List<List<Integer>> res = new ArrayList<>();
+        int prevX = Integer.MIN_VALUE;
+        while (!order.isEmpty()) {
+            RichNode n = order.poll();
+            if (n.x > prevX) //start of new list
+                res.add(new ArrayList<>());
+            res.get(res.size() - 1).add(n.val);
+            prevX = n.x;
         }
-
-        return ans;
+        return res;
     }
 }
-
