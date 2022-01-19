@@ -29,26 +29,13 @@ Note: You may assume the sum of values in any subtree is in the range of 32-bit 
  */
 public class MostFrequentSubtreeSum {
 
-    class Sum {
-        int sum;
-        int freq;
-        public Sum(int sum) {
-            this.sum = sum;
-            this.freq = 1;
-        }
-
-        void incrementFreq() {
-            freq++;
+    class CompareFrequency implements Comparator<Map.Entry<Integer, Integer>> { // max heap
+        public int compare(Map.Entry<Integer, Integer> a, Map.Entry<Integer, Integer> b) {
+            return b.getValue() - a.getValue();
         }
     }
 
-    class CompareFrequency implements Comparator<Sum> { // max heap
-        public int compare(Sum a, Sum b) {
-            return b.freq - a.freq;
-        }
-    }
-
-    private Map<Integer, Sum> frequency = new HashMap<>(); //make hashmap to count each sum's frequency
+    private Map<Integer, Integer> frequency = new HashMap<>(); //make hashmap to count each sum's frequency
 
     private TreeNode postOrderCreate(TreeNode tn) {
         if (tn == null)
@@ -64,27 +51,25 @@ public class MostFrequentSubtreeSum {
         root.right = rightNode;
 
         //Count frequency of each subtreeSum
-        Sum val = frequency.putIfAbsent(subtreeSum, new Sum(subtreeSum));
-        if (val != null) //subtreeSum mapping was already present
-            frequency.get(subtreeSum).incrementFreq();
+        frequency.put(subtreeSum, frequency.getOrDefault(subtreeSum, 0) + 1);
 
         return root;
     }
 
     private int[] findMostFrequentSums() { //Use max heap to get most frequent sum
-        Queue<Sum> sumMaxHeap = new PriorityQueue<>(new CompareFrequency());
-        for(Sum sum : frequency.values()){
-            sumMaxHeap.offer(sum);
+        Queue<Map.Entry<Integer, Integer>> sumMaxHeap = new PriorityQueue<>(new CompareFrequency());
+        for (Map.Entry<Integer, Integer> e: frequency.entrySet()) {
+            sumMaxHeap.offer(e);
         }
-        int currMax = sumMaxHeap.peek().freq;
+        int currMax = sumMaxHeap.peek().getValue();
 
         List<Integer> res = new ArrayList<>();
 
-        while(!sumMaxHeap.isEmpty()) {
-            Sum currSum = sumMaxHeap.poll();
-            int curr = currSum.freq;
-            if(curr == currMax)
-                res.add(currSum.sum);
+        while (!sumMaxHeap.isEmpty()) {
+            Map.Entry<Integer, Integer> currSum = sumMaxHeap.poll();
+            int curr = currSum.getValue();
+            if (curr == currMax)
+                res.add(currSum.getKey());
             else
                 break;
         }

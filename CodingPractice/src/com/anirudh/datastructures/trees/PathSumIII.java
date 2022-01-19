@@ -59,7 +59,7 @@ public class PathSumIII {
         map.put(runningSum, map.getOrDefault(runningSum, 0) + 1); //add running sum to map
 
         return res +
-                calculatePathSums(new HashMap<>(map), tn.left, runningSum) +
+                calculatePathSums(new HashMap<>(map), tn.left, runningSum) + //so that left doesnt affect right
                 calculatePathSums(new HashMap<>(map), tn.right, runningSum);
 
     }

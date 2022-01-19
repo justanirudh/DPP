@@ -82,9 +82,7 @@ public class ShortestPathGetFood {
                 for (int i = 0; i < 4; ++i) {
                     int x = curr.get(0) + dx[i];
                     int y = curr.get(1) + dy[i];
-                    List<Integer> p = new ArrayList<>();
-                    p.add(x);
-                    p.add(y);
+                    List<Integer> p = Arrays.asList(x,y);
                     if (isValid(x, y) && grid[x][y] != 'X' && !visited.contains(p)) {
                         if (grid[x][y] == '#')
                             return dist + 1;

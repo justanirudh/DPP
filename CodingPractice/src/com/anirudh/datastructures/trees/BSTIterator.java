@@ -32,7 +32,7 @@ public class BSTIterator { //also a BT iterator as not using BST property at all
         populateStack(root);
     }
 
-    public void populateStack(TreeNode node) {
+    private void populateStack(TreeNode node) {
         while (node != null) {
             leftTreeStack.push(node);
             node = node.left;

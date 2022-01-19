@@ -40,7 +40,7 @@ Explanation: Since there are already no fresh oranges at minute 0, the answer is
  */
 
 /**
- * Do a BFS in a matrix
+ * Do a BFS in a matrix; starting with all rotten oranges in the queue
  */
 public class RottingOranges {
     int[][] grid;

@@ -45,10 +45,8 @@ public class BinaryTreeRightSideVIew {
             return r;
         Deque<TreeNode> dq = new ArrayDeque<>();
         dq.offer(root);
-        int size = 0;
-
         while (!dq.isEmpty()) {
-            size = dq.size();
+            int size = dq.size();
             TreeNode cur = null;
             for (int i = 0; i < size; ++i) {
                 cur = dq.poll();

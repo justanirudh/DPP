@@ -47,10 +47,10 @@ class BTMaximumPathSum {
     int pathSum = Integer.MIN_VALUE;
 
     int getMaxSumStartingFrom(TreeNode node) {
-        if(node == null)
+        if (node == null)
             return 0;
 
-        int leftPathSum =  Math.max(getMaxSumStartingFrom(node.left), 0); //take it or dont take it if it is -ve
+        int leftPathSum = Math.max(getMaxSumStartingFrom(node.left), 0); //take it or dont take it if it is -ve
         int rightPathSum = Math.max(getMaxSumStartingFrom(node.right), 0);
 
         pathSum = Math.max(pathSum, node.val + leftPathSum + rightPathSum);

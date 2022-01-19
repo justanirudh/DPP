@@ -61,7 +61,7 @@ public class GameOfLife_Large {
                 int x = cell.get(0) + dx[k];
                 int y = cell.get(1) + dy[k];
                 List<Integer> coords = Arrays.asList(x, y);
-                neighbours.put(coords, neighbours.getOrDefault(coords, 0) + 1);
+                neighbours.put(coords, neighbours.getOrDefault(coords, 0) + 1);//Map {coord -> nuber of 1 neighbours of the coord}
             }
         }
 
