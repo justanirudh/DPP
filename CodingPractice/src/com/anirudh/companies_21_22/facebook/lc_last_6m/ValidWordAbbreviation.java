@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 /*
 408. Valid Word Abbreviation
@@ -75,7 +75,7 @@ public class ValidWordAbbreviation {
                 if (abb == '0')
                     return false;
                 StringBuilder sb = new StringBuilder();
-                while (a < abbr.length() && Character.isDigit(abbr.charAt(a))) {
+                while (a < abbr.length() && Character.isDigit(abbr.charAt(a))) { //calculate number
                     sb.append(abbr.charAt(a));
                     a++;
                 }

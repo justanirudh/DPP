@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 import java.util.*;
 
@@ -43,6 +43,7 @@ All the characters of order are unique.
  */
 
 /*
+Counting Sort
 Make freq map of Map {c -> frequency} from s;
 Now go in order in "order" string, find it in map and add it to result that many number of times
     remove from map after adding

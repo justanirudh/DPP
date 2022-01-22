@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 /*
 Description
@@ -61,7 +61,7 @@ public class MaximumSwap {
         if (p == -1)
             return num;
 
-        int max = Integer.MIN_VALUE;
+        int max = numS.charAt(p) - '0';
         int q = -1;
         for (int i = p + 1; i < numS.length(); ++i) { //2.
             if (numS.charAt(i) - '0' >= max) { //if equal, use the higher index so that the swap is with the least significant digit of number
@@ -69,7 +69,7 @@ public class MaximumSwap {
                 q = i;
             }
         }
-        if (q == -1 || max <= numS.charAt(p) - '0') //if all equal or less than first elem
+        if (q == -1) //if all equal or less than first elem
             return num;
 
         for (int i = 0; i <= p; i++) { //now find 1st index < max, 3.
