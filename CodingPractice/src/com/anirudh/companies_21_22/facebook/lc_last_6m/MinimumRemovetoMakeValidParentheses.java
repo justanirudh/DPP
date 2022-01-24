@@ -61,28 +61,18 @@ import java.util.Deque;
  */
 public class MinimumRemovetoMakeValidParentheses {
 
-    class Paren {
-        char paren;
-        int index;
-
-        Paren(char paren, int index) {
-            this.paren = paren;
-            this.index = index;
-        }
-    }
-
     public String minRemoveToMakeValid(String s) {
-        Deque<Paren> parens = new ArrayDeque<>();
+        Deque<Integer> parens = new ArrayDeque<>();
         for (int i = 0; i < s.length(); ++i) {
             char c = s.charAt(i);
             if (c == '(' || c == ')') {
                 if (c == '(') {
-                    parens.push(new Paren('(', i));
+                    parens.push(i);
                 } else { //if it is closed, check if top of stack is open, if yes, pop it out
-                    if (!parens.isEmpty() && parens.peek().paren == '(') {
+                    if (!parens.isEmpty() && s.charAt(parens.peek()) == '(') {
                         parens.pop();
                     } else {
-                        parens.push(new Paren(')', i));
+                        parens.push(i);
                     }
                 }
             }
@@ -90,7 +80,7 @@ public class MinimumRemovetoMakeValidParentheses {
 
         StringBuilder sb = new StringBuilder(s);
         while (!parens.isEmpty()) {
-            sb.deleteCharAt(parens.pop().index);
+            sb.deleteCharAt(parens.pop());
         }
         return sb.toString();
 

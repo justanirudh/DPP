@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m;
+package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
 
 
 /**
@@ -116,7 +116,7 @@ public class ConvertBSTtoSortedDoublyLinkedList {
             populateStack(curr.right);
             prev = curr;
         }
-        head.left = prev;
+        head.left = prev; //close the loop
         prev.right = head;
         return head;
     }

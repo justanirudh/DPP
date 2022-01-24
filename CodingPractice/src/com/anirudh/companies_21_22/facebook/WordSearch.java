@@ -37,6 +37,10 @@ public class WordSearch {
     boolean[][] visited;
     String word;
 
+    boolean isValid(int x, int y) {
+        return x >= 0 && x < board.length && y >= 0 && y < board[0].length;
+    }
+
     boolean doDFS(int x, int y, int wordIdx) {
         visited[x][y] = true;
         if (wordIdx == word.length())
@@ -44,13 +48,10 @@ public class WordSearch {
         for (int z = 0; z < 4; z++) {
             int nx = x + dx[z];
             int ny = y + dy[z];
-            if (nx >= 0 && nx < board.length && ny >= 0 && ny < board[0].length && !visited[nx][ny]) {
-                char letter = board[nx][ny];
-                if (letter == word.charAt(wordIdx)) {
-                    boolean wordExists = doDFS(nx, ny, wordIdx + 1);
-                    if (wordExists)
-                        return true;
-                }
+            if (isValid(nx, ny) && !visited[nx][ny] && board[nx][ny] == word.charAt(wordIdx)) {
+                boolean wordExists = doDFS(nx, ny, wordIdx + 1);
+                if (wordExists)
+                    return true;
             }
         }
         visited[x][y] = false; //so that it can be used elsewhere

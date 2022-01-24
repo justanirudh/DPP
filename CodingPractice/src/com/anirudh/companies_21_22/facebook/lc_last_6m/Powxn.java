@@ -42,7 +42,7 @@ public class Powxn {
     double fastPower(double x, int n) {
         if (n == 0)
             return 1;
-        double half = fastPower(x, n / 2);
+        double half = fastPower(x, n / 2); //memoization
         if (n % 2 == 0) {
             return half * half;
         } else {

@@ -12,10 +12,11 @@ public class HelloWorld {
 //        System.out.println("91283472332".compareTo("2147483648"));
 //        System.out.println("2147483648".compareTo("91283472332"));
 String s = "\t\tfoo";
-        System.out.println(s.startsWith("\t"));
-        System.out.println(s.substring(1));
-        System.out.println(s.substring(2));
-        System.out.println(Integer.parseInt("-2147483649"));
+//        System.out.println(s.startsWith("\t"));
+//        System.out.println(s.substring(1));
+//        System.out.println(s.substring(2));
+//        System.out.println(Integer.parseInt("-2147483649"));
+        System.out.println('z' - 'a');
 
 //        int n = 3;
 //        for (int i = 0; i < Math.pow(2, n); ++i) {

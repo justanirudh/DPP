@@ -42,7 +42,7 @@ Constraints:
 /*
 1. Going from right to left, find first pair of elems s.t. a[i] < a[i + 1]
     Also means, all elems on the right of a[i] are in decreasing order
-2. Find the smallest elem in [i + 1, n-1] range that is larger than a[i] : say a[j]
+2. Find the smallest elem with the highest index in [i + 1, n-1] range that is larger than a[i] : say a[j]
 3. Swap a[i] and a[j]
     all elems on the right of a[i] are STILL in decreasing order
 4. Reverse elems on the right of a[i]
@@ -56,7 +56,7 @@ public class NextPermutation {
             int mid = start + (end - start) / 2;
             if (num < nums[mid]) {
                 res = mid;
-                start = mid + 1;
+                start = mid + 1; //to find if there is a smaller element or equal elem but higher index
             } else { //num > nums[mid]
                 end = mid - 1;
             }
@@ -86,7 +86,7 @@ public class NextPermutation {
             reverseArray(0, nums.length - 1);
             return;
         }
-        int idx = binarySearch(nums[i - 1], i, nums.length - 1);
+        int idx = binarySearch(nums[i - 1], i, nums.length - 1); //Find the smallest elem in [i + 1, n-1] range that is larger than a[i] : say a[j]
         int temp = nums[i - 1]; //swap
         nums[i - 1] = nums[idx];
         nums[idx] = temp;

@@ -41,7 +41,7 @@ import java.util.Map;
 
 /**
  * Use runningSum and complement
- * Create a hashmap of {runningSum -> number of times it has appeared}
+ * Create a MAP{runningSum -> number of times it has appeared}
  * For every runningSum, check if {runningSum-k} is in map. if it is, add it to the final result
  * Populate hashMap with {runningSum -> number of times it has appeared}
  *

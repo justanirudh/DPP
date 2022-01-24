@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.dp_word_break_II;
+package com.anirudh.companies_21_22.facebook.lc_last_6m.tbd.dp_word_break_II;
 
 /**
  * Created by paanir on 8/29/21.
@@ -44,20 +44,18 @@ import java.util.*;
  */
 public class WordBreakIILC {
     Set<String> wordSet;
-    Map<String, List<String>> breakMap = new HashMap<>(); //Map from a string to list of ways it can be broken down
+    Map<String, List<String>> waysToBreakMap = new HashMap<>(); //Map from a string to list of ways it can be broken down
 
     List<String> getWaysToBreak(String toBeBroken) {
 
         if (toBeBroken.equals("")) { //base case
-            List<String> solutions = new ArrayList<>();
-            solutions.add("");
-            return solutions;
+            return Collections.singletonList("");
         }
 
-        if (breakMap.containsKey(toBeBroken)) { //if already in the map, return
-            return breakMap.get(toBeBroken);
+        if (waysToBreakMap.containsKey(toBeBroken)) { //if already in the map, return
+            return waysToBreakMap.get(toBeBroken);
         } else {
-            breakMap.put(toBeBroken, new ArrayList<>());
+            waysToBreakMap.put(toBeBroken, new ArrayList<>());
         }
 
         for (int i = 1; i <= toBeBroken.length(); ++i) { //check all substrings
@@ -69,14 +67,12 @@ public class WordBreakIILC {
                 List<String> brokenPostfixes = getWaysToBreak(postFix); //sending rest of the String to recurse
 
                 for (String brokenPostfix : brokenPostfixes) { //add it to map
-                    if (brokenPostfix.isEmpty())
-                        breakMap.get(toBeBroken).add(prefix);
-                    else
-                        breakMap.get(toBeBroken).add(prefix + " " + brokenPostfix);
+                    String way = brokenPostfix.isEmpty() ? prefix : prefix + " " + brokenPostfix;
+                    waysToBreakMap.get(toBeBroken).add(way);
                 }
             }
         }
-        return breakMap.get(toBeBroken);
+        return waysToBreakMap.get(toBeBroken);
     }
 
     public List<String> wordBreak(String s, List<String> wordDict) {

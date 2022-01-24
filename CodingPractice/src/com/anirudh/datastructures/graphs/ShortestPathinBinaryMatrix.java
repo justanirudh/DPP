@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m;
+package com.anirudh.datastructures.graphs;
 /*
 1091. Shortest Path in Binary Matrix
 Medium

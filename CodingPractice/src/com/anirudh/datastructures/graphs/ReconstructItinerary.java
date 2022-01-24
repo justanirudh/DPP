@@ -24,11 +24,11 @@ import java.util.*;
 
 class ReconstructItinerary {
 
-    private Map<String, PriorityQueue<String>> flights;
+    private Map<String, Queue<String>> flights;
     private Deque<String> path;
 
     private void doDFS(String departure) {
-        PriorityQueue<String> arrivals = flights.get(departure);
+        Queue<String> arrivals = flights.get(departure);
         while (arrivals != null && !arrivals.isEmpty()) { //arrivals is null if there is no flight FROM the city
             String nextStop = arrivals.poll();
             doDFS(nextStop);

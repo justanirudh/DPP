@@ -31,7 +31,7 @@ public class ProductofArrayExceptSelf {
         //O(1) space, O(n) time [only results array produced, no other space used]
         int[] res = new int[nums.length];
 
-        //res[i] has product of all numbers to its left
+        //res[i] has product of all numbers strictly to its left
         res[0] = 1; //on the left of first elem is 1
         for (int i = 1; i < nums.length; ++i) {
             res[i] = res[i - 1] * nums[i - 1];
@@ -40,8 +40,8 @@ public class ProductofArrayExceptSelf {
         //now multiplying existing values with values to the right of each number
         int rightProduct = 1;
         for (int i = nums.length - 1; i >= 0; --i) {
-            res[i] *= rightProduct;
-            rightProduct *= nums[i]; //now calculate product on the right
+            res[i] = res[i] * rightProduct; //leftproduct * rightproduct
+            rightProduct = rightProduct * nums[i]; //now calculate product on the right
         }
 
         return res;
@@ -52,23 +52,23 @@ public class ProductofArrayExceptSelf {
 
     static int[] productExceptSelf2(int[] nums) {
         //O(n) space, O(n) time
-        int[] lr = new int[nums.length]; //left to right cumulative products
-        int[] rl = new int[nums.length]; //right to left cumulative products
+        int[] left = new int[nums.length]; //left to right cumulative products
+        int[] right = new int[nums.length]; //right to left cumulative products
 
-        lr[0] = nums[0];
+        left[0] = nums[0];
         for (int i = 1; i < nums.length; ++i) {
-            lr[i] = lr[i - 1] * nums[i];
+            left[i] = left[i - 1] * nums[i];
         }
 
-        rl[nums.length - 1] = nums[nums.length - 1];
+        right[nums.length - 1] = nums[nums.length - 1];
         for (int i = nums.length - 2; i >= 0; --i) {
-            rl[i] = rl[i + 1] * nums[i];
+            right[i] = right[i + 1] * nums[i];
         }
 
         int[] res = new int[nums.length];
         for (int i = 0; i < nums.length; ++i) {
-            int leftProd = (i - 1 >= 0) ? lr[i - 1] : 1;
-            int rightProd = (i + 1 < nums.length) ? rl[i + 1] : 1;
+            int leftProd = (i - 1 >= 0) ? left[i - 1] : 1;
+            int rightProd = (i + 1 < nums.length) ? right[i + 1] : 1;
             res[i] = leftProd * rightProd;
         }
         return res;

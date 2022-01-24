@@ -43,7 +43,7 @@ Submissions
  */
 
 /*
-1. Iterate until you find for n[i] < n[i + 1]
+1. Iterate from left to right until you find for n[i] < n[i + 1]
 2. Now from [i+1 to n-1] find the max element MAX with highest index(hence lowest contribution) thats > n[i]
 3. Now from [0 to i] (decreasing order), find the first index thats < MAX
 4. Swap 2. and 3.
@@ -58,7 +58,7 @@ public class MaximumSwap {
                 break;
             }
         }
-        if (p == -1)
+        if (p == -1) //all decreasing
             return num;
 
         int max = numS.charAt(p) - '0';

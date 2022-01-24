@@ -78,7 +78,12 @@ import java.util.Random;
  *
  * Catch: Create a runningSum array from the weights array
  * The range of numbers between runningSums rs1 and rs2 will be basket of rs2 where a random number can fall
- * Basket of first number rs0 will be 0 to rs0
+ * Basket of first number rs0 will [0,rs0)
+ *
+ * For [1,3]
+ * runningSum = [1,4]
+ * 0 index's field: [0,1)
+ * 1 index's field: [1,2,3,4)
  *
  * Then for the pickIndex, find a random number from 0 to sumOfAllWeights and
  * do a binary search for it in the runningSum array
@@ -87,38 +92,37 @@ import java.util.Random;
  */
 
 public class RandomPickwithWeight {
-
     int[] runningSums;
     Random rand = new Random();
 
-    private int binarySearch(double num, int end) {
-        int start = 0;
-        while(start < end) {
-            int mid  = start + (end-start)/2;
-            if(runningSums[mid] == num)
-                return mid;
-            else if(runningSums[mid] > num) {
-                end = mid;   // IMP: Using mid and not mid - 1 because mid is still a possible answer as a number's field is before it
-            }
-            else // weight < num
+    private int binarySearch(double num, int start, int end) {
+        int res = 0;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (num == runningSums[mid])
+                return mid + 1;// the index itself belongs to next number's field
+            else if ( num < runningSums[mid]) { //potential solution
+                res = mid;
+                end = mid - 1;
+            } else // weight < num
                 start = mid + 1;
         }
-        return start;
+        return res;
     }
 
     public RandomPickwithWeight(int[] w) {
         runningSums = new int[w.length];
         runningSums[0] = w[0];
-        for(int i = 1; i < w.length; ++i) {
-            runningSums[i] = runningSums[i-1] + w[i];
+        for (int i = 1; i < w.length; ++i) {
+            runningSums[i] = runningSums[i - 1] + w[i];
         }
     }
 
     public int pickIndex() {
         int maxSum = runningSums[runningSums.length - 1];
-        double num = maxSum * Math.random(); //why rand.nextint doesnt give correct answer??
+        int num = rand.nextInt(maxSum);
         //find num's potential index in runningSums array
-        return binarySearch(num,runningSums.length - 1);
+        return binarySearch(num, 0, runningSums.length - 1);
 
     }
 
