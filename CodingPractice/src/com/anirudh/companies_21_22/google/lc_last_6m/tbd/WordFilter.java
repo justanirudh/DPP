@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m.tbd;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +19,8 @@ Design a special dictionary with some words that searchs the words in it by a pr
 Implement the WordFilter class:
 
 WordFilter(string[] words) Initializes the object with the words in the dictionary.
-f(string prefix, string suffix) Returns the index of the word in the dictionary, which has the prefix prefix and the suffix suffix. If there is more than one valid index, return the largest of them. If there is no such word in the dictionary, return -1.
+f(string prefix, string suffix) Returns the index of the word in the dictionary, which has the prefix prefix and the suffix suffix.
+If there is more than one valid index, return the largest of them. If there is no such word in the dictionary, return -1.
 
 
 Example 1:
@@ -60,8 +61,8 @@ class TrieNode{
     int index;
 }
 iterate from 0 to max_words in the words list
-replace weights as you go
-naturally each weight would then be the maximum
+replace indices as you go
+naturally each index would then be the maximum (requirement: If there is more than one valid index, return the largest of them)
 ----------------------------------------------
 TLE:
 1. Create 2 tries: 1 for all words T and 1 for all reversed words T'

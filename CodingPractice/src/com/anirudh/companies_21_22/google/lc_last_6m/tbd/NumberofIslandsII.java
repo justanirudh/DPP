@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.anki;
+package com.anirudh.companies_21_22.google.lc_last_6m.tbd;
 
 /*
 305. Number of Islands II
@@ -40,8 +40,9 @@ Output: [1]
 
 /*
 Approach 1:
+Do DFS and make islands
 Have a Map {coordinate -> island_id}
-For each new cell,
+For each new cell that is converted into land,
     check its 4 neighbours in the map
     create a set of island_ids for the neighbours
 if the set is empty, new island create. res[i] = ++num_islands; //increment and get
