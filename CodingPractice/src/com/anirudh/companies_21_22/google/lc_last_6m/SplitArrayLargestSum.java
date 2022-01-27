@@ -93,7 +93,7 @@ public class SplitArrayLargestSum {
                 max = n;
         }
 
-        minSum = sum; //taking whole array-sum as min
+        minSum = sum; //taking whole array-sum as min (as it is actually the max, so any sum will be less than it)
         binarySearch(max, sum);
 
         return minSum;

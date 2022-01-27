@@ -48,9 +48,7 @@ The cars starting at 0 (speed 4) and 2 (speed 2) become a fleet, meeting each ot
 Then, the fleet (speed 2) and the car starting at 4 (speed 1) become one fleet, meeting each other at 6. The fleet moves at speed 1 until it reaches target.
  */
 
-import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /*
 reverse sort cars by positions
@@ -69,6 +67,7 @@ public class CarFleet {
         for (int i = 0; i < position.length; ++i) {
             cars.put(position[i], (target - position[i]) * 1.0 / speed[i]);
         }
+
         int res = 0;
         double currTime = Double.MIN_VALUE;
         for(double time : cars.values()) {

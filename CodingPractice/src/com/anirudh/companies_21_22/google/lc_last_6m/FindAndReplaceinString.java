@@ -1,7 +1,7 @@
 package com.anirudh.companies_21_22.google.lc_last_6m;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /*
 833. Find And Replace in String
@@ -66,13 +66,16 @@ public class FindAndReplaceinString {
         }
     }
     public String findReplaceString(String s, int[] indices, String[] sources, String[] targets) {
+
         Map<Integer, Replace> replacements = new HashMap<>();
+
         for(int i = 0; i < indices.length; ++i) {
             int strIdx = indices[i];
-            if(s.substring(strIdx).startsWith(sources[i])) {
+            if(s.indexOf(sources[i]) == strIdx) {
                 replacements.put(strIdx, new Replace(sources[i].length(), targets[i]));
             }
         }
+
         StringBuilder sb = new StringBuilder();
         int strIdx = 0;
         while(strIdx <= s.length() - 1) {

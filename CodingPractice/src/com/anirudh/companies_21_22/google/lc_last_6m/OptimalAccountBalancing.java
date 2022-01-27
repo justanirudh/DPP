@@ -56,9 +56,11 @@ import java.util.Map;
 
 /*
 Backtracking Brute Force
-For every i, transfer all debt to any j > i and then find the minimum transactions for i->j transaction
+For every i, transfer all debt to any j > i that has (-ve) debt
+Then find the minimum transactions for i->j transaction
 Complexity:
-f(n) = n * f(n-1) => O(n!)
+for ith index, I am doing i! operations
+Tx: n! + (n-1)! + (n-2)!. . . => (n+1)!
  */
 public class OptimalAccountBalancing {
 
@@ -67,7 +69,7 @@ public class OptimalAccountBalancing {
     int settle(int i) {
         while (i < debtsArr.size() && debtsArr.get(i) == 0) { //ignore already settled people
             i++;
-        }
+        } //i is first non-zero elem
         if (i == debtsArr.size())
             return 0; //reached end of arr
         int minTransactions = Integer.MAX_VALUE;

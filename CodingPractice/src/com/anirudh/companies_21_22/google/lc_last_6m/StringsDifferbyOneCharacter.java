@@ -65,11 +65,12 @@ public class StringsDifferbyOneCharacter {
     public boolean differByOne(String[] dict) {
         int PRIME_NUM = 31;
         long MOD = (long) Math.pow(10, 20) + 7; //10^9 doesnt work
+
         Map<String, Long> stringToHash = new HashMap<>();
         for (String s : dict) { //calculate hashes
             long hash = 0;
             for (int i = 0; i < s.length(); ++i) {
-                hash = hash * PRIME_NUM + (s.charAt(i) - 'a') % MOD;
+                hash = (hash * PRIME_NUM + (s.charAt(i) - 'a') ) % MOD;
             }
             stringToHash.put(s, hash);
         }

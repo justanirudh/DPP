@@ -70,7 +70,6 @@ public class MaximumPointsObtainCards {
 
         int windowLen = cardPoints.length - k;
 
-        int minSum = Integer.MAX_VALUE;
         int currSum = 0;
         int fast = 0;
         while (fast <= windowLen - 1) { //i - 0 + 1 = windowLen
@@ -78,7 +77,7 @@ public class MaximumPointsObtainCards {
             fast++;
         }
         fast--;
-        minSum = currSum;
+        int minSum = currSum;
         int slow = 0;
         while (fast < cardPoints.length - 1) {
             fast++;

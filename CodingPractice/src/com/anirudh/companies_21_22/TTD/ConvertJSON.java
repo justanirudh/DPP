@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.TTD.anki;
+package com.anirudh.companies_21_22.TTD;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

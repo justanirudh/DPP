@@ -28,22 +28,31 @@ Why it works?
 startStation to 0 is proven by algo
 What about 0 to startStation?
 Proof here (easy): https://leetcode.com/problems/gas-station/solution/
+
+if 0<k<Ns is unreachable
+totGasLeft >=0
+
+[0,k] + [k+1, Ns] + [Ns, N] >=0
+[k+1, Ns] is -ve else k+1 would be the starting station
+=> [0,k] + [Ns, N] >=0
+path from NS to k is [Ns, N] + [0,k]
+which i +ve according to above equation
  */
 public class GasStations {
 
     public int canCompleteCircuit(int[] gas, int[] cost) {
         int totGasLeft = 0;
         int currGasLeft = 0;
-        int startStation = 0;
+        int start = 0;
         for (int i = 0; i < gas.length; ++i) {
             totGasLeft += gas[i] - cost[i];
             currGasLeft += gas[i] - cost[i];
             if (currGasLeft < 0) {
                 currGasLeft = 0;
-                startStation = i + 1;
+                start = i + 1; //as cant reach i, start from next, i.e. i + 1
             }
         }
-        return totGasLeft >= 0 ? startStation : -1;
+        return totGasLeft >= 0 ? start : -1;
     }
 
     public static int canCompleteCircuitSlow(int[] gas, int[] cost) {

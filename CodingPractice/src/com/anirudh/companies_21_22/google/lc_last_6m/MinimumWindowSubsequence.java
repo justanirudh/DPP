@@ -41,8 +41,8 @@ Submissions
 164,889
  */
 /*
-    fast: to find a correct subsequence, goes from left to right
-    slow: to find the shortest subsequence. goes from right to left. goes from last letter of s2 to first letter
+    fast on s1: to find a correct subsequence, goes from left to right
+    slow on s1: to find the shortest subsequence. goes from right to left. goes from last letter of s2 to first letter
     ptr: ptr to traverse s2
  */
 public class MinimumWindowSubsequence {

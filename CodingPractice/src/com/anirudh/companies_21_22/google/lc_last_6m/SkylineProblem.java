@@ -90,7 +90,7 @@ public class SkylineProblem {
                 return a.x - b.x;
             } else { //x are same
                 if (a.isStart && b.isStart) { //both starts
-                    return b.height - a.height; // decreasing order of height, so that max height remains same after addition of smaller height
+                    return b.height - a.height; // decreasing order of height, so that max height remains same after addition of smaller height to map
                 } else if (!a.isStart && !b.isStart) { //both ends
                     return a.height - b.height; //increasing order of height, so that max height changes after addition of bigger height
                 } else if (a.isStart) {

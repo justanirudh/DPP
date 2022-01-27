@@ -88,12 +88,12 @@ public class AlienDictionary {
         visited.add(c);
         stack.add(c);
         for (Character neighbour : graph.get(c)) {
-            if (stack.contains(neighbour)) {
-                hasCycle = true;
-                return;
-            }
             if (!visited.contains(neighbour)) {
                 doTopologicalSort(neighbour);
+            }
+            else if (stack.contains(neighbour)) {
+                hasCycle = true;
+                return;
             }
         }
         sb.insert(0, c);

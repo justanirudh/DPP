@@ -75,7 +75,9 @@ public class RemoveAllOnesWithRowandColumnFlips {
             }
             patterns.add(sb.toString());
             patterns.add(antiSb.toString());
+            if(patterns.size() > 2)
+                return false;
         }
-        return patterns.size() <= 2;
+        return true;
     }
 }

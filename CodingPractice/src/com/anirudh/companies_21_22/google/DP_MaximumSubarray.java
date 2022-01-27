@@ -51,12 +51,12 @@ A clever way to update currentSubarray is using currentSubarray = max(num, curre
 public class DP_MaximumSubarray {
 
     public int maxSubArray(int[] nums) {
-        int currMax = nums[0];
+        int currSum = nums[0];
         int max = nums[0];
 
         for (int i = 1; i < nums.length; ++i) {
-            currMax = Math.max(currMax + nums[i], nums[i]); //take the subarray until now OR thorw it away and just take current num
-            max = Math.max(max, currMax);
+            currSum = Math.max(currSum + nums[i], nums[i]); //take the subarray until now OR thorw it away and just take current num
+            max = Math.max(max, currSum);
         }
         return max;
 

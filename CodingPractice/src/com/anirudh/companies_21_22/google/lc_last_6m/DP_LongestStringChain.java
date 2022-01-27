@@ -50,6 +50,12 @@ Similar to WordBreakII in Facebook
 Top down DP: for each string find longest chain ENDING in that string
 Memoization: Use String -> length of longest chain ending at the string
 For each word, delete each char, do recursion, add the char back and delete next char
+
+Tx: O(N * n^2) where N is total words and n is char per word
+For each word (N)
+    we are making n words
+        making 1 word = O(n) {shift letters}
+        making n words : O(n^2)
  */
 public class DP_LongestStringChain {
 

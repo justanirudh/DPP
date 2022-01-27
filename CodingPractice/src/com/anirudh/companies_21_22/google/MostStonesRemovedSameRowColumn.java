@@ -77,13 +77,13 @@ public class MostStonesRemovedSameRowColumn {
         visited = new HashSet<>();
         this.stones = stones;
 
-        int connectedComponents = 0;
+        int stonesToKeep = 0;
         for (int[] stone : stones) {
             if (!visited.contains(Arrays.asList(stone[0], stone[1]))) {
                 doDFS(stone);
-                connectedComponents++;
+                stonesToKeep++;
             }
         }
-        return numStones - connectedComponents;
+        return numStones - stonesToKeep; // = stonesToRemove
     }
 }

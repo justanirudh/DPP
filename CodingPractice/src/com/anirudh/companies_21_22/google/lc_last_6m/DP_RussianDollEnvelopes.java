@@ -45,7 +45,7 @@ import java.util.Comparator;
 /*
 sort increasing order by width
 if width is equal, sort decreasing order by height so that they dont become part of a valid subsequence
-after doing this, find Longest Increasing Subsequence
+after doing this, find Longest Increasing Subsequence for heights
  */
 public class DP_RussianDollEnvelopes {
 

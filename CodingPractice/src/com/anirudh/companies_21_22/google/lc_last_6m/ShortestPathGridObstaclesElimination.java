@@ -1,9 +1,6 @@
 package com.anirudh.companies_21_22.google.lc_last_6m;
 
-import java.util.ArrayDeque;
-import java.util.HashSet;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by paanir on 9/4/21.
@@ -62,41 +59,11 @@ first check if quota > manhattan distance. if so, return true
 every time we go through an obstacle, decrease it by 1, check if it has been visited, then offer it in queue
 EVERYTHING else remains the same
 
+OR create a list of x,y,quota as state key and separate map of state to dist
+
 For State's equals and hashcode, use x,y,num_obstacles (NOT distance)
  */
 class ShortestPathGridObstaclesElimination {
-
-    class State {
-        int x;
-        int y;
-        int dist;
-        int numRemObs;
-
-        State(int x, int y, int dist, int remainingObstacles) {
-            this.x = x;
-            this.y = y;
-            this.dist = dist;
-            this.numRemObs = remainingObstacles;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (!(o instanceof State))
-                return false;
-            State s = (State) o;
-            return this.x == s.x &&
-                    this.y == s.y && //NO dist in equals
-                    this.numRemObs == s.numRemObs;
-        }
-
-        @Override
-        public int hashCode() {
-
-            int a = 31 * this.x;
-            a = 31 * a + this.y;
-            return 31 * a + this.numRemObs; //NO dist in hashcode
-        }
-    }
 
     int[] dx = {0, 0, 1, -1};
     int[] dy = {1, -1, 0, 0};
@@ -113,23 +80,31 @@ class ShortestPathGridObstaclesElimination {
         if (k >= numRows + numCols - 2) //manhattan distance
             return numRows + numCols - 2;
 
-        State start = new State(0, 0, 0, k);
-        Queue<State> states = new ArrayDeque<>();
-        Set<State> visited = new HashSet<>();
-        states.offer(start);
+        List<Integer> initState = Arrays.asList(0, 0, k); //x,y,num_remaining_quota
+        Map<List<Integer>, Integer> stateToDist = new HashMap<>(); //state -> steps from origin
+        stateToDist.put(initState, 0);
+
+        Queue<List<Integer>> states = new ArrayDeque<>();
+        states.offer(initState);
+
+        Set<List<Integer>> visited = new HashSet<>();
+        visited.add(initState);
+
         while (!states.isEmpty()) {
-            State curr = states.poll();
-            visited.add(curr);
+            List<Integer> curr = states.poll();
             for (int i = 0; i < 4; ++i) {
-                int x = curr.x + dx[i];
-                int y = curr.y + dy[i];
+                int x = curr.get(0) + dx[i];
+                int y = curr.get(1) + dy[i];
                 if (isValid(x, y)) {
-                    if (x == numRows - 1 && y == numCols - 1)
-                        return curr.dist + 1;
-                    int numRemObs = curr.numRemObs - grid[x][y];
-                    State nextState = new State(x, y, curr.dist + 1, numRemObs);
-                    if (numRemObs >= 0 && !visited.contains(nextState))
+                    if (x == numRows - 1 && y == numCols - 1) //reached dest
+                        return stateToDist.get(curr) + 1;
+                    int numRemQuota = curr.get(2) - grid[x][y]; //if not obstacle, nothing deducted
+                    List<Integer> nextState = Arrays.asList(x, y, numRemQuota);
+                    if (numRemQuota >= 0 && !visited.contains(nextState)) {
+                        visited.add(curr);
                         states.offer(nextState);
+                        stateToDist.put(nextState, stateToDist.get(curr) + 1);
+                    }
                 }
             }
         }

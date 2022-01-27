@@ -87,8 +87,7 @@ public class StockPrice {
                 priceToTS.remove(oldPrice);
         }
         tsToPrice.put(timestamp, price);
-        if (!priceToTS.containsKey(price))
-            priceToTS.put(price, new HashSet<>());
+        priceToTS.putIfAbsent(price, new HashSet<>());
         priceToTS.get(price).add(timestamp);
     }
 

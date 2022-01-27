@@ -93,7 +93,7 @@ public class MinimumNumberofFlipstoConvertBinaryMatrixtoZeroMatrix {
             hash = sb.toString();
         }
 
-        private State flip(int x, int y) {
+        private State flip(int x, int y) { //O(mn)
             int[][] next = new int[mat.length][mat[0].length];
             for (int i = 0; i < mat.length; ++i) {
                 for (int j = 0; j < mat[0].length; ++j) {
@@ -111,7 +111,7 @@ public class MinimumNumberofFlipstoConvertBinaryMatrixtoZeroMatrix {
             return new State(next, steps + 1);
         }
 
-        List<State> getNeighbours() { //flip each cell
+        List<State> getNeighbours() { //flip each cell and its neighbours; O(m^2n^2) OR O(2^mn)
             List<State> list = new ArrayList<>();
             for (int i = 0; i < mat.length; ++i) {
                 for (int j = 0; j < mat[0].length; ++j) {
@@ -132,7 +132,7 @@ public class MinimumNumberofFlipstoConvertBinaryMatrixtoZeroMatrix {
         Set<String> visited = new HashSet<>();
         visited.add(s.hash);
 
-        while (!q.isEmpty()) { //BFS
+        while (!q.isEmpty()) { //BFS O(mn * 2^mn) maybe
             State curr = q.poll();
             List<State> neighbours = curr.getNeighbours();
             for (State next : neighbours) {

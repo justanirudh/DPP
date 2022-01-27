@@ -87,11 +87,11 @@ public class DP_StudentAttendanceRecordII {
 
     //--------------------------------------------------------------------------------------------------------------
 
-    Map<Integer, Double> numCombos;
-    double CONST = Math.pow(10, 9) + 7;
+    Map<Integer, Long> numCombos;
+    long MOD = (long)Math.pow(10, 9) + 7;
 
     void populateCombinations(int size) {
-        double numCombo = 2 * numCombos.get(size - 1) - numCombos.get(size - 4);
+        long numCombo = (2 * numCombos.get(size - 1) - numCombos.get(size - 4)) % MOD;
         numCombos.put(size, numCombo);
     }
 
@@ -100,12 +100,12 @@ public class DP_StudentAttendanceRecordII {
             return 1;
         if (n == 1)
             return 3;
-        //consider PL
+        //ONLY consider PL
         numCombos = new HashMap<>(); //size of arr -> number of rewardable PL combinations
-        numCombos.put(0, 0.0);
-        numCombos.put(1, 2.0);
-        numCombos.put(2, 4.0);
-        numCombos.put(3, 7.0);
+        numCombos.put(0, (long)1); //1 way to award
+        numCombos.put(1, (long)2); //2 because only consider P and L
+        numCombos.put(2, (long)4);
+        numCombos.put(3, (long)7);
         for (int i = 4; i <= n; ++i)
             populateCombinations(i);
         //consider A
@@ -114,8 +114,8 @@ public class DP_StudentAttendanceRecordII {
         sum += numCombos.get(n);
         //If A = 1, put it in each pos
         for (int i = 0; i < n; ++i) {
-            sum += (numCombos.get(i) * numCombos.get(n - i - 1)) % CONST; //multiply
+            sum += (numCombos.get(i) * numCombos.get(n - i - 1)) % MOD; //multiply
         }
-        return (int) (sum % CONST);
+        return (int) (sum % MOD);
     }
 }

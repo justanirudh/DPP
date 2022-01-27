@@ -65,12 +65,12 @@ public class FindOriginalArrayFromDoubledArray {
 
         Collections.sort(positive);
         all.sort(Collections.reverseOrder());
-        all.addAll(positive); //merge to same arr
+        all.addAll(positive); //merge to same arr; negative rev sorted, postive proper sorted
 
         Map<Integer, Integer> state = new HashMap<>();
         int[] res = new int[changed.length / 2];
         int i = 0;
-        for (int a : all) {
+        for (int a : all) { //start from low to hi
             if (a % 2 != 0 || !state.containsKey(a / 2)) { //is odd or (is even but a/2 not present)
                 state.put(a, state.getOrDefault(a, 0) + 1);
             } else { //is even and a/2 present
@@ -79,7 +79,7 @@ public class FindOriginalArrayFromDoubledArray {
                     res[i] = a / 2;
                     i++;
                 }
-                if (state.get(a / 2) == 0) //if got its complement, remove from map, so it doesnt disturb next pair
+                if (state.get(a / 2) == 0) //if got all its complements, remove from map, so it doesnt disturb next pair
                     state.remove(a / 2);
             }
         }

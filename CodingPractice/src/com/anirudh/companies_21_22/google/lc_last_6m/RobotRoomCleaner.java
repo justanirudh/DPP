@@ -104,7 +104,7 @@ public class RobotRoomCleaner {
     Robot robot;
     Set<List<Integer>> visited;
 
-    void comeBack() {
+    void backtrack() {
         robot.turnRight();
         robot.turnRight();
         robot.move(); //is now in previous cell but facing in the opposite direction
@@ -122,7 +122,7 @@ public class RobotRoomCleaner {
             List<Integer> nextCell = Arrays.asList(nextRow, nextCol);
             if (!visited.contains(nextCell) && robot.move()) {
                 dfs(nextCell, nextDir);
-                comeBack(); //come back to current cell and face in the current direction again
+                backtrack(); //come back to current cell and face in the current direction again
             }
             robot.turnRight(); //turn clockwise
         }

@@ -58,7 +58,7 @@ public class AsteroidCollision {
         Deque<Integer> stack = new ArrayDeque<>();
 
         for (int asteroid : asteroids) {
-            if (stack.isEmpty() || stack.peek() < 0 || asteroid > 0) { //asteroid is +ve OR stack.peek is -ve
+            if (stack.isEmpty() || stack.peek() < 0 || asteroid > 0) { //asteroid is +ve OR stack.peek is -ve (3 cases)
                 stack.push(asteroid);
             } else { //asteroid is -ve and stack.peek is +ve
                 if (Math.abs(asteroid) > stack.peek()) {

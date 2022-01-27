@@ -79,7 +79,7 @@ public class SentenceScreenFitting {
         for (int i = 0; i < rows; ++i) {
             idx += cols;
             if (joined.charAt(idx % len) == ' ') { //fits perfectly in current row
-                idx++;
+                idx++; //go to start of next word
             } else { //if not a space, in the middle of a word. decrement idx until the start of a word is found
                 while (idx > 0 && joined.charAt((idx - 1) % len) != ' ') {
                     idx--;

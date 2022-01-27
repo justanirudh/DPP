@@ -60,8 +60,8 @@ Deque has elems in decreasing order of yi-xi from head to tail
 
 when a new elem comes in: xj,yj
 1. remove elems from head until xj-xi becomes <=k
-2. find max = Max(max, head[0]+ xj + yj ) //deque has elems as decreasing order of yi-xi, so head will have largest elem in window
-3. remove elems from tail until you find an elem such that elem[0] > yj-xj
+2. find max = Max(max, head[1]+ xj + yj ) //deque has elems as decreasing order of yi-xi, so head will have largest elem in window
+3. remove elems from tail until you find an elem such that elem[1] > yj-xj
  */
 public class MaxValueofEquation {
     public int findMaxValueOfEquation(int[][] points, int k) {
@@ -76,7 +76,7 @@ public class MaxValueofEquation {
                 max = Math.max(max, richPoints.peekFirst().get(1) + point[0] + point[1]); // (yi-xi) + xj + yj
             }
             //remove smaller elems(yi-xi) from tail
-            while (!richPoints.isEmpty() && richPoints.peekLast().get(1) < point[1] - point[0]) { //if peek(yi-xi) < yj-xj, remove
+            while (!richPoints.isEmpty() && richPoints.peekLast().get(1) < point[1] - point[0]) { //if peekLast(yi-xi) < yj-xj, remove
                 richPoints.pollLast();
             }
             richPoints.offer(Arrays.asList(point[0], point[1] - point[0])); //add {xi, yi-xi}

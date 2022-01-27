@@ -84,19 +84,19 @@ public class SingleThreadedCPU {
         List<Integer> resList = new ArrayList<>();
 
         int idx = 0;
-        int thresholdStartTime = richTasks[idx][0]; //first start time
+        int thresholdT = richTasks[idx][0]; //first start time
 
         while (idx < richTasks.length) {
-            while (idx < richTasks.length && richTasks[idx][0] <= thresholdStartTime) { //get all valid tasks
+            while (idx < richTasks.length && richTasks[idx][0] <= thresholdT) { //get all valid tasks
                 order.offer(richTasks[idx]);
                 idx++;
             }
             if (!order.isEmpty()) {
                 int[] nextTask = order.poll();
                 resList.add(nextTask[2]); //add its index to result
-                thresholdStartTime += nextTask[1]; //get next threshold
+                thresholdT += nextTask[1]; //get next thresholdby adding the task's duration to threshold
             } else { //gap between 2 tasks, put next one in queue
-                thresholdStartTime = richTasks[idx][0];
+                thresholdT = richTasks[idx][0];
             }
 
         }

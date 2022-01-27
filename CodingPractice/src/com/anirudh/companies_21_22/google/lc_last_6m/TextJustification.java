@@ -39,7 +39,7 @@ For each line
             total gaps b/w words
             find spaces per gap
             remainder spaces to be distributed evenly starting from left
-        distribute spaces per gap and remainder across all words
+        distribute spaces per gap and remainder across all words(from left)
         add extra spaces at the end
 
  */

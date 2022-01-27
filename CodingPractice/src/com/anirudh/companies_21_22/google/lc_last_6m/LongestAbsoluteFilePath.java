@@ -81,7 +81,7 @@ public class LongestAbsoluteFilePath {
 
         String root = inodes[0];
         int lastDepth = 0;
-        int maxLen = root.contains(".") ? root.length() : 0;
+        int maxLen = root.contains(".") ? root.length() : 0;//if file count length
         stack.push(root.length()); //length of first dir
 
         for (int i = 1; i < inodes.length; ++i) {
@@ -101,7 +101,7 @@ public class LongestAbsoluteFilePath {
             int len = (stack.isEmpty() ? 0 : stack.peek()) + inode.length();  //push cumulative lengths
             stack.push(len);
             if (inode.contains(".")) { //file
-                int totalLen = len + (stack.size() - 1);  //taking stack.size - 1 to consider the "/"
+                int totalLen = len + (stack.size() - 1);  //taking (stack.size - 1) to consider the "/"
                 if (totalLen > maxLen)
                     maxLen = totalLen;
             }

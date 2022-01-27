@@ -43,10 +43,10 @@ public class TrappingRainwater {
             if (height[r] > rightMax)
                 rightMax = height[r];
             if (leftMax < rightMax) { //take leftMax as the height of the container
-                res += Math.max(0, leftMax - height[l]);
+                res += leftMax - height[l];
                 l++; //keeping right as is because it is bigger height so possibility of more water to be stored in the future
             } else { //rightMax <= leftMax   take rightMax as the height of the container
-                res += Math.max(0, rightMax - height[r]);
+                res += rightMax - height[r];
                 r--;
             }
         }

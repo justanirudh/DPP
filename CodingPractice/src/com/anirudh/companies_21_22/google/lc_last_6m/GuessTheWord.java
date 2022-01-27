@@ -112,7 +112,7 @@ public class GuessTheWord {
 
             //find word with the best overall score
             int bestScore = Integer.MIN_VALUE;
-            String currGuess = "";
+            String currGuess = null;
             for (String word : wordlist) {
                 //calculate score
                 int score = 0;

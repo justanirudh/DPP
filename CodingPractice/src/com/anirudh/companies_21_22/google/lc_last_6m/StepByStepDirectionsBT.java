@@ -65,7 +65,7 @@ public class StepByStepDirectionsBT {
         if (node.val == val)
             return true;
         if (preOrder(node.left, val, pathTillNow)) {
-            pathTillNow.insert(0, 'L'); //gets added when go from node to root; ee want path from root to node
+            pathTillNow.insert(0, 'L'); //gets added when go from node to root; we want path from root to node
         } else if (preOrder(node.right, val, pathTillNow)) {
             pathTillNow.insert(0, 'R');
         }
@@ -75,6 +75,7 @@ public class StepByStepDirectionsBT {
     public String getDirections(TreeNode root, int startValue, int destValue) {
         StringBuilder rootToStart = new StringBuilder();
         StringBuilder rootToEnd = new StringBuilder();
+
         preOrder(root, startValue, rootToStart); //LRRLR
         preOrder(root, destValue, rootToEnd); // LRLLR
 
