@@ -51,7 +51,7 @@ import java.util.StringJoiner;
 
 /*
 Problem 297
-Only use preorder. Important thing is to also encode null values.
+Only use PREORDER. Important thing is to also encode null values.
 Both pre/post and inorder are required to uniqely identify a tree IF the null values have not been encoded
  */
 public class SerializeandDeserializeBT {
