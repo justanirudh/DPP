@@ -56,22 +56,25 @@ public class MinimumWindowSubsequence {
                 if (s1.charAt(fast) == s2.charAt(ptr)) {
                     ptr++;
                 }
+                if (ptr == s2.length()) {
+                    break;
+                }
                 fast++;
             }
-            if (ptr == s2.length()) //we got the subsequence
-                fast--; //since we overstepped once
-            else { //means we didnt get any new subsequence
-                break;
-            }
+            if (ptr != s2.length()) //we didnt get the subsequence
+                break; //didnt get any more subseqs
+
             int slow = fast; //now optimize; go from right to left to find a potentially shorter string
             ptr = s2.length() - 1;
             while (slow >= 0 && ptr >= 0) {
                 if (s1.charAt(slow) == s2.charAt(ptr)) {
                     ptr--;
                 }
+                if (ptr == -1) {
+                    break;
+                }
                 slow--;
             }
-            slow++; //since we understepped
             int len = fast - slow + 1;
             if (len < minLen) {
                 minLen = len;

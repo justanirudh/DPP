@@ -46,7 +46,7 @@ lRUCache.get(1);    // return -1 (not found)
 lRUCache.get(3);    // return 3
 lRUCache.get(4);    // return 4
  */
-public class LRUCache_DIY {
+public class LRUCacheDIY {
 
     static class DLLNode {
         int key;
@@ -68,7 +68,7 @@ public class LRUCache_DIY {
     DLLNode head;
     DLLNode tail;
 
-    public LRUCache_DIY(int capacity) {
+    public LRUCacheDIY(int capacity) {
         cache = new HashMap<>();
         head = new DLLNode(-1, -1); //sentinel
         tail = new DLLNode(-1, -1); //sentinel

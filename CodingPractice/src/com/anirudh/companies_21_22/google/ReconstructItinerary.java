@@ -32,7 +32,7 @@ import java.util.*;
 class ReconstructItinerary {
 
     private Map<String, PriorityQueue<String>> flights;
-    private Deque<String> path;
+    private Deque<String> res;
 
     private void doDFS(String departure) {
         Queue<String> arrivals = flights.get(departure);
@@ -41,12 +41,12 @@ class ReconstructItinerary {
             String nextStop = arrivals.poll();
             doDFS(nextStop);
         }
-        path.push(departure); //topological sort. the one that gets finished first is prepended first
+        res.push(departure); //topological sort. the one that gets finished first is prepended first
     }
 
     public List<String> findItinerary(List<List<String>> tickets) {
         flights = new HashMap<>();
-        path = new ArrayDeque<>();
+        res = new ArrayDeque<>();
 
         //create a DAG
         for (List<String> ticket : tickets) {
@@ -57,7 +57,7 @@ class ReconstructItinerary {
         //do DFS
         doDFS("JFK");
 
-        return new ArrayList<>(path);
+        return new ArrayList<>(res);
     }
 
 

@@ -34,7 +34,7 @@ public class SnapshotArray {
     public SnapshotArray(int length) {
         history = new HashMap<>();
         snapId = 0;
-        for(int i = 0; i < length; ++i) {
+        for (int i = 0; i < length; ++i) {
             history.put(i, new TreeMap<>());
             history.get(i).put(snapId, 0);
         }
@@ -42,12 +42,7 @@ public class SnapshotArray {
 
     public void set(int index, int val) {
         TreeMap<Integer, Integer> map = history.get(index);
-        if(map.lastKey() == snapId) { //if same as last (biggest) key, replace
-            map.put(map.lastKey(), val);
-        }
-        else { //map.lastKey() < snapId
-            map.put(snapId, val);
-        }
+        map.put(snapId, val); //if map.lastKey() same as last (biggest) key, replace; if map.lastKey() < snapId, add new entry
     }
 
     public int snap() {
@@ -56,7 +51,7 @@ public class SnapshotArray {
         return currSnap;
     }
 
-    public int get(int index, int snap_id) {
+    public int get(int index, int snap_id) { //find biggest entry <= snap_id
         return history.get(index).floorEntry(snap_id).getValue();
     }
 }

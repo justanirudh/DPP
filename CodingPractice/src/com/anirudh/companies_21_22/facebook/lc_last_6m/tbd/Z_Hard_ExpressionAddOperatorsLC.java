@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.tbd.expression_add_operators;
+package com.anirudh.companies_21_22.facebook.lc_last_6m.tbd;
 
 /**
  * Created by paanir on 8/29/21.
@@ -69,7 +69,7 @@ import java.util.List;
  S = O(N) for stack
 
  */
-public class ExpressionAddOperatorsLC {
+public class Z_Hard_ExpressionAddOperatorsLC {
 
     public List<String> answer;
     public String digits;

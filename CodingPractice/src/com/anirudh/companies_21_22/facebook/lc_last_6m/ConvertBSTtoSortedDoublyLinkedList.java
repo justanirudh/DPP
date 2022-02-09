@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 
 /**
@@ -67,6 +67,7 @@ import java.util.Deque;
  * then push node.right and then keep pushing left until null
  * so on and so forth
  */
+
 public class ConvertBSTtoSortedDoublyLinkedList {
     static class Node {
         public int val;
@@ -87,9 +88,7 @@ public class ConvertBSTtoSortedDoublyLinkedList {
         }
     }
 
-    Deque<Node> stack;
-
-    private void populateStack(Node node) {
+    private void populateStack(Node node, Deque<Node> stack) {
         while (node != null) {
             stack.push(node);
             node = node.left;
@@ -98,11 +97,12 @@ public class ConvertBSTtoSortedDoublyLinkedList {
 
     public Node treeToDoublyList(Node root) {
         if(root == null)
-            return root;
-        stack = new ArrayDeque<>();
-        Node node = root;
+            return null;
+        Deque<Node> stack = new ArrayDeque<>();
+
         //initialize
-        populateStack(node);
+        populateStack(root, stack);
+
         Node prev = null;
         Node head = null;
         while (!stack.isEmpty()) {
@@ -113,11 +113,14 @@ public class ConvertBSTtoSortedDoublyLinkedList {
                 prev.right = curr;
                 curr.left = prev;
             }
-            populateStack(curr.right);
+            populateStack(curr.right, stack);
             prev = curr;
         }
-        head.left = prev; //close the loop
+
+        //close the loop
+        head.left = prev;
         prev.right = head;
+
         return head;
     }
 }

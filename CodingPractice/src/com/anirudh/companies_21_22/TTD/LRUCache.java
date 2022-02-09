@@ -54,6 +54,7 @@ Option 2: /*
 Map to DIY queue
 Map has {elements -> QueueNode {k,v,next, prev} }
  */
+
 public class LRUCache extends LinkedHashMap<Integer, Integer> {
 
     int capacity;
@@ -72,7 +73,7 @@ public class LRUCache extends LinkedHashMap<Integer, Integer> {
 
     @Override
     protected boolean removeEldestEntry(Map.Entry eldest) {
-        return size() > capacity;
+        return super.size() > capacity;
     }
 
 }

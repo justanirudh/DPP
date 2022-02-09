@@ -1,5 +1,6 @@
-package com.anirudh.companies_21_22.google.lc_last_6m.tbd;
+package com.anirudh.companies_21_22.google.lc_last_6m;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,18 +75,65 @@ TLE:
 Brute-force:use startsWith and endsWith for each word
  */
 public class WordFilter {
-    //TLE
-    List<String> wordsL;
+
+    class TrieNode { //int[] a = new int[10];
+        TrieNode[] children;
+        int index;
+
+        TrieNode() {
+            this.children = new TrieNode[27]; //a-z and '#'
+            this.index = 0;
+        }
+    }
+
+    TrieNode root;
+
+    List<String> getWrappedWords(String word) {
+        List<String> words = new ArrayList<>();
+        String base = "#" + word;
+        words.add(base);
+        for (int i = word.length() - 1; i >= 0; --i) {
+            words.add(word.substring(i) + base);
+        }
+        return words;
+    }
+
+    void addToTrie(String word, int index) {
+        TrieNode node = root;
+        for (char c : word.toCharArray()) {
+            int childIdx = c == '#' ? 26 : c - 'a';
+            if (node.children[childIdx] == null) {
+                node.children[childIdx] = new TrieNode();
+            }
+            node.index = index;
+            node = node.children[childIdx];
+        }
+    }
+
+    int findIndexInTrie(String str) {
+        TrieNode node = root;
+        for (char c : str.toCharArray()) {
+            int childIdx = c == '#' ? 26 : c - 'a';
+            if (node.children[childIdx] == null) {
+                return -1;
+            }
+            node = node.children[childIdx];
+        }
+        return node.index;
+    }
 
     public WordFilter(String[] words) {
-        wordsL = Arrays.asList(words);
+        root = new TrieNode();
+        for (int i = 0; i < words.length; ++i) {
+            List<String> wrapped = getWrappedWords(words[i]);
+            for (String wrWord : wrapped) {
+                addToTrie(wrWord, i);
+            }
+        }
     }
 
     public int f(String prefix, String suffix) {
-        for (int i = wordsL.size() - 1; i >= 0; --i) {
-            if (wordsL.get(i).startsWith(prefix) && wordsL.get(i).endsWith(suffix))
-                return i;
-        }
-        return -1;
+        String toFind = suffix + "#" + prefix;
+        return findIndexInTrie(toFind);
     }
 }

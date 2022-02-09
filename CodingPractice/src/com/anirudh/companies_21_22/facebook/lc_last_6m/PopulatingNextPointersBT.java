@@ -1,6 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
-
-//import com.anirudh.datastructures.trees.Node;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 /**
  * Created by paanir on 2/1/17.

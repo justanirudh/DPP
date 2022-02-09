@@ -60,30 +60,31 @@ public class FindAndReplaceinString {
     static class Replace {
         int numLetters;
         String target;
+
         Replace(int numLetters, String target) {
             this.numLetters = numLetters;
             this.target = target;
         }
     }
+
     public String findReplaceString(String s, int[] indices, String[] sources, String[] targets) {
 
         Map<Integer, Replace> replacements = new HashMap<>();
 
-        for(int i = 0; i < indices.length; ++i) {
+        for (int i = 0; i < indices.length; ++i) {
             int strIdx = indices[i];
-            if(s.indexOf(sources[i]) == strIdx) {
+            if (s.indexOf(sources[i]) == strIdx) {
                 replacements.put(strIdx, new Replace(sources[i].length(), targets[i]));
             }
         }
 
         StringBuilder sb = new StringBuilder();
         int strIdx = 0;
-        while(strIdx <= s.length() - 1) {
-            if(!replacements.containsKey(strIdx)) {
+        while (strIdx < s.length()) {
+            if (!replacements.containsKey(strIdx)) {
                 sb.append(s.charAt(strIdx));
                 strIdx++;
-            }
-            else { //in map
+            } else { //in map
                 sb.append(replacements.get(strIdx).target);
                 strIdx += replacements.get(strIdx).numLetters;
             }

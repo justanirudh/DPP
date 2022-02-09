@@ -87,20 +87,22 @@ public class LongestAbsoluteFilePath {
         for (int i = 1; i < inodes.length; ++i) {
             String inode = inodes[i];
             int currDepth = 0;
-            while (inode.startsWith("\t")) {
-                inode = inode.substring(1); //only need 1 offset
+            for (int j = 0; j < inode.length(); ++j) { //1. calculate current depth
+                if (inode.charAt(j) != '\t') {
+                    break;
+                }
                 currDepth++;
             }
-            if (currDepth <= lastDepth) { //currDepth <= lastDepth
+            if (currDepth <= lastDepth) { //2. if currDepth <= lastDepth, pop until currDepth > lastDepth
                 int pops = lastDepth - currDepth + 1; //also pop same dir
                 while (pops > 0) {
                     stack.pop();
                     pops--;
                 }
             }
-            int len = (stack.isEmpty() ? 0 : stack.peek()) + inode.length();  //push cumulative lengths
+            int len = (stack.isEmpty() ? 0 : stack.peek()) + inode.length();  //3. push cumulative lengths
             stack.push(len);
-            if (inode.contains(".")) { //file
+            if (inode.contains(".")) { //4. if file, calculate max len
                 int totalLen = len + (stack.size() - 1);  //taking (stack.size - 1) to consider the "/"
                 if (totalLen > maxLen)
                     maxLen = totalLen;

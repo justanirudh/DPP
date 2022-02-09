@@ -53,20 +53,22 @@ import java.util.List;
 
 public class DP_LongestIncreasingSubsequence2 {
 
-    int binarySearch(List<Integer> list, int num) {
+    int binarySearch(List<Integer> list, int num) { //find least number > num
         int l = 0;
         int r = list.size() - 1;
-        while(l < r) {
+        int res = Integer.MAX_VALUE;
+        while(l <= r) {
             int mid = l + (r-l)/2;
             if(list.get(mid) == num)
                 return mid;
             else if (list.get(mid) > num) {
-                r = mid; //answer can be mid, so keep it in boundary
+                res = Math.min(res, list.get(mid));
+                r = mid - 1; //answer can be mid, so keep it in boundary
             }
             else
                 l = mid + 1;
         }
-        return r; // or l
+        return res;
     }
 
     public int lengthOfLIS(int[] nums) {
@@ -76,7 +78,7 @@ public class DP_LongestIncreasingSubsequence2 {
             if(nums[i] > sub.get(sub.size() - 1)) { //num bigger than biggest in sub
                 sub.add(nums[i]);
             }
-            else { //replace smallest elem in sub greater than num
+            else { //replace smallest elem in sub greater than num (ceilingKey, higherKey from treemap)
                 int idx = binarySearch(sub, nums[i]);
                 sub.set(idx, nums[i]);
             }

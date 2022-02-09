@@ -134,7 +134,7 @@ public class MinimumNumberofFlipstoConvertBinaryMatrixtoZeroMatrix {
 
         while (!q.isEmpty()) { //BFS O(mn * 2^mn) maybe
             State curr = q.poll();
-            List<State> neighbours = curr.getNeighbours();
+            List<State> neighbours = curr.getNeighbours(); //num neighbours = num cells = mn
             for (State next : neighbours) {
                 String hash = next.hash;
                 if (!visited.contains(hash)) {

@@ -80,7 +80,7 @@ public class DetectSquares {
     }
 
     public int count(int[] point) {
-        int x = point[0];
+        int x = point[0]; // new point
         int y = point[1];
         int res = 0;
         for (List<Integer> pointL : freq.keySet()) {

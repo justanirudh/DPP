@@ -50,8 +50,7 @@ public class EmployeeImportance {
 
     Map<Integer, List<Integer>> graph;
     Map<Integer, Integer> impMap;
-    int sum;
-//    Set<Integer> visited; //visited not required since it is a DAG
+//    Set<Integer> visited; //visited not required since it is a acyclic DAG
 
     class Employee {
         public int id;
@@ -59,18 +58,18 @@ public class EmployeeImportance {
         public List<Integer> subordinates;
     }
 
-    void doDFS(int id) {
+    int doDFS(int id, int sum) {
         sum += impMap.get(id);
         for (int subId : graph.get(id)) {
-            doDFS(subId);
+            doDFS(subId, sum);
         }
+        return sum;
     }
 
     public int getImportance(List<Employee> employees, int id) {
         //create graph
         graph = new HashMap<>();
         impMap = new HashMap<>();
-        sum = 0;
 
         for (Employee e : employees) {
             impMap.put(e.id, e.importance);
@@ -81,7 +80,6 @@ public class EmployeeImportance {
         }
 
         //do DFS
-        doDFS(id);
-        return sum;
+        return doDFS(id, 0);
     }
 }

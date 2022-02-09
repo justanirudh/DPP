@@ -61,5 +61,5 @@ Approach: Flip each 0 and find size by doing DFS; Find max size among them
 Tx: mn * mn
  */
 
-public class MakingALargeIsland {
+public class Z_Hard_MakingALargeIsland {
 }

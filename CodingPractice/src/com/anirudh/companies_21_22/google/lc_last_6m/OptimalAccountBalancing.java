@@ -73,7 +73,7 @@ public class OptimalAccountBalancing {
         if (i == debtsArr.size())
             return 0; //reached end of arr
         int minTransactions = Integer.MAX_VALUE;
-        for (int j = i + 1; j < debtsArr.size(); ++j) {
+        for (int j = i + 1; j < debtsArr.size(); ++j) { //settling for ith
             if (debtsArr.get(i) * debtsArr.get(j) < 0) { //they are of opposing signs
                 debtsArr.set(j, debtsArr.get(j) + debtsArr.get(i)); //give all of debt of i to j
                 minTransactions = Math.min(minTransactions, 1 + settle(i + 1)); //calculate min, settle the next person

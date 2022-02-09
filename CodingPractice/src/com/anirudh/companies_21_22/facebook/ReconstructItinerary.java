@@ -26,7 +26,7 @@ class ReconstructItinerary {
 
     private List<List<String>> tickets;
     private Map<String, PriorityQueue<String>> flights;
-    private LinkedList<String> path;
+    private LinkedList<String> res;
 
     private void doDFS(String departure) {
         PriorityQueue<String> arrivals = flights.get(departure);
@@ -34,11 +34,10 @@ class ReconstructItinerary {
             String nextStop = arrivals.poll();
             doDFS(nextStop);
         }
-        path.addFirst(departure); //topological sort. the one that gets finished first is prepended first
+        res.addFirst(departure); //topological sort. the one that gets finished first is at the last of the list
     }
 
-    void createGraph() {
-        //create graph
+    void createGraph() { //create DAG graph
         for (List<String> ticket : tickets) {
             flights.putIfAbsent(ticket.get(0), new PriorityQueue<>()); //create a priority queue which always has lexicographically lowest elem as the 1st elem
             flights.get(ticket.get(0)).offer(ticket.get(1));
@@ -48,7 +47,7 @@ class ReconstructItinerary {
     public List<String> findItinerary(List<List<String>> tickets) {
         this.tickets = tickets;
         flights = new HashMap<>();
-        path = new LinkedList<>();
+        res = new LinkedList<>();
 
         //Create DAG graph
         createGraph();
@@ -56,7 +55,7 @@ class ReconstructItinerary {
         //do DFS
         doDFS("JFK");
 
-        return path;
+        return res;
     }
 
 

@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.tbd.dp_word_break_II;
+package com.anirudh.companies_21_22.facebook.lc_last_6m.tbd;
 
 /**
  * Created by paanir on 8/29/21.
@@ -42,7 +42,7 @@ import java.util.*;
  * <p>
  * use the memoization map first thing to make sure we do no extra processing
  */
-public class WordBreakIILC {
+public class Z_DP_WordBreakIILC {
     Set<String> wordSet;
     Map<String, List<String>> waysToBreakMap = new HashMap<>(); //Map from a string to list of ways it can be broken down
 

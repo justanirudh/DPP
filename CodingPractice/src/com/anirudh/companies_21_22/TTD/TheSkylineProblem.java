@@ -123,7 +123,7 @@ public class TheSkylineProblem {
             }
             int currMaxHeight = heights.lastKey();
             if(currMaxHeight != prevMaxHeight) { //less than or greater than
-                res.add(Arrays.asList(p.x, currMaxHeight));
+                res.add(Arrays.asList(p.x, currMaxHeight)); //current x with max height
                 prevMaxHeight = currMaxHeight;
             }
         }

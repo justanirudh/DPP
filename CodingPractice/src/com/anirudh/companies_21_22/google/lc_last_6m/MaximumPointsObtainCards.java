@@ -68,22 +68,21 @@ public class MaximumPointsObtainCards {
         if (cardPoints.length == k)
             return totalSum;
 
-        int windowLen = cardPoints.length - k;
+        int windowLen = cardPoints.length - k; //find min in this window
 
-        int currSum = 0;
+        int slow = 0;
         int fast = 0;
-        while (fast <= windowLen - 1) { //i - 0 + 1 = windowLen
+        int currSum = 0;
+        while (fast < cardPoints.length && fast + 1 <= windowLen) { //create first window
             currSum += cardPoints[fast];
             fast++;
         }
-        fast--;
-        int minSum = currSum;
-        int slow = 0;
-        while (fast < cardPoints.length - 1) {
-            fast++;
-            currSum = currSum - cardPoints[slow] + cardPoints[fast];
+        int minSum = currSum; //fast is outside window, slow is inside window
+        while (fast < cardPoints.length) {
+            currSum = currSum + cardPoints[fast] - cardPoints[slow];
             minSum = Math.min(minSum, currSum);
             slow++;
+            fast++;
         }
         return totalSum - minSum;
     }

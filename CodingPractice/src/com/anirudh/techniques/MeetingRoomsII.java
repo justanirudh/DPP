@@ -47,7 +47,8 @@ public class MeetingRoomsII {
                 return timeDiff;
             else {
                 //if any times overlapping, then dont consider the meetings overlapping
-                //Eg. [[6,8][8,10]] should require 1 room, not 2
+                //Eg. [[6,8][8,10]] should require 1 room, not 2;
+                // end comes before start
                 if (!i1.isStart && i2.isStart)
                     return -1;
                 else if (i1.isStart && !i2.isStart)

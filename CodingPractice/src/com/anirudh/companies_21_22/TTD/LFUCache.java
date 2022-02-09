@@ -173,18 +173,22 @@ public class LFUCache {
         int oldFreq = node.freq;
         DLL oldDLL = freqMap.get(oldFreq);
         oldDLL.remove(node);
+
         node.freq = oldFreq + 1;
-        DLL newDLL = freqMap.getOrDefault(node.freq, new DLL());
-        newDLL.addFirst(node);
-        freqMap.put(node.freq, newDLL);
+        freqMap.putIfAbsent(node.freq, new DLL());
+        freqMap.get(node.freq).addFirst(node);
 
         //check if minFreq needs to be updated
-        if (minFreq == oldFreq && oldDLL.size == 0)
-            minFreq = node.freq;
+        if (oldDLL.size == 0) {
+            if (oldFreq == minFreq) {
+                minFreq = node.freq;
+            }
+            freqMap.remove(oldFreq);
+        }
     }
 
     public int get(int key) {
-        if(!cacheMap.containsKey(key)) {
+        if (!cacheMap.containsKey(key)) {
             return -1;
         }
         QNode qn = cacheMap.get(key);
@@ -193,7 +197,7 @@ public class LFUCache {
     }
 
     public void put(int key, int value) {
-        if(capacity == 0)
+        if (capacity == 0)
             return;
         if (cacheMap.containsKey(key)) {
             QNode node = cacheMap.get(key);
@@ -205,15 +209,14 @@ public class LFUCache {
         if (cacheMap.size() == capacity) {
             DLL dll = freqMap.get(minFreq);
             QNode qn = dll.removeLast(); //LRU
-            if(dll.size == 0)
+            if (dll.size == 0)
                 freqMap.remove(minFreq);
             cacheMap.remove(qn.k);
         }
         minFreq = 1;
-        DLL dll = freqMap.getOrDefault(minFreq, new DLL());
+        freqMap.putIfAbsent(minFreq, new DLL());
         QNode qn = new QNode(key, value);
-        dll.addFirst(qn);
-        freqMap.put(minFreq, dll);
+        freqMap.get(minFreq).addFirst(qn);
         cacheMap.put(key, qn);
     }
 }
