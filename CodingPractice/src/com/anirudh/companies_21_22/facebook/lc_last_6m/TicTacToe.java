@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 /*
 348. Design Tic-Tac-Toe

@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.anki;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 /*
 1539. Kth Missing Positive Number
@@ -67,7 +67,7 @@ public class KthMissingPositiveNumber {
                 r = mid - 1;
             }
         }
-        // newl = r + 1
+        // newl = r + 1 now
         // kth num between r and newl
         //arr[r] + elems missing after r == arr[r] + (k - elems missing before r)
         //arr[r] + (k - (arr[r] - r - 1)) == k + (r + 1) = k + newl
