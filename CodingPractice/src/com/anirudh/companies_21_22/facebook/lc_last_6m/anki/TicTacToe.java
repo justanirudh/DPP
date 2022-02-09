@@ -165,7 +165,7 @@ public class TicTacToe {
         return 0;
     }
 
-
+//-------------------------------SLOW
     public class DesignTicTacToeSlow {
         int[][] matrix;
         int n;
