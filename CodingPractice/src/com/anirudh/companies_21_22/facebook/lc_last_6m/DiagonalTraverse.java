@@ -77,12 +77,9 @@ public class DiagonalTraverse {
             } else {
                 coords.sort(new CompareCoords(false));
             }
-            int j = 0;
-            while (j < coords.size()) {
-                int[] coord = coords.get(j);
+            for (int[] coord : coords) {
                 res[i] = mat[coord[0]][coord[1]];
                 i++;
-                j++;
             }
         }
 

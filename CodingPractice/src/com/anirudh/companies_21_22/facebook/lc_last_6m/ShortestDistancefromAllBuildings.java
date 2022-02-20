@@ -128,7 +128,7 @@ public class ShortestDistancefromAllBuildings {
             }
         }
 
-        //grid is populated with sum of distances. Now get max while making sure the cell can reached by all buildings
+        //grid is populated with sum of distances. Now get min while making sure the cell can reached by all buildings
         int res = Integer.MAX_VALUE;
         for (int i = 0; i < grid.length; ++i) {
             for (int j = 0; j < grid[0].length; ++j) {

@@ -70,8 +70,7 @@ To start with, ans = S as it is sum of 1 giant subarray
 mid = (E+S)/2
 make groups with sum <= mid
 if num_groups > m => less groups required => each group's sum will increase => lo = mid+1, hi = S
-if num_groups < m => more groups required => each group's sum will decrease => lo = E, hi = mid - 1
-if num_groups = m => record the value and keep searching for lesser sum => lo = E, hi = mid - 1
+if num_groups <= m => more groups required => each group's sum will decrease => lo = E, hi = mid - 1, record result as pot soln
 Keep doing this until lo > hi
  */
 public class CapacityToShipPackagesWithinDDays {

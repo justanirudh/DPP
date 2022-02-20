@@ -75,7 +75,7 @@ public class PopulatingNextPointersBT {
                    curr.right.next = curr.next.left; //across different parents
                curr = curr.next;
            }
-            leftMost = leftMost.left;
+            leftMost = leftMost.left; //go to next level
        }
        return root;
     }

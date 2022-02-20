@@ -1,4 +1,4 @@
-package com.anirudh.companies_21_22.facebook.lc_last_6m.tbd;
+package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 /**
  * Created by paanir on 8/29/21.
@@ -42,7 +42,7 @@ import java.util.*;
  * <p>
  * use the memoization map first thing to make sure we do no extra processing
  */
-public class Z_DP_WordBreakIILC {
+public class DP_WordBreakII {
     Set<String> wordSet;
     Map<String, List<String>> waysToBreakMap = new HashMap<>(); //Map from a string to list of ways it can be broken down
 
@@ -63,11 +63,11 @@ public class Z_DP_WordBreakIILC {
 
             if (wordSet.contains(prefix)) { //if prefix is in dictionary, then search for postfixes
 
-                String postFix = toBeBroken.substring(i);
-                List<String> brokenPostfixes = getWaysToBreak(postFix); //sending rest of the String to recurse
+                String suffix = toBeBroken.substring(i);
+                List<String> brokenSuffixes = getWaysToBreak(suffix); //sending rest of the String to recurse
 
-                for (String brokenPostfix : brokenPostfixes) { //add it to map
-                    String way = brokenPostfix.isEmpty() ? prefix : prefix + " " + brokenPostfix;
+                for (String brokenSuffix : brokenSuffixes) { //add it to map
+                    String way = brokenSuffix.isEmpty() ? prefix : prefix + " " + brokenSuffix;
                     waysToBreakMap.get(toBeBroken).add(way);
                 }
             }

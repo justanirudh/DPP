@@ -26,6 +26,7 @@ word = "ABCB", -> returns false.
     DFS in matrix (as multiple sources possible)
     like finding cycle in a directed graph. maintain a record of path
  */
+
 //DFS with backtracking
 public class WordSearch {
     char[][] board;
@@ -34,28 +35,27 @@ public class WordSearch {
     boolean[][] visited;
 
     int length, breadth;
-    int[] coordsX = {-1, 0, 1, 0};
-    int[] coordsY = {0, 1, 0, -1};
+    int[] dx = {-1, 0, 1, 0};
+    int[] dy = {0, 1, 0, -1};
 
     boolean isValid(int x, int y) {
         return !(x < 0 || x >= length || y < 0 || y >= breadth);
     }
 
     boolean dfs(int x, int y, int index) { //index is index of word string
-        visited[x][y] = true; //S, E
-        ++index;
+        visited[x][y] = true;
         //reached end of word
         if (index == word.length())
             return true;
 
         boolean res = false;
-//curr is E, next find C
+
         for (int i = 0; i < 4; ++i) {
-            int neighX = x + coordsX[i];
-            int neighY = y + coordsY[i];
+            int neighX = x + dx[i];
+            int neighY = y + dy[i];
             //is within matrix, is undiscovered and its value is equal to next char
-            if (isValid(neighX, neighY) && board[neighX][neighY] == word.charAt(index) && !visited[neighX][neighY]) //found E on top
-                res = dfs(neighX, neighY, index);
+            if (isValid(neighX, neighY) && board[neighX][neighY] == word.charAt(index) && !visited[neighX][neighY])
+                res = dfs(neighX, neighY, index + 1);
             //else res will remain false
             if (res) //if found 1 true path, break. no need to check further
                 return true;
@@ -86,7 +86,7 @@ public class WordSearch {
                 if (board[i][j] == word.charAt(0)) {
                     //found a source
                     visited = new boolean[length][breadth]; //new DFS for each source found
-                    boolean exists = dfs(i, j, 0);
+                    boolean exists = dfs(i, j, 1);
                     if (exists)
                         return true;
                 }

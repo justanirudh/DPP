@@ -73,9 +73,8 @@ public class WordLadder {
                         // Key is the generic word
                         // Value is a list of words which have the same intermediate generic word.
                         String pattern = word.substring(0, i) + '*' + word.substring(i + 1, wordLen);
-                        List<String> transformations = patternToMatches.getOrDefault(pattern, new ArrayList<>());
-                        transformations.add(word);
-                        patternToMatches.put(pattern, transformations);
+                        patternToMatches.putIfAbsent(pattern, new ArrayList<>());
+                        patternToMatches.get(pattern).add(word);
                     }
                 });
 
@@ -93,11 +92,12 @@ public class WordLadder {
 
                 // Intermediate words for current word
                 String currPattern = word.substring(0, i) + '*' + word.substring(i + 1, wordLen);
-                if(visited.contains(currPattern))
+                if (visited.contains(currPattern))
                     continue;
 
                 // Next states are all the words which share the same intermediate state.
-                for (String adjacentWord : patternToMatches.getOrDefault(currPattern, new ArrayList<>())) {
+                List<String> neighbours = patternToMatches.getOrDefault(currPattern, new ArrayList<>());
+                for (String adjacentWord : neighbours) {
                     // If at any point if we find what we are looking for
                     // i.e. the end word - we can return with the answer.
                     if (adjacentWord.equals(endWord)) {

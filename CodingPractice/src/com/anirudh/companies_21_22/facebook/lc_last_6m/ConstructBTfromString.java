@@ -58,7 +58,7 @@ Submissions
  */
 public class ConstructBTfromString {
 
-    class TreeNodeAndIndex {
+    static class TreeNodeAndIndex {
 
         TreeNode tn;
         int index;
@@ -91,25 +91,25 @@ public class ConstructBTfromString {
         if(idx == s.length())
             return new TreeNodeAndIndex(null, idx);
 
-        List<Integer> valueAndIdx = getValueAndIndex(s, idx);
+        List<Integer> valueAndIdx = getValueAndIndex(s, idx); //any subtree start from num
         TreeNode node = new TreeNode(valueAndIdx.get(0));
         idx = valueAndIdx.get(1);
 
-        if(idx < s.length() && s.charAt(idx) == '(') {
+        if(idx < s.length() && s.charAt(idx) == '(') { //left child
             idx++;
             TreeNodeAndIndex tni = preOrder(s, idx);
             node.left = tni.tn;
             idx = tni.index;
         }
 
-        if(idx < s.length() && node.left != null && s.charAt(idx) == '(') {
+        if(idx < s.length() && node.left != null && s.charAt(idx) == '(') { //right child
             idx++;
             TreeNodeAndIndex tni = preOrder(s, idx);
             node.right = tni.tn;
             idx = tni.index;
         }
 
-        if(idx < s.length() && s.charAt(idx) == ')') {
+        if(idx < s.length() && s.charAt(idx) == ')') { //move to next
             idx++;
         }
 

@@ -61,7 +61,7 @@ Output: -1
 public class ShortestPathGetFood {
 
     char[][] grid;
-    Set<List<Integer>> visited = new HashSet<>(); //DONT use set of arrays. hashcode of each aray is diff even is elems are same
+    boolean[][] visited;
     int[] dx = {0, 0, 1, -1};
     int[] dy = {1, -1, 0, 0};
 
@@ -70,31 +70,30 @@ public class ShortestPathGetFood {
 
     }
 
-    int doBFS(List<Integer> point) {
-        visited.add(point);
+    int doBFS(int[] point) {
+        visited[point[0]][point[1]] = true;
         int dist = 0;
-        Queue<List<Integer>> queue = new ArrayDeque<>();
+        Queue<int[]> queue = new ArrayDeque<>();
         queue.offer(point);
         while (!queue.isEmpty()) {
             int len = queue.size();
             for (int j = 0; j < len; ++j) { //using similar to level order traversal
-                List<Integer> curr = queue.poll();
+                int[] curr = queue.poll();
                 for (int i = 0; i < 4; ++i) {
-                    int x = curr.get(0) + dx[i];
-                    int y = curr.get(1) + dy[i];
-                    List<Integer> p = Arrays.asList(x,y);
-                    if (isValid(x, y) && grid[x][y] != 'X' && !visited.contains(p)) {
+                    int x = curr[0] + dx[i];
+                    int y = curr[1] + dy[i];
+                    int[] p = {x, y};
+                    if (isValid(x, y) && grid[x][y] != 'X' && !visited[x][y]) {
                         if (grid[x][y] == '#')
                             return dist + 1;
                         else { // is unvisited '0'
-                            visited.add(p);
+                            visited[x][y] = true;
                             queue.offer(p);
-
                         }
                     }
                 }
             }
-            dist++; //increment distance after each "LEVEL"
+            dist++; //increment distance after each "LEVEL"; dist of all nodes in the q right now
         }
         return -1;
     }
@@ -102,14 +101,15 @@ public class ShortestPathGetFood {
     public int getFood(char[][] grid) {
 
         this.grid = grid;
-        List<Integer> user = new ArrayList<>();
+        visited = new boolean[grid.length][grid[0].length];
+        int[] user = new int[2];
 
         //find person
         for (int i = 0; i < grid.length; ++i) {
             for (int j = 0; j < grid[0].length; ++j) {
                 if (grid[i][j] == '*') {
-                    user.add(i);
-                    user.add(j);
+                    user[0] = i;
+                    user[1] = j;
                     break;
                 }
             }

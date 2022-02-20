@@ -6,6 +6,11 @@ import java.util.*;
  * Created by paanir on 5/18/21.
  */
 public class HelloWorld {
+    enum Status{
+        PENDING,
+        PARTIAL,
+        FILLED
+    }
 
     static void yello() {
         int a = 0;
@@ -16,6 +21,18 @@ public class HelloWorld {
     }
 
     public static void main(String[] args) {
+
+        String foo = "/a/b/c";
+        String bar = "/";
+        String baz = "";
+
+        System.out.println( foo.split("/").length);
+        System.out.println( bar.split("/").length);
+        System.out.println( baz.split("/").length);
+        Map<Integer, Status> orderMap = new HashMap<>();
+        orderMap.put(1, Status.PENDING);
+        orderMap.put(2, Status.PARTIAL);
+        orderMap.put(3, Status.FILLED);
 
 //        List<Integer> list = new ArrayList<>(5);
 //        System.out.println("91283472332".compareTo("2147483648"));
@@ -48,7 +65,7 @@ public class HelloWorld {
 //            }
 //        });
 
-        System.out.println(Integer.toBinaryString(5));
+//        System.out.println(Integer.toBinaryString(5));
 
     }
 }

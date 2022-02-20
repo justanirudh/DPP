@@ -11,17 +11,17 @@ Medium
 Add to List
 
 Share
-You are given an longeger array ribbons, where ribbons[i] represents the length of the ith ribbon, and an longeger k. You may cut any of the ribbons longo any number of segments of positive longeger lengths, or perform no cuts at all.
+You are given an integer array ribbons, where ribbons[i] represents the length of the ith ribbon, and an integer k. You may cut any of the ribbons into any number of segments of positive integer lengths, or perform no cuts at all.
 
 For example, if you have a ribbon of length 4, you can:
 Keep the ribbon of length 4,
-Cut it longo one ribbon of length 3 and one ribbon of length 1,
-Cut it longo two ribbons of length 2,
-Cut it longo one ribbon of length 2 and two ribbons of length 1, or
-Cut it longo four ribbons of length 1.
-Your goal is to obtain k ribbons of all the same positive longeger length. You are allowed to throw away any excess ribbon as a result of cutting.
+Cut it into one ribbon of length 3 and one ribbon of length 1,
+Cut it into two ribbons of length 2,
+Cut it into one ribbon of length 2 and two ribbons of length 1, or
+Cut it into four ribbons of length 1.
+Your goal is to obtain k ribbons of all the same positive integer length. You are allowed to throw away any excess ribbon as a result of cutting.
 
-Return the maximum possible positive longeger length that you can obtain k ribbons of, or 0 if you cannot obtain k ribbons of the same length.
+Return the maximum possible positive integer length that you can obtain k ribbons of, or 0 if you cannot obtain k ribbons of the same length.
 
 
 
@@ -47,10 +47,10 @@ Example 3:
 
 Input: ribbons = [5,7,9], k = 22
 Output: 0
-Explanation: You cannot obtain k ribbons of the same positive longeger length.
+Explanation: You cannot obtain k ribbons of the same positive integer length.
 
 
-Constralongs:
+Constraints:
 
 1 <= ribbons.length <= 105
 1 <= ribbons[i] <= 105
@@ -70,7 +70,7 @@ public class CuttingRibbons {
     boolean validLength(long len, int[] ribbons, long k) {
         long num = 0;
         for (long rib : ribbons) {
-            num += rib / len; //number of pieces per ribbon
+            num += rib / len; //number of len-size pieces per ribbon
             if (num >= k)
                 return true;
         }
@@ -78,28 +78,30 @@ public class CuttingRibbons {
     }
 
     public int maxLength(int[] ribbons, int k) {
-        long l = 0;
+        long res = 0;
+
         long sum = 0;
-        long max = 0;
         for (long rib : ribbons) {
             sum += rib;
         }
+
+        long l = 0;
         long r = sum / k;// upper bound of length
         if (r == 0) //ribbon cannot be even 1 length
             return 0;
         while (l <= r) {
-            long mid = l + (r - l) / 2;
-            if (mid == 0) {
+            long mid = l + (r - l) / 2; //mid = possible length of k ribbons
+            if (mid == 0) { //l = 0, r = 1
                 l = mid + 1;
                 continue;
             }
             if (validLength(mid, ribbons, k)) {
-                max = mid;
+                res = mid; // we have to find the longest
                 l = mid + 1;
             } else {
                 r = mid - 1;
             }
         }
-        return (int)max;
+        return (int)res;
     }
 }

@@ -116,7 +116,7 @@ public class RobotRoomCleaner {
         robot.clean();
         visited.add(curr);
         for (int i = 0; i < 4; ++i) {
-            int nextDir = (dir + i) % 4; // i is the offset from the current dir; this calculation makes it so that nextRow and nextCol become compatible with the turn we took at the end of previous loop
+            int nextDir = (dir + i) % 4; // i is the offset from the current dir;
             int nextRow = curr.get(0) + dx[nextDir];
             int nextCol = curr.get(1) + dy[nextDir];
             List<Integer> nextCell = Arrays.asList(nextRow, nextCol);
@@ -124,7 +124,7 @@ public class RobotRoomCleaner {
                 dfs(nextCell, nextDir);
                 comeBack(); //come back to current cell and face in the current direction again
             }
-            robot.turnRight(); //turn clockwise
+            robot.turnRight(); //turn clockwise to comply with next direction to explore
         }
     }
 

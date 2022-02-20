@@ -40,9 +40,9 @@ is just one single connected black shape.
  * DFS in a matrix
  */
 public class BlackShapes {
-    private boolean visited[][]; //explored
-    private int di[] = new int[]{1, -1, 0, 0}; //neighbours: (1,0) (-1, 0) (0, 1) (0,-1)
-    private int dj[] = new int[]{0, 0, 1, -1};//neighbours ^
+    private boolean[][] visited; //explored
+    private final int[] di = new int[]{1, -1, 0, 0}; //neighbours: (1,0) (-1, 0) (0, 1) (0,-1)
+    private final int[] dj = new int[]{0, 0, 1, -1};//neighbours ^
     private List<String> input;
     private int nRows, nCols;
 
@@ -51,10 +51,8 @@ public class BlackShapes {
         if (i < 0 || i >= nRows || j < 0 || j >= nCols) //are in the matrix
             return false;
 
-        if (input.get(i).charAt(j) != 'X') //is X, word at i and char at j
-            return false;
-
-        return true;
+        //is X, word at i and char at j
+        return input.get(i).charAt(j) == 'X';
     }
 
     private void dfs(int i, int j) {

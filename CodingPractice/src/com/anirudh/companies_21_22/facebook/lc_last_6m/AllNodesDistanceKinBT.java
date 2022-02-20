@@ -104,8 +104,9 @@ public class AllNodesDistanceKinBT {
                     q.offer(node.right);
                 }
                 if (nodeToParent.containsKey(node) && !visited.contains(nodeToParent.get(node))) {
-                    visited.add(nodeToParent.get(node));
-                    q.offer(nodeToParent.get(node));
+                    TreeNode parent = nodeToParent.get(node);
+                    visited.add(parent);
+                    q.offer(parent);
                 }
 
             }

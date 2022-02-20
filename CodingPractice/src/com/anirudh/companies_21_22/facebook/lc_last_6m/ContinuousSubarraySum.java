@@ -56,7 +56,7 @@ import java.util.Map;
 public class ContinuousSubarraySum {
     public boolean checkSubarraySum(int[] nums, int k) {
         Map<Integer, Integer> rems = new HashMap<>();
-        rems.put(0, -1); //remainder is 0 and its index is -1. required if the entire array's sum is a multiple of k
+        rems.put(0, -1); //remainder is 0 and its index is -1. required if the entire array's sum until index i is a multiple of k. eg: [23,2,4,6,6] k=7
         int runningSum = 0;
         for (int i = 0; i < nums.length; ++i) {
             runningSum += nums[i];
@@ -64,7 +64,7 @@ public class ContinuousSubarraySum {
             if (rems.containsKey(rem)) { //seen this remainder before
                 if (i - rems.get(rem) >= 2)  // i - rems.get(rem) will give me the size of the array as the array itself is from [rems.get(rem) + 1, i]
                     return true;
-            } else {
+            } else { //else req to get the longest such subarray
                 rems.put(rem, i);
             }
         }

@@ -6,6 +6,8 @@ package com.anirudh.companies_21_22.facebook.lc_last_6m;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 1249. Minimum Remove to Make Valid Parentheses
@@ -78,11 +80,39 @@ public class MinimumRemovetoMakeValidParentheses {
             }
         }
 
-        StringBuilder sb = new StringBuilder(s);
+        Set<Integer> remove = new HashSet<>();
         while (!parens.isEmpty()) {
-            sb.deleteCharAt(parens.pop());
+            remove.add(parens.pop());
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); ++i) {
+            if(!remove.contains(i)) {
+                sb.append(s.charAt(i));
+            }
         }
         return sb.toString();
 
     }
+    /*
+        public String minRemoveToMakeValid(String s) {
+        int balance = 0;
+        int unopenedRight = 0;
+
+        for (char c : s.toCharArray()) {
+            if(c == '(')
+                balance++;
+            else if (c == ')')
+                balance--;
+            else
+                continue;
+
+            if (balance == -1) { //means at least 1 right bracket that was not opened
+                unopenedRight++;
+                balance++;
+            }
+        }
+        return unopenedRight + balance;
+    }
+     */
 }
