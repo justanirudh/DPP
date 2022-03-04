@@ -55,17 +55,17 @@ public class IntegertoEnglishWords {
         if (num < TEN) { //5
             res = below10[num];
         } else if (num < TWENTY) { //19
-            res =  below20[num - TEN];
+            res = below20[num - TEN];
         } else if (num < HUNDRED) { //9 5
-            res =  below100[num / TEN] + " " + getPhrase(num % TEN);
+            res = below100[num / TEN] + " " + getPhrase(num % TEN);
         } else if (num < THOUSAND) { //9 95
-            res =  getPhrase(num / HUNDRED) + " Hundred " + getPhrase(num % HUNDRED);
+            res = getPhrase(num / HUNDRED) + " Hundred " + getPhrase(num % HUNDRED);
         } else if (num < MILLION) { //995 001
-            res =  getPhrase(num / THOUSAND) + " Thousand " + getPhrase(num % THOUSAND);
+            res = getPhrase(num / THOUSAND) + " Thousand " + getPhrase(num % THOUSAND);
         } else if (num < BILLION) { //99 995 003
-            res =  getPhrase(num / MILLION) + " Million " + getPhrase(num % MILLION);
+            res = getPhrase(num / MILLION) + " Million " + getPhrase(num % MILLION);
         } else {
-            res =  getPhrase(num / BILLION) + " Billion " + getPhrase(num % BILLION);
+            res = getPhrase(num / BILLION) + " Billion " + getPhrase(num % BILLION);
         }
         return res.trim();
     }

@@ -92,19 +92,40 @@ public class LeftmostColumnwithatLeastaOne {
 
     //Given class--------------------------------end
 
+    public int leftMostColumnWithOneFastest(BinaryMatrix binaryMatrix) {
+        int rows = binaryMatrix.dimensions().get(0);
+        int cols = binaryMatrix.dimensions().get(1);
+
+        // Set pointers to the top-right corner.
+        int i = 0;
+        int j = cols - 1;
+
+        // Repeat the search until it goes off the grid.
+        while (i < rows && j >= 0) {
+            if (binaryMatrix.get(i, j) == 0) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+
+        // If we never left the last column, this is because it was all 0's.
+        return (j == cols - 1) ? -1 : j + 1;
+    }
+
     //LC solution [Better, nlogm]: do binary search in each row to find leftmost 1 and record their indices.
     // Then find the minimum of those indices
     public int leftMostColumnWithOne(BinaryMatrix binaryMatrix) {
         int rows = binaryMatrix.dimensions().get(0);
         int cols = binaryMatrix.dimensions().get(1);
-        int smallestIndex = cols;
-        for (int row = 0; row < rows; row++) {
+        int res = cols;
+        for (int i = 0; i < rows; i++) {
             // Binary Search for each row.
             int lo = 0;
             int hi = cols - 1;
             while (lo < hi) {
                 int mid = (lo + hi) / 2;
-                if (binaryMatrix.get(row, mid) == 0) {
+                if (binaryMatrix.get(i, mid) == 0) {
                     lo = mid + 1;
                 }
                 else { //if it is 1
@@ -113,13 +134,13 @@ public class LeftmostColumnwithatLeastaOne {
             }
             // If the last element in the search space is a 1, then this row
             // contained a 1.
-            if (binaryMatrix.get(row, lo) == 1) {
-                smallestIndex = Math.min(smallestIndex, lo);
+            if (binaryMatrix.get(i, lo) == 1) {
+                res = Math.min(res, lo);
             }
         }
         // If smallest_index is still set to cols, then there were no 1's in
         // the grid.
-        return smallestIndex == cols ? -1 : smallestIndex;
+        return res == cols ? -1 : res;
     }
 
     //----------------------------------

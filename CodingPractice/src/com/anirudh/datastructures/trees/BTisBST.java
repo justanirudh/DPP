@@ -48,7 +48,7 @@ public class BTisBST {
         }
     }
 
-    public boolean isBSTNode(TreeNode curr, double min, double max) {
+    public boolean preOrder(TreeNode curr, double min, double max) {
 
         if (curr == null)
             return true;
@@ -56,7 +56,7 @@ public class BTisBST {
         if (curr.val <= min || curr.val >= max) //if the current node violates the BST property
             return false;
 
-        return isBSTNode(curr.left, min, curr.val) && isBSTNode(curr.right, curr.val, max);
+        return preOrder(curr.left, min, curr.val) && preOrder(curr.right, curr.val, max);
 
     }
 
@@ -68,6 +68,6 @@ public class BTisBST {
         double max = Double.POSITIVE_INFINITY;
 
         //Also passing a range to each side of the tree left: [math.min, root] and right: [root, math.pathSum]
-        return isBSTNode(root, min, max);
+        return preOrder(root, min, max);
     }
 }

@@ -31,16 +31,14 @@ public class NumberOfIslands {
     //Do DFS in matrix
 
     private boolean[][] visited;
-    private int[] di = {0,0,1,-1};
-    private int[] dj = {1,-1,0,0};
+    private final int[] di = {0,0,1,-1};
+    private final int[] dj = {1,-1,0,0};
     private int numRows;
     private int numCols;
     private char[][] grid;
 
     private boolean isValid(int row, int col){
-        if(row < 0 || col < 0 || row >= numRows || col >= numCols )
-            return false;
-        return true;
+        return row >= 0 && col >= 0 && row < numRows && col < numCols;
     }
 
     private void doDFS(int row, int col) {

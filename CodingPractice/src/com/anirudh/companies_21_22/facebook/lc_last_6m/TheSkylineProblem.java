@@ -93,7 +93,7 @@ public class TheSkylineProblem {
                 } else if (!a.isStart && !b.isStart) { //both ends
                     return a.height - b.height;
                 } else if (a.isStart) {
-                    return -1; //put a before b
+                    return -1; //put a before b; new start comes before old end
                 } else
                     return 1;
             }

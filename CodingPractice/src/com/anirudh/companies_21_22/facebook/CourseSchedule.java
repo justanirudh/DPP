@@ -69,6 +69,8 @@ public class CourseSchedule {
         visited = new HashSet<>();
         path = new HashSet<>();
         for (int i = 0; i < numCourses; ++i) { //go over all trees
+            if(visited.contains(i))
+                continue;
             boolean cycleExists = hasCycle(i, graph);
             if (cycleExists)
                 return false;

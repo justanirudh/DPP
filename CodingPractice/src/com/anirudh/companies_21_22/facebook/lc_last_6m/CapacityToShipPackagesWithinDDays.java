@@ -13,7 +13,8 @@ Add to List
 Share
 A conveyor belt has packages that must be shipped from one port to another within days days.
 
-The ith package on the conveyor belt has a weight of weights[i]. Each day, we load the ship with packages on the conveyor belt (in the order given by weights). We may not load more weight than the maximum weight capacity of the ship.
+The ith package on the conveyor belt has a weight of weights[i]. Each day, we load the ship with packages on the conveyor belt (in the order given by weights).
+We may not load more weight than the maximum weight capacity of the ship.
 
 Return the least weight capacity of the ship that will result in all the packages on the conveyor belt being shipped within days days.
 
@@ -79,7 +80,7 @@ public class CapacityToShipPackagesWithinDDays {
     void binarySearch(int[] weights, int min, int max, int days) {
 
         while (min <= max) {
-            int mid = min + (max - min) / 2;
+            int mid = min + (max - min) / 2; //weight per day
             int currDays = 0;
             int currSum = 0;
             for (int weight : weights) {
@@ -90,9 +91,9 @@ public class CapacityToShipPackagesWithinDDays {
                 }
             }
             currDays++; //to close last subarray
-            if (currDays > days) {
+            if (currDays > days) { //more days needed than supplied; need to decrease days, hence increase weight per day, increase min
                 min = mid + 1;
-            } else { //currDays <= days
+            } else { //currDays <= days, potential solution
                 res = Math.min(res, mid);
                 max = mid - 1;
             }

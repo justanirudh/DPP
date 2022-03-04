@@ -122,23 +122,23 @@ public class ValidNumber {
         int currState = 0; //this tells us which index in the list we should look at
         for(char c : s.toCharArray()) {
 
-            String type; //this gives us which key-value to look at in a state
+            String transition; //this gives us which key-value to look at in a state
             if(Character.isDigit(c))
-                type = "digit";
+                transition = "digit";
             else if (c == '+' || c == '-')
-                type = "sign";
+                transition = "sign";
             else if (c == '.')
-                type = "dot";
+                transition = "dot";
             else if (c == 'e' || c == 'E')
-                type = "expo";
+                transition = "expo";
             else
                 return false;
 
-            if(!stateMachine.get(currState).containsKey(type)) { //if there is no transition to next state
+            if(!stateMachine.get(currState).containsKey(transition)) { //if there is no transition to next state
                 return false;
             }
 
-            currState = stateMachine.get(currState).get(type); //new state
+            currState = stateMachine.get(currState).get(transition); //new state
 
         }
 

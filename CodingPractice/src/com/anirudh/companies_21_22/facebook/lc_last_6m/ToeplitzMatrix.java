@@ -50,7 +50,7 @@ import java.util.Map;
 For elements in same top-left to bottom-right diagonal
     row-col is same
 For elements in same bottom-left to top-right diagonal
-    row-col is same
+    row+col is same
  */
 public class ToeplitzMatrix {
 

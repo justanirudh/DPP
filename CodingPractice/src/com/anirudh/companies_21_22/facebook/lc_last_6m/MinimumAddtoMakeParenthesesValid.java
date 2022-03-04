@@ -57,18 +57,18 @@ public class MinimumAddtoMakeParenthesesValid {
 
     //O(1) space, O(n) time
     public int minAddToMakeValid(String s) {
-        int balance = 0;
+        int unclosedLeft = 0;
         int unopenedRight = 0;
 
         for (char c : s.toCharArray()) {
-            balance += (c == '(') ? 1 : -1;
+            unclosedLeft += (c == '(') ? 1 : -1;
 
-            if (balance == -1) { //means at least 1 right bracket that was not opened
+            if (unclosedLeft == -1) { //means at least 1 right bracket that was not opened
                 unopenedRight++;
-                balance++;
+                unclosedLeft = 0;
             }
         }
-        return unopenedRight + balance;
+        return unopenedRight + unclosedLeft;
 
     }
 

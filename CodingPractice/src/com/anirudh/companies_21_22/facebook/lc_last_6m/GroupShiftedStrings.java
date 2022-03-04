@@ -93,9 +93,7 @@ public class GroupShiftedStrings {
 
         List<List<String>> res = new ArrayList<>();
         for (Map<String, List<String>> internalMaps : seqs.values()) {
-            for (List<String> seq : internalMaps.values()) {
-                res.add(seq);
-            }
+            res.addAll(internalMaps.values());
         }
         return res;
     }

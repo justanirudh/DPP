@@ -11,7 +11,8 @@ Medium
 Add to List
 
 Share
-You are given an integer array ribbons, where ribbons[i] represents the length of the ith ribbon, and an integer k. You may cut any of the ribbons into any number of segments of positive integer lengths, or perform no cuts at all.
+You are given an integer array ribbons, where ribbons[i] represents the length of the ith ribbon, and an integer k.
+You may cut any of the ribbons into any number of segments of positive integer lengths, or perform no cuts at all.
 
 For example, if you have a ribbon of length 4, you can:
 Keep the ribbon of length 4,
@@ -85,16 +86,12 @@ public class CuttingRibbons {
             sum += rib;
         }
 
-        long l = 0;
+        long l = 1; //min length of a string
         long r = sum / k;// upper bound of length
         if (r == 0) //ribbon cannot be even 1 length
             return 0;
         while (l <= r) {
             long mid = l + (r - l) / 2; //mid = possible length of k ribbons
-            if (mid == 0) { //l = 0, r = 1
-                l = mid + 1;
-                continue;
-            }
             if (validLength(mid, ribbons, k)) {
                 res = mid; // we have to find the longest
                 l = mid + 1;

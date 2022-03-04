@@ -53,11 +53,6 @@ while(q! empty) {
 
 public class BTRightSideView {
 
-    //Just use level order traversal.
-    //Use size of level to find the last element
-    // See 107. Binary Tree Level Order Traversal II
-    //TODO: Implement
-
     public List<Integer> rightSideView(TreeNode root) {
         if(root == null)
             return new ArrayList<>();

@@ -83,7 +83,7 @@ class RemoveInvalidParentheses {
         if (openParen == '(') //means we have only looked from left to right
             removeHelper(reversed, 0, 0, ')', '('); //now do rToL
         else
-            output.add(reversed); //looked at both lToR and rToL
+            output.add(reversed); //looked at both lToR and rToL, reversed of reversed is original string
     }
 
     public List<String> removeInvalidParentheses(String s) {

@@ -98,6 +98,7 @@ public class CopyListwithRandomPointer {
             Node n = new Node(currOld.val);
             idxToNewNode.put(i, n);
             n.random = currOld.random; //pointing to other list to do the 2-map traversal
+
             if (prev == null) { //first node
                 headNew = n;
             } else {

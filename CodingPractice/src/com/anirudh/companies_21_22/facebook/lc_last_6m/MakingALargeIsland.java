@@ -107,8 +107,9 @@ public class MakingALargeIsland {
                     key++;
                     noOnes = false;
                 }
-                if (grid[i][j] == 0)
+                else {
                     noZeroes = false;
+                }
             }
         }
         if (noZeroes) { //for all 1s case
@@ -138,7 +139,6 @@ public class MakingALargeIsland {
                     }
                     max = Math.max(max, sum + 1);
                 }
-
             }
         }
         return max;

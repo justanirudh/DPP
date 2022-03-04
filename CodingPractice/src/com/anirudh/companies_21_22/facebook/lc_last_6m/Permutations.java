@@ -63,7 +63,7 @@ public class Permutations {
     List<List<Integer>> output;
     List<Integer> nums;
 
-    void backtrack(int first) { //create all permutations that start from curr
+    void backtrack(int first) { //swap each number with the number at first index
         if (first == nums.size()) {
             output.add(new ArrayList<>(nums));
             return;

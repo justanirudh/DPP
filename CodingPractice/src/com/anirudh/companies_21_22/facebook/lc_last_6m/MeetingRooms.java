@@ -46,7 +46,7 @@ public class MeetingRooms {
     public boolean canAttendMeetings(int[][] intervals) {
         Arrays.sort(intervals, Comparator.comparingInt(x -> x[0])); //compare start times
         for(int i= 0; i < intervals.length - 1; ++i) {
-            if(intervals[i][1] > intervals[i + 1][0]) { //prev's end time > curr's start time
+            if(intervals[i][1] > intervals[i + 1][0]) { //curr's end time > next's start time
                 return false;
             }
         }

@@ -77,13 +77,13 @@ public class IntervalListIntersections {
     }
 
     public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
-        int[][] merged = merge(firstList, secondList); //sorted
+        int[][] merged = merge(firstList, secondList); //sorted by start times
         List<List<Integer>> resL = new ArrayList<>();
         int end = merged[0][1];
         for (int i = 1; i < merged.length; ++i) {
             if (end >= merged[i][0]) { //end of last >= start of next
-                int firstEnd = Math.min(end, merged[i][1]);
-                List<Integer> intersect = Arrays.asList(merged[i][0], firstEnd);
+                int smallerEnd = Math.min(end, merged[i][1]);
+                List<Integer> intersect = Arrays.asList(merged[i][0], smallerEnd);
                 resL.add(intersect);
                 end = Math.max(end, merged[i][1]);
             } else {
