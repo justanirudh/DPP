@@ -34,7 +34,7 @@ public class ImportantDataTypesForNonIDETests {
         int k = 5;
         int[] arr2 = new int[k];
 
-        int[] arr = new int[]{2,3,4};
+        int[] arr = new int[]{2, 3, 4};
         System.out.println(arr);
 
 
@@ -56,6 +56,7 @@ public class ImportantDataTypesForNonIDETests {
         class Node {
             int val;
             Node next;
+
             Node(int val) {
                 this.val = val;
                 this.next = null;
@@ -81,21 +82,22 @@ public class ImportantDataTypesForNonIDETests {
         betterStack.pop();
 
         //2
-        class Pair{
+        class Pair {
             int num;
             int count;
-            public Pair(int num, int count){
-                this.num=num;
-                this.count=count;
+
+            public Pair(int num, int count) {
+                this.num = num;
+                this.count = count;
             }
         }
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
         // create a min heap
         //comparator: Returns a negative integer, zero, or a positive integer as the first argument is less than,
         // equal to, or greater than the second.
-        PriorityQueue<Pair> pQueue = new PriorityQueue<>(new Comparator<Pair>(){
-            public int compare(Pair a, Pair b){
-                return a.count-b.count;
+        PriorityQueue<Pair> pQueue = new PriorityQueue<>(new Comparator<Pair>() {
+            public int compare(Pair a, Pair b) {
+                return a.count - b.count;
             }
         });
         priorityQueue.poll();

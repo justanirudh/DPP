@@ -86,10 +86,10 @@ public class FileSystem {
 
     public static void main(String[] args) {
         FileSystem fs = new FileSystem();
-        fs.ls("/").forEach(x -> System.out.println(x));
+        fs.ls("/").forEach(System.out::println);
         fs.mkdir("/a/b/c");
         fs.addContentToFile("/a/b/c/d", "helloworld");
-        fs.ls("/").forEach(x -> System.out.println(x));
+        fs.ls("/").forEach(System.out::println);
         System.out.println(fs.readContentFromFile("/a/b/c/d"));
     }
 }
