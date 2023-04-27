@@ -87,7 +87,7 @@ public class CountCompleteTreeNodes {
         }
     }
 
-
+//----------------------------------------------------------------------
     /*
         Best case T= O(logn)
         Worst case T = O(n)
@@ -120,7 +120,7 @@ public class CountCompleteTreeNodes {
         if(root == null)
             return 0;
 
-        int leftH = getLeftHeight(root.left);
+        int leftH = getLeftHeight(root.left); //#nodes for height
         int rightH = getRightHeight(root.right);
 
         if(leftH == rightH) //perfect/full binary tree

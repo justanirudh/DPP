@@ -59,7 +59,7 @@ public class SubarraySumEqualsK {
         freq.put(0, 1); //0 has come once; required if k is the runningSum at some point
         for (int num : nums) {
             runningSum += num;
-            //if complement of the runningSum appears, count would be the number of times it has appeared until now
+            // if complement of the runningSum appears, count would be the number of times it has appeared until now
             if (freq.containsKey(runningSum - k)) {
                 res += freq.get(runningSum - k);
             }

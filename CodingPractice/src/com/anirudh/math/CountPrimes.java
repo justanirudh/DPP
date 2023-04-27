@@ -39,7 +39,7 @@ public class CountPrimes {
     public int countPrimesFast(int n) {
         if (n == 0 || n == 1 || n == 2) // ques says less than
             return 0;
-        boolean[] done = new boolean[n]; //got all numbers from 0 until n in just a declaration!
+        boolean[] done = new boolean[n]; //got all numbers from 0 to n-1 in just a declaration!
         int count = 0;
         for (int i = 2; i < n; ++i) {
             if (!done[i]) {

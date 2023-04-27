@@ -82,13 +82,11 @@ public class LCAofaBTIII {
             return null;
         else { //both non-null
             Deque<Node> pStack = new ArrayDeque<>();
-            pStack.push(p);
             while (p != null) {
                 pStack.push(p);
                 p = p.parent;
             }
             Deque<Node> qStack = new ArrayDeque<>();
-            qStack.push(q);
             while (q != null) {
                 qStack.push(q);
                 q = q.parent;

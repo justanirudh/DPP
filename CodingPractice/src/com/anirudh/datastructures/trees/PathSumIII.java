@@ -8,7 +8,7 @@ import java.util.Map;
  */
 /*
 437. Path Sum III
-Easy
+Medium
 
 You are given a binary tree in which each node contains an integer value.
 
@@ -46,26 +46,26 @@ S : O(N^2) {N + N-1 + N-2 + . . . }
  */
 public class PathSumIII {
 
-    private int sum;
+    private int k;
 
-    private int calculatePathSums(Map<Integer, Integer> map, TreeNode tn, int runningSum) {
+    private int calculatePathSums(Map<Integer, Integer> runningSumFreq, TreeNode tn, int runningSum) {
         if (tn == null)
             return 0;
         runningSum += tn.val; //add to running sum
 
-        int complement = runningSum - sum; //get complement
-        int res = map.getOrDefault(complement, 0); //first get res, then add to map
+        int complement = runningSum - k; //get complement
+        int res = runningSumFreq.getOrDefault(complement, 0); //first get res, then add to map
 
-        map.put(runningSum, map.getOrDefault(runningSum, 0) + 1); //add running sum to map
+        runningSumFreq.put(runningSum, runningSumFreq.getOrDefault(runningSum, 0) + 1); //add running sum to map
 
         return res +
-                calculatePathSums(new HashMap<>(map), tn.left, runningSum) + //so that left doesnt affect right
-                calculatePathSums(new HashMap<>(map), tn.right, runningSum);
+                calculatePathSums(new HashMap<>(runningSumFreq), tn.left, runningSum) + //so that left doesnt affect right
+                calculatePathSums(new HashMap<>(runningSumFreq), tn.right, runningSum);
 
     }
 
     public int pathSum(TreeNode root, int sum) {
-        this.sum = sum;
+        this.k = sum;
 
         Map<Integer, Integer> map = new HashMap<>(); //running_sum map
         map.put(0, 1); //base case. Required if we want to include root in a path as well, which we obviosuly do

@@ -22,6 +22,7 @@ public class BinarySearch {
         int[] arr = {5,7,10,12,15, 16, 18, 22, 25, 28};
 //        int[] arr = {1, 2};
         int elem = 16;
+        System.out.println("yello");
         System.out.println(search(arr, 0, arr.length - 1, elem));
     }
 }

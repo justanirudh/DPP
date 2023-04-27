@@ -74,7 +74,7 @@ public class ShuffleArray {
      */
     public int[] shuffle() {
         for (int i = 0; i < nums.length; ++i) {
-            int idx = rand.nextInt(i + 1); // for elem at index i, consider self for swapping as well
+            int idx = rand.nextInt(i + 1); // for elem at index i, consider not swapping it (by swapping by itself)
             int tmp = nums[i];
             nums[i] = nums[idx];
             nums[idx] = tmp;

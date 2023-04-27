@@ -92,7 +92,7 @@ public class BTVerticalOrderTraversal {
             RichNode n = order.poll();
             if (n.x > prevX) //start of new list
                 res.add(new ArrayList<>());
-            res.get(res.size() - 1).add(n.val);
+            res.get(res.size() - 1).add(n.val); //add to the last lisr
             prevX = n.x;
         }
         return res;

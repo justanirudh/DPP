@@ -31,10 +31,10 @@ public class BSTIterator { //also a BT iterator as not using BST property at all
 
     public BSTIterator(TreeNode root) { //O(logn) space, O(logn) time
         leftTreeStack = new ArrayDeque<>();
-        populateStack(root);
+        populateLeftStack(root);
     }
 
-    public void populateStack(TreeNode node) {
+    private void populateLeftStack(TreeNode node) {
         while (node != null) {
             leftTreeStack.push(node);
             node = node.left;
@@ -47,7 +47,7 @@ public class BSTIterator { //also a BT iterator as not using BST property at all
 
     public int next() { //InOrder iterative
         ans = leftTreeStack.pop();
-        populateStack(ans.right);
+        populateLeftStack(ans.right);
         return ans.val;
     }
 

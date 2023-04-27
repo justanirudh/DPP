@@ -30,7 +30,7 @@ public class BTLevelOrderTraversalII {
         2. For each level, do level-order traversal
         3. pop each level and append to a list before returning
          */
-        Deque<List<Integer>> levelsS = new ArrayDeque<>(); //stack for the result
+        Deque<List<Integer>> levelsS = new ArrayDeque<>(); //levels Stack for the result
 
         if(root == null)
             return new ArrayList<>(levelsS);

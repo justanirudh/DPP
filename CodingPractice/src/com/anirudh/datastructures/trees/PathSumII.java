@@ -32,8 +32,10 @@ public class PathSumII {
         if (tn.left == null && tn.right == null) { //leaf
             if (remainingSum - tn.val == 0) { //found a solution
                 List<List<Integer>> resList = new ArrayList<>();
-                List<Integer> res = new ArrayList<>(path);
+
+                List<Integer> res = new ArrayList<>(path); //duplicate and add
                 res.add(tn.val);
+
                 resList.add(res);
                 return resList;
             } else

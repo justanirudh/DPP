@@ -93,7 +93,7 @@ space: O(1) + stack(O(h))
                     nodes.offer(head.left);
                 if (head.right != null)
                     nodes.offer(head.right);
-                if (i != levelLen - 1)
+                if (i != levelLen - 1) //not the last elem
                     head.next = nodes.peek();
                 else
                     head.next = null;

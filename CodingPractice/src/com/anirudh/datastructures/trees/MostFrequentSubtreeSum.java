@@ -29,62 +29,45 @@ Note: You may assume the sum of values in any subtree is in the range of 32-bit 
  */
 public class MostFrequentSubtreeSum {
 
-    class CompareFrequency implements Comparator<Map.Entry<Integer, Integer>> { // max heap
-        public int compare(Map.Entry<Integer, Integer> a, Map.Entry<Integer, Integer> b) {
+    int postOrder(TreeNode node, Map<Integer, Integer> sumCount) {
+        if(node == null)
+            return 0;
+        int left = postOrder(node.left, sumCount);
+        int right = postOrder(node.right, sumCount);
+        int sum = left + right + node.val;
+        sumCount.put(sum, sumCount.getOrDefault(sum, 0) + 1);
+        return sum;
+    }
+
+
+    class CompareSums implements Comparator<Map.Entry<Integer,Integer>> { //max heap
+        public int compare(Map.Entry<Integer,Integer> a, Map.Entry<Integer,Integer> b) {
             return b.getValue() - a.getValue();
         }
     }
 
-    private Map<Integer, Integer> frequency = new HashMap<>(); //make hashmap to count each sum's frequency
-
-    private TreeNode postOrderCreate(TreeNode tn) {
-        if (tn == null)
-            return null;
-        TreeNode leftNode = postOrderCreate(tn.left);
-        TreeNode rightNode = postOrderCreate(tn.right);
-
-        int leftSum = leftNode == null ? 0 : leftNode.val;
-        int rightSum = rightNode == null ? 0 : rightNode.val;
-        int subtreeSum = leftSum + rightSum + tn.val;
-        TreeNode root = new TreeNode(subtreeSum); //in the new tree, val is sum of subtree
-        root.left = leftNode;
-        root.right = rightNode;
-
-        //Count frequency of each subtreeSum
-        frequency.put(subtreeSum, frequency.getOrDefault(subtreeSum, 0) + 1);
-
-        return root;
-    }
-
-    private int[] findMostFrequentSums() { //Use max heap to get most frequent sum
-        Queue<Map.Entry<Integer, Integer>> sumMaxHeap = new PriorityQueue<>(new CompareFrequency());
-        for (Map.Entry<Integer, Integer> e: frequency.entrySet()) {
-            sumMaxHeap.offer(e);
-        }
-        int currMax = sumMaxHeap.peek().getValue();
-
-        List<Integer> res = new ArrayList<>();
-
-        while (!sumMaxHeap.isEmpty()) {
-            Map.Entry<Integer, Integer> currSum = sumMaxHeap.poll();
-            int curr = currSum.getValue();
-            if (curr == currMax)
-                res.add(currSum.getKey());
-            else
-                break;
-        }
-
-        return res.stream().mapToInt(i -> i).toArray();
-
-    }
-
     public int[] findFrequentTreeSum(TreeNode root) {
-        if (root == null)
+        //Track MaxFreq
+        if(root == null)
             return new int[0];
+        Map<Integer, Integer> sumCount = new HashMap<>();
+        postOrder(root, sumCount);
 
-        postOrderCreate(root); //create + calculate sum of (children + curr) in 1 pass + calculate frequency
-
-        return findMostFrequentSums();
-
+        //Now just find MaxFreq value in map
+        Queue<Map.Entry<Integer,Integer>> pq = new PriorityQueue<>(new CompareSums());
+        for (Map.Entry<Integer,Integer> e : sumCount.entrySet()) {
+            pq.offer(e);
+        }
+        int maxCount = pq.peek().getValue();
+        List<Integer> resList = new ArrayList<>();
+        while(!pq.isEmpty() && pq.peek().getValue() == maxCount) {
+            resList.add(pq.peek().getKey());
+            pq.poll();
+        }
+        int[] res = new int[resList.size()];
+        for (int i = 0; i < resList.size(); ++i) {
+            res[i] = resList.get(i);
+        }
+        return res;
     }
 }

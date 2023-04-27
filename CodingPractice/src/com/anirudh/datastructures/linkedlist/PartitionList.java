@@ -17,43 +17,28 @@ return 1->2->2->4->3->5.
 
 public class PartitionList {
     public ListNode partition(ListNode head, int x) {
-
-        if (head == null)
-            return null;
-
-        ListNode ltHead = null; //less than list
-        ListNode ltCurr = null;
-        ListNode geHead = null; //greater than equal to list
-        ListNode geCurr = null;
+        ListNode lessHead = new ListNode(-1);
+        ListNode lessCurr = lessHead;
+        ListNode moreHead = new ListNode(-1);
+        ListNode moreCurr = moreHead;
 
         ListNode curr = head;
+        if(head == null || head.next == null)
+            return head;
+
         while (curr != null) {
-            int val = curr.val;
-            if (val < x) {
-                if (ltHead == null) {
-                    ltHead = new ListNode(val);
-                    ltCurr = ltHead;
-                } else {
-                    ListNode node = new ListNode(val);
-                    ltCurr.next = node;
-                    ltCurr = node;
-                }
-            } else {
-                if (geHead == null) {
-                    geHead = new ListNode(val);
-                    geCurr = geHead;
-                } else {
-                    ListNode node = new ListNode(val);
-                    geCurr.next = node;
-                    geCurr = node;
-                }
+            if(curr.val  < x) {
+                lessCurr.next = curr;
+                lessCurr = curr;
+            }
+            else {
+                moreCurr.next = curr;
+                moreCurr = curr;
             }
             curr = curr.next;
         }
-        if (ltHead != null) {
-            ltCurr.next = geHead;
-            return ltHead;
-        } else
-            return geHead;
+        moreCurr.next = null;
+        lessCurr.next = moreHead.next; //skip sentinel
+        return lessHead.next; // skip sentinel
     }
 }

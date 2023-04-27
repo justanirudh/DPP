@@ -52,6 +52,7 @@ public class DeleteNodesAndReturnForest {
   Set<Integer> toDelete;
   List<TreeNode> res;
 
+  //passing isRight to set correct child of parent to null when node is removed
   void postOrder(TreeNode node, TreeNode parent, boolean isRight) {
     if (node == null) {
       return;

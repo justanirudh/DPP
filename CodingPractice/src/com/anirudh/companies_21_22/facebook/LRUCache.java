@@ -53,27 +53,26 @@ Option 2: /*
 Map to DIY queue
 Map has {elements -> QueueNode {k,v,next, prev} }
  */
-public class LRUCache extends LinkedHashMap<Integer, Integer> {
+public class LRUCache {
 
     int capacity;
+    LinkedHashMap<Integer, Integer> cache;
     public LRUCache(int capacity) {
-        super(capacity, 0.5F, true);
+        cache = new LinkedHashMap<Integer, Integer>(capacity, 0.5F, true) {
+            @Override
+        protected boolean removeEldestEntry(Map.Entry eldest) {
+            return super.size() > capacity;
+        }};
         this.capacity = capacity;
     }
 
     public int get(int key) {
-        return super.getOrDefault(key, -1);
+        return cache.getOrDefault(key, -1);
     }
 
     public void put(int key, int value) {
-        super.put(key, value);
+        cache.put(key, value);
     }
-
-    @Override
-    protected boolean removeEldestEntry(Map.Entry eldest) {
-        return super.size() > capacity;
-    }
-
 }
 
 /**
