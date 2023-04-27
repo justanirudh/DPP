@@ -38,6 +38,8 @@ public class ReplaceWords {
     //O(Dd + s)
     //create trie //beats 77%
 
+    //TBD: Minor issue, fix it later
+
     class TrieNode {
         String word; //for leaf
         TrieNode[] children; //for its children
@@ -55,12 +57,11 @@ public class ReplaceWords {
         for (String word : dict) {
             //add to Trie
             TrieNode curr = trieRoot;
-            char[] rootArr = word.toCharArray();
-            for (char ch : rootArr) {
-                int index = ch - 'a';
-                if (curr.children[index] == null)
-                    curr.children[index] = new TrieNode();
-                curr = curr.children[index]; //bring pointer down to child node
+            for (char ch : word.toCharArray()) {
+                int idx = ch - 'a';
+                if (curr.children[idx] == null)
+                    curr.children[idx] = new TrieNode();
+                curr = curr.children[idx]; //bring pointer down to child node
             }
             curr.word = word; //add entire word to leaf
         }
@@ -70,9 +71,8 @@ public class ReplaceWords {
         StringJoiner sj = new StringJoiner(" ");
         //get roots for each word in sentence by using the trie
         for (String word : words) {
-            char[] wordArr = word.toCharArray();
             TrieNode curr = trieRoot;
-            for (char ch : wordArr) {
+            for (char ch : word.toCharArray()) {
                 int idx = ch - 'a';
                 if (curr.children[idx] == null || curr.word != null) //reached a node that doesnt have the correct child or reached a leaf
                     break;

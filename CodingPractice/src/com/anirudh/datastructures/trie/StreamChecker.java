@@ -63,7 +63,7 @@ Submissions
 
 /*
 Use Trie
-find suffix for words == finding prefix for reversed words
+find suffix of straight streams in straight words == finding prefix of reversed streams in reversed words
 Make trie of reversed words
 For every new character, traverse reverse of stream
 If at any point a word is met, return true; else return false
@@ -72,11 +72,10 @@ public class StreamChecker {
 
     class TrieNode {
         TrieNode[] children;
-        String word;
+        boolean isLeaf;
 
         TrieNode() {
             children = new TrieNode[26];
-            word = null;
         }
     }
 
@@ -97,7 +96,7 @@ public class StreamChecker {
                 }
                 curr = curr.children[c - 'a'];
             }
-            curr.word = revWord;
+            curr.isLeaf = true;
         }
     }
 
@@ -107,15 +106,15 @@ public class StreamChecker {
         for (int i = stream.size() - 1; i >= 0; --i) { //go reverse
             char c = stream.get(i);
             if (curr.children[c - 'a'] != null) {
-                if (curr.word != null) //check if found a word
+                if (curr.isLeaf) //check if found a word
                     return true;
                 else
                     curr = curr.children[c - 'a']; // else go to next word
             } else { //no next trienode
-                return curr.word != null; //should be a valid leaf
+                return curr.isLeaf; //should be a valid leaf
             }
         }
-        return curr.word != null; //if word == stream
+        return curr.isLeaf; //if word == stream
     }
 
 //Gives TLE

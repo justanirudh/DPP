@@ -18,11 +18,11 @@ O(N) time, O(N) space
 public class LongestCommonPrefix {
 
     //Trie looks like this, in brackets is the value of word: null(null) -> b(null) -> a(null) -> t(bat)
-    //beats 23%
+    //beats 76.68%
 
     class TrieNode {
         TrieNode[] children;
-        String word;
+        boolean isLeaf; //last node of the word
         int numChildren; //number of children of a node
 
         TrieNode() {
@@ -31,8 +31,7 @@ public class LongestCommonPrefix {
     }
 
     void addToTrie(TrieNode curr, String str) {
-        for (int i = 0; i < str.length(); ++i) {
-            char ch = str.charAt(i);
+        for (char ch : str.toCharArray()) {
             int index = ch - 'a';
             if (curr.children[index] == null) {
                 TrieNode tn = new TrieNode();
@@ -41,7 +40,7 @@ public class LongestCommonPrefix {
             }
             curr = curr.children[index];
         }
-        curr.word = str;
+        curr.isLeaf = true;
     }
 
     public String longestCommonPrefix(String[] strs) {
@@ -53,21 +52,21 @@ public class LongestCommonPrefix {
         }
         //Traverse the trie and stop when either:
         // 1. size of children array is > 1 (means bifurcation) OR
-        // 2. a word is reached
+        // 2. a leaf is reached
         TrieNode curr = root;
         int idx = 0;
         String str = strs[0]; //any word would do
         char[] chars = str.toCharArray();
-        while (curr.word == null && curr.numChildren == 1) {
+        while (curr.numChildren == 1 && !curr.isLeaf) {
             curr = curr.children[chars[idx] - 'a'];
             idx++;
         }
         return str.substring(0, idx);
     }
 
-    // faster than 33.26%
+    // faster than 31.47%
     public String longestCommonPrefix2(String[] strs) {
-        if(strs.length == 0)
+        if (strs.length == 0)
             return "";
         int minLen = Integer.MAX_VALUE;
         for (String str : strs) {
@@ -90,13 +89,13 @@ public class LongestCommonPrefix {
         return sb.toString();
     }
 
-    // faster than 65.39%
+    // faster than 31.47%
     String getCommonSubstring(String s1, String s2) {
         StringBuilder sb = new StringBuilder();
         char[] s1c = s1.toCharArray();
         char[] s2c = s2.toCharArray();
-        for(int i = 0; i < Math.min(s1.length(), s2.length()); ++i) {
-            if(s1c[i] == s2c[i])
+        for (int i = 0; i < Math.min(s1.length(), s2.length()); ++i) {
+            if (s1c[i] == s2c[i])
                 sb.append(s1c[i]);
             else
                 break;
@@ -106,9 +105,9 @@ public class LongestCommonPrefix {
 
     public String longestCommonPrefix3(String[] strs) {
         String res = strs[0];
-        for(int i = 1; i < strs.length; ++i) {
-            String next = strs[i];
-            res = getCommonSubstring(res, next);
+        for (int i = 1; i < strs.length; ++i) {
+            String curr = strs[i];
+            res = getCommonSubstring(res, curr);
         }
         return res;
     }

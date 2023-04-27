@@ -22,41 +22,29 @@ Your algorithm's time complexity must be better than O(n log n), where n is the 
 
 public class TopKFrequentElements {
 
-    static class Pair {
-        int num;
-        int freq;
-
-        Pair(int num) {
-            this.num = num;
-            freq = 0;
-        }
-    }
-
-    static class CompareFrequency implements Comparator<Pair> {
-        public int compare(Pair a, Pair b) {
-            return a.freq - b.freq;
+    static class CompareFrequency implements Comparator<Map.Entry<Integer, Integer>> {
+        public int compare(Map.Entry<Integer, Integer> a, Map.Entry<Integer, Integer> b) {
+            return a.getValue() - b.getValue();
         }
     }
 
     public List<Integer> topKFrequent(int[] nums, int k) {
 
         //calculate frequencies
-        Map<Integer, Pair> counts = new HashMap<>();
+        Map<Integer, Integer> counts = new HashMap<>();
         for (int num : nums) {
-            if (!counts.containsKey(num))
-                counts.put(num, new Pair(num));
-            counts.get(num).freq++;
+                counts.put(num, counts.getOrDefault(num, 0) + 1);
         }
 
         //T = O(nlogk)
-        Queue<Pair> minHeap = new PriorityQueue<>(new CompareFrequency());
-        for (Pair p : counts.values()) {
-            minHeap.offer(p);
+        Queue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>(new CompareFrequency()); //queue of k size
+        for (Map.Entry<Integer, Integer> p : counts.entrySet()) {
+            minHeap.offer(p); //log k operation
             if (minHeap.size() == k + 1)
                 minHeap.poll(); //remove the least frequent, logk operation
         }
 
-        return new ArrayList<>(minHeap).stream().map(x -> x.num).collect(Collectors.toList());
+        return new ArrayList<>(minHeap).stream().map(Map.Entry::getKey).collect(Collectors.toList());
     }
 
     public static void main(String[] args) {

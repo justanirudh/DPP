@@ -136,6 +136,7 @@ public class FindMedianFromDataStream {
     //balancing is important and always,
     // size of smaller elems heap  = size of larger elems heap OR (even elems)
     //size of smaller elems heap  = 1 + size of larger elems heap (odd elems)
+    // we can chose min heap for have 1 larger as well, but need to stick with it
 
     Queue<Integer> lo; //maxHeap
     Queue<Integer> high; //minHeap
@@ -151,7 +152,9 @@ public class FindMedianFromDataStream {
     //logn
     public void addNum(int num) {
         /*
-        The balancing step is required. lets say a number comes that is greater than element of both heaps
+        The balancing step is required. This is to make sure we keep the invariant:
+        all members in lo heap <= all members in hi heap
+        lets say a number comes that is greater than element of both heaps
         just adding it to lo will be wrong as now we have an elem in low that is greater than an elem in high
         hence, do a high.offer(lo.poll()) after that so that all elems of low are smaller than all elems in high
          */
@@ -167,9 +170,16 @@ public class FindMedianFromDataStream {
 
     //O(1)
     public double findMedian() {
-        if (lo.size() == high.size())
-            return (lo.peek() + high.peek()) / 2.0; //2.0 is imp. to get fractional values
-        else //lo.size > high.size
-            return lo.peek();
+        if(lo.isEmpty() && high.isEmpty())
+            return 0;
+        else if (lo.isEmpty() || high.isEmpty()){
+            return lo.isEmpty() ? high.peek() : lo.peek();
+        }
+        else { //both non empty
+            if (lo.size() == high.size())
+                return (lo.peek() + high.peek()) / 2.0; //2.0 is imp. to get fractional values
+            else //lo.size > high.size
+                return lo.peek();
+        }
     }
 }
