@@ -49,12 +49,8 @@ Use stack
  */
 public class DecodeString {
 
-    boolean isPositiveNumber(String str) {
-        for(char c : str.toCharArray()) {
-            if (c < '0' || c > '9')
-                return false;
-        }
-        return true;
+    boolean isDigit(String str) {
+        return Character.isDigit(str.toCharArray()[0]);
     }
 
     public String decodeString(String s) {
@@ -66,14 +62,14 @@ public class DecodeString {
         }
         for (String str : sList) {
             if (!str.equals("]")) {
-                if (isPositiveNumber(str)) {
-                    if (!stack.isEmpty() && isPositiveNumber(stack.peek())) { //add to already existing number
+                if (isDigit(str)) {
+                    if (!stack.isEmpty() && isDigit(stack.peek())) { //add to already existing number
                         String num = stack.pop();
                         stack.push(num + str);
-                    } else { //just push the number
+                    } else { //just push the first number
                         stack.push(str);
                     }
-                } else { //just push for first number, [ and alphabets
+                } else { //just push for [ and alphabets
                     stack.push(str);
                 }
             } else {

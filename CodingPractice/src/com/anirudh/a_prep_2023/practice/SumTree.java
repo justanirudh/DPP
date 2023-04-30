@@ -1,6 +1,5 @@
 package com.anirudh.a_prep_2023.practice;
 
-import com.anirudh.datastructures.trees.Node;
 
 /**
  * Created by paanir on 12/31/17.
@@ -46,43 +45,6 @@ Output:
 */
 //https://practice.geeksforgeeks.org/problems/sum-tree/1
 public class SumTree {
-
-    //return sum and is valid together
-    class Result {
-        boolean isSumTree;
-        int sum;
-
-        Result(boolean isSumTree, int sum) {
-            this.isSumTree = isSumTree;
-            this.sum = sum;
-        }
-    }
-
-    Result postOrder(Node node) {
-        if (node == null)
-            return new Result(true, 0);
-        if (node.left == null && node.right == null)
-            return new Result(true, node.data);
-        Result left = postOrder(node.left);
-        if (!left.isSumTree)
-            return left;
-        Result right = postOrder(node.right);
-        if (!right.isSumTree)
-            return right;
-        if (node.data == left.sum + right.sum)
-            return new Result(true, node.data + left.sum + right.sum);
-        else
-            return new Result(false, -1);
-    }
-
-    boolean isSumTree(Node node) {
-        if (node == null)
-            return true;
-        if (node.left == null && node.right == null)
-            return true;
-        Result res = postOrder(node);
-        return res.isSumTree;
-    }
 
 
 }

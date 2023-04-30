@@ -40,6 +40,11 @@ sort start and end points individually, prioritizing end when tied
 then +1 for start and -1 for end
 find max
  */
+
+/*
+Sx = O(n)
+Tx = O(nlogn)
+ */
 public class MeetingRoomsII {
 
     static class CompareElems implements Comparator<int[]> {
