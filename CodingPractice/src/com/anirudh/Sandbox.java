@@ -8,7 +8,11 @@ import java.util.*;
  */
 
 public class Sandbox {
-
+    public static void main(String[] args) {
+        List<int[]> l = new ArrayList<>();
+        l.add(new int[]{1,2});
+        System.out.println(l.get(0)[0]);
+    }
 
 
 }

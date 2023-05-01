@@ -39,7 +39,7 @@ Output: ["bob,50,1200,mtv"]
  */
 
 /*
-TBD
+TODO
 Go over transactions array, Make map of person -> transactions
 Now go over transaction array again, get the name, get all transactions for the name from the map,
 then compare each transaction

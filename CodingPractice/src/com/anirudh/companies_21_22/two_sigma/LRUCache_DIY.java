@@ -78,7 +78,7 @@ public class LRUCache_DIY {
         size = 0;
     }
 
-    void addFirst(DLLNode node) {
+    private void addFirst(DLLNode node) {
         DLLNode newNext = head.next;
         head.next = node;
         node.prev = head;
