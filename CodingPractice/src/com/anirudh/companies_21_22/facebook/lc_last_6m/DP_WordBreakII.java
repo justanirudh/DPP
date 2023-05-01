@@ -48,7 +48,9 @@ public class DP_WordBreakII {
 
     List<String> getWaysToBreak(String toBeBroken) {
 
-        if (toBeBroken.equals("")) { //base case
+        // toBeBroken.substring(end) from prev call that makes toBeBroken here
+        // will return empty string if end is outside the string eg. "abc".substring(3)
+        if (toBeBroken.equals("")) {
             return Collections.singletonList("");
         }
 
@@ -58,12 +60,12 @@ public class DP_WordBreakII {
             waysToBreakMap.put(toBeBroken, new ArrayList<>());
         }
 
-        for (int i = 1; i <= toBeBroken.length(); ++i) { //check all substrings
-            String prefix = toBeBroken.substring(0, i);
+        for (int end = 1; end <= toBeBroken.length(); ++end) { //check all substrings
+            String prefix = toBeBroken.substring(0, end);
 
             if (wordSet.contains(prefix)) { //if prefix is in dictionary, then search for postfixes
 
-                String suffix = toBeBroken.substring(i);
+                String suffix = toBeBroken.substring(end);
                 List<String> brokenSuffixes = getWaysToBreak(suffix); //sending rest of the String to recurse
 
                 for (String brokenSuffix : brokenSuffixes) { //add it to map

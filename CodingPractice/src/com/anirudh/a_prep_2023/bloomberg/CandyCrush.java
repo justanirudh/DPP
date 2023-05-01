@@ -180,13 +180,13 @@ Leet code solution:
 class Solution {
     public int[][] candyCrush(int[][] board) {
         int R = board.length, C = board[0].length;
-        boolean todo = false;
+        boolean changed = false;
         for (int r = 0; r < R; ++r) {
             for (int c = 0; c + 2 < C; ++c) {
                 int v = Math.abs(board[r][c]);
                 if (v != 0 && v == Math.abs(board[r][c+1]) && v == Math.abs(board[r][c+2])) {
                     board[r][c] = board[r][c+1] = board[r][c+2] = -v;
-                    todo = true;
+                    changed = true;
                 }
             }
         }
@@ -195,7 +195,7 @@ class Solution {
                 int v = Math.abs(board[r][c]);
                 if (v != 0 && v == Math.abs(board[r+1][c]) && v == Math.abs(board[r+2][c])) {
                     board[r][c] = board[r+1][c] = board[r+2][c] = -v;
-                    todo = true;
+                    changed = true;
                 }
             }
         }
@@ -209,7 +209,7 @@ class Solution {
                 board[wr--][c] = 0;
         }
 
-        return todo ? candyCrush(board) : board;
+        return changed ? candyCrush(board) : board;
     }
 }
  */
