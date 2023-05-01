@@ -78,21 +78,21 @@ public class CandyCrush {
 
         int nr = board.length;
         int nc = board[0].length;
-        boolean hadChanges = false;
+        boolean hadChanges;
 
         //2 pointer approach to mark >=3 conseq elems
-
         //mark them all first, then remove together
         List<int[]> tbr = new ArrayList<>();
+
         //mark row by row
         for (int i = 0; i < nr; ++i) {
-            for (int fast = 0; fast < nc; ) {
+            int fast = 0;
+            while (fast < nc) {
                 int first = board[i][fast];
                 if (first == 0) {
                     fast++;
                     continue; //so that next recursion of board does not consider 0 for consecutive sequence
                 }
-
                 int slow = fast; //resets slow
                 int count = 0;
                 while (fast < nc && board[i][fast] == first) {
@@ -110,13 +110,13 @@ public class CandyCrush {
 
         //mark col by col
         for (int i = 0; i < nc; ++i) {
-            for (int fast = 0; fast < nr; ) {
+            int fast = 0;
+            while (fast < nr) {
                 int first = board[fast][i];
                 if (first == 0) {
                     fast++;
                     continue; //so that next recursion of board does not consider 0 for consecutive sequence
                 }
-
                 int slow = fast; //resets slow
                 int count = 0;
                 while (fast < nr && board[fast][i] == first) {
@@ -131,85 +131,29 @@ public class CandyCrush {
                 }
             }
         }
-
         //sweep
-        for (int[] elem : tbr) { //not required, just mark them while iterating as sweeping is being done as prt of dropping step
+        for (int[] elem : tbr) {
             board[elem[0]][elem[1]] = -1;
         }
+
         hadChanges = !tbr.isEmpty();
+        if (!hadChanges)
+            return board;
 
-        // sweep and drop candies
-
-        // traverse columns bottom-up to find drops
-        //2 pointer: slow and fast
-        //slow remains on first -1
-        //fast finds first non-(-1)
-        //then copy from fast to slow until fast reaches end
-        //then put 0s in slow until slow reaches end
-
+        // drop candies
         for (int i = 0; i < nc; ++i) {
-            for (int fast = nr - 1; fast >= 0; ) {
-                int slow = fast;
-                while (fast >= 0 && board[fast][i] == -1) {
-                    fast--;
-                }
-                if (slow == fast) {
-                    fast--;
-                    continue;
-                } else {
-                    while (fast >= 0) {
-                        board[slow][i] = board[fast][i];
-                        fast--;
-                        slow--;
-                    }
-                    while (slow >= 0) {
-                        board[slow][i] = 0;
-                        slow--;
-                    }
+            int slow = nr - 1;
+            for (int fast = nr - 1; fast >= 0; --fast) {
+                if (board[fast][i] > 0) { //if negative, dont decrement slow it will be sentinel for neg values
+                    board[slow][i] = board[fast][i];
+                    slow--;
                 }
             }
+            while (slow >= 0) {
+                board[slow][i] = 0;
+                slow--;
+            }
         }
-
-        if (hadChanges) return candyCrush(board);
-        else return board;
+        return candyCrush(board);
     }
 }
-
-/*
-Leet code solution:
-class Solution {
-    public int[][] candyCrush(int[][] board) {
-        int R = board.length, C = board[0].length;
-        boolean changed = false;
-        for (int r = 0; r < R; ++r) {
-            for (int c = 0; c + 2 < C; ++c) {
-                int v = Math.abs(board[r][c]);
-                if (v != 0 && v == Math.abs(board[r][c+1]) && v == Math.abs(board[r][c+2])) {
-                    board[r][c] = board[r][c+1] = board[r][c+2] = -v;
-                    changed = true;
-                }
-            }
-        }
-        for (int r = 0; r + 2 < R; ++r) {
-            for (int c = 0; c < C; ++c) {
-                int v = Math.abs(board[r][c]);
-                if (v != 0 && v == Math.abs(board[r+1][c]) && v == Math.abs(board[r+2][c])) {
-                    board[r][c] = board[r+1][c] = board[r+2][c] = -v;
-                    changed = true;
-                }
-            }
-        }
-
-        for (int c = 0; c < C; ++c) {
-            int wr = R - 1;
-            for (int r = R-1; r >= 0; --r)
-                if (board[r][c] > 0)
-                    board[wr--][c] = board[r][c];
-            while (wr >= 0)
-                board[wr--][c] = 0;
-        }
-
-        return changed ? candyCrush(board) : board;
-    }
-}
- */
