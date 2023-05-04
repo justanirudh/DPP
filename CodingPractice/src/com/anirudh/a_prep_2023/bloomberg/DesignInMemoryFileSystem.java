@@ -124,6 +124,7 @@ public class DesignInMemoryFileSystem {
             curr.content = curr.content + content;
     }
 
+    //testing
     public String readContentFromFile(String filePath) {
         String[] dirs = filePath.split("/");
         TreeNode curr = root;
