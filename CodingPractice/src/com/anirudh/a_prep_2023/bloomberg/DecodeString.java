@@ -45,9 +45,39 @@ import java.util.Deque;
 import java.util.List;
 
 /*
-Use stack
+Use stack of chars
  */
 public class DecodeString {
-//TODO
+    public String decodeString(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        for (char a : s.toCharArray()) {
+            if (a != ']') {
+                stack.push(a);
+            } else {
+                //match opening, get number, repeat chars, put back in
+                List<Character> inBrackets = new ArrayList<>();
+                while (stack.peek() != '[') { //get chars in bracket
+                    inBrackets.add(stack.pop());
+                }
+                stack.pop(); //pop [
+                StringBuilder timesS = new StringBuilder();
+                while (!stack.isEmpty() && Character.isDigit(stack.peek())) { //construct number
+                    timesS.insert(0, stack.pop());
+                }
+                int times = Integer.parseInt(timesS.toString());
+                for (int i = 0; i < times; ++i) { //put chars back in correct order
+                    for (int j = inBrackets.size() - 1; j >= 0; --j) {
+                        stack.push(inBrackets.get(j));
+                    }
+                }
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        while (!stack.isEmpty()) {
+            sb.insert(0, stack.pop());
+        }
+        return sb.toString();
+
+    }
 
 }

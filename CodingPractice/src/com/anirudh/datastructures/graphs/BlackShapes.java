@@ -85,7 +85,7 @@ public class BlackShapes {
 
         for (int i = 0; i < nRows; i++) { //dfs helper function
             for (int j = 0; j < nCols; j++) {
-                if (!visited[i][j] && input.get(i).charAt(j) == 'X') { //if black, do dfs
+                if (input.get(i).charAt(j) == 'X' && !visited[i][j]) { //if black, do dfs
                     dfs(i, j);
                     res++; //number of trees
                 }

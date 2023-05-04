@@ -25,20 +25,20 @@ import java.util.*;
 class ReconstructItinerary {
 
     private Map<String, Queue<String>> flights;
-    private Deque<String> path;
+    private Deque<String> stack;
 
     private void doDFS(String departure) {
         Queue<String> arrivals = flights.get(departure);
-        while (arrivals != null && !arrivals.isEmpty()) { //arrivals is null if there is no flight FROM the city
+        while (arrivals != null && !arrivals.isEmpty()) { //arrivals is null if there is no flight FROM departure i.r. it is not in graph as key
             String nextStop = arrivals.poll();
             doDFS(nextStop);
         }
-        path.addFirst(departure); //topological sort. the one that gets completely explored first is prepended first
+        stack.push(departure); //topological sort. the one that gets completely explored first is prepended first
     }
 
     public List<String> findItinerary(List<List<String>> tickets) {
         flights = new HashMap<>();
-        path = new ArrayDeque<>();
+        stack = new ArrayDeque<>();
         //create graph
         for (List<String> ticket : tickets) {
             flights.putIfAbsent(ticket.get(0), new PriorityQueue<>()); //create a priority queue which always has lexicographically lowest elem as the 1st elem
@@ -46,7 +46,7 @@ class ReconstructItinerary {
         }
         //do DFS
         doDFS("JFK");
-        return new ArrayList<>(path);
+        return new ArrayList<>(stack);
     }
 
 

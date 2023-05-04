@@ -122,7 +122,7 @@ public class MinimumHeightTrees {
                 for (int neighbour : graph.get(leaf)) {
                     degrees.set(neighbour, degrees.get(neighbour) - 1);// decrement neighbour's degree
                     graph.get(neighbour).remove(leaf); //can be removed
-                    if (degrees.get(neighbour) == 1) //any node with degree <=1 will be added
+                    if (degrees.get(neighbour) == 1) //any node with degree ==1 will be added
                         leaves.offer(neighbour);
                 }
             }

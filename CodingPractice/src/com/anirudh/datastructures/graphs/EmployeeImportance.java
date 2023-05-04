@@ -58,11 +58,11 @@ public class EmployeeImportance {
 
     class Employee {
         public int id;
-        public int importance;
-        public List<Integer> subordinates;
+        public int imp;
+        public List<Integer> sub;
     }
 
-    void doDFS(int id) {
+    void doDFS(int id) { // no visited reqd since tree structure
         sum += impMap.get(id);
         for (int subId : graph.get(id)) {
             doDFS(subId);
@@ -76,9 +76,9 @@ public class EmployeeImportance {
         sum = 0;
 
         for (Employee e : employees) {
-            impMap.put(e.id, e.importance);
+            impMap.put(e.id, e.imp);
             graph.put(e.id, new ArrayList<>());
-            for (Integer sub : e.subordinates) {
+            for (Integer sub : e.sub) {
                 graph.get(e.id).add(sub);
             }
         }

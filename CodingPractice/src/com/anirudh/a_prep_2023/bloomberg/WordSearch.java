@@ -1,8 +1,4 @@
-package com.anirudh.companies_21_22.facebook;
-
-/**
- * Created by paanir on 6/21/17.
- */
+package com.anirudh.a_prep_2023.bloomberg;
 /*
 79. Word Search
 
@@ -27,52 +23,55 @@ word = "ABCB", -> returns false.
 /*
     DFS in matrix (as multiple sources possible) with backtracking
     like finding cycle in a directed graph. maintain a record of path
+
+    Tx = O(m * n * 3^L): for each cell, we look at 3 options (not 4 as that one will be visited), we do it L times
+    Sx = O(L) : stack size is max L
  */
 
 public class WordSearch {
-
-    int[] dx = {-1, 0, 1, 0};
-    int[] dy = {0, 1, 0, -1};
-    char[][] board;
+    int[] dx = {0, 0, 1, -1};
+    int[] dy = {1, -1, 0, 0};
     boolean[][] visited;
+    char[][] board;
     String word;
 
-    boolean isValid(int x, int y) {
+    private boolean isValid(int x, int y) {
         return x >= 0 && x < board.length && y >= 0 && y < board[0].length;
     }
 
-    boolean doDFS(int x, int y, int nextIdx) {
+    private boolean doDFS(int x, int y, int nextIdx) {
         visited[x][y] = true;
-        if (nextIdx == word.length())
+        if (nextIdx == word.length()) {
             return true;
-        for (int z = 0; z < 4; z++) {
-            int nx = x + dx[z];
-            int ny = y + dy[z];
-            if (isValid(nx, ny) && !visited[nx][ny] && board[nx][ny] == word.charAt(nextIdx)) {
-                boolean wordExists = doDFS(nx, ny, nextIdx + 1);
-                if (wordExists)
+        }
+        for (int i = 0; i < 4; ++i) {
+            int xi = x + dx[i];
+            int yi = y + dy[i];
+            if (isValid(xi, yi) && board[xi][yi] == word.charAt(nextIdx) && !visited[xi][yi]) {
+                boolean exists = doDFS(xi, yi, nextIdx + 1);
+                if (exists)
                     return true;
             }
         }
-        visited[x][y] = false; //so that it can be used elsewhere
+        visited[x][y] = false;
         return false;
     }
-
 
     public boolean exist(char[][] board, String word) {
         this.board = board;
         this.word = word;
         for (int i = 0; i < board.length; ++i) {
             for (int j = 0; j < board[0].length; ++j) {
-                if (word.charAt(0) == board[i][j]) {
-                    visited = new boolean[board.length][board[0].length]; //new visited board for every run
-                    boolean wordExists = doDFS(i, j, 1);
-                    if (wordExists)
+                if (board[i][j] == word.charAt(0)) {
+                    visited = new boolean[board.length][board[0].length];
+                    boolean exists = doDFS(i, j, 1);
+                    if (exists)
                         return true;
                 }
             }
         }
         return false;
+
     }
 
 }

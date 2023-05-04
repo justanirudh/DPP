@@ -54,12 +54,12 @@ public class EvaluateDivision {
         //getters and setters
     }
 
-    private class Path {
-        double product;
+    private static class Path {
+        double lastProduct;
         String lastNode;
 
         Path(double product, String lastNode) {
-            this.product = product;
+            this.lastProduct = product;
             this.lastNode = lastNode;
         }
         //getters and setters    
@@ -71,8 +71,8 @@ public class EvaluateDivision {
             double value = values[i];// 2
             String node1 = equation.get(0);
             String node2 = equation.get(1);
-            graph.put(node1, new HashSet<>());
-            graph.put(node2, new HashSet<>());
+            graph.putIfAbsent(node1, new HashSet<>());
+            graph.putIfAbsent(node2, new HashSet<>());
             graph.get(node1).add(new Edge(value, node2));
             graph.get(node2).add(new Edge(1 / value, node1));
         }
@@ -96,7 +96,7 @@ public class EvaluateDivision {
             for (Edge edge : edges) {
                 String neighbour = edge.dest;
                 if (!visited.contains(neighbour)) { //not visited
-                    double pathWeight = path.product * edge.weight;
+                    double pathWeight = path.lastProduct * edge.weight;
                     if (neighbour.equals(dest)) {
                         return pathWeight; //found answer
                     } else {

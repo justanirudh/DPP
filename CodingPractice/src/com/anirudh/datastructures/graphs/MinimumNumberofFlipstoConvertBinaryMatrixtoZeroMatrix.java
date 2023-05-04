@@ -11,7 +11,8 @@ Hard
 Add to List
 
 Share
-Given a m x n binary matrix mat. In one step, you can choose one cell and flip it and all the four neighbors of it if they exist (Flip is changing 1 to 0 and 0 to 1). A pair of cells are called neighbors if they share one edge.
+Given a m x n binary matrix mat. In one step, you can choose one cell and flip it and all the four neighbors of it if they exist (Flip is changing 1 to 0 and 0 to 1).
+A pair of cells are called neighbors if they share one edge.
 
 Return the minimum number of steps required to convert mat to a zero matrix or -1 if you cannot.
 
@@ -132,7 +133,7 @@ public class MinimumNumberofFlipstoConvertBinaryMatrixtoZeroMatrix {
 
         while (!q.isEmpty()) { //BFS
             State curr = q.poll();
-            List<State> neighbours = curr.getNeighbours();
+            List<State> neighbours = curr.getNeighbours(); //m*n neighbours
             for (State next : neighbours) {
                 String hash = next.hash;
                 if (!visited.contains(hash)) {

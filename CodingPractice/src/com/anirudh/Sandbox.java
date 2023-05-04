@@ -9,9 +9,10 @@ import java.util.*;
 
 public class Sandbox {
     public static void main(String[] args) {
-        List<int[]> l = new ArrayList<>();
-        l.add(new int[]{1,2});
-        System.out.println(l.get(0)[0]);
+        List<Integer> l = new ArrayList<>();
+        l.add(5);
+        int f = l.get(0);
+        System.out.println(l.get(0));
     }
 
 

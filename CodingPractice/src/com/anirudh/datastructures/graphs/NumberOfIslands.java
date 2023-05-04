@@ -34,8 +34,8 @@ public class NumberOfIslands {
     //Do DFS in matrix
 
     private boolean[][] visited;
-    private int[] di = {0, 0, 1, -1};
-    private int[] dj = {1, -1, 0, 0};
+    private final int[] di = {0, 0, 1, -1};
+    private final int[] dj = {1, -1, 0, 0};
     private int numRows;
     private int numCols;
     private char[][] grid;

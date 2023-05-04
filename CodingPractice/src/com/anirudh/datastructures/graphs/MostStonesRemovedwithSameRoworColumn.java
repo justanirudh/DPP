@@ -51,10 +51,9 @@ Input: stones = [[0,0]]
 Output: 0
 Explanation: [0,0] is the only stone on the plane, so you cannot remove it.
  */
-//Problem #947
 public class MostStonesRemovedwithSameRoworColumn {
 
-    Map<Integer, List<Integer>> graph = new HashMap<>();
+    Map<Integer, List<Integer>> graph = new HashMap<>();// index of stones
     Set<Integer> visited = new HashSet<>();
 
     void doDFS(Integer stone) {
