@@ -48,5 +48,50 @@ Sx: O(n)
 Tx: O(n^2)
  */
 public class InvalidTransactions {
+    public List<String> invalidTransactions(String[] transactions) {
+        /*
+        0: name
+        1: time
+        2: amount
+        3: city
+        */
+
+        //{name -> {city -> [[time, amt]]}}
+        Map<String, Map<String, List<Integer>>> transM = new HashMap<>();
+        for (String trans : transactions) {
+            String[] props = trans.split(",");
+            transM.putIfAbsent(props[0], new HashMap<>()); // {name -> {}}
+            transM.get(props[0]).putIfAbsent(props[3], new ArrayList<>()); //{name -> {city -> time}}
+            transM.get(props[0]).get(props[3]).add(Integer.parseInt(props[1]));
+        }
+
+        List<String> res = new ArrayList<>();
+        for (String trans : transactions) {
+            boolean found = false;
+            String[] props = trans.split(",");
+            if (Integer.parseInt(props[2]) > 1000) { //add it but should be used to check others
+                res.add(trans);
+                continue;
+            }
+            Map<String, List<Integer>> cityTimes = transM.get(props[0]);
+            String currCity = props[3];
+            int currTime = Integer.parseInt(props[1]);
+            for (String city : cityTimes.keySet()) {
+                if (!city.equals(currCity)) { //ignore same city trans
+                    List<Integer> times = cityTimes.get(city);
+                    for (int t : times) {
+                        if (Math.abs(t - currTime) <= 60) { //add both trans
+                            res.add(trans); //orig trans, not puttin other trans to avoid duplication when we process it
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found)
+                        break;
+                }
+            }
+        }
+        return res;
+    }
 
 }

@@ -80,6 +80,7 @@ public class ShortestPathGetFood {
             for (int j = 0; j < len; ++j) { //using similar to level order traversal
                 int[] curr = queue.poll();
                 for (int i = 0; i < 4; ++i) {
+                    assert curr != null;
                     int x = curr[0] + dx[i];
                     int y = curr[1] + dy[i];
                     int[] p = {x, y};
